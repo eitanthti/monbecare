@@ -417,15 +417,20 @@
                 font-size: 1.3rem;
             }
 
-            /* Mobile Hero - Fixed */
+            /* Mobile Hero - Fixed Image Display */
             .hero {
                 padding: 1rem;
-                background-size: cover;
+                background-size: contain;
+                background-position: center center;
                 height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .hero-content {
-                padding: 1rem;
+            .hero::after {
+                background-size: contain;
+                background-position: center center;
             }
 
             .brand-name {
@@ -460,10 +465,12 @@
             }
 
             .contact-right {
-                height: 250px;
+                height: 300px;
                 order: 1;
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
+                background-repeat: no-repeat;
+                background-color: #f8f9fa;
             }
 
             .contact-left {
@@ -561,7 +568,7 @@
             }
 
             .contact-right {
-                height: 200px;
+                height: 250px;
             }
         }
 
