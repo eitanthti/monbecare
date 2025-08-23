@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonBe - See Your Baby Feed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -93,7 +93,7 @@
         .hero {
             height: 100vh;
             background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_04_03%20PM.png');
-            background-size: cover;
+            background-size: 120%;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
@@ -103,6 +103,12 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            transition: background-image 2s ease-in-out;
+        }
+
+        /* Transition to color image */
+        .hero.color-transition {
+            background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_05_53%20PM.png');
         }
 
         /* Dark overlay for better text readability */
@@ -114,6 +120,11 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero.color-transition::before {
+            opacity: 0.2;
         }
 
         .hero-content {
@@ -123,24 +134,43 @@
             padding: 2rem;
         }
 
-        .tagline {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 300;
+        /* Initial big MonBe title */
+        .brand-name {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 700;
             color: white;
-            margin-bottom: 1rem;
             letter-spacing: 2px;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            animation: slideInUp 1.2s ease-out;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0;
+            opacity: 1;
+            transform: scale(1);
+            transition: all 2s ease-in-out;
         }
 
-        .brand-name {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+        /* MonBe fades out and gets smaller */
+        .brand-name.fade-out {
+            opacity: 0.3;
+            transform: scale(0.7);
+        }
+
+        /* Tagline starts hidden and fades in */
+        .tagline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 400;
             color: white;
-            letter-spacing: 3px;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            animation: slideInUp 1.2s ease-out 0.3s both;
-            margin-bottom: 2rem;
+            margin-top: 1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 2s ease-in-out;
+        }
+
+        .tagline.fade-in {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .connect-btn {
@@ -156,7 +186,15 @@
             text-decoration: none;
             display: inline-block;
             letter-spacing: 1px;
-            animation: slideInUp 1.2s ease-out 0.6s both;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .connect-btn.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 2s ease-in-out 1s;
         }
 
         .connect-btn:hover {
@@ -417,9 +455,9 @@
         <section class="hero">
             <div class="hero-image"></div>
             <div class="hero-content">
-                <h1 class="tagline">see your baby feed.</h1>
-                <p class="brand-name">MonBe Inc.</p>
-                <a href="#" onclick="showPage('contact')" class="connect-btn">Connect Us</a>
+                <h1 class="brand-name" id="brandName">MonBe</h1>
+                <p class="tagline" id="tagline">see your baby feed.</p>
+                <a href="#" onclick="showPage('contact')" class="connect-btn" id="connectBtn">Connect Us</a>
             </div>
         </section>
     </div>
@@ -541,14 +579,36 @@
             }
         });
 
-        // Add smooth animations on page load
+        // Animation sequence when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth page transitions
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.style.transition = 'opacity 0.4s ease-in-out';
-            });
+            // Start the animation sequence after 1 second
+            setTimeout(function() {
+                startAnimation();
+            }, 1000);
         });
+
+        function startAnimation() {
+            const hero = document.querySelector('.hero');
+            const brandName = document.getElementById('brandName');
+            const tagline = document.getElementById('tagline');
+            const connectBtn = document.getElementById('connectBtn');
+
+            // Step 1: After 2 seconds, start fading out MonBe and transition background
+            setTimeout(function() {
+                brandName.classList.add('fade-out');
+                hero.classList.add('color-transition');
+            }, 2000);
+
+            // Step 2: After 3 seconds, fade in the tagline
+            setTimeout(function() {
+                tagline.classList.add('fade-in');
+            }, 3000);
+
+            // Step 3: After 4 seconds, fade in the button
+            setTimeout(function() {
+                connectBtn.classList.add('fade-in');
+            }, 4000);
+        }
     </script>
 </body>
 </html>
