@@ -118,7 +118,7 @@
             background-position: center center;
             background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 4s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
             z-index: 1;
         }
 
@@ -136,7 +136,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
-            transition: opacity 3s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
             z-index: 2;
         }
 
@@ -162,7 +162,7 @@
             margin-bottom: 0;
             opacity: 1;
             transform: scale(1);
-            transition: opacity 4s ease-in-out, transform 4s ease-in-out;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
         }
 
         /* MonBe fades out more naturally and slowly */
@@ -182,7 +182,7 @@
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 4s ease-in-out, transform 4s ease-in-out;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
         }
 
         .tagline.fade-in {
@@ -211,7 +211,7 @@
         .connect-btn.fade-in {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
         }
 
         .connect-btn:hover {
@@ -240,8 +240,9 @@
         .contact-page {
             padding: 0;
             background: #f8f9fa;
-            min-height: 100vh;
+            height: 100vh;
             padding-top: 80px;
+            overflow: hidden;
         }
 
         .contact-container {
@@ -249,51 +250,53 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: calc(100vh - 80px);
+            height: calc(100vh - 80px);
         }
 
         .contact-left {
             background: #f8f9fa;
-            padding: 4rem 3rem;
+            padding: 2rem 3rem;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            overflow-y: auto;
         }
 
         .contact-right {
             background-image: url('contact-image.png');
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
             position: relative;
         }
 
         .contact-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 400;
             color: #2c3e50;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
         }
 
         .contact-description {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #555;
-            line-height: 1.6;
-            margin-bottom: 3rem;
+            line-height: 1.5;
+            margin-bottom: 2rem;
             max-width: 90%;
         }
 
         .contact-emails {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .email-item {
             font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: #2c3e50;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .email-label {
@@ -307,22 +310,22 @@
         }
 
         .contact-form-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .form-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #2c3e50;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 500;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .form-group {
@@ -332,13 +335,14 @@
 
         .form-group.full-width {
             grid-column: 1 / -1;
+            margin-bottom: 1rem;
         }
 
         .form-label {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #2c3e50;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             font-weight: 500;
         }
 
@@ -350,10 +354,10 @@
         .form-input,
         .form-textarea {
             font-family: 'Cormorant Garamond', serif;
-            padding: 1rem;
+            padding: 0.8rem;
             border: 2px solid #d1d5db;
-            border-radius: 25px;
-            font-size: 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
             background: #f8f9fa;
             transition: all 0.3s ease;
             outline: none;
@@ -366,25 +370,25 @@
         }
 
         .form-textarea {
-            height: 120px;
+            height: 80px;
             resize: vertical;
-            border-radius: 20px;
+            border-radius: 15px;
         }
 
         .submit-btn {
             background: #2c3e50;
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 0.8rem 2rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
 
         .submit-btn:hover {
@@ -618,10 +622,10 @@
 
         // Animation sequence when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Start the animation sequence after 1.5 seconds
+            // Start the animation sequence after 0.5 seconds
             setTimeout(function() {
                 startAnimation();
-            }, 1500);
+            }, 500);
         });
 
         function startAnimation() {
@@ -630,21 +634,21 @@
             const tagline = document.getElementById('tagline');
             const connectBtn = document.getElementById('connectBtn');
 
-            // Step 1: After 2.5 seconds, start gradual fade out of MonBe and transition background
+            // Step 1: After 1 second, start fade out of MonBe and transition background
             setTimeout(function() {
                 brandName.classList.add('fade-out');
                 hero.classList.add('color-transition');
-            }, 2500);
+            }, 1000);
 
-            // Step 2: After 4 seconds, gradually fade in the tagline (overlapping with MonBe fade)
+            // Step 2: After 1.5 seconds, fade in the tagline (overlapping with MonBe fade)
             setTimeout(function() {
                 tagline.classList.add('fade-in');
-            }, 4000);
+            }, 1500);
 
-            // Step 3: After 6 seconds, fade in the button
+            // Step 3: After 2.5 seconds, fade in the button
             setTimeout(function() {
                 connectBtn.classList.add('fade-in');
-            }, 6000);
+            }, 2500);
         }
     </script>
 </body>
