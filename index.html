@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -93,8 +93,8 @@
         .hero {
             height: 100vh;
             background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_04_03%20PM.png');
-            background-size: 120%;
-            background-position: center;
+            background-size: 110%;
+            background-position: center center;
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
@@ -103,13 +103,28 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            transition: background-image 3s ease-in-out;
         }
 
-        /* Transition to color image with same zoom */
-        .hero.color-transition {
+        /* Color image preload and smooth transition */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_05_53%20PM.png');
-            background-size: 120%;
+            background-size: 110%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 4s ease-in-out;
+            z-index: 1;
+        }
+
+        /* Show color image */
+        .hero.color-transition::after {
+            opacity: 1;
         }
 
         /* Dark overlay for better text readability */
@@ -122,6 +137,7 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
             transition: opacity 3s ease-in-out;
+            z-index: 2;
         }
 
         .hero.color-transition::before {
@@ -130,14 +146,14 @@
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             max-width: 900px;
             padding: 2rem;
         }
 
         /* Initial big MonBe title */
         .brand-name {
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: clamp(4rem, 10vw, 8rem);
             font-weight: 700;
             color: white;
@@ -157,7 +173,7 @@
 
         /* Tagline starts hidden and fades in slowly */
         .tagline {
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 400;
             color: white;
@@ -220,146 +236,161 @@
             display: none;
         }
 
-        /* Contact Page Styles */
+        /* Contact Page Styles - Completely redesigned to match the image */
         .contact-page {
-            padding: 120px 2rem 4rem;
-            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            padding: 0;
+            background: #f8f9fa;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .contact-container {
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 80px);
         }
 
-        .contact-header {
-            text-align: center;
-            margin-bottom: 3rem;
+        .contact-left {
+            background: #f8f9fa;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .contact-right {
+            background-image: url('contact-image.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
 
         .contact-title {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 300;
-            color: #2d3748;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            line-height: 1.2;
         }
 
-        .contact-subtitle {
-            font-size: 1.25rem;
-            color: #718096;
-            max-width: 600px;
-            margin: 0 auto;
+        .contact-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #555;
             line-height: 1.6;
-            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 90%;
         }
 
-        .contact-content {
+        .contact-emails {
+            margin-bottom: 3rem;
+        }
+
+        .email-item {
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .email-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .email-address {
+            color: #2c3e50;
+            font-weight: 400;
+        }
+
+        .contact-form-section {
+            margin-top: 2rem;
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .contact-info {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 2px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f7fafc;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 2px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f7fafc;
-        }
-
-        .info-item {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #f7fafc;
-        }
-
-        .info-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .info-label {
-            font-weight: 500;
-            color: #4a5568;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-value {
-            color: #2d3748;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        .form-group {
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
         .form-label {
-            display: block;
-            font-weight: 500;
-            color: #4a5568;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: #2c3e50;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .required {
+            color: #666;
+            font-weight: 400;
         }
 
         .form-input,
         .form-textarea {
-            width: 100%;
+            font-family: 'Cormorant Garamond', serif;
             padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 2px;
+            border: 2px solid #d1d5db;
+            border-radius: 25px;
             font-size: 1rem;
+            background: #f8f9fa;
             transition: all 0.3s ease;
-            font-family: inherit;
-            font-weight: 300;
+            outline: none;
         }
 
         .form-input:focus,
         .form-textarea:focus {
-            outline: none;
-            border-color: #a0aec0;
-            box-shadow: 0 0 0 1px rgba(160, 174, 192, 0.3);
+            border-color: #2c3e50;
+            background: white;
         }
 
         .form-textarea {
             height: 120px;
             resize: vertical;
+            border-radius: 20px;
         }
 
         .submit-btn {
-            background: #4a5568;
+            background: #2c3e50;
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 2px;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
-            text-transform: uppercase;
             letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 1rem;
         }
 
         .submit-btn:hover {
-            background: #2d3748;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3);
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
         /* Responsive Design */
@@ -372,9 +403,26 @@
                 display: flex;
             }
 
-            .contact-content {
+            .contact-container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+            }
+
+            .contact-right {
+                height: 300px;
+                order: 1;
+            }
+
+            .contact-left {
+                order: 2;
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-title {
+                font-size: 2.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
 
             .navbar {
@@ -385,10 +433,6 @@
 
             .hero {
                 padding: 1rem;
-            }
-
-            .contact-page {
-                padding: 100px 1rem 2rem;
             }
 
             .tagline {
@@ -467,62 +511,54 @@
     <div class="page" id="contact-page">
         <section class="contact-page">
             <div class="contact-container">
-                <div class="contact-header">
-                    <h1 class="contact-title">Contact</h1>
-                    <p class="contact-subtitle">Ready to revolutionize breastfeeding? Get in touch with us to learn more about MonBe and join our mission.</p>
-                </div>
+                <div class="contact-left">
+                    <h1 class="contact-title">Contact Us</h1>
+                    
+                    <p class="contact-description">
+                        We'd love to hear from you. Whether you're a parent interested in early access, a clinician exploring collaboration, or an investor looking to learn more about MonBe — reach out and we'll get back to you soon.
+                    </p>
 
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3 style="color: #2d3748; margin-bottom: 2rem; font-size: 1.5rem; font-weight: 300;">Get in Touch</h3>
-                        
-                        <div class="info-item">
-                            <div class="info-label">Email</div>
-                            <div class="info-value">hello@monbe.com</div>
+                    <div class="contact-emails">
+                        <div class="email-item">
+                            <span class="email-label">Email:</span> <span class="email-address">hello@monbecare.com</span>
                         </div>
-
-                        <div class="info-item">
-                            <div class="info-label">Phone</div>
-                            <div class="info-value">+1 (555) 123-4567</div>
-                        </div>
-
-                        <div class="info-item">
-                            <div class="info-label">Address</div>
-                            <div class="info-value">123 Innovation Drive<br>Tech Valley, CA 94000</div>
-                        </div>
-
-                        <div class="info-item">
-                            <div class="info-label">Business Hours</div>
-                            <div class="info-value">Monday - Friday<br>9:00 AM - 6:00 PM PST</div>
+                        <div class="email-item">
+                            <span class="email-label">Investors:</span> <span class="email-address">investors@monbecare.com</span>
                         </div>
                     </div>
 
-                    <div class="contact-form">
-                        <h3 style="color: #2d3748; margin-bottom: 2rem; font-size: 1.5rem; font-weight: 300;">Send us a Message</h3>
+                    <div class="contact-form-section">
+                        <h3 class="form-title">Name (required)</h3>
+                        
                         <form>
-                            <div class="form-group">
-                                <label class="form-label" for="name">Your Name</label>
-                                <input type="text" id="name" name="name" class="form-input" required>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" name="firstName" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" name="lastName" class="form-input" required>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="email">Email Address</label>
-                                <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="form-group full-width">
+                                <label class="form-label">Email <span class="required">(required)</span></label>
+                                <input type="email" name="email" class="form-input" required>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-input" required>
+                            <div class="form-group full-width">
+                                <label class="form-label">Message <span class="required">(required)</span></label>
+                                <textarea name="message" class="form-textarea" required></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="message">Message</label>
-                                <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us about your interest in MonBe..."></textarea>
-                            </div>
-
-                            <button type="submit" class="submit-btn">Send Message</button>
+                            <button type="submit" class="submit-btn">SEND</button>
                         </form>
                     </div>
+                </div>
+
+                <div class="contact-right">
+                    <!-- Background image will be applied via CSS -->
                 </div>
             </div>
         </section>
