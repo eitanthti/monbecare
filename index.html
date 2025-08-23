@@ -397,7 +397,7 @@
             box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
-        /* Responsive Design */
+        /* Responsive Design - Enhanced Mobile Optimization */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -407,59 +407,190 @@
                 display: flex;
             }
 
+            .navbar {
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile Hero Optimizations */
+            .hero {
+                padding: 1rem;
+                background-size: 150%; /* Larger zoom for mobile */
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .brand-name {
+                font-size: clamp(2.5rem, 12vw, 5rem);
+                letter-spacing: 1px;
+            }
+
+            .tagline {
+                font-size: clamp(1.5rem, 8vw, 3rem);
+                letter-spacing: 0.5px;
+                margin-top: 0.5rem;
+            }
+
+            .connect-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            /* Mobile Contact Page */
             .contact-container {
                 grid-template-columns: 1fr;
+                height: auto;
+                min-height: calc(100vh - 80px);
             }
 
             .contact-right {
-                height: 300px;
+                height: 40vh;
                 order: 1;
+                background-size: cover;
+                background-position: center top;
             }
 
             .contact-left {
                 order: 2;
-                padding: 2rem 1.5rem;
+                padding: 1.5rem;
+                height: auto;
+                overflow-y: visible;
             }
 
             .contact-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.4;
+            }
+
+            .contact-emails {
+                margin-bottom: 1.5rem;
+            }
+
+            .email-item {
+                font-size: 0.95rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .form-title {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
+                margin-bottom: 0.8rem;
             }
 
-            .navbar {
-                padding: 1rem;
-                background: rgba(255, 255, 255, 0.9);
-                backdrop-filter: blur(10px);
+            .form-group.full-width {
+                margin-bottom: 0.8rem;
             }
 
-            .hero {
-                padding: 1rem;
+            .form-label {
+                font-size: 0.85rem;
+                margin-bottom: 0.3rem;
             }
 
-            .tagline {
-                font-size: clamp(2rem, 10vw, 4rem);
+            .form-input,
+            .form-textarea {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+                border-radius: 15px;
             }
 
-            .brand-name {
-                font-size: clamp(1.5rem, 8vw, 2.5rem);
+            .form-textarea {
+                height: 70px;
+                border-radius: 12px;
+            }
+
+            .submit-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                width: 100%;
+                border-radius: 15px;
             }
         }
 
-        /* Mobile menu styles */
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .hero {
+                background-size: 180%; /* Even larger zoom for very small screens */
+            }
+
+            .brand-name {
+                font-size: clamp(2rem, 15vw, 4rem);
+            }
+
+            .tagline {
+                font-size: clamp(1.2rem, 10vw, 2.5rem);
+            }
+
+            .contact-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-description {
+                font-size: 0.95rem;
+            }
+
+            .contact-left {
+                padding: 1rem;
+            }
+
+            .contact-right {
+                height: 35vh;
+            }
+        }
+
+        /* Landscape phone orientation */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero {
+                background-size: 120%;
+            }
+
+            .contact-right {
+                height: 50vh;
+            }
+        }
+
+        /* Mobile menu styles - Enhanced */
         .nav-links.mobile-open {
             display: flex;
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
             flex-direction: column;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .nav-links.mobile-open a {
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.mobile-open a:last-child {
+            border-bottom: none;
         }
 
         /* Additional styling for the baby hands effect */
