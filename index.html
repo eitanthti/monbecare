@@ -632,7 +632,13 @@
                     alert('Sorry, there was an error sending your message. Please try again.');
                 });
             } else {
-                alert('Please fill in all required fields.');
+                // Show exactly which fields are missing for debugging
+                const missing = [];
+                if (!firstName) missing.push('First Name');
+                if (!lastName) missing.push('Last Name');
+                if (!email) missing.push('Email');
+                if (!message) missing.push('Message');
+                alert('Please fill in all required fields. Missing: ' + missing.join(', '));
             }
         });
 
