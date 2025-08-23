@@ -103,12 +103,13 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            transition: background-image 2s ease-in-out;
+            transition: background-image 3s ease-in-out;
         }
 
-        /* Transition to color image */
+        /* Transition to color image with same zoom */
         .hero.color-transition {
             background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_05_53%20PM.png');
+            background-size: 120%;
         }
 
         /* Dark overlay for better text readability */
@@ -120,7 +121,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
-            transition: opacity 2s ease-in-out;
+            transition: opacity 3s ease-in-out;
         }
 
         .hero.color-transition::before {
@@ -145,16 +146,16 @@
             margin-bottom: 0;
             opacity: 1;
             transform: scale(1);
-            transition: all 2s ease-in-out;
+            transition: opacity 4s ease-in-out, transform 4s ease-in-out;
         }
 
-        /* MonBe fades out and gets smaller */
+        /* MonBe fades out more naturally and slowly */
         .brand-name.fade-out {
-            opacity: 0.3;
-            transform: scale(0.7);
+            opacity: 0.15;
+            transform: scale(0.75);
         }
 
-        /* Tagline starts hidden and fades in */
+        /* Tagline starts hidden and fades in slowly */
         .tagline {
             font-family: 'Libre Baskerville', serif;
             font-size: clamp(2rem, 6vw, 4rem);
@@ -164,8 +165,8 @@
             letter-spacing: 1px;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 2s ease-in-out;
+            transform: translateY(20px);
+            transition: opacity 4s ease-in-out, transform 4s ease-in-out;
         }
 
         .tagline.fade-in {
@@ -188,13 +189,13 @@
             letter-spacing: 1px;
             margin-top: 2rem;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(15px);
         }
 
         .connect-btn.fade-in {
             opacity: 1;
             transform: translateY(0);
-            transition: all 2s ease-in-out 1s;
+            transition: opacity 3s ease-in-out, transform 3s ease-in-out;
         }
 
         .connect-btn:hover {
@@ -581,10 +582,10 @@
 
         // Animation sequence when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Start the animation sequence after 1 second
+            // Start the animation sequence after 1.5 seconds
             setTimeout(function() {
                 startAnimation();
-            }, 1000);
+            }, 1500);
         });
 
         function startAnimation() {
@@ -593,21 +594,21 @@
             const tagline = document.getElementById('tagline');
             const connectBtn = document.getElementById('connectBtn');
 
-            // Step 1: After 2 seconds, start fading out MonBe and transition background
+            // Step 1: After 2.5 seconds, start gradual fade out of MonBe and transition background
             setTimeout(function() {
                 brandName.classList.add('fade-out');
                 hero.classList.add('color-transition');
-            }, 2000);
+            }, 2500);
 
-            // Step 2: After 3 seconds, fade in the tagline
+            // Step 2: After 4 seconds, gradually fade in the tagline (overlapping with MonBe fade)
             setTimeout(function() {
                 tagline.classList.add('fade-in');
-            }, 3000);
+            }, 4000);
 
-            // Step 3: After 4 seconds, fade in the button
+            // Step 3: After 6 seconds, fade in the button
             setTimeout(function() {
                 connectBtn.classList.add('fade-in');
-            }, 4000);
+            }, 6000);
         }
     </script>
 </body>
