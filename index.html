@@ -534,7 +534,12 @@
                     <div class="contact-form-section">
                         <h3 class="form-title">Name (required)</h3>
                         
-                        <form>
+                        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                            <!-- Hidden field for spam protection -->
+                            <input type="hidden" name="form-name" value="contact" />
+                            <p style="display: none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">First Name</label>
@@ -600,23 +605,34 @@
             navLinks.classList.toggle('mobile-open');
         }
 
-        // Form submission
+        // Form submission for Netlify
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
             const formData = new FormData(this);
-            const name = formData.get('name');
+            const firstName = formData.get('firstName');
+            const lastName = formData.get('lastName');
             const email = formData.get('email');
-            const subject = formData.get('subject');
             const message = formData.get('message');
             
             // Simple validation
-            if (name && email && subject && message) {
-                alert('Thank you for your message! We\'ll get back to you soon.');
-                this.reset();
+            if (firstName && lastName && email && message) {
+                // Submit to Netlify
+                fetch('/', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(() => {
+                    alert('Thank you for your message! We\'ll get back to you soon.');
+                    this.reset();
+                })
+                .catch((error) => {
+                    alert('Sorry, there was an error sending your message. Please try again.');
+                });
             } else {
-                alert('Please fill in all fields.');
+                alert('Please fill in all required fields.');
             }
         });
 
