@@ -397,7 +397,7 @@
             box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
-        /* Responsive Design - Enhanced Mobile Optimization */
+        /* Responsive Design - Fixed Mobile Issues */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -414,13 +414,14 @@
             }
 
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
 
-            /* Mobile Hero Optimizations */
+            /* Mobile Hero - Fixed */
             .hero {
                 padding: 1rem;
-                background-size: 150%; /* Larger zoom for mobile */
+                background-size: cover;
+                height: 100vh;
             }
 
             .hero-content {
@@ -428,146 +429,143 @@
             }
 
             .brand-name {
-                font-size: clamp(2.5rem, 12vw, 5rem);
+                font-size: clamp(3rem, 12vw, 6rem);
                 letter-spacing: 1px;
             }
 
             .tagline {
-                font-size: clamp(1.5rem, 8vw, 3rem);
+                font-size: clamp(1.8rem, 8vw, 3.5rem);
                 letter-spacing: 0.5px;
-                margin-top: 0.5rem;
+                margin-top: 1rem;
             }
 
             .connect-btn {
                 padding: 1rem 2rem;
                 font-size: 1rem;
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
 
-            /* Mobile Contact Page */
+            /* Mobile Contact Page - Simplified */
+            .contact-page {
+                height: auto;
+                min-height: 100vh;
+                padding-top: 80px;
+                overflow-y: auto;
+            }
+
             .contact-container {
                 grid-template-columns: 1fr;
                 height: auto;
-                min-height: calc(100vh - 80px);
+                min-height: auto;
             }
 
             .contact-right {
-                height: 40vh;
+                height: 250px;
                 order: 1;
                 background-size: cover;
-                background-position: center top;
+                background-position: center;
             }
 
             .contact-left {
                 order: 2;
-                padding: 1.5rem;
+                padding: 2rem 1.5rem;
                 height: auto;
                 overflow-y: visible;
             }
 
             .contact-title {
-                font-size: 2.2rem;
-                margin-bottom: 1rem;
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
             }
 
             .contact-description {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-                line-height: 1.4;
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                line-height: 1.5;
             }
 
             .contact-emails {
-                margin-bottom: 1.5rem;
+                margin-bottom: 2rem;
             }
 
             .email-item {
-                font-size: 0.95rem;
-                margin-bottom: 0.6rem;
+                font-size: 1rem;
+                margin-bottom: 1rem;
             }
 
             .form-title {
-                font-size: 1rem;
-                margin-bottom: 0.8rem;
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
-                gap: 0.8rem;
-                margin-bottom: 0.8rem;
+                gap: 1rem;
+                margin-bottom: 1rem;
             }
 
             .form-group.full-width {
-                margin-bottom: 0.8rem;
+                margin-bottom: 1rem;
             }
 
             .form-label {
-                font-size: 0.85rem;
-                margin-bottom: 0.3rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
             }
 
             .form-input,
             .form-textarea {
-                padding: 0.8rem;
-                font-size: 0.9rem;
-                border-radius: 15px;
+                padding: 1rem;
+                font-size: 1rem;
+                border-radius: 20px;
             }
 
             .form-textarea {
-                height: 70px;
-                border-radius: 12px;
+                height: 100px;
+                border-radius: 15px;
             }
 
             .submit-btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
+                padding: 1rem 2rem;
+                font-size: 1rem;
                 width: 100%;
-                border-radius: 15px;
+                border-radius: 20px;
+                margin-top: 1rem;
             }
         }
 
-        /* Extra small phones */
+        /* Small phones */
         @media (max-width: 480px) {
-            .hero {
-                background-size: 180%; /* Even larger zoom for very small screens */
+            .logo {
+                font-size: 1.1rem;
             }
 
             .brand-name {
-                font-size: clamp(2rem, 15vw, 4rem);
+                font-size: clamp(2.5rem, 15vw, 5rem);
             }
 
             .tagline {
-                font-size: clamp(1.2rem, 10vw, 2.5rem);
+                font-size: clamp(1.5rem, 10vw, 3rem);
             }
 
             .contact-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .contact-description {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
 
             .contact-left {
-                padding: 1rem;
+                padding: 1.5rem 1rem;
             }
 
             .contact-right {
-                height: 35vh;
+                height: 200px;
             }
         }
 
-        /* Landscape phone orientation */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .hero {
-                background-size: 120%;
-            }
-
-            .contact-right {
-                height: 50vh;
-            }
-        }
-
-        /* Mobile menu styles - Enhanced */
+        /* Mobile menu styles - Fixed */
         .nav-links.mobile-open {
             display: flex;
             position: absolute;
@@ -617,7 +615,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo" onclick="showPage('main')">MonBe</a>
+            <a href="#" class="logo" onclick="showPage('main')">MonBe Inc.</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" onclick="showPage('main')" class="active">Home</a></li>
                 <li><a href="#" onclick="showPage('contact')">Contact</a></li>
