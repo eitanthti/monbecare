@@ -239,49 +239,45 @@
         /* About Page Styles */
         .about-page {
             padding: 0;
-            background-image: url('commingsoon.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
+            background: #f8f9fa;
             height: 100vh;
             padding-top: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             overflow: hidden;
         }
 
-        /* Add overlay for better text readability */
-        .about-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(2px);
-            z-index: 1;
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 80px);
         }
 
-        .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 2rem;
+        .about-left {
+            background: #f8f9fa;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .about-right {
+            background-image: url('commingsoon.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
             position: relative;
-            z-index: 2;
         }
 
         .about-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: 300;
             color: #2c3e50;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+            line-height: 1.2;
             opacity: 0;
             transform: translateY(30px);
             animation: slideInUp 1s ease-out 0.3s forwards;
@@ -289,12 +285,11 @@
 
         .about-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 400;
             color: #4a5568;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             letter-spacing: 1px;
-            text-shadow: 0 1px 8px rgba(255, 255, 255, 0.7);
             opacity: 0;
             transform: translateY(30px);
             animation: slideInUp 1s ease-out 0.6s forwards;
@@ -302,54 +297,21 @@
 
         .coming-soon-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #2c3e50;
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            color: #555;
             line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.8);
+            max-width: 90%;
+            margin-bottom: 3rem;
             opacity: 0;
             transform: translateY(30px);
             animation: slideInUp 1s ease-out 0.9s forwards;
         }
 
-        .about-placeholder {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideInUp 1s ease-out 1.2s forwards;
-        }
-
-        .about-teaser {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: #2c3e50;
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-
-        .patent-notice {
-            font-size: 0.9rem;
-            color: #718096;
-            font-style: normal;
-            background: rgba(233, 213, 255, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 4px solid #9f7aea;
-        }
-
         .back-home-btn {
-            background: rgba(44, 62, 80, 0.9);
+            background: #2c3e50;
             color: white;
             padding: 1rem 2.5rem;
-            border: 2px solid rgba(44, 62, 80, 0.9);
+            border: none;
             border-radius: 25px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
@@ -359,22 +321,17 @@
             text-decoration: none;
             display: inline-block;
             letter-spacing: 1px;
-            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            width: fit-content;
             opacity: 0;
             transform: translateY(30px);
-            animation: slideInUp 1s ease-out 1.5s forwards;
+            animation: slideInUp 1s ease-out 1.2s forwards;
         }
 
         .back-home-btn:hover {
-            background: rgba(26, 37, 47, 0.95);
-            border-color: rgba(26, 37, 47, 0.95);
+            background: #1a252f;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.4);
-        }
-
-        /* Remove old decorative background elements since we're using the image */
-        .about-page::after {
-            display: none;
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
         /* Contact Page Styles - Completely redesigned to match the image */
