@@ -236,6 +236,153 @@
             display: none;
         }
 
+        /* About Page Styles */
+        .about-page {
+            padding: 0;
+            background: linear-gradient(135deg, 
+                rgba(252, 231, 243, 0.3) 0%,
+                rgba(254, 240, 220, 0.2) 25%,
+                rgba(251, 207, 232, 0.2) 50%,
+                rgba(233, 213, 255, 0.3) 75%,
+                rgba(219, 234, 254, 0.2) 100%
+            );
+            height: 100vh;
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 0.3s forwards;
+        }
+
+        .about-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 0.6s forwards;
+        }
+
+        .coming-soon-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #718096;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 0.9s forwards;
+        }
+
+        .about-placeholder {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 1.2s forwards;
+        }
+
+        .about-teaser {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .patent-notice {
+            font-size: 0.9rem;
+            color: #718096;
+            font-style: normal;
+            background: rgba(233, 213, 255, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #9f7aea;
+        }
+
+        .back-home-btn {
+            background: transparent;
+            color: #2c3e50;
+            padding: 1rem 2.5rem;
+            border: 2px solid #2c3e50;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 1.5s forwards;
+        }
+
+        .back-home-btn:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+
+        /* Decorative background elements for about page */
+        .about-page::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(251, 207, 232, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .about-page::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(233, 213, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
         /* Contact Page Styles - Completely redesigned to match the image */
         .contact-page {
             padding: 0;
@@ -450,6 +597,57 @@
                 margin-top: 2rem;
             }
 
+            /* Mobile About Page */
+            .about-page {
+                height: auto;
+                min-height: 100vh;
+                padding: 80px 1rem 2rem;
+                overflow-y: auto;
+            }
+
+            .about-container {
+                padding: 1.5rem;
+            }
+
+            .about-title {
+                font-size: clamp(2.5rem, 12vw, 4rem);
+                margin-bottom: 1rem;
+            }
+
+            .about-subtitle {
+                font-size: clamp(1.3rem, 6vw, 2rem);
+                margin-bottom: 1.5rem;
+            }
+
+            .coming-soon-text {
+                font-size: clamp(1rem, 4vw, 1.4rem);
+                margin-bottom: 2rem;
+            }
+
+            .about-placeholder {
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
+                border-radius: 15px;
+            }
+
+            .about-teaser {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .patent-notice {
+                font-size: 0.85rem;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            .back-home-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                border-radius: 20px;
+            }
+
             /* Mobile Contact Page - Simplified */
             .contact-page {
                 height: auto;
@@ -625,6 +823,7 @@
             <a href="#" class="logo" onclick="showPage('main')">MonBe Inc.</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" onclick="showPage('main')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
                 <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()">
@@ -643,6 +842,32 @@
                 <h1 class="brand-name" id="brandName">MonBe</h1>
                 <p class="tagline" id="tagline">see your baby feed.</p>
                 <a href="#" onclick="showPage('contact')" class="connect-btn" id="connectBtn">Connect Us</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div class="page" id="about-page">
+        <section class="about-page">
+            <div class="about-container">
+                <h1 class="about-title">About MonBe</h1>
+                <h2 class="about-subtitle">Coming Soon</h2>
+                
+                <p class="coming-soon-text">
+                    We're putting the finishing touches on something special. Stay tuned for the complete story behind MonBe's mission to transform breastfeeding through intelligent monitoring technology.
+                </p>
+
+                <div class="about-placeholder">
+                    <p class="about-teaser">
+                        "MonBe lets parents see their baby feed — a discreet smart sticker + AI that turns breastfeeding into clear, objective insights without changing how you nurse."
+                    </p>
+                    
+                    <div class="patent-notice">
+                        <strong>Patent Pending:</strong> Full details will be available after our provisional patent filing is complete. We're building something innovative and want to protect it properly first.
+                    </div>
+                </div>
+
+                <a href="#" onclick="showPage('main')" class="back-home-btn">Back to Home</a>
             </div>
         </section>
     </div>
@@ -717,7 +942,21 @@
             pages.forEach(page => page.classList.remove('active'));
             
             // Show selected page
-            const targetPage = pageId === 'main' ? 'main-page' : 'contact-page';
+            let targetPage;
+            switch(pageId) {
+                case 'main':
+                    targetPage = 'main-page';
+                    break;
+                case 'about':
+                    targetPage = 'about-page';
+                    break;
+                case 'contact':
+                    targetPage = 'contact-page';
+                    break;
+                default:
+                    targetPage = 'main-page';
+            }
+            
             document.getElementById(targetPage).classList.add('active');
             
             // Update nav links
@@ -726,8 +965,10 @@
             
             if (pageId === 'main') {
                 navLinks[0].classList.add('active');
-            } else {
+            } else if (pageId === 'about') {
                 navLinks[1].classList.add('active');
+            } else if (pageId === 'contact') {
+                navLinks[2].classList.add('active');
             }
 
             // Close mobile menu if open
