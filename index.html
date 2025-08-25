@@ -267,6 +267,7 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: #f8f9fa;
             position: relative;
         }
 
@@ -552,59 +553,54 @@
             .about-page {
                 height: auto;
                 min-height: 100vh;
-                padding: 80px 1rem 2rem;
+                padding-top: 80px;
                 overflow-y: auto;
-                background-size: cover;
-                background-position: center center;
-            }
-
-            /* Mobile overlay adjustment */
-            .about-page::before {
-                background: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(3px);
             }
 
             .about-container {
-                padding: 1.5rem;
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: auto;
+            }
+
+            .about-right {
+                height: 300px;
+                order: 1;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: #f8f9fa;
+            }
+
+            .about-left {
+                order: 2;
+                padding: 2rem 1.5rem;
+                height: auto;
+                overflow-y: visible;
+                justify-content: flex-start;
             }
 
             .about-title {
                 font-size: clamp(2.5rem, 12vw, 4rem);
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
             }
 
             .about-subtitle {
                 font-size: clamp(1.3rem, 6vw, 2rem);
-                margin-bottom: 1.5rem;
-            }
-
-            .coming-soon-text {
-                font-size: clamp(1rem, 4vw, 1.4rem);
                 margin-bottom: 2rem;
             }
 
-            .about-placeholder {
-                padding: 2rem 1.5rem;
-                margin: 1.5rem 0;
-                border-radius: 15px;
-            }
-
-            .about-teaser {
-                font-size: 1rem;
-                line-height: 1.6;
-                margin-bottom: 1.5rem;
-            }
-
-            .patent-notice {
-                font-size: 0.85rem;
-                padding: 1rem;
-                border-radius: 8px;
+            .coming-soon-text {
+                font-size: clamp(1rem, 4vw, 1.3rem);
+                margin-bottom: 2.5rem;
+                line-height: 1.5;
             }
 
             .back-home-btn {
                 padding: 1rem 2rem;
                 font-size: 1rem;
-                border-radius: 20px;
+                width: 100%;
+                text-align: center;
             }
 
             /* Mobile Contact Page - Simplified */
@@ -809,24 +805,18 @@
     <div class="page" id="about-page">
         <section class="about-page">
             <div class="about-container">
-                <h1 class="about-title">About MonBe</h1>
-                <h2 class="about-subtitle">Coming Soon</h2>
-                
-                <p class="coming-soon-text">
-                    We're putting the finishing touches on something special. Stay tuned for the complete story behind MonBe's mission to transform breastfeeding through intelligent monitoring technology.
-                </p>
-
-                <div class="about-placeholder">
-                    <p class="about-teaser">
-                        "MonBe lets parents see their baby feed — a discreet smart sticker + AI that turns breastfeeding into clear, objective insights without changing how you nurse."
-                    </p>
+                <div class="about-left">
+                    <h1 class="about-title">About MonBe</h1>
+                    <h2 class="about-subtitle">Coming Soon</h2>
                     
-                    <div class="patent-notice">
-                        <strong>Patent Pending:</strong> Full details will be available after our provisional patent filing is complete. We're building something innovative and want to protect it properly first.
-                    </div>
+                    <p class="coming-soon-text">
+                        We're putting the finishing touches on something special. Stay tuned for the complete story behind MonBe's mission.
+                    </p>
                 </div>
 
-                <a href="#" onclick="showPage('main')" class="back-home-btn">Back to Home</a>
+                <div class="about-right">
+                    <!-- commingsoon.png image will be displayed here via CSS background -->
+                </div>
             </div>
         </section>
     </div>
