@@ -343,6 +343,295 @@
             box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
+        /* Pitch Page Styles */
+        .pitch-page {
+            padding: 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .password-container {
+            max-width: 500px;
+            margin: 10vh auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .password-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .password-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .password-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .password-input:focus {
+            border-color: #2c3e50;
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+        }
+
+        .password-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .password-submit:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+
+        .password-error {
+            color: #e74c3c;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .password-error.show {
+            opacity: 1;
+        }
+
+        .pitch-content {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .pitch-content.unlocked {
+            display: block;
+        }
+
+        .pitch-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .pitch-main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .pitch-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #4a5568;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .pitch-summary {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pitch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pitch-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pitch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .key-points {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+        }
+
+        .key-points h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .point-icon {
+            width: 40px;
+            height: 40px;
+            background: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .point-text {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .point-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-cta {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a5568 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-cta h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
         /* Contact Page Styles - Completely redesigned to match the image */
         .contact-page {
             padding: 0;
@@ -611,6 +900,83 @@
                 text-align: center;
             }
 
+            /* Mobile Pitch Page */
+            .pitch-page {
+                padding-top: 80px;
+            }
+
+            .password-container {
+                margin: 5vh 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .password-title {
+                font-size: 2rem;
+            }
+
+            .password-description {
+                font-size: 1rem;
+            }
+
+            .pitch-content {
+                padding: 1rem;
+            }
+
+            .pitch-main-title {
+                font-size: 2.5rem;
+            }
+
+            .pitch-tagline {
+                font-size: 1.3rem;
+            }
+
+            .pitch-summary {
+                font-size: 1.1rem;
+            }
+
+            .pitch-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pitch-card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .market-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .key-points {
+                padding: 2rem 1.5rem;
+            }
+
+            .key-points h3 {
+                font-size: 1.8rem;
+            }
+
+            .points-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-cta {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-cta h3 {
+                font-size: 1.8rem;
+            }
+
             /* Mobile Contact Page - Simplified */
             .contact-page {
                 height: auto;
@@ -787,6 +1153,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" onclick="showPage('main')" class="active">Home</a></li>
                 <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('pitch')">Pitch</a></li>
                 <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()">
@@ -829,6 +1196,164 @@
         </section>
     </div>
 
+    <!-- Pitch Page -->
+    <div class="page" id="pitch-page">
+        <section class="pitch-page">
+            <!-- Password Protection -->
+            <div class="password-container" id="passwordContainer">
+                <h2 class="password-title">MonBe Pitch</h2>
+                <p class="password-description">
+                    This content is password protected. Please enter the access code to view our comprehensive pitch materials.
+                </p>
+                <form class="password-form" onsubmit="checkPassword(event)">
+                    <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
+                    <button type="submit" class="password-submit">ACCESS PITCH</button>
+                </form>
+                <div class="password-error" id="passwordError">
+                    Incorrect password. Please try again.
+                </div>
+            </div>
+
+            <!-- Pitch Content (Hidden until password is correct) -->
+            <div class="pitch-content" id="pitchContent">
+                <div class="pitch-header">
+                    <h1 class="pitch-main-title">MonBe</h1>
+                    <p class="pitch-tagline">"See your baby feed."</p>
+                    <p class="pitch-summary">
+                        The world's first consumer-accessible, multi-sensor breast-mounted monitoring system that delivers clinical-grade feeding insights through an effortless, privacy-first platform.
+                    </p>
+                </div>
+
+                <div class="market-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">$2.31B</span>
+                        <span class="stat-label">Current Market Size</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$4.20B</span>
+                        <span class="stat-label">Projected by 2033</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85.7%</span>
+                        <span class="stat-label">Start Breastfeeding</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">27.9%</span>
+                        <span class="stat-label">Continue at 6 Months</span>
+                    </div>
+                </div>
+
+                <div class="pitch-grid">
+                    <div class="pitch-card">
+                        <h3 class="card-title">The Problem</h3>
+                        <div class="card-content">
+                            <p><strong>80-90% of mothers estimate milk intake by baby behavior alone</strong>, leading to frequent misjudgment and early breastfeeding cessation.</p>
+                            <p>Current solutions require weighing scales, nipple shields, or wrap-around devices that disrupt natural nursing. <strong>Only 2 companies offer genuine milk intake monitoring during nursing</strong> despite a $2.31 billion market.</p>
+                        </div>
+                    </div>
+
+                    <div class="pitch-card">
+                        <h3 class="card-title">Our Solution</h3>
+                        <div class="card-content">
+                            <p><strong>MonBe is a passive, multi-sensor breast-mounted patch</strong> that captures comprehensive feeding data and provides AI-powered insights through smartphone integration.</p>
+                            <p>The only true breast-mounted multi-sensor patch available commercially, with post-session NFC data transfer and zero manual logging required.</p>
+                        </div>
+                    </div>
+
+                    <div class="pitch-card">
+                        <h3 class="card-title">Technology</h3>
+                        <div class="card-content">
+                            <p><strong>5-sensor fusion system:</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Acoustic microphone (swallow detection)</li>
+                                <li>Micro-vibration sensor (jaw motion)</li>
+                                <li>Temperature sensor (milk letdown)</li>
+                                <li>4-electrode bioimpedance array</li>
+                                <li>Pressure sensor (suction patterns)</li>
+                            </ul>
+                            <p>Clinical accuracy target: ±20-25% vs reference scales</p>
+                        </div>
+                    </div>
+
+                    <div class="pitch-card">
+                        <h3 class="card-title">Business Model</h3>
+                        <div class="card-content">
+                            <p><strong>Razor & Blade Model:</strong></p>
+                            <p>• Reusable Core: $50-100 (multi-month use)<br>
+                            • Daily Patches: $30-50/month (subscribe & save)<br>
+                            • Software: Freemium + premium analytics</p>
+                            <p><strong>Target LTV:</strong> $400-600 per customer<br>
+                            <strong>Gross Margin:</strong> 60-70%</p>
+                        </div>
+                    </div>
+
+                    <div class="pitch-card">
+                        <h3 class="card-title">Market Opportunity</h3>
+                        <div class="card-content">
+                            <p><strong>Primary cessation reason:</strong> 35-44% cite "insufficient milk supply" (often incorrect perception)</p>
+                            <p><strong>Target Markets:</strong><br>
+                            • US: 3.3M mothers start breastfeeding annually<br>
+                            • Western Europe: 80-98% initiation rates<br>
+                            • Total Addressable Market: $100-200M</p>
+                        </div>
+                    </div>
+
+                    <div class="pitch-card">
+                        <h3 class="card-title">Competitive Advantage</h3>
+                        <div class="card-content">
+                            <p><strong>Key differentiators:</strong></p>
+                            <p>• Only breast-mounted multi-sensor patch<br>
+                            • Post-session analysis (no RF during feeding)<br>
+                            • Complete ecosystem (Daily/Nightie/Clinic)<br>
+                            • Favorable patent landscape<br>
+                            • Northwestern University bioimpedance validation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-points">
+                    <h3>Why MonBe Will Succeed</h3>
+                    <div class="points-grid">
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div>
+                                <div class="point-title">Massive Unmet Need</div>
+                                <div class="point-text">68% of feeding records have missing/contradictory data. Healthcare providers waste 5-7 minutes per visit reconstructing history.</div>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div>
+                                <div class="point-title">Technology Leadership</div>
+                                <div class="point-text">Multi-sensor fusion approach validated by Northwestern University research. Clear patent freedom to operate.</div>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div>
+                                <div class="point-title">Scalable Business Model</div>
+                                <div class="point-text">Recurring revenue through disposable patches. Target margins of 60-70% with strong unit economics.</div>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">4</div>
+                            <div>
+                                <div class="point-title">Clear Market Entry</div>
+                                <div class="point-text">Consumer wellness device pathway avoids FDA delays. Premium positioning in underserved market.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-cta">
+                    <h3>Ready to Learn More?</h3>
+                    <p>Join us in transforming breastfeeding through intelligent monitoring technology.</p>
+                    <a href="#" onclick="showPage('contact')" class="cta-button">Contact Us Today</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <!-- Contact Page -->
     <div class="page" id="contact-page">
         <section class="contact-page">
@@ -837,7 +1362,7 @@
                     <h1 class="contact-title">Contact Us</h1>
                     
                     <p class="contact-description">
-                        We'd love to hear from you. Whether you're a parent interested in early access, a clinician exploring collaboration, or an investor looking to learn more about MonBe — reach out and we'll get back to you soon.
+                        We'd love to hear from you. Whether you're a parent interested in early access, a clinician exploring collaboration, or an investor looking to learn more about MonBe – reach out and we'll get back to you soon.
                     </p>
 
                     <div class="contact-emails">
@@ -907,6 +1432,9 @@
                 case 'about':
                     targetPage = 'about-page';
                     break;
+                case 'pitch':
+                    targetPage = 'pitch-page';
+                    break;
                 case 'contact':
                     targetPage = 'contact-page';
                     break;
@@ -924,8 +1452,10 @@
                 navLinks[0].classList.add('active');
             } else if (pageId === 'about') {
                 navLinks[1].classList.add('active');
-            } else if (pageId === 'contact') {
+            } else if (pageId === 'pitch') {
                 navLinks[2].classList.add('active');
+            } else if (pageId === 'contact') {
+                navLinks[3].classList.add('active');
             }
 
             // Close mobile menu if open
@@ -938,6 +1468,47 @@
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('mobile-open');
         }
+
+        // Password protection for pitch page
+        function checkPassword(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'monbe2025'; // You can change this password
+            const errorElement = document.getElementById('passwordError');
+            
+            if (password === correctPassword) {
+                // Hide password container and show pitch content
+                document.getElementById('passwordContainer').style.display = 'none';
+                document.getElementById('pitchContent').classList.add('unlocked');
+                
+                // Store access in session (so they don't need to re-enter during same session)
+                sessionStorage.setItem('pitchAccess', 'granted');
+            } else {
+                // Show error message
+                errorElement.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorElement.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Check if user already has access when navigating to pitch page
+        function checkPitchAccess() {
+            if (sessionStorage.getItem('pitchAccess') === 'granted') {
+                document.getElementById('passwordContainer').style.display = 'none';
+                document.getElementById('pitchContent').classList.add('unlocked');
+            }
+        }
+
+        // Call this when pitch page is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for existing pitch access
+            checkPitchAccess();
+        });
 
         // Form submission for Netlify
         document.querySelector('form').addEventListener('submit', function(e) {
