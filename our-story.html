@@ -18,109 +18,124 @@
         .story-page {
             padding: 0;
             background: #f8f9fa;
-            min-height: 100vh;
-            padding-top: 80px;
-            overflow-y: auto;
-        }
-
-        .story-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
 
         .story-section {
-            margin-bottom: 4rem;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease-out;
         }
 
-        .story-section.animate {
+        .story-section.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .story-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 300;
-            color: #2c3e50;
+        .story-section:nth-child(odd) {
+            background: #f8f9fa;
+        }
+
+        .story-section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        .story-content {
+            max-width: 900px;
             text-align: center;
-            margin-bottom: 3rem;
-            letter-spacing: 2px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .story-title.animate {
-            opacity: 1;
-            transform: translateY(0);
+            margin: 0 auto;
         }
 
         .story-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
             color: #555;
             line-height: 1.8;
             margin-bottom: 2rem;
-            text-align: left;
+            text-align: center;
         }
 
         .story-text.highlight {
-            font-size: clamp(1.5rem, 3.5vw, 1.9rem);
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
             color: #2c3e50;
-            font-weight: 500;
-            text-align: center;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+            margin: 2rem 0;
         }
 
         .story-text.emphasis {
-            font-size: clamp(1.4rem, 3.2vw, 1.8rem);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
             color: #2c3e50;
             font-weight: 600;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .story-text.final {
-            font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             color: #2c3e50;
-            font-weight: 600;
-            text-align: center;
-            margin: 4rem 0;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            margin: 2rem 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .story-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+        .story-text.quote {
+            font-size: clamp(1.5rem, 3.8vw, 2.1rem);
             color: #2c3e50;
             font-style: italic;
-            text-align: center;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-left: 4px solid #2c3e50;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
         }
 
+        /* Navigation dots */
+        .story-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .story-nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .story-nav-dot.active {
+            background: #2c3e50;
+            transform: scale(1.2);
+        }
+
+        .story-nav-dot:hover {
+            background: #2c3e50;
+            transform: scale(1.1);
+        }
+
+        /* Back button */
         .story-back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
             background: #2c3e50;
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 25px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -128,10 +143,9 @@
             display: inline-block;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin: 3rem auto;
-            text-align: center;
+            z-index: 1000;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(-20px);
             transition: all 0.8s ease-out;
         }
 
@@ -146,37 +160,64 @@
             box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
 
-        .story-back-btn-container {
-            text-align: center;
-            margin-top: 4rem;
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #2c3e50;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            z-index: 1000;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Hide scroll indicator on last section */
+        .story-section:last-child .scroll-indicator {
+            display: none;
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .story-container {
+            .story-section {
                 padding: 1rem;
             }
 
-            .story-section {
-                margin-bottom: 3rem;
-            }
-
-            .story-text.highlight,
-            .story-text.final {
-                padding: 1.5rem;
-                margin: 2rem 0;
-            }
-
-            .story-quote {
-                padding: 1.5rem;
-                margin: 2rem 0;
+            .story-nav {
+                right: 1rem;
             }
 
             .story-back-btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                width: 100%;
-                max-width: 300px;
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .scroll-indicator {
+                bottom: 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Hide navigation on mobile */
+        @media (max-width: 480px) {
+            .story-nav {
+                display: none;
             }
         }
     </style>
@@ -188,7 +229,6 @@
             <a href="home.html" class="logo">MonBe Inc.</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="home.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
                 <li><a href="our-story.html" class="active">Our Story</a></li>
                 <li><a href="pitch.html">Pitch</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -203,131 +243,225 @@
 
     <!-- Our Story Page -->
     <section class="story-page">
-        <div class="story-container">
-            <h1 class="story-title" id="storyTitle">Our Story</h1>
-            
-            <div class="story-section" id="section1">
+        <!-- Section 1 -->
+        <div class="story-section active" id="section1">
+            <div class="story-content">
                 <p class="story-text">
-                    Becoming a parent is the most beautiful gift — and the most overwhelming.
-                    You hold your baby close, you listen, you watch, you try to read every tiny signal.
+                    Becoming a parent is the most beautiful gift — and the most overwhelming.<br>
+                    You hold your baby close, you listen, you watch, you try to read every tiny signal.<br>
                     But there's always one question that creates more worry than anything else:
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section2">
+        <!-- Section 2 -->
+        <div class="story-section" id="section2">
+            <div class="story-content">
                 <p class="story-text highlight">
                     "Is my baby eating enough?"
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section3">
+        <!-- Section 3 -->
+        <div class="story-section" id="section3">
+            <div class="story-content">
                 <p class="story-text">
-                    For generations, parents have lived with this uncertainty.
+                    For generations, parents have lived with this uncertainty.<br>
                     The only answers were indirect — counting wet diapers, weighing the baby every few days, or relying on guesswork. These methods leave parents anxious, second-guessing themselves, and sometimes giving up on breastfeeding sooner than they wanted.
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section4">
+        <!-- Section 4 -->
+        <div class="story-section" id="section4">
+            <div class="story-content">
                 <p class="story-text emphasis">
-                    At MonBe, we believe it shouldn't be this way.
+                    At MonBe, we believe it shouldn't be this way.<br>
                     We believe parents deserve clarity, calm, and confidence — without disrupting the natural bond of breastfeeding.
                 </p>
-            </div>
-
-            <div class="story-section" id="section5">
                 <p class="story-text">
                     That's why we created <strong>MonBe</strong>, a gentle, smart sticker that listens to your baby's sucking, swallowing, and breathing, and gives you real-time insights into feeding — <strong>without changing how you nurse.</strong>
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section6">
-                <p class="story-text">
+        <!-- Section 5 -->
+        <div class="story-section" id="section5">
+            <div class="story-content">
+                <p class="story-text quote">
                     With MonBe, the darkness of uncertainty becomes light.<br>
                     The stress of "not knowing" is replaced with peace of mind.<br>
                     <strong>Bringing light to the darkness, and certainty to the uncertain.</strong>
                 </p>
-            </div>
-
-            <div class="story-section" id="section7">
                 <p class="story-text">
                     MonBe was born from our own journey as parents — those 3 AM moments of doubt, the sleepless nights, the questions with no answers, and the determination to find a better way. We want every family to feel sure, supported, and connected.
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section8">
+        <!-- Section 6 -->
+        <div class="story-section" id="section6">
+            <div class="story-content">
                 <p class="story-text emphasis">
                     Because breastfeeding is not just about nutrition.<br>
                     It's about trust.<br>
                     It's about closeness.<br>
                     It's about knowing you are enough.
                 </p>
-            </div>
-
-            <div class="story-section" id="section9">
-                <p class="story-text emphasis">
+                <p class="story-text">
                     Because every parent deserves to know.
                 </p>
             </div>
+            <div class="scroll-indicator">Scroll to continue</div>
+        </div>
 
-            <div class="story-section" id="section10">
+        <!-- Section 7 -->
+        <div class="story-section" id="section7">
+            <div class="story-content">
                 <p class="story-text final">
-                    <strong>MonBe — see your baby feed.</strong>
+                    MonBe — see your baby feed.
                 </p>
             </div>
+        </div>
 
-            <div class="story-back-btn-container">
-                <a href="home.html" class="story-back-btn" id="backBtn">Back to Home</a>
-            </div>
+        <!-- Back Button -->
+        <a href="home.html" class="story-back-btn" id="backBtn">Back to Home</a>
+
+        <!-- Navigation Dots -->
+        <div class="story-nav">
+            <div class="story-nav-dot active" data-section="1"></div>
+            <div class="story-nav-dot" data-section="2"></div>
+            <div class="story-nav-dot" data-section="3"></div>
+            <div class="story-nav-dot" data-section="4"></div>
+            <div class="story-nav-dot" data-section="5"></div>
+            <div class="story-nav-dot" data-section="6"></div>
+            <div class="story-nav-dot" data-section="7"></div>
         </div>
     </section>
 
     <script src="script.js"></script>
     <script>
-        // Scroll animation for Our Story page
-        function animateOnScroll() {
-            const sections = document.querySelectorAll('.story-section');
-            const title = document.getElementById('storyTitle');
-            const backBtn = document.getElementById('backBtn');
-            
-            // Animate title first
-            setTimeout(() => {
-                title.classList.add('animate');
-            }, 300);
-            
-            // Create intersection observer for sections
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+        // Full-screen scroll functionality for Our Story page
+        let currentSection = 1;
+        const totalSections = 7;
+        let isScrolling = false;
+
+        function showSection(sectionNumber) {
+            // Hide all sections
+            document.querySelectorAll('.story-section').forEach(section => {
+                section.classList.remove('active');
             });
             
-            // Observe all sections
-            sections.forEach((section) => {
-                observer.observe(section);
-            });
+            // Show target section
+            document.getElementById(`section${sectionNumber}`).classList.add('active');
             
-            // Animate back button when user reaches the end
-            const backBtnObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        backBtn.classList.add('animate');
-                    }
-                });
-            }, {
-                threshold: 0.5
+            // Update navigation dots
+            document.querySelectorAll('.story-nav-dot').forEach(dot => {
+                dot.classList.remove('active');
             });
+            document.querySelector(`[data-section="${sectionNumber}"]`).classList.add('active');
             
-            backBtnObserver.observe(backBtn);
+            currentSection = sectionNumber;
         }
-        
-        // Initialize animations when page loads
+
+        function scrollToSection(direction) {
+            if (isScrolling) return;
+            
+            let targetSection = currentSection;
+            
+            if (direction === 'down' && currentSection < totalSections) {
+                targetSection = currentSection + 1;
+            } else if (direction === 'up' && currentSection > 1) {
+                targetSection = currentSection - 1;
+            }
+            
+            if (targetSection !== currentSection) {
+                isScrolling = true;
+                showSection(targetSection);
+                
+                // Prevent scrolling for a short time
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 800);
+            }
+        }
+
+        // Mouse wheel scroll
+        document.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            
+            if (e.deltaY > 0) {
+                scrollToSection('down');
+            } else {
+                scrollToSection('up');
+            }
+        }, { passive: false });
+
+        // Touch/swipe support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe up - go to next section
+                    scrollToSection('down');
+                } else {
+                    // Swipe down - go to previous section
+                    scrollToSection('up');
+                }
+            }
+        }
+
+        // Navigation dots click
+        document.querySelectorAll('.story-nav-dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                const sectionNumber = parseInt(this.dataset.section);
+                if (sectionNumber !== currentSection) {
+                    isScrolling = true;
+                    showSection(sectionNumber);
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 800);
+                }
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                scrollToSection('down');
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                scrollToSection('up');
+            }
+        });
+
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            animateOnScroll();
+            // Animate back button
+            setTimeout(() => {
+                document.getElementById('backBtn').classList.add('animate');
+            }, 1000);
         });
     </script>
 </body>
