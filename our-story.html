@@ -127,41 +127,6 @@
             transform: scale(1.1);
         }
 
-        /* Back button */
-        .story-back-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #2c3e50;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-
-        .story-back-btn.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .story-back-btn:hover {
-            background: #1a252f;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
-        }
 
         /* Scroll indicator */
         .scroll-indicator {
@@ -204,12 +169,6 @@
                 right: 1rem;
             }
 
-            .story-back-btn {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-            }
 
             .scroll-indicator {
                 bottom: 1rem;
@@ -333,8 +292,6 @@
             </div>
         </div>
 
-        <!-- Back Button -->
-        <a href="home.html" class="story-back-btn" id="backBtn">Back to Home</a>
 
         <!-- Navigation Dots -->
         <div class="story-nav">
@@ -464,11 +421,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Ensure first section is active
             showSection(1);
-            
-            // Animate back button
-            setTimeout(() => {
-                document.getElementById('backBtn').classList.add('animate');
-            }, 1000);
         });
     </script>
 </body>
