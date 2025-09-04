@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch - MonBe Inc.</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="logo">MonBe Inc.</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pitch.html" class="active">Pitch</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pitch Page -->
+    <section class="pitch-page">
+        <!-- Password Protection -->
+        <div class="password-container" id="passwordContainer">
+            <h2 class="password-title">MonBe Pitch</h2>
+            <p class="password-description">
+                This content is password protected. Please enter the access code to view our comprehensive pitch materials.
+            </p>
+            <form class="password-form" onsubmit="checkPassword(event)" id="passwordForm">
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
+                <button type="submit" class="password-submit">ACCESS PITCH</button>
+            </form>
+            <div class="password-error" id="passwordError">
+                Incorrect password. Please try again.
+            </div>
+        </div>
+
+        <!-- Pitch Content (Hidden until password is correct) -->
+        <div class="pitch-content" id="pitchContent">
+            <div class="pitch-header">
+                <h1 class="pitch-main-title">MonBe</h1>
+                <p class="pitch-tagline">"See your baby feed."</p>
+                <p class="pitch-summary">
+                    The world's first consumer-accessible, multi-sensor breast-mounted monitoring system that delivers clinical-grade feeding insights through an effortless, privacy-first platform.
+                </p>
+            </div>
+
+            <div class="market-stats">
+                <div class="stat-item">
+                    <span class="stat-number">$2.31B</span>
+                    <span class="stat-label">Global Breastfeeding Accessories Market (2024)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$4.20B</span>
+                    <span class="stat-label">Projected Market Size by 2033</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$100-200M</span>
+                    <span class="stat-label">MonBe's Addressable Market Segment</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10-15%</span>
+                    <span class="stat-label">CAGR Growth Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">85.7%</span>
+                    <span class="stat-label">US Mothers Start Breastfeeding</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">27.9%</span>
+                    <span class="stat-label">Still Exclusively Breastfeeding at 6 Months</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">68%</span>
+                    <span class="stat-label">Feeding Records Have Missing/Contradictory Data</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">35-44%</span>
+                    <span class="stat-label">Stop Due to "Insufficient Supply" Perception</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">94%</span>
+                    <span class="stat-label">Smartphone Penetration Among Millennial Mothers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$23,380</span>
+                    <span class="stat-label">Annual Baby Spending per Family</span>
+                </div>
+            </div>
+
+            <div class="pitch-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); margin: 2rem 0;">
+                <h3 class="card-title" style="color: #2c3e50; text-align: center;">Market Analysis Deep Dive</h3>
+                <div class="card-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Regional Market Data:</h4>
+                            <p>• <strong>US:</strong> 4M annual births, 3.3M start breastfeeding<br>
+                            • <strong>Western Europe:</strong> 80-98% initiation rates<br>
+                            • <strong>Israel:</strong> ~90% initiation, strong Tipat Halav integration<br>
+                            • <strong>Canada:</strong> 94% smartphone penetration among millennial mothers</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Healthcare Economics:</h4>
+                            <p>• <strong>194 babies</strong> per lactation consultant in US<br>
+                            • <strong>68%</strong> of feeding records have missing/contradictory data<br>
+                            • <strong>5-7 minutes</strong> wasted per clinical visit reconstructing history<br>
+                            • <strong>$9,300-$23,380</strong> annual baby spending per family</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pitch-grid" style="grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto auto; gap: 2rem;">
+                <div class="pitch-card">
+                    <h3 class="card-title">The Problem</h3>
+                    <div class="card-content">
+                        <p style="font-weight: 700; font-size: 1.1rem; color: #2c3e50; margin-bottom: 1rem;">Mothers are flying blind during breastfeeding with no way to measure if their baby is actually getting enough milk.</p>
+                        
+                        <p><strong>80-90% of mothers estimate milk intake by baby behavior alone</strong>, leading to frequent misjudgment and early breastfeeding cessation. <strong>35-44% stop breastfeeding citing "insufficient milk supply"</strong> - often an incorrect perception due to lack of objective data.</p>
+                        
+                        <p>Current solutions require weighing scales, nipple shields, or wrap-around devices that disrupt natural nursing. <strong>Only 2 companies offer genuine milk intake monitoring during nursing</strong> despite a $2.31 billion market.</p>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">Specific Pain Points Our Products Address:</h4>
+                            <p><strong>Early Nursing Phase (0-3 months):</strong> New mothers need real-time milk intake data but have no non-invasive way to measure it during direct nursing.</p>
+                            
+                            <p><strong>Combination Feeding Period (3-6 months):</strong> Mothers introducing formula or other milk substitutes cannot accurately track how much breast milk versus formula their baby consumes, making nutritional planning and feeding decisions extremely difficult.</p>
+                            
+                            <p><strong>Night Feeding Challenges (6-12 months):</strong> 90%+ of mothers continue night feeding but can't distinguish nutritive eating from comfort sucking, making weaning decisions difficult.</p>
+                            
+                            <p><strong>Healthcare Provider Inefficiency:</strong> Healthcare providers waste 5-7 minutes per appointment reconstructing incomplete feeding histories instead of providing targeted care.</p>
+                            
+                            <p><strong>Public Breastfeeding Monitoring:</strong> Mothers need discrete feeding monitoring when nursing in public spaces but lack appropriate privacy solutions with integrated tracking capabilities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Our Solution</h3>
+                    <div class="card-content">
+                        <p style="font-weight: 700; font-size: 1.1rem; color: #2c3e50; margin-bottom: 1rem;">MonBe delivers the world's first consumer breast-mounted monitoring system that makes breastfeeding visible through intelligent sensing.</p>
+                        
+                        <p><strong>MonBe is a passive, multi-sensor breast-mounted patch</strong> that captures comprehensive feeding data and provides AI-powered insights through smartphone integration.</p>
+                        <p>The only true breast-mounted multi-sensor patch available commercially, with post-session NFC data transfer and zero manual logging required.</p>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #e8f5e8; border-radius: 8px;">
+                            <h4 style="color: #155724; margin-bottom: 0.8rem;">Complete Product Ecosystem:</h4>
+                            <p><strong>MonBe Daily:</strong> Standard daytime monitoring with real-time intake measurement and latch quality assessment.</p>
+                            
+                            <p><strong>MonBe Nightie:</strong> Sleep-optimized night feeding classification distinguishing eating, comfort sucking, and sleep states.</p>
+                            
+                            <p><strong>MonBe Care:</strong> Clinical integration platform providing automated reports for healthcare providers and lactation consultants.</p>
+                            
+                            <p><strong>MonBe To-Go:</strong> Discrete breastfeeding cover with tetra design, noise sealing technology, and integrated patch compatibility for public feeding monitoring.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Product: How It Works</h3>
+                    <div class="card-content">
+                        <p><strong>5-sensor fusion system:</strong></p>
+                        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                            <li>Acoustic microphone (swallow detection)</li>
+                            <li>Micro-vibration sensor (jaw motion)</li>
+                            <li>Temperature sensor (milk letdown)</li>
+                            <li>4-electrode bioimpedance array</li>
+                            <li>Pressure sensor (suction patterns)</li>
+                        </ul>
+                        <p>Clinical accuracy target: <±5% for final product</p>
+                        
+                        <div style="background: #f0f8ff; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 0.5rem;">User Flow:</h4>
+                            <p style="color: #1e3a8a; font-size: 0.95rem;">
+                                1. Apply daily patch (30 seconds)<br>
+                                2. Feed naturally (no disruption)<br>
+                                3. Tap phone to sync (<3 seconds)<br>
+                                4. View AI insights instantly
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Traction & Validation</h3>
+                    <div class="card-content">
+                        <div style="margin-bottom: 1rem;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Current Status:</h4>
+                            <p>• <strong>Provisional Patent:</strong> Filed August 2025<br>
+                            • <strong>Northwestern Partnership:</strong> Bioimpedance technology validation<br>
+                            • <strong>Concept Design:</strong> Complete product concept and architecture finalized<br>
+                            • <strong>Market Research:</strong> Comprehensive patent & competitive analysis</p>
+                        </div>
+                        
+                        <div style="background: #e8f5e8; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #155724; margin-bottom: 0.5rem;">Timeline Upon Investment & Team Building:</h4>
+                            <p style="color: #155724; font-size: 0.95rem;">
+                                Months 1-6: First working MVP development<br>
+                                Months 7-10: Pilot testing with 50+ mothers<br>
+                                Months 11-16: Consumer launch preparation<br>
+                                Months 17-20: Direct-to-consumer launch
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Competition Analysis</h3>
+                    <div class="card-content">
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
+                                <tr style="background: #f8f9fa;">
+                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Solution</th>
+                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Price</th>
+                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Limitation</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>nfant Thrive</strong></td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$299+</td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Clinical focus only</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>Coro Shield</strong></td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$199</td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Nipple shield rejection</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>Hatch Scale</strong></td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$149</td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Disrupts feeding</td>
+                                </tr>
+                                <tr style="background: #f0f8ff;">
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>MonBe</strong></td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$150-250</td>
+                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">None - best of all</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Go-to-Market Strategy</h3>
+                    <div class="card-content">
+                        <div style="margin-bottom: 1rem;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Customer Acquisition:</h4>
+                            <p>• <strong>Digital Marketing:</strong> Social media, parenting forums, influencer partnerships<br>
+                            • <strong>Healthcare Partnerships:</strong> Lactation consultants, pediatric practices<br>
+                            • <strong>Retail Channels:</strong> Buy Buy Baby, Amazon, Target<br>
+                            • <strong>Direct Sales:</strong> Company website, subscription model</p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Launch Timeline:</h4>
+                            <p style="font-size: 0.95rem;">
+                                <strong>Phase 1 (Q3 2026):</strong> Israel soft launch<br>
+                                <strong>Phase 2 (Q4 2026):</strong> US direct-to-consumer<br>
+                                <strong>Phase 3 (Q1 2027):</strong> EU expansion<br>
+                                <strong>Phase 4 (Q2 2027):</strong> Healthcare integration
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Business Model</h3>
+                    <div class="card-content">
+                        <p><strong>Razor & Blade Model with Software Layer:</strong></p>
+                        
+                        <div style="margin: 1rem 0;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Revenue Streams:</h4>
+                            <p>• <strong>Reusable Core:</strong> $50-100 (multi-month lifespan)<br>
+                            • <strong>Daily Patches:</strong> $30-50/month (subscribe & save)<br>
+                            • <strong>Software Tiers:</strong> Freemium + premium analytics ($5-15/month)<br>
+                            • <strong>Healthcare Integration:</strong> Clinic MonBe bulk licensing</p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Distribution Strategy:</h4>
+                            <p style="font-size: 0.95rem;"><strong>Phase 1:</strong> Direct-to-consumer (consumer wellness device)<br>
+                            <strong>Phase 2:</strong> Healthcare integration (lactation consultants, pediatrics)<br>
+                            <strong>Phase 3:</strong> Medical device transition (FDA 510k pathway)<br>
+                            <strong>Phase 4:</strong> International expansion (EU, Canada, Israel)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Team & Expertise</h3>
+                    <div class="card-content">
+                        <div style="margin-bottom: 1rem;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Founding Team:</h4>
+                            <p><strong>CEO/Founder:</strong> Electrical & Computer Engineering background<br>
+                            • Hardware development expertise<br>
+                            • Multi-sensor integration experience<br>
+                            • Embedded systems and IoT development</p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Key Advisors & Partners:</h4>
+                            <p style="font-size: 0.95rem;">
+                                • <strong>Clinical Advisor:</strong> Certified lactation consultant<br>
+                                • <strong>Technology Partner:</strong> Northwestern University research collaboration<br>
+                                • <strong>Regulatory Advisor:</strong> FDA pathway expertise<br>
+                                • <strong>Manufacturing Partner:</strong> Medical device contract manufacturer
+                            </p>
+                        </div>
+                        
+                        <div style="background: #e8f5e8; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #155724; margin-bottom: 0.5rem;">Hiring Roadmap:</h4>
+                            <p style="color: #155724; font-size: 0.95rem;">
+                                Q4 2025: Hardware Engineer, Software Engineer<br>
+                                Q1 2026: Product Designer, Manufacturing Consultant<br>
+                                Q2 2026: Clinical Affairs Manager, Marketing Lead
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Detailed Financials & Funding</h3>
+                    <div class="card-content">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Funding Needs:</h4>
+                                <p><strong>Seed Round:</strong> $3-5M<br>
+                                • R&D: $1.5M (50%)<br>
+                                • Regulatory: $0.5M (17%)<br>
+                                • Team: $1M (33%)</p>
+                            </div>
+                            <div>
+                                <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Path to Profitability:</h4>
+                                <p><strong>Break-even:</strong> Month 30<br>
+                                <strong>Gross Margin:</strong> 60-70%<br>
+                                <strong>Monthly Burn:</strong> $200K peak<br>
+                                <strong>Runway:</strong> 24+ months</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f0f8ff; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 0.5rem;">Use of Funds Breakdown:</h4>
+                            <p style="color: #1e3a8a; font-size: 0.95rem;">
+                                <strong>Product Development (50%):</strong> Hardware prototyping, software development, clinical validation<br>
+                                <strong>Team Expansion (33%):</strong> Key hires across engineering, product, and clinical affairs<br>
+                                <strong>Regulatory & IP (17%):</strong> FDA pathway, patent filings, quality systems
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Market Opportunity (IL/US/EU Focus)</h3>
+                    <div class="card-content">
+                        <p><strong>Phase 1 Launch Markets:</strong> Israel, United States, European Union</p>
+                        
+                        <div style="margin: 1rem 0;">
+                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Market Breakdown:</h4>
+                            <p><strong>Israel:</strong> ~162,000 mothers initiate annually (90% rate)<br>
+                            <strong>United States:</strong> ~3.3M mothers initiate annually (83% rate)<br>
+                            <strong>European Union:</strong> ~3.3-3.9M mothers initiate annually (80-95% rates)</p>
+                        </div>
+                        
+                        <div style="background: #f0f8ff; padding: 1rem; border-radius: 6px;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 0.5rem;">Addressable Market Sizing:</h4>
+                            <p style="color: #1e3a8a; font-size: 0.95rem;">
+                                <strong>TAM:</strong> $2.31B global breastfeeding accessories<br>
+                                <strong>SAM:</strong> $600-800M IL/US/EU monitoring segment<br>
+                                <strong>SOM:</strong> $100-200M premium tech adoption (3-5%)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-card">
+                    <h3 class="card-title">Competitive Advantage</h3>
+                    <div class="card-content">
+                        <p><strong>Key differentiators:</strong></p>
+                        <p>• <strong>Only breast-mounted multi-sensor patch</strong> available commercially<br>
+                        • <strong>Post-session analysis</strong> (no RF during feeding for baby safety)<br>
+                        • <strong>Complete ecosystem</strong> (Daily/Nightie/Care/To-Go variants)<br>
+                        • <strong>Patent protection</strong>: Provisional patent filed August 2025<br>
+                        • <strong>Northwestern University bioimpedance validation</strong></p>
+                        
+                        <div style="margin: 1rem 0; padding: 1rem; background: #e8f5e8; border-radius: 8px; border-left: 4px solid #28a745;">
+                            <h4 style="color: #155724; margin-bottom: 0.5rem;">IP & Technology Position:</h4>
+                            <p style="color: #155724; font-size: 0.95rem;"><strong>Favorable Patent Landscape:</strong> Critical foundational patents have expired (capacitance-based monitoring, NFC integration, smart garment concepts), creating substantial freedom to operate.</p>
+                            <p style="color: #155724; font-size: 0.95rem;"><strong>Our Protection:</strong> Provisional patent application filed August 2025 covering our multi-sensor fusion approach, modular hardware design, and night classification algorithms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>Why MonBe Will Succeed</h3>
+                <div class="points-grid">
+                    <div class="point-item">
+                        <div class="point-icon">1</div>
+                        <div>
+                            <div class="point-title">Massive Unmet Need</div>
+                            <div class="point-text">68% of feeding records have missing/contradictory data. Healthcare providers waste 5-7 minutes per visit reconstructing history.</div>
+                        </div>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">2</div>
+                        <div>
+                            <div class="point-title">Technology Leadership</div>
+                            <div class="point-text">Multi-sensor fusion approach validated by Northwestern University research. Clear patent freedom to operate.</div>
+                        </div>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">3</div>
+                        <div>
+                            <div class="point-title">Scalable Business Model</div>
+                            <div class="point-text">Recurring revenue through disposable patches. Target margins of 60-70% with strong unit economics.</div>
+                        </div>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">4</div>
+                        <div>
+                            <div class="point-title">Clear Market Entry</div>
+                            <div class="point-text">Consumer wellness device pathway avoids FDA delays. Premium positioning in underserved market.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-cta">
+                <h3>Long-Term Vision & Impact</h3>
+                <div style="text-align: left; margin-bottom: 2rem;">
+                    <h4 style="color: white; margin-bottom: 1rem;">5-10 Year Vision:</h4>
+                    <p style="margin-bottom: 1rem;">Transform MonBe into the universal standard for breastfeeding support, as common as baby monitors in every home. Expand globally to support WHO breastfeeding goals and reduce maternal anxiety worldwide.</p>
+                    
+                    <h4 style="color: white; margin-bottom: 1rem;">Why Now?</h4>
+                    <p style="margin-bottom: 1rem;">• Post-COVID emphasis on disposable medical devices<br>
+                    • Accelerating digital health adoption<br>
+                    • Increased focus on maternal health outcomes<br>
+                    • Breakthrough bioimpedance research validation<br>
+                    • Favorable patent landscape with expired foundational IP<br>
+                    • Modern mothers increasingly demand digital solutions that provide detailed feeding insights and data<br>
+                    • Advanced sensor technology and AI capabilities have matured to enable accurate, consumer-ready monitoring solutions</p>
+                    
+                    <h4 style="color: white; margin-bottom: 1rem;">Global Impact Potential:</h4>
+                    <p style="margin-bottom: 2rem;">Support the 140+ million mothers who give birth globally each year. Reduce early breastfeeding cessation, improve infant health outcomes, and provide objective data to eliminate uncertainty that drives 35-44% to stop nursing prematurely.</p>
+                </div>
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 2rem;">Join us in transforming breastfeeding through intelligent monitoring technology.</p>
+                <a href="contact.html" class="cta-button">Contact Us Today</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

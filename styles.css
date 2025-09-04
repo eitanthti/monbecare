@@ -1,0 +1,1097 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2d3748;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    padding: 2rem;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #4a5568;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #2d3748;
+}
+
+/* Mobile menu toggle */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.mobile-menu span {
+    width: 25px;
+    height: 2px;
+    background: #4a5568;
+    margin: 4px 0;
+    transition: 0.3s;
+}
+
+/* Main Page Styles */
+.hero {
+    height: 100vh;
+    background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_04_03%20PM.png');
+    background-size: 110%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Color image preload and smooth transition */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('ChatGPT%20Image%20Aug%2023,%202025%20at%2009_05_53%20PM.png');
+    background-size: 110%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+}
+
+/* Show color image */
+.hero.color-transition::after {
+    opacity: 1;
+}
+
+/* Dark overlay for better text readability */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: opacity 1.5s ease-in-out;
+    z-index: 2;
+}
+
+.hero.color-transition::before {
+    opacity: 0.2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 900px;
+    padding: 2rem;
+}
+
+/* Initial big MonBe title */
+.brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+/* MonBe fades out more naturally and slowly */
+.brand-name.fade-out {
+    opacity: 0.15;
+    transform: scale(0.75);
+}
+
+/* Tagline starts hidden and fades in slowly */
+.tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 400;
+    color: white;
+    margin-top: 1rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.tagline.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.connect-btn {
+    background: #2d3748;
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.connect-btn.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+}
+
+.connect-btn:hover {
+    background: #1a202c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45, 55, 72, 0.3);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Remove the CSS baby hands simulation since we're using real image */
+.hero-image {
+    display: none;
+}
+
+/* About Page Styles */
+.about-page {
+    padding: 0;
+    background: #f8f9fa;
+    height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100vh - 80px);
+}
+
+.about-left {
+    background: #f8f9fa;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.about-right {
+    background-image: url('commingsoon.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out 0.3s forwards;
+}
+
+.about-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    color: #4a5568;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out 0.6s forwards;
+}
+
+.coming-soon-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+    color: #555;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out 0.9s forwards;
+}
+
+.back-home-btn {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: fit-content;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out 1.2s forwards;
+}
+
+.back-home-btn:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+
+/* Pitch Page Styles */
+.pitch-page {
+    padding: 0;
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding-top: 80px;
+    overflow-y: auto;
+}
+
+.password-container {
+    max-width: 500px;
+    margin: 10vh auto;
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.password-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.password-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.password-form {
+    margin-bottom: 1.5rem;
+}
+
+.password-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 25px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.password-input:focus {
+    border-color: #2c3e50;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+}
+
+.password-submit {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.password-submit:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+
+.password-error {
+    color: #e74c3c;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.password-error.show {
+    opacity: 1;
+}
+
+.pitch-content {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.pitch-content.unlocked {
+    display: block;
+}
+
+.pitch-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pitch-main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.pitch-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #4a5568;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.pitch-summary {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pitch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.pitch-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pitch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.card-content {
+    color: #555;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.market-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.key-points {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin: 2rem 0;
+}
+
+.key-points h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.point-icon {
+    width: 40px;
+    height: 40px;
+    background: #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.point-text {
+    color: #555;
+    line-height: 1.5;
+}
+
+.point-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.contact-cta {
+    background: linear-gradient(135deg, #2c3e50 0%, #4a5568 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.contact-cta h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.contact-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Page Styles */
+.contact-page {
+    padding: 0;
+    background: #f8f9fa;
+    height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+.contact-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100vh - 80px);
+}
+
+.contact-left {
+    background: #f8f9fa;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.contact-right {
+    background-image: url('contact-image.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.contact-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    max-width: 90%;
+}
+
+.contact-emails {
+    margin-bottom: 2rem;
+}
+
+.email-item {
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 0.8rem;
+    color: #2c3e50;
+    font-size: 1.05rem;
+}
+
+.email-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.email-address {
+    color: #2c3e50;
+    font-weight: 400;
+}
+
+.contact-form-section {
+    margin-top: 1.5rem;
+}
+
+.form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.required {
+    color: #666;
+    font-weight: 400;
+}
+
+.form-input,
+.form-textarea {
+    font-family: 'Cormorant Garamond', serif;
+    padding: 0.8rem;
+    border: 2px solid #d1d5db;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #2c3e50;
+    background: white;
+}
+
+.form-textarea {
+    height: 80px;
+    resize: vertical;
+    border-radius: 15px;
+}
+
+.submit-btn {
+    background: #2c3e50;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .navbar {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero {
+        padding: 1rem;
+        background-size: contain;
+        background-position: center center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero::after {
+        background-size: contain;
+        background-position: center center;
+    }
+
+    .brand-name {
+        font-size: clamp(3rem, 12vw, 6rem);
+        letter-spacing: 1px;
+    }
+
+    .tagline {
+        font-size: clamp(1.8rem, 8vw, 3.5rem);
+        letter-spacing: 0.5px;
+        margin-top: 1rem;
+    }
+
+    .connect-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+    }
+
+    .about-page {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 80px;
+        overflow-y: auto;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+    }
+
+    .about-right {
+        height: 300px;
+        order: 1;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #f8f9fa;
+    }
+
+    .about-left {
+        order: 2;
+        padding: 2rem 1.5rem;
+        height: auto;
+        overflow-y: visible;
+        justify-content: flex-start;
+    }
+
+    .about-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .about-subtitle {
+        font-size: clamp(1.3rem, 6vw, 2rem);
+        margin-bottom: 2rem;
+    }
+
+    .coming-soon-text {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        margin-bottom: 2.5rem;
+        line-height: 1.5;
+    }
+
+    .back-home-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .pitch-page {
+        padding-top: 80px;
+    }
+
+    .password-container {
+        margin: 5vh 1rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .password-title {
+        font-size: 2rem;
+    }
+
+    .password-description {
+        font-size: 1rem;
+    }
+
+    .pitch-content {
+        padding: 1rem;
+    }
+
+    .pitch-main-title {
+        font-size: 2.5rem;
+    }
+
+    .pitch-tagline {
+        font-size: 1.3rem;
+    }
+
+    .pitch-summary {
+        font-size: 1.1rem;
+    }
+
+    .pitch-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pitch-card {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .market-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .key-points {
+        padding: 2rem 1.5rem;
+    }
+
+    .key-points h3 {
+        font-size: 1.8rem;
+    }
+
+    .points-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-cta {
+        padding: 2rem 1.5rem;
+    }
+
+    .contact-cta h3 {
+        font-size: 1.8rem;
+    }
+
+    .contact-page {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 80px;
+        overflow-y: auto;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+    }
+
+    .contact-right {
+        height: 300px;
+        order: 1;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #f8f9fa;
+    }
+
+    .contact-left {
+        order: 2;
+        padding: 2rem 1.5rem;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .contact-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-description {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+    }
+
+    .contact-emails {
+        margin-bottom: 2rem;
+    }
+
+    .email-item {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-group.full-width {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 20px;
+    }
+
+    .form-textarea {
+        height: 100px;
+        border-radius: 15px;
+    }
+
+    .submit-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        border-radius: 20px;
+        margin-top: 1rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .brand-name {
+        font-size: clamp(2.5rem, 15vw, 5rem);
+    }
+
+    .tagline {
+        font-size: clamp(1.5rem, 10vw, 3rem);
+    }
+
+    .contact-title {
+        font-size: 2rem;
+    }
+
+    .contact-description {
+        font-size: 1rem;
+    }
+
+    .contact-left {
+        padding: 1.5rem 1rem;
+    }
+
+    .contact-right {
+        height: 250px;
+    }
+}
+
+/* Mobile menu styles */
+.nav-links.mobile-open {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 15px 15px;
+}
+
+.nav-links.mobile-open a {
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-links.mobile-open a:last-child {
+    border-bottom: none;
+}
