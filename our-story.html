@@ -52,18 +52,24 @@
         }
 
         .story-content {
-            max-width: 900px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin: 0 auto;
+            padding: 2rem;
         }
 
         .story-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
             color: #555;
-            line-height: 1.8;
+            line-height: 1.6;
             margin-bottom: 2rem;
             text-align: center;
+            max-width: 1200px;
         }
 
         .story-text.highlight {
@@ -257,8 +263,7 @@
             <div class="story-content">
                 <p class="story-text quote">
                     With MonBe, the darkness of uncertainty becomes light.<br>
-                    The stress of "not knowing" is replaced with peace of mind.<br>
-                    <strong>Bringing light to the darkness, and certainty to the uncertain.</strong>
+                    The stress of "not knowing" is replaced with peace of mind.
                 </p>
                 <p class="story-text">
                     MonBe was born from our own journey as parents - those 3 AM moments of doubt, the sleepless nights, the questions with no answers, and the determination to find a better way. We want every family to feel sure, supported, and connected.
