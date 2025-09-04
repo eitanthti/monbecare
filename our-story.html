@@ -33,11 +33,13 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease-out;
+            visibility: hidden;
         }
 
         .story-section.active {
             opacity: 1;
             transform: translateY(0);
+            visibility: visible;
         }
 
         .story-section:nth-child(odd) {
@@ -127,8 +129,8 @@
         /* Back button */
         .story-back-btn {
             position: fixed;
-            top: 2rem;
-            left: 2rem;
+            bottom: 2rem;
+            right: 2rem;
             background: #2c3e50;
             color: white;
             padding: 1rem 2rem;
@@ -145,7 +147,7 @@
             text-transform: uppercase;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(20px);
             transition: all 0.8s ease-out;
         }
 
@@ -202,8 +204,8 @@
             }
 
             .story-back-btn {
-                top: 1rem;
-                left: 1rem;
+                bottom: 1rem;
+                right: 1rem;
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
             }
