@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - MonBe Inc.</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Our Story Page Specific Styles */
+        .story-page {
+            padding: 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .story-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .story-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .story-section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .story-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .story-text.highlight {
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .story-text.emphasis {
+            font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 2.5rem 0;
+        }
+
+        .story-text.final {
+            font-size: clamp(1.4rem, 3.2vw, 1.8rem);
+            color: #2c3e50;
+            font-weight: 600;
+            text-align: center;
+            margin: 4rem 0;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+            color: #2c3e50;
+            font-style: italic;
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-left: 4px solid #2c3e50;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .story-back-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 3rem auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .story-back-btn.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-back-btn:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+
+        .story-back-btn-container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .story-container {
+                padding: 1rem;
+            }
+
+            .story-section {
+                margin-bottom: 3rem;
+            }
+
+            .story-text.highlight,
+            .story-text.final {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .story-quote {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .story-back-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="logo">MonBe Inc.</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="our-story.html" class="active">Our Story</a></li>
+                <li><a href="pitch.html">Pitch</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Our Story Page -->
+    <section class="story-page">
+        <div class="story-container">
+            <h1 class="story-title" id="storyTitle">Our Story</h1>
+            
+            <div class="story-section" id="section1">
+                <p class="story-text">
+                    Becoming a parent is the most beautiful gift — and the most overwhelming.
+                    You hold your baby close, you listen, you watch, you try to read every tiny signal.
+                    But there's always one question that creates more worry than anything else:
+                </p>
+            </div>
+
+            <div class="story-section" id="section2">
+                <p class="story-text highlight">
+                    "Is my baby eating enough?"
+                </p>
+            </div>
+
+            <div class="story-section" id="section3">
+                <p class="story-text">
+                    For generations, parents have lived with this uncertainty.
+                    The only answers were indirect — counting wet diapers, weighing the baby every few days, or relying on guesswork. These methods leave parents anxious, second-guessing themselves, and sometimes giving up on breastfeeding sooner than they wanted.
+                </p>
+            </div>
+
+            <div class="story-section" id="section4">
+                <p class="story-text emphasis">
+                    At MonBe, we believe it shouldn't be this way.
+                    We believe parents deserve clarity, calm, and confidence — without disrupting the natural bond of breastfeeding.
+                </p>
+            </div>
+
+            <div class="story-section" id="section5">
+                <p class="story-text">
+                    That's why we created <strong>MonBe</strong>, a gentle, smart sticker that listens to your baby's sucking, swallowing, and breathing, and gives you real-time insights into feeding — <strong>without changing how you nurse.</strong>
+                </p>
+            </div>
+
+            <div class="story-section" id="section6">
+                <p class="story-quote">
+                    With MonBe, the darkness of uncertainty becomes light.<br>
+                    The stress of "not knowing" is replaced with peace of mind.<br>
+                    <strong>Bringing light to the darkness, and certainty to the uncertain.</strong>
+                </p>
+            </div>
+
+            <div class="story-section" id="section7">
+                <p class="story-text">
+                    MonBe was born from our own journey as parents — <strong>those 3 AM moments of doubt</strong>, the sleepless nights, the questions with no answers, and the determination to find a better way. We want every family to feel sure, supported, and connected.
+                </p>
+            </div>
+
+            <div class="story-section" id="section8">
+                <p class="story-text emphasis">
+                    Because breastfeeding is not just about nutrition.<br>
+                    It's about trust.<br>
+                    It's about closeness.<br>
+                    It's about knowing you are enough.
+                </p>
+            </div>
+
+            <div class="story-section" id="section9">
+                <p class="story-text emphasis">
+                    Because every parent deserves to know.
+                </p>
+            </div>
+
+            <div class="story-section" id="section10">
+                <p class="story-text final">
+                    <strong>MonBe — see your baby feed.</strong>
+                </p>
+            </div>
+
+            <div class="story-back-btn-container">
+                <a href="home.html" class="story-back-btn" id="backBtn">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Scroll animation for Our Story page
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.story-section');
+            const title = document.getElementById('storyTitle');
+            const backBtn = document.getElementById('backBtn');
+            
+            // Animate title first
+            setTimeout(() => {
+                title.classList.add('animate');
+            }, 300);
+            
+            // Create intersection observer for sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            // Observe all sections
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+            
+            // Animate back button when user reaches the end
+            const backBtnObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        backBtn.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            
+            backBtnObserver.observe(backBtn);
+        }
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
