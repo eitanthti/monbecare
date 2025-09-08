@@ -131,6 +131,34 @@ function startAnimation() {
     }, 2500);
 }
 
+// FAQ Toggle Function
+function toggleFAQ(faqNumber) {
+    const answer = document.getElementById(`faq-${faqNumber}`);
+    const icon = answer.previousElementSibling.querySelector('.faq-icon');
+    const question = answer.previousElementSibling;
+    
+    if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+        // Close all other FAQs
+        document.querySelectorAll('.faq-answer').forEach(faq => {
+            if (faq.id !== `faq-${faqNumber}`) {
+                faq.style.maxHeight = '0px';
+                faq.previousElementSibling.querySelector('.faq-icon').textContent = '+';
+                faq.previousElementSibling.style.backgroundColor = '';
+            }
+        });
+        
+        // Open current FAQ
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '−';
+        question.style.backgroundColor = '#f8f9fa';
+    } else {
+        // Close current FAQ
+        answer.style.maxHeight = '0px';
+        icon.textContent = '+';
+        question.style.backgroundColor = '';
+    }
+}
+
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Check for existing pitch access

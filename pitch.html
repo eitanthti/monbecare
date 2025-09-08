@@ -65,83 +65,97 @@
                 <h3 class="card-title" style="color: #2c3e50; text-align: center; margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">TL;DR</h3>
                 <p style="margin-bottom: 2.5rem; font-weight: 500; color: #2c3e50; text-align: center; font-size: 1.1rem;">Before we dive into the full story, here's a quick TL;DR answering the five questions investors ask most often:</p>
                 
-                <div style="display: grid; gap: 2rem;">
+                <div style="display: grid; gap: 1rem;">
                     <!-- Q1 -->
-                    <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #667eea;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="background: #667eea; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">1</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600;">Why now & what problem are you solving?</h4>
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #667eea; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(1)">
+                            <div style="background: #667eea; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">1</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Why now & what problem are you solving?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #667eea; transition: transform 0.3s ease;">+</div>
                         </div>
-                        <div style="padding-left: 3rem;">
-                            <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Most mothers (80–90%) guess milk intake by baby behavior, leading 35–44% to stop early over "not enough milk" fears.</p>
-                            <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">MonBe is the first breast-mounted patch giving objective feeding data — solving the #1 reason mothers quit.</p>
-                            <p style="color: #555; line-height: 1.6; font-weight: 500;">Now is the right time: affordable sensors + AI + parents eager for digital baby-care solutions.</p>
+                        <div class="faq-answer" id="faq-1" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Most mothers (80–90%) guess milk intake by baby behavior, leading 35–44% to stop early over "not enough milk" fears.</p>
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">MonBe is the first breast-mounted patch giving objective feeding data — solving the #1 reason mothers quit.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;">Now is the right time: affordable sensors + AI + parents eager for digital baby-care solutions.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Q2 -->
-                    <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #764ba2;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="background: #764ba2; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">2</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600;">How big is the market?</h4>
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #764ba2; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(2)">
+                            <div style="background: #764ba2; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">2</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How big is the market?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #764ba2; transition: transform 0.3s ease;">+</div>
                         </div>
-                        <div style="padding-left: 3rem;">
-                            <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">The breastfeeding accessories market is $2.31B and projected to reach $4.20B by 2033.</p>
-                            <p style="color: #555; line-height: 1.6; font-weight: 500;">Our directly addressable segment is $100–200M, growing 10–15% annually, with 3.3M new US mothers starting breastfeeding each year.</p>
+                        <div class="faq-answer" id="faq-2" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">The breastfeeding accessories market is $2.31B and projected to reach $4.20B by 2033.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;">Our directly addressable segment is $100–200M, growing 10–15% annually, with 3.3M new US mothers starting breastfeeding each year.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Q3 -->
-                    <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #f093fb;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="background: #f093fb; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">3</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600;">What validation & advantage do you have?</h4>
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #f093fb; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(3)">
+                            <div style="background: #f093fb; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">3</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">What validation & advantage do you have?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #f093fb; transition: transform 0.3s ease;">+</div>
                         </div>
-                        <div style="padding-left: 3rem;">
-                            <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Competitors rely on single sensors. MonBe fuses five sensors with NFC transfer, backed by a favorable patent landscape and Northwestern University's validation studies.</p>
-                            <p style="color: #555; line-height: 1.6; font-weight: 500;">We've filed a provisional patent and are preparing MVP pilots with clinical advisors.</p>
+                        <div class="faq-answer" id="faq-3" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Competitors rely on single sensors. MonBe fuses five sensors with NFC transfer, backed by a favorable patent landscape and Northwestern University's validation studies.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;">We've filed a provisional patent and are preparing MVP pilots with clinical advisors.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Q4 -->
-                    <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #4facfe;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="background: #4facfe; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">4</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600;">Who is the team & how do you scale?</h4>
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #4facfe; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(4)">
+                            <div style="background: #4facfe; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">4</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Who is the team & how do you scale?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #4facfe; transition: transform 0.3s ease;">+</div>
                         </div>
-                        <div style="padding-left: 3rem;">
-                            <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Founder-led by Eitan Halfon, who combines deep technical expertise with financial insight. His background spans a BSc in Electrical & Computer Engineering, a Global MSc in Financial Economics, and extensive experience in full-cycle product development across hardware, embedded systems, software, and project management.</p>
-                            <p style="color: #555; line-height: 1.6; font-weight: 500;">We start as a consumer wellness device (fast market entry), then scale to healthcare integration, public health programs, and international expansion in North America and Western Europe.</p>
+                        <div class="faq-answer" id="faq-4" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Founder-led by Eitan Halfon, who combines deep technical expertise with financial insight. His background spans a BSc in Electrical & Computer Engineering, a Global MSc in Financial Economics, and extensive experience in full-cycle product development across hardware, embedded systems, software, and project management.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;">We start as a consumer wellness device (fast market entry), then scale to healthcare integration, public health programs, and international expansion in North America and Western Europe.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Q5 -->
-                    <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #43e97b;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="background: #43e97b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">5</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600;">How do you make money?</h4>
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #43e97b; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(5)">
+                            <div style="background: #43e97b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">5</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How do you make money?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #43e97b; transition: transform 0.3s ease;">+</div>
                         </div>
-                        <div style="padding-left: 3rem;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-                                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                    <p style="margin: 0; font-weight: 600; color: #2c3e50;">Hardware starter kits</p>
-                                    <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$150–250</p>
+                        <div class="faq-answer" id="faq-5" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Hardware starter kits</p>
+                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$150–250</p>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Recurring patches</p>
+                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$30–50/month</p>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Software subscriptions</p>
+                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$5–15/month</p>
+                                    </div>
                                 </div>
-                                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                    <p style="margin: 0; font-weight: 600; color: #2c3e50;">Recurring patches</p>
-                                    <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$30–50/month</p>
-                                </div>
-                                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                    <p style="margin: 0; font-weight: 600; color: #2c3e50;">Software subscriptions</p>
-                                    <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$5–15/month</p>
-                                </div>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;">Unit economics: $50–75 CAC, $400–600 LTV, 60–70% gross margins, with a clear path to long-term healthcare reimbursement.</p>
                             </div>
-                            <p style="color: #555; line-height: 1.6; font-weight: 500;">Unit economics: $50–75 CAC, $400–600 LTV, 60–70% gross margins, with a clear path to long-term healthcare reimbursement.</p>
                         </div>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 3rem; font-size: 1.5rem; color: #2c3e50; font-weight: 500;">⸻</div>
             </div>
 
             <div class="market-stats">
