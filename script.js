@@ -33,9 +33,33 @@ function checkPassword(event) {
 
 // Check if user already has access when navigating to pitch page
 function checkPitchAccess() {
+    // Session-based access
     if (sessionStorage.getItem('pitchAccess') === 'granted') {
-        document.getElementById('passwordContainer').style.display = 'none';
-        document.getElementById('pitchContent').classList.add('unlocked');
+        const passwordContainer = document.getElementById('passwordContainer');
+        const pitchContent = document.getElementById('pitchContent');
+        if (passwordContainer && pitchContent) {
+            passwordContainer.style.display = 'none';
+            pitchContent.classList.add('unlocked');
+        }
+        return;
+    }
+
+    // URL parameter based access (e.g., pitch.html?access=monbe2025)
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessParam = urlParams.get('access');
+    if (accessParam && accessParam === 'monbe2025') {
+        sessionStorage.setItem('pitchAccess', 'granted');
+        const passwordContainer = document.getElementById('passwordContainer');
+        const pitchContent = document.getElementById('pitchContent');
+        if (passwordContainer && pitchContent) {
+            passwordContainer.style.display = 'none';
+            pitchContent.classList.add('unlocked');
+        }
+        // Clean the URL so the param doesn't persist on refresh/share
+        if (window.history && window.history.replaceState) {
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
     }
 }
 
@@ -119,4 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         startAnimation();
     }, 500);
+
+    // (Removed QR rendering on-site by request)
 });
