@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonBe Company Deck</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Deck-specific styles (self-contained, print-friendly) */
+        body { background: #f5f7fb; }
+        .deck {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        .deck-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            z-index: 1000;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .deck-nav .brand { font-size: 1.25rem; color: #2c3e50; text-decoration: none; }
+        .deck-nav .controls { display: flex; align-items: center; gap: 8px; }
+        .deck-btn {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #2c3e50;
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            padding: 40px;
+            margin: 20px 0 28px;
+            page-break-inside: avoid;
+        }
+        .slide h1, .slide h2, .slide h3 { font-family: 'Cormorant Garamond', serif; color: #2c3e50; }
+        .slide h1 { font-size: 2.2rem; margin-bottom: 12px; }
+        .slide h2 { font-size: 1.6rem; margin: 16px 0 8px; }
+        .slide p { color: #4a5568; line-height: 1.6; margin: 8px 0; }
+        .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .card { background: #f8f9fa; border-radius: 12px; padding: 14px 16px; }
+        .kpi { text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 14px; padding: 16px; }
+        .kpi .n { font-size: 1.8rem; font-weight: 700; display: block; }
+        .small { font-size: 0.95rem; color: #4a5568; }
+        .footer-note { text-align: right; font-size: 0.85rem; color: #6b7280; margin-top: 6px; }
+        .muted { color: #6b7280; }
+
+        @media (max-width: 768px) { .cols { grid-template-columns: 1fr; } }
+
+        /* Print to PDF (one slide per page) */
+        @media print {
+            body { background: white; }
+            .deck-nav { display: none; }
+            .deck { padding: 0; }
+            .slide { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0; min-height: 100vh; }
+        }
+    </style>
+    <script>
+        // Simple slide navigation (keyboard + buttons + hash)
+        let current = 0;
+        function slides() { return Array.from(document.querySelectorAll('.slide')); }
+        function showSlide(i) {
+            const s = slides();
+            if (s.length === 0) return;
+            current = Math.max(0, Math.min(i, s.length - 1));
+            s[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const idx = current + 1;
+            const total = s.length;
+            const counter = document.getElementById('counter');
+            if (counter) counter.textContent = idx + ' / ' + total;
+            if (history.replaceState) history.replaceState({}, '', '#'+idx);
+        }
+        function nextSlide() { showSlide(current + 1); }
+        function prevSlide() { showSlide(current - 1); }
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            const idx = parseInt(hash, 10);
+            if (!isNaN(idx) && idx > 0) showSlide(idx - 1); else showSlide(0);
+        });
+    </script>
+</head>
+<body>
+    <div class="deck-nav">
+        <a class="brand" href="home.html">MonBe — Company Deck</a>
+        <div class="controls">
+            <button class="deck-btn" onclick="prevSlide()">◀ Prev</button>
+            <span id="counter" class="muted">0 / 0</span>
+            <button class="deck-btn" onclick="nextSlide()">Next ▶</button>
+        </div>
+    </div>
+
+    <div class="deck">
+        <!-- Cover -->
+        <section class="slide">
+            <h1>MonBe</h1>
+            <p class="small">"See your baby feed."</p>
+            <div class="grid" style="margin-top: 20px;">
+                <div class="kpi"><span class="n">$2.31B</span><div>Global breastfeeding accessories market</div></div>
+                <div class="kpi"><span class="n">60–70%</span><div>Target gross margins</div></div>
+                <div class="kpi"><span class="n">$400–600</span><div>LTV per family</div></div>
+            </div>
+            <div class="footer-note">Confidential — MonBe Inc.</div>
+        </section>
+
+        <!-- TL;DR -->
+        <section class="slide">
+            <h1>TL;DR</h1>
+            <div class="grid">
+                <div class="card">
+                    <h2>Problem & Why Now</h2>
+                    <p>Parents lack objective milk-intake data; anxiety drives early cessation. Affordable sensors + AI now enable consumer-ready accuracy.</p>
+                </div>
+                <div class="card">
+                    <h2>Market</h2>
+                    <p>$2.31B global market; directly addressable $100–200M segment growing 10–15% annually.</p>
+                </div>
+                <div class="card">
+                    <h2>Advantage</h2>
+                    <p>Only breast-mounted multi‑sensor patch; NFC post-session; favorable patent landscape; Northwestern validation.</p>
+                </div>
+                <div class="card">
+                    <h2>Team & Scale</h2>
+                    <p>Founder-led; fast consumer entry, then healthcare integration and international expansion.</p>
+                </div>
+                <div class="card">
+                    <h2>Business Model</h2>
+                    <p>Hardware kit + recurring patches + software subscription; CAC $50–75; LTV $400–600.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem -->
+        <section class="slide">
+            <h1>The Problem</h1>
+            <p>Breastfeeding is the gold standard, yet 80–90% of mothers rely on indirect cues to gauge intake. 35–44% stop early due to perceived insufficiency.</p>
+            <div class="grid" style="margin-top: 12px;">
+                <div class="card"><strong>Vulnerable infants:</strong> Preterm babies need precise intake for development.</div>
+                <div class="card"><strong>Combination feeding:</strong> No clear split between breast milk and formula.</div>
+                <div class="card"><strong>Night feeding:</strong> Hard to distinguish nutritive vs comfort sucking.</div>
+                <div class="card"><strong>Clinical burden:</strong> 5–7 minutes wasted reconstructing history; 68% records incomplete.</div>
+            </div>
+        </section>
+
+        <!-- Solution -->
+        <section class="slide">
+            <h1>Our Solution</h1>
+            <p>MonBe is a gentle, smart, breast-mounted sticker that listens to sucking, swallowing, and breathing to deliver real-time feeding insights—without disrupting nursing.</p>
+            <div class="grid" style="margin-top: 12px;">
+                <div class="card"><strong>MonBe Daily:</strong> Real-time intake and latch quality.</div>
+                <div class="card"><strong>MonBe Nightie:</strong> Sleep-optimized classification of eating vs comfort.</div>
+                <div class="card"><strong>MonBe Care:</strong> Provider reports and clinical integration.</div>
+                <div class="card"><strong>MonBe To‑Go:</strong> Discrete cover with integrated patch support.</div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="slide">
+            <h1>How It Works</h1>
+            <div class="cols">
+                <div>
+                    <h2>5‑Sensor Fusion</h2>
+                    <p>Acoustic microphone, micro‑vibration (jaw), temperature (letdown), 4‑electrode bioimpedance, pressure (suction).</p>
+                    <p class="small">Clinical accuracy target: ±5% (final product)</p>
+                </div>
+                <div>
+                    <h2>User Flow</h2>
+                    <p>1) Apply patch (30s)  2) Feed naturally  3) Tap phone to sync (&lt;3s)  4) View AI insights</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market -->
+        <section class="slide">
+            <h1>Market</h1>
+            <div class="grid">
+                <div class="kpi"><span class="n">$2.31B</span>Global market</div>
+                <div class="kpi"><span class="n">$4.20B</span>2033 projection</div>
+                <div class="kpi"><span class="n">$100–200M</span>Addressable segment</div>
+                <div class="kpi"><span class="n">10–15%</span>CAGR</div>
+            </div>
+            <p class="small" style="margin-top: 10px;">US: 3.3M mothers start annually; EU/IL initiation 80–95%.</p>
+        </section>
+
+        <!-- Traction -->
+        <section class="slide">
+            <h1>Traction & Validation</h1>
+            <div class="grid">
+                <div class="card"><strong>Provisional patent</strong> filed Aug 2025.</div>
+                <div class="card"><strong>Northwestern partnership</strong> for bioimpedance validation.</div>
+                <div class="card"><strong>Concept design</strong> and architecture finalized.</div>
+                <div class="card"><strong>Competitive & patent</strong> analysis complete.</div>
+            </div>
+            <h2>Planned Timeline (post-investment)</h2>
+            <p class="small">M1–6 MVP • M7–10 50+ mother pilots • M11–16 launch prep • M17–20 DTC launch</p>
+        </section>
+
+        <!-- Competition -->
+        <section class="slide">
+            <h1>Competition</h1>
+            <div class="grid">
+                <div class="card"><strong>Infant Thrive</strong> — $299+, clinical focus only</div>
+                <div class="card"><strong>Coro Shield</strong> — $199, nipple shield rejection</div>
+                <div class="card"><strong>Hatch Scale</strong> — $149, disrupts feeding</div>
+                <div class="card"><strong>MonBe</strong> — $150–250, non‑disruptive, multi‑sensor patch</div>
+            </div>
+        </section>
+
+        <!-- Business Model -->
+        <section class="slide">
+            <h1>Business Model</h1>
+            <div class="cols">
+                <div>
+                    <h2>Revenue Streams</h2>
+                    <p>Reusable core $50–100 • Daily patches $30–50/mo • Software $5–15/mo • Clinic licensing</p>
+                </div>
+                <div>
+                    <h2>Unit Economics</h2>
+                    <p>CAC $50–75 • LTV $400–600 • 60–70% gross margins • Reimbursement path</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Go-to-Market -->
+        <section class="slide">
+            <h1>Go‑to‑Market</h1>
+            <div class="grid">
+                <div class="card"><strong>Digital</strong>: Social, forums, influencers</div>
+                <div class="card"><strong>Healthcare</strong>: Lactation, pediatrics</div>
+                <div class="card"><strong>Retail</strong>: Amazon, Target, specialty</div>
+                <div class="card"><strong>Direct</strong>: Website subscriptions</div>
+            </div>
+            <p class="small">Phase 1 Israel • Phase 2 US DTC • Phase 3 EU • Phase 4 Healthcare</p>
+        </section>
+
+        <!-- Team -->
+        <section class="slide">
+            <h1>Team & Advisors</h1>
+            <div class="cols">
+                <div>
+                    <h2>Founder & CEO — Eitan Halfon</h2>
+                    <p>ECE background; hardware, embedded, IoT; product leadership; military officer; SolarEdge alum.</p>
+                </div>
+                <div>
+                    <h2>Advisors & Partners</h2>
+                    <p>Clinical advisor (IBCLC) • Northwestern research • FDA regulatory advisor • Med device manufacturer</p>
+                    <p class="small">Hiring: HW & SW Eng (Q4’25), Product & Mfg (Q1’26), Clinical & Marketing (Q2’26)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financials & Funding -->
+        <section class="slide">
+            <h1>Financials & Funding</h1>
+            <div class="cols">
+                <div>
+                    <h2>Rounds</h2>
+                    <p>Pre‑Seed $600K — R&D+Team $500K (83%), Reg+IP $100K (17%)</p>
+                    <p>Seed $3–5M — R&D $1.5M (50%), Reg $0.5M (17%), Team $1M (33%)</p>
+                </div>
+                <div>
+                    <h2>Path to Profitability</h2>
+                    <p>Break-even ~Month 30 • GM 60–70% • Peak burn ~$200K/mo • 24+ months runway</p>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 10px;">
+                <strong>Use of Funds</strong>: Product (50%) • Team (33%) • Reg & IP (17%)
+            </div>
+        </section>
+
+        <!-- Advantage & IP -->
+        <section class="slide">
+            <h1>Competitive Advantage & IP</h1>
+            <div class="grid">
+                <div class="card">Only breast‑mounted multi‑sensor patch</div>
+                <div class="card">Post‑session analysis (no RF during feeding)</div>
+                <div class="card">Complete ecosystem (Daily/Nightie/Care/To‑Go)</div>
+                <div class="card">Provisional patent filed Aug 2025</div>
+                <div class="card">Favorable landscape; foundational patents expired</div>
+                <div class="card">Northwestern bioimpedance validation</div>
+            </div>
+        </section>
+
+        <!-- Vision -->
+        <section class="slide">
+            <h1>Vision & Impact</h1>
+            <p>Make MonBe the universal standard for breastfeeding support. Empower every parent with clarity, reduce premature cessation, and improve infant outcomes globally.</p>
+            <p class="small">Why Now: Disposable device adoption, digital health acceleration, maternal health focus, matured sensors & AI.</p>
+        </section>
+
+        <!-- Contact -->
+        <section class="slide">
+            <h1>Contact</h1>
+            <p><strong>Email</strong>: hello@monbecare.com</p>
+            <p><strong>Investors</strong>: investors@monbecare.com</p>
+            <p class="small">More: home, story, and pitch at monbecare.com</p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
