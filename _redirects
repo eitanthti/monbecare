@@ -1,0 +1,4 @@
+# Redirect all HTTP to HTTPS and all apex to www
+http://monbecare.com/*     https://www.monbecare.com/:splat   301!
+http://www.monbecare.com/* https://www.monbecare.com/:splat   301!
+https://monbecare.com/*    https://www.monbecare.com/:splat   301!
