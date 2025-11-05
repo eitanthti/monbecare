@@ -2,3 +2,6 @@
 http://monbecare.com/*     https://www.monbecare.com/:splat   301!
 http://www.monbecare.com/* https://www.monbecare.com/:splat   301!
 https://monbecare.com/*    https://www.monbecare.com/:splat   301!
+
+# Redirect root to home page
+/  /home.html  301!
