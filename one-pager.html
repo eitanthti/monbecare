@@ -568,17 +568,22 @@
         /* --- Force one-page PDF (A4) by scaling the whole layout --- */
         @media print {
             /* Pick your page size - A4 by default */
-            @page { size: A4 portrait; margin: 0; }
+            @page { 
+                size: A4 portrait; 
+                margin: 0; 
+            }
             /* For US Letter, swap the line above with:
                @page { size: Letter portrait; margin: 0; } */
 
-            :root { --print-scale: 0.72; } /* Tweak this up/down to perfectly fit */
+            :root { --print-scale: 0.60; } /* Aggressive scale to fit on one page */
 
             html, body {
                 width: 210mm;   /* 216mm for Letter */
                 height: 297mm;  /* 279mm for Letter */
                 background: white !important;
                 overflow: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             .download-bar { display: none !important; }
@@ -587,22 +592,50 @@
             .page-wrapper {
                 /* Make the wrapper virtually "bigger", then scale it down to one page */
                 width: calc(210mm / var(--print-scale));   /* 216mm for Letter */
-                min-height: calc(297mm / var(--print-scale)); /* 279mm for Letter */
+                height: calc(297mm / var(--print-scale)); /* 279mm for Letter */
                 margin: 0 !important;
+                margin-top: 0 !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
+                padding: 0 !important;
 
                 transform-origin: top left;
                 transform: scale(var(--print-scale));
-                page-break-inside: avoid;
-                page-break-before: auto;
-                page-break-after: auto;
+                page-break-inside: avoid !important;
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
             }
 
             /* Prevent any internal breaks or extra shadows while printing */
-            .card, .market-hero, .funding-section, .mission-section, .header, .footer {
+            .card, .market-hero, .funding-section, .mission-section, .header, .footer,
+            .top-section, .two-col-grid, .content {
                 box-shadow: none !important;
-                page-break-inside: avoid;
+                page-break-inside: avoid !important;
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+            }
+
+            /* Additional spacing reduction */
+            .header {
+                padding: 25px 50px 30px !important;
+            }
+            .content {
+                padding: 30px 50px !important;
+            }
+            .top-section, .two-col-grid {
+                gap: 12px !important;
+                margin-bottom: 15px !important;
+            }
+            .card {
+                padding: 18px !important;
+                margin-bottom: 0 !important;
+            }
+            .market-hero, .funding-section, .mission-section {
+                padding: 20px 30px !important;
+                margin-bottom: 15px !important;
+            }
+            .footer {
+                padding: 20px 50px !important;
             }
         }
     </style>
