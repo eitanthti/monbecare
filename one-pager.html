@@ -565,21 +565,19 @@
             }
         }
         
-        /* --- Force one-page PDF (A4) by scaling the whole layout --- */
+        /* --- Force one-page PDF (A5) by scaling the whole layout --- */
         @media print {
-            /* Pick your page size - A4 by default */
+            /* A5 page size - smaller format */
             @page { 
-                size: A4 portrait; 
+                size: A5 portrait; 
                 margin: 0; 
             }
-            /* For US Letter, swap the line above with:
-               @page { size: Letter portrait; margin: 0; } */
 
-            :root { --print-scale: 0.60; } /* Aggressive scale to fit on one page */
+            :root { --print-scale: 0.50; } /* Scale to fit A5 on one page */
 
             html, body {
-                width: 210mm;   /* 216mm for Letter */
-                height: 297mm;  /* 279mm for Letter */
+                width: 148mm;   /* A5 width */
+                height: 210mm;  /* A5 height */
                 background: white !important;
                 overflow: hidden !important;
                 margin: 0 !important;
@@ -591,8 +589,8 @@
             /* Scale your whole page wrapper */
             .page-wrapper {
                 /* Make the wrapper virtually "bigger", then scale it down to one page */
-                width: calc(210mm / var(--print-scale));   /* 216mm for Letter */
-                height: calc(297mm / var(--print-scale)); /* 279mm for Letter */
+                width: calc(148mm / var(--print-scale));   /* A5 width */
+                height: calc(210mm / var(--print-scale));  /* A5 height */
                 margin: 0 !important;
                 margin-top: 0 !important;
                 border-radius: 0 !important;
@@ -615,27 +613,113 @@
                 page-break-after: avoid !important;
             }
 
-            /* Additional spacing reduction */
+            /* Aggressive spacing reduction for A5 */
             .header {
-                padding: 25px 50px 30px !important;
+                padding: 20px 40px 25px !important;
+            }
+            .header-tagline {
+                font-size: 1.3rem !important;
+            }
+            .header-subtitle {
+                font-size: 0.65rem !important;
+            }
+            .badge {
+                padding: 4px 10px !important;
+                font-size: 0.65rem !important;
+            }
+            .logo-img {
+                height: 50px !important;
             }
             .content {
-                padding: 30px 50px !important;
+                padding: 20px 40px !important;
             }
             .top-section, .two-col-grid {
-                gap: 12px !important;
-                margin-bottom: 15px !important;
+                gap: 10px !important;
+                margin-bottom: 12px !important;
             }
             .card {
-                padding: 18px !important;
+                padding: 15px !important;
                 margin-bottom: 0 !important;
             }
+            .card-title {
+                font-size: 1.2rem !important;
+            }
+            .card-body {
+                font-size: 0.75rem !important;
+                line-height: 1.4 !important;
+            }
+            .card-body p {
+                margin-bottom: 6px !important;
+            }
+            .card-icon {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 1.1rem !important;
+            }
             .market-hero, .funding-section, .mission-section {
-                padding: 20px 30px !important;
-                margin-bottom: 15px !important;
+                padding: 18px 25px !important;
+                margin-bottom: 12px !important;
+            }
+            .market-text h2, .funding-text h2, .mission-section h2 {
+                font-size: 1.3rem !important;
+            }
+            .market-text p, .funding-text p, .mission-section p {
+                font-size: 0.75rem !important;
+                margin-bottom: 8px !important;
+            }
+            .market-stats, .funding-stats {
+                gap: 8px !important;
+            }
+            .market-stat, .funding-stat {
+                padding: 12px !important;
+            }
+            .market-stat-value, .funding-stat-value {
+                font-size: 1.2rem !important;
+            }
+            .market-stat-label, .funding-stat-label {
+                font-size: 0.65rem !important;
+            }
+            .phase-item {
+                margin-bottom: 8px !important;
+                padding-bottom: 8px !important;
+                gap: 10px !important;
+            }
+            .phase-number {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 0.85rem !important;
+            }
+            .phase-title {
+                font-size: 0.75rem !important;
+            }
+            .phase-desc {
+                font-size: 0.65rem !important;
+            }
+            .team-member {
+                margin-bottom: 12px !important;
+                padding-bottom: 12px !important;
+            }
+            .team-name {
+                font-size: 0.85rem !important;
+            }
+            .team-role {
+                font-size: 0.7rem !important;
+            }
+            .team-bio {
+                font-size: 0.7rem !important;
             }
             .footer {
-                padding: 20px 50px !important;
+                padding: 18px 40px !important;
+            }
+            .footer-cta {
+                font-size: 1rem !important;
+            }
+            .footer-contact p {
+                font-size: 0.75rem !important;
+                margin-bottom: 4px !important;
+            }
+            .footer-contact p:first-child {
+                font-size: 0.8rem !important;
             }
         }
     </style>
