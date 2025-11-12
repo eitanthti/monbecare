@@ -565,25 +565,44 @@
             }
         }
         
+        /* --- Force one-page PDF (A4) by scaling the whole layout --- */
         @media print {
-            .download-bar {
-                display: none;
+            /* Pick your page size - A4 by default */
+            @page { size: A4 portrait; margin: 0; }
+            /* For US Letter, swap the line above with:
+               @page { size: Letter portrait; margin: 0; } */
+
+            :root { --print-scale: 0.72; } /* Tweak this up/down to perfectly fit */
+
+            html, body {
+                width: 210mm;   /* 216mm for Letter */
+                height: 297mm;  /* 279mm for Letter */
+                background: white !important;
+                overflow: hidden !important;
             }
-            body {
-                background: white;
-            }
+
+            .download-bar { display: none !important; }
+
+            /* Scale your whole page wrapper */
             .page-wrapper {
-                margin: 0;
-                margin-top: 0 !important;
-                box-shadow: none;
-                border-radius: 0;
-            }
-            .card {
+                /* Make the wrapper virtually "bigger", then scale it down to one page */
+                width: calc(210mm / var(--print-scale));   /* 216mm for Letter */
+                min-height: calc(297mm / var(--print-scale)); /* 279mm for Letter */
+                margin: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+
+                transform-origin: top left;
+                transform: scale(var(--print-scale));
                 page-break-inside: avoid;
-                box-shadow: none;
+                page-break-before: auto;
+                page-break-after: auto;
             }
-            .header, .footer {
-                page-break-after: avoid;
+
+            /* Prevent any internal breaks or extra shadows while printing */
+            .card, .market-hero, .funding-section, .mission-section, .header, .footer {
+                box-shadow: none !important;
+                page-break-inside: avoid;
             }
         }
     </style>
