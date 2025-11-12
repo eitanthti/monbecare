@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonBe — One Page Executive Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f6fa;
+            color: #1a1f2e;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 40px auto;
+            background: #ffffff;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.12);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8a7e8 30%, #b8a7e8 60%, #a8b4e8 100%);
+            color: #ffffff;
+            padding: 70px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -300px;
+            right: -300px;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 65%);
+            border-radius: 50%;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 65%);
+            border-radius: 50%;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .logo-container {
+            flex-shrink: 0;
+        }
+        .logo-img {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+        }
+        .header-text {
+            flex: 1;
+        }
+        .header-subtitle {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        .header-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+        }
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.22);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        
+        /* Main Content */
+        .content {
+            padding: 60px 80px;
+        }
+        
+        /* Top Section - Problem & Solution Full Width */
+        .top-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Middle Section - Market Stats Full Width */
+        .market-hero {
+            background: linear-gradient(135deg, #fef7ff 0%, #f8f9ff 100%);
+            border-radius: 24px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border: 2px solid #f0e4f8;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .market-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+        }
+        .market-text p {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .market-stat {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(216, 167, 232, 0.15);
+        }
+        .market-stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d8a7e8 0%, #b8a7e8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .market-stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        /* Two Column Grid */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Card Styles */
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid #e8ecf0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f8b4d9 0%, #d8a7e8 50%, #b8a7e8 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: #d8dde5;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8a7e8 50%, #b8a7e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(248, 180, 217, 0.3);
+        }
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+        }
+        .card-body {
+            color: #4a5568;
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+        .card-body p {
+            margin-bottom: 14px;
+        }
+        .card-body p:last-child {
+            margin-bottom: 0;
+        }
+        .card-body strong {
+            color: #1a1f2e;
+            font-weight: 600;
+        }
+        
+        /* Full Width Card */
+        .card-full {
+            grid-column: 1 / -1;
+        }
+        
+        /* Phase List */
+        .phase-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .phase-item {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e8ecf0;
+            align-items: start;
+        }
+        .phase-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .phase-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8a7e8 50%, #b8a7e8 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(248, 180, 217, 0.3);
+        }
+        .phase-content {
+            padding-top: 3px;
+        }
+        .phase-title {
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 5px;
+            font-size: 0.94rem;
+            line-height: 1.4;
+        }
+        .phase-desc {
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        
+        /* Team Section */
+        .team-member {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e8ecf0;
+        }
+        .team-member:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .team-name {
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+        .team-role {
+            font-size: 0.84rem;
+            color: #b8a7e8;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .team-bio {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        /* Funding Section */
+        .funding-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f8f9ff 100%);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 40px;
+            border: 2px solid #f0e4f8;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .funding-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 18px;
+            letter-spacing: -0.3px;
+        }
+        .funding-text p {
+            color: #4a5568;
+            font-size: 0.98rem;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+        .funding-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .funding-stat {
+            text-align: center;
+            padding: 22px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(216, 167, 232, 0.15);
+        }
+        .funding-stat-value {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d8a7e8 0%, #b8a7e8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .funding-stat-label {
+            font-size: 0.82rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 40px;
+            border: 1px solid #e8ecf0;
+        }
+        .mission-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .mission-section h2::before {
+            content: '💚';
+            font-size: 1.8rem;
+        }
+        .mission-section p {
+            color: #4a5568;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .mission-section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1f2e 0%, #2d3447 100%);
+            color: white;
+            padding: 50px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .footer-cta {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .footer-contact {
+            text-align: right;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .footer-contact p:first-child {
+            font-weight: 600;
+            font-size: 1.08rem;
+            margin-bottom: 12px;
+        }
+        .footer-contact p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .content {
+                padding: 50px 60px;
+            }
+            .header {
+                padding: 60px 60px;
+            }
+            .footer {
+                padding: 40px 60px;
+            }
+        }
+        @media (max-width: 968px) {
+            .page-wrapper {
+                margin: 20px;
+                border-radius: 0;
+            }
+            .content {
+                padding: 40px 30px;
+            }
+            .header {
+                padding: 50px 40px;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            .header-tagline {
+                font-size: 2rem;
+            }
+            .logo-img {
+                height: 80px;
+            }
+            .top-section,
+            .two-col-grid,
+            .market-hero,
+            .funding-section {
+                grid-template-columns: 1fr;
+            }
+            .footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 40px 30px;
+            }
+            .footer-contact {
+                text-align: center;
+            }
+            .card {
+                padding: 30px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .page-wrapper {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .card {
+                page-break-inside: avoid;
+                box-shadow: none;
+            }
+            .header, .footer {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="MonBe_logo.png" alt="MonBe Logo" class="logo-img">
+                </div>
+                <div class="header-text">
+                    <div class="header-subtitle">One Page Executive Summary</div>
+                    <div class="header-tagline">A passive smart sticker that turns breastfeeding uncertainty into clarity - naturally and non-invasively.</div>
+                    <div class="header-badges">
+                        <span class="badge">Multi-Sensor Technology</span>
+                        <span class="badge">AI-Powered Insights</span>
+                        <span class="badge">Non-Invasive Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Top Section: Problem & Solution -->
+            <div class="top-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">❓</div>
+                        <h2 class="card-title">Problem</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Parents constantly wonder – "Is my baby eating enough?" Existing solutions are often intrusive, inaccurate, or disrupt bonding.</p>
+                        <p>The younger generation of parents expects digital, data-driven tools that fit naturally into their tech-enabled lives and provide real, objective insights into their baby's wellbeing.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💡</div>
+                        <h2 class="card-title">Solution</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>A passive breast-mounted multi-sensor sticker with NFC sync. Detects sucking - swallowing - breathing - suction - temperature and bioimpedance signals from the mother's breast, translating them into clear AI insights. No camera - no wires - no radiation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Hero Section -->
+            <div class="market-hero">
+                <div class="market-text">
+                    <h2>Market</h2>
+                    <p>Breastfeeding accessories: $2.31B today - projected $4.20B by 2033. 120M births annually worldwide - about 90% of mothers in Western markets initiate breastfeeding.</p>
+                    <p>Expanding into FemTech and BabyTech with the same multi-sensor platform, enabling future extensions into sleep, nutrition, and early development using the same core hardware.</p>
+                </div>
+                <div class="market-stats">
+                    <div class="market-stat">
+                        <div class="market-stat-value">$2.31B</div>
+                        <div class="market-stat-label">Market Today</div>
+                    </div>
+                    <div class="market-stat">
+                        <div class="market-stat-value">$4.20B</div>
+                        <div class="market-stat-label">2033 Projection</div>
+                    </div>
+                    <div class="market-stat">
+                        <div class="market-stat-value">120M</div>
+                        <div class="market-stat-label">Annual Births</div>
+                    </div>
+                    <div class="market-stat">
+                        <div class="market-stat-value">90%</div>
+                        <div class="market-stat-label">Western Initiation</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Grid -->
+            <div class="two-col-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🔬</div>
+                        <h2 class="card-title">Technology</h2>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Sensors:</strong> microphone - vibration - pressure - temperature - bioimpedance.</p>
+                        <p>Reusable smart core + disposable patch with smart AI-powered technology that interprets multi-sensor data to deliver real-time feeding insights.</p>
+                        <p>Post-session NFC transfer. Provisional patent filed Aug 2025.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🚀</div>
+                        <h2 class="card-title">Traction</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>MonBe Inc. officially incorporated in the U.S. Full concept architecture complete. Provisional IP submitted Aug 2025. Mother validation in progress – interviews and survey underway. Hardware design in progress.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Go-To-Market Full Width -->
+            <div class="card card-full">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <h2 class="card-title">Go-To-Market</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="phase-list">
+                        <li class="phase-item">
+                            <div class="phase-number">1</div>
+                            <div class="phase-content">
+                                <div class="phase-title">Consumer wellness DTC, Israel soft launch</div>
+                            </div>
+                        </li>
+                        <li class="phase-item">
+                            <div class="phase-number">2</div>
+                            <div class="phase-content">
+                                <div class="phase-title">Global direct-to-consumer rollout (US + EU)</div>
+                                <div class="phase-desc">Through e-commerce, influencers, and retail partnerships</div>
+                            </div>
+                        </li>
+                        <li class="phase-item">
+                            <div class="phase-number">3</div>
+                            <div class="phase-content">
+                                <div class="phase-title">Healthcare integration</div>
+                                <div class="phase-desc">With lactation consultants, pediatric clinics, and hospitals</div>
+                            </div>
+                        </li>
+                        <li class="phase-item">
+                            <div class="phase-number">4</div>
+                            <div class="phase-content">
+                                <div class="phase-title">Enterprise & insurance partnerships</div>
+                                <div class="phase-desc">For reimbursement and large-scale distribution</div>
+                            </div>
+                        </li>
+                        <li class="phase-item">
+                            <div class="phase-number">5</div>
+                            <div class="phase-content">
+                                <div class="phase-title">FemTech and BabyTech expansion</div>
+                                <div class="phase-desc">Sleep - nutrition - baby development using the same core hardware</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Model & Team -->
+            <div class="two-col-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💰</div>
+                        <h2 class="card-title">Business Model</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Razor and blade with software. Hardware starter kit $150-250. Reusable core $50-100. Recurring daily patches $30-50 per month. App tiers $5-15 per month. Clinic licensing for MonBe Care. Target 60-70% gross margin. CAC $50-75. LTV $400-600.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">👥</div>
+                        <h2 class="card-title">Team</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="team-member">
+                            <div class="team-name">Eitan Halfon</div>
+                            <div class="team-role">Founder & CEO</div>
+                            <div class="team-bio">BSc in Electrical & Computer Engineering and MSc in Global Financial Economics. Experienced hardware and software engineer with strong management and product leadership skills. Deep expertise in analog, digital, and embedded systems, with a proven track record in multidisciplinary product development and execution.</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-name">May Paller</div>
+                            <div class="team-role">Advisor & Partner</div>
+                            <div class="team-bio">Lactation Consultant and Baby & Infant Development Specialist, working closely with MonBe on product design, user validation, and clinical insight.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="mission-section">
+                <h2>Our Mission Alignment</h2>
+                <p>Breastfeeding is the most natural and precisely tailored nourishment for infants — a living, adaptive system rich in antibodies, hormones, and proteins that nurture the baby's growth, immunity, and emotional connection with the mother.</p>
+                <p>MonBe is committed to supporting this critical foundation of life by helping more families sustain breastfeeding with confidence. We aim to bring confidence and calm to every parent in the world through the insight and light that MonBe delivers — See your baby feed.</p>
+            </div>
+
+            <!-- Funding Section -->
+            <div class="funding-section">
+                <div class="funding-text">
+                    <h2>Funding Ask</h2>
+                    <p>Raising $600K pre-seed to complete MVP - run pilots with 20-50 mothers - refine AI - prepare DTC launch.</p>
+                    <p>Use of funds: R&D and team 83% - regulatory and IP 17%.</p>
+                </div>
+                <div class="funding-stats">
+                    <div class="funding-stat">
+                        <div class="funding-stat-value">$600K</div>
+                        <div class="funding-stat-label">Pre-Seed Round</div>
+                    </div>
+                    <div class="funding-stat">
+                        <div class="funding-stat-value">83%</div>
+                        <div class="funding-stat-label">R&D + Team</div>
+                    </div>
+                    <div class="funding-stat">
+                        <div class="funding-stat-value">17%</div>
+                        <div class="funding-stat-label">Regulatory & IP</div>
+                    </div>
+                    <div class="funding-stat">
+                        <div class="funding-stat-value">20-50</div>
+                        <div class="funding-stat-label">Pilot Mothers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-cta">We invite you to partner with us.</div>
+            <div class="footer-contact">
+                <p>Eitan Halfon - Founder and CEO</p>
+                <p>eitan.h@monbecare.com</p>
+                <p>+972-524042798</p>
+                <p>www.monbecare.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
