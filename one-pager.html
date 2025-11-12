@@ -26,6 +26,50 @@
             box-shadow: 0 20px 80px rgba(0,0,0,0.12);
             border-radius: 8px;
             overflow: hidden;
+            position: relative;
+        }
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e8ecf0;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .download-bar .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            text-decoration: none;
+        }
+        .download-bar .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .download-btn {
+            padding: 8px 16px;
+            border: 1px solid #d8dde5;
+            background: white;
+            color: #1a1f2e;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .download-btn:hover {
+            background: #f8f9fa;
+            border-color: #b8a7e8;
+            color: #b8a7e8;
         }
         
         /* Header Section */
@@ -471,6 +515,16 @@
             }
         }
         @media (max-width: 968px) {
+            .download-bar {
+                padding: 10px 15px;
+            }
+            .download-bar .brand {
+                font-size: 0.95rem;
+            }
+            .download-btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
             .page-wrapper {
                 margin: 20px;
                 border-radius: 0;
@@ -512,11 +566,15 @@
         }
         
         @media print {
+            .download-bar {
+                display: none;
+            }
             body {
                 background: white;
             }
             .page-wrapper {
                 margin: 0;
+                margin-top: 0 !important;
                 box-shadow: none;
                 border-radius: 0;
             }
@@ -531,7 +589,13 @@
     </style>
 </head>
 <body>
-    <div class="page-wrapper">
+    <div class="download-bar">
+        <a class="brand" href="home.html">MonBe — One Page Executive Summary</a>
+        <div class="controls">
+            <button class="download-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
+        </div>
+    </div>
+    <div class="page-wrapper" style="margin-top: 60px;">
         <!-- Header -->
         <div class="header">
             <div class="header-content">
