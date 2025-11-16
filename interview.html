@@ -117,7 +117,7 @@
                                 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
-                                    <select name="feeding0to3" class="form-input" required>
+                                    <select name="feeding0to3" class="form-input" data-required="true">
                                         <option value="" data-translate="select-option">Please select...</option>
                                         <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
                                         <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
@@ -130,7 +130,7 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
-                                    <select name="feeding3to6" class="form-input" required>
+                                    <select name="feeding3to6" class="form-input" data-required="true">
                                         <option value="" data-translate="select-option">Please select...</option>
                                         <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
                                         <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
@@ -143,7 +143,7 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
-                                    <select name="feeding6to12" class="form-input" required>
+                                    <select name="feeding6to12" class="form-input" data-required="true">
                                         <option value="" data-translate="select-option">Please select...</option>
                                         <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
                                         <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
@@ -156,7 +156,7 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
-                                    <select name="breastfeedingAfter1" class="form-input" required>
+                                    <select name="breastfeedingAfter1" class="form-input" data-required="true">
                                         <option value="" data-translate="select-option">Please select...</option>
                                         <option value="yes" data-translate="opt-yes">Yes</option>
                                         <option value="no" data-translate="opt-no">No</option>
@@ -178,7 +178,7 @@
                                     <div class="age-inputs-container">
                                         <div>
                                             <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="years-label">Years</label>
-                                            <select name="stoppedAgeYears" class="form-input" required>
+                                            <select name="stoppedAgeYears" class="form-input" data-required="true">
                                                 <option value="" data-translate="select-option">Please select...</option>
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
@@ -188,7 +188,7 @@
                                         </div>
                                         <div>
                                             <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="months-label">Months</label>
-                                            <select name="stoppedAgeMonths" class="form-input" required>
+                                            <select name="stoppedAgeMonths" class="form-input" data-required="true">
                                                 <option value="" data-translate="select-option">Please select...</option>
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
@@ -210,12 +210,12 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
-                                    <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." required></textarea>
+                                    <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." data-required="true"></textarea>
                                 </div>
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
-                                    <select name="notBreastfeedingReason" class="form-input" required>
+                                    <select name="notBreastfeedingReason" class="form-input" data-required="true">
                                         <option value="" data-translate="select-option">Please select...</option>
                                         <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
                                         <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
@@ -1129,6 +1129,11 @@
                     const originalName = input.getAttribute('name');
                     if (originalName) {
                         input.setAttribute('name', `${originalName}_child${i + 1}`);
+                    }
+                    // Add required attribute if data-required is set
+                    if (input.hasAttribute('data-required')) {
+                        input.setAttribute('required', 'required');
+                        input.removeAttribute('data-required');
                     }
                 });
                 
