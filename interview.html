@@ -110,201 +110,6 @@
                             <!-- Section 3 title will be inserted here when children are added -->
                         </div>
 
-                        <!-- Template for per-child questions (hidden) -->
-                        <div id="childQuestionTemplate" style="display: none;">
-                            <div class="child-question-group" data-child-index="">
-                                <h4 class="child-label" data-translate-child="">First child</h4>
-                                
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
-                                    <select name="feeding0to3" class="form-input" data-required="true">
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
-                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
-                                    <select name="feeding3to6" class="form-input" data-required="true">
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
-                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
-                                    <select name="feeding6to12" class="form-input" data-required="true">
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
-                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
-                                    <select name="breastfeedingAfter1" class="form-input" data-required="true">
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="yes" data-translate="opt-yes">Yes</option>
-                                        <option value="no" data-translate="opt-no">No</option>
-                                    </select>
-                                </div>
-
-                                <!-- Additional comments field for Section 3 -->
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="section3-additional-comments-label">Additional comments <span class="required" data-translate="optional-text">(optional)</span></label>
-                                    <textarea name="section3AdditionalComments" class="form-textarea" rows="3" data-translate-placeholder="section3-additional-comments-placeholder" placeholder="Any additional comments..."></textarea>
-                                </div>
-
-                                <!-- Section 4: Stopping Breastfeeding -->
-                                <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
-                                <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? <span class="required">(required)</span></label>
-                                    <div class="age-inputs-container">
-                                        <div>
-                                            <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="years-label">Years</label>
-                                            <select name="stoppedAgeYears" class="form-input" data-required="true">
-                                                <option value="" data-translate="select-option">Please select...</option>
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="months-label">Months</label>
-                                            <select name="stoppedAgeMonths" class="form-input" data-required="true">
-                                                <option value="" data-translate="select-option">Please select...</option>
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
-                                    <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." data-required="true"></textarea>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
-                                    <select name="notBreastfeedingReason" class="form-input" data-required="true">
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
-                                        <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
-                                        <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
-                                        <option value="combination" data-translate="opt-combination">Combination of factors</option>
-                                        <option value="other" data-translate="opt-other">Other</option>
-                                    </select>
-                                </div>
-
-                                <!-- Section 5: Support and Assistance -->
-                                <h3 class="form-section-title" data-translate="section5-title">Section 5 - Support and Assistance</h3>
-                                <p class="section-description" data-translate="section5-description">For each child separately.</p>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_lactation" value="lactation-consultant" class="checkbox-input">
-                                            <label for="support_lactation" class="checkbox-label" data-translate="opt-lactation-consultant">Lactation consultant</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_parenting" value="parenting-guide" class="checkbox-input">
-                                            <label for="support_parenting" class="checkbox-label" data-translate="opt-parenting-guide">Parenting guide</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_development" value="development-guide" class="checkbox-input">
-                                            <label for="support_development" class="checkbox-label" data-translate="opt-development-guide">Development guide</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_health-clinic" value="health-clinic" class="checkbox-input">
-                                            <label for="support_health-clinic" class="checkbox-label" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_family-social" value="family-social-only" class="checkbox-input">
-                                            <label for="support_family-social" class="checkbox-label" data-translate="opt-family-social-only">Family / Social support only</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="professionalSupport" id="support_none" value="no-support" class="checkbox-input">
-                                            <label for="support_none" class="checkbox-label" data-translate="opt-no-support">I did not receive support</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_nursing-pillow" value="nursing-pillow" class="checkbox-input">
-                                            <label for="aids_nursing-pillow" class="checkbox-label" data-translate="opt-nursing-pillow">Nursing pillow</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_home-scale" value="home-scale" class="checkbox-input">
-                                            <label for="aids_home-scale" class="checkbox-label" data-translate="opt-home-scale">Home baby scale</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_feeding-app" value="feeding-app" class="checkbox-input">
-                                            <label for="aids_feeding-app" class="checkbox-label" data-translate="opt-feeding-app">Feeding tracking app</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_pumping" value="pumping" class="checkbox-input">
-                                            <label for="aids_pumping" class="checkbox-label" data-translate="opt-pumping">Pumping (manual / electric)</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_silicone-nipple" value="silicone-nipple" class="checkbox-input">
-                                            <label for="aids_silicone-nipple" class="checkbox-label" data-translate="opt-silicone-nipple">Silicone nipple</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_tube-feeding" value="tube-feeding" class="checkbox-input">
-                                            <label for="aids_tube-feeding" class="checkbox-label" data-translate="opt-tube-feeding">Tube feeding</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_no-aids" value="no-aids" class="checkbox-input">
-                                            <label for="aids_no-aids" class="checkbox-label" data-translate="opt-no-aids">I did not use aids</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" name="aidsUsed" id="aids_other" value="other" class="checkbox-input">
-                                            <label for="aids_other" class="checkbox-label" data-translate="opt-other">Other</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Comments field for Section 3 -->
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="section3-comments-label">Additional comments for this child <span class="required" data-translate="optional-text">(optional)</span></label>
-                                    <textarea name="section3Comments" class="form-textarea" rows="3" data-translate-placeholder="section3-comments-placeholder" placeholder="Any additional comments or information about this child..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Section 6: Interest in Future Product -->
                         <h3 class="form-section-title" data-translate="section6-title">Section 6 - Interest in Future Product</h3>
 
@@ -351,6 +156,201 @@
 
                         <button type="submit" class="submit-btn" data-translate="submit-btn">SUBMIT SURVEY</button>
                     </form>
+                </div>
+            </div>
+
+            <!-- Template for per-child questions (hidden, outside form to prevent validation issues) -->
+            <div id="childQuestionTemplate" style="display: none;">
+                <div class="child-question-group" data-child-index="">
+                    <h4 class="child-label" data-translate-child="">First child</h4>
+                    
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
+                        <select name="feeding0to3" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                            <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                            <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                            <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                            <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                            <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
+                        <select name="feeding3to6" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                            <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                            <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                            <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                            <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                            <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
+                        <select name="feeding6to12" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                            <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
+                            <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                            <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                            <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                            <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
+                        <select name="breastfeedingAfter1" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="yes" data-translate="opt-yes">Yes</option>
+                            <option value="no" data-translate="opt-no">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Additional comments field for Section 3 -->
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="section3-additional-comments-label">Additional comments <span class="required" data-translate="optional-text">(optional)</span></label>
+                        <textarea name="section3AdditionalComments" class="form-textarea" rows="3" data-translate-placeholder="section3-additional-comments-placeholder" placeholder="Any additional comments..."></textarea>
+                    </div>
+
+                    <!-- Section 4: Stopping Breastfeeding -->
+                    <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
+                    <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? <span class="required">(required)</span></label>
+                        <div class="age-inputs-container">
+                            <div>
+                                <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="years-label">Years</label>
+                                <select name="stoppedAgeYears" class="form-input" data-required="true">
+                                    <option value="" data-translate="select-option">Please select...</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="months-label">Months</label>
+                                <select name="stoppedAgeMonths" class="form-input" data-required="true">
+                                    <option value="" data-translate="select-option">Please select...</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
+                        <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." data-required="true"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
+                        <select name="notBreastfeedingReason" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
+                            <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
+                            <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
+                            <option value="combination" data-translate="opt-combination">Combination of factors</option>
+                            <option value="other" data-translate="opt-other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Section 5: Support and Assistance -->
+                    <h3 class="form-section-title" data-translate="section5-title">Section 5 - Support and Assistance</h3>
+                    <p class="section-description" data-translate="section5-description">For each child separately.</p>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_lactation" value="lactation-consultant" class="checkbox-input">
+                                <label for="support_lactation" class="checkbox-label" data-translate="opt-lactation-consultant">Lactation consultant</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_parenting" value="parenting-guide" class="checkbox-input">
+                                <label for="support_parenting" class="checkbox-label" data-translate="opt-parenting-guide">Parenting guide</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_development" value="development-guide" class="checkbox-input">
+                                <label for="support_development" class="checkbox-label" data-translate="opt-development-guide">Development guide</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_health-clinic" value="health-clinic" class="checkbox-input">
+                                <label for="support_health-clinic" class="checkbox-label" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_family-social" value="family-social-only" class="checkbox-input">
+                                <label for="support_family-social" class="checkbox-label" data-translate="opt-family-social-only">Family / Social support only</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="professionalSupport" id="support_none" value="no-support" class="checkbox-input">
+                                <label for="support_none" class="checkbox-label" data-translate="opt-no-support">I did not receive support</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_nursing-pillow" value="nursing-pillow" class="checkbox-input">
+                                <label for="aids_nursing-pillow" class="checkbox-label" data-translate="opt-nursing-pillow">Nursing pillow</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_home-scale" value="home-scale" class="checkbox-input">
+                                <label for="aids_home-scale" class="checkbox-label" data-translate="opt-home-scale">Home baby scale</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_feeding-app" value="feeding-app" class="checkbox-input">
+                                <label for="aids_feeding-app" class="checkbox-label" data-translate="opt-feeding-app">Feeding tracking app</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_pumping" value="pumping" class="checkbox-input">
+                                <label for="aids_pumping" class="checkbox-label" data-translate="opt-pumping">Pumping (manual / electric)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_silicone-nipple" value="silicone-nipple" class="checkbox-input">
+                                <label for="aids_silicone-nipple" class="checkbox-label" data-translate="opt-silicone-nipple">Silicone nipple</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_tube-feeding" value="tube-feeding" class="checkbox-input">
+                                <label for="aids_tube-feeding" class="checkbox-label" data-translate="opt-tube-feeding">Tube feeding</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_no-aids" value="no-aids" class="checkbox-input">
+                                <label for="aids_no-aids" class="checkbox-label" data-translate="opt-no-aids">I did not use aids</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="aidsUsed" id="aids_other" value="other" class="checkbox-input">
+                                <label for="aids_other" class="checkbox-label" data-translate="opt-other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments field for Section 3 -->
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="section3-comments-label">Additional comments for this child <span class="required" data-translate="optional-text">(optional)</span></label>
+                        <textarea name="section3Comments" class="form-textarea" rows="3" data-translate-placeholder="section3-comments-placeholder" placeholder="Any additional comments or information about this child..."></textarea>
+                    </div>
                 </div>
             </div>
 
