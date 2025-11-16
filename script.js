@@ -119,10 +119,12 @@ function handleInterviewForm() {
         e.preventDefault();
         console.log('Form submit event triggered');
         
+        const form = this; // Store reference to form for use in callbacks
+        
         // Check if form is valid using HTML5 validation first
-        if (!this.checkValidity()) {
+        if (!form.checkValidity()) {
             console.log('Form validation failed');
-            this.reportValidity();
+            form.reportValidity();
             return;
         }
         
@@ -167,105 +169,40 @@ function handleInterviewForm() {
             return;
         }
         
-        // Get form data using FormData (handles most fields automatically)
-        const formData = new FormData(this);
+        // Get form data (same approach as contact form)
+        const formData = new FormData(form);
         console.log('Form data collected, submitting...');
         
-        // Build URL-encoded string, handling multiple checkbox values
-        // Netlify Forms expects URL-encoded format with form-name
-        const formDataPairs = [];
-        
-        // Process all inputs to handle multiple checkbox values correctly
-        const inputs = this.querySelectorAll('input, select, textarea');
-        const processedFields = new Set();
-        
-        inputs.forEach(input => {
-            const name = input.name;
-            if (!name || processedFields.has(name)) return;
-            
-            if (input.type === 'checkbox') {
-                // Handle checkboxes - collect all checked values with the same name
-                const checkboxes = this.querySelectorAll(`input[name="${name}"]:checked`);
-                checkboxes.forEach(cb => {
-                    formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(cb.value));
-                });
-                processedFields.add(name);
-            } else if (input.type === 'radio') {
-                // Handle radio buttons - only the checked one
-                const checked = this.querySelector(`input[name="${name}"]:checked`);
-                if (checked) {
-                    formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(checked.value));
-                    processedFields.add(name);
-                }
-            } else {
-                // For all other inputs (text, select, textarea, hidden, etc.)
-                const value = input.value || '';
-                formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
-                processedFields.add(name);
-            }
-        });
-        
-        // Ensure form-name is first (Netlify requirement)
-        const formNameIndex = formDataPairs.findIndex(pair => pair.startsWith('form-name='));
-        if (formNameIndex > 0) {
-            // Move form-name to the beginning
-            const formNamePair = formDataPairs.splice(formNameIndex, 1)[0];
-            formDataPairs.unshift(formNamePair);
-        } else if (formNameIndex === -1) {
-            // Add form-name if missing
-            formDataPairs.unshift('form-name=' + encodeURIComponent('interview'));
-        }
-        
-        const formDataString = formDataPairs.join('&');
-        console.log('Submitting form data (full):', formDataString);
-        console.log('Form data length:', formDataString.length);
-        console.log('Number of field pairs:', formDataPairs.length);
-        
-        // Submit to Netlify Forms
-        // Netlify Forms expects POST to the same URL with form-name in the body
+        // Submit to Netlify (same approach as contact form)
         fetch('/', {
             method: 'POST',
-            headers: { 
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: formDataString
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
         })
-        .then(async (response) => {
-            console.log('Form submission response status:', response.status);
-            console.log('Form submission response headers:', response.headers);
+        .then(() => {
+            console.log('Form submitted successfully');
+            // Get current language for thank you message
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+            const thankYouMessages = {
+                en: 'Thank you! We will be in touch soon.',
+                de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
+                fr: 'Merci! Nous vous contacterons bientôt.',
+                he: 'תודה! ניצור קשר בקרוב.',
+                ar: 'شكراً! سنتواصل معك قريباً.',
+                es: '¡Gracias! Nos pondremos en contacto pronto.'
+            };
+            const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
             
-            // Try to read response text for debugging
-            const responseText = await response.text();
-            console.log('Form submission response body (first 500 chars):', responseText.substring(0, 500));
+            alert(thankYouMessage);
             
-            // Netlify Forms returns 200 on success, sometimes with a redirect
-            if (response.ok || response.status === 200 || response.status === 302) {
-                console.log('Form submitted successfully to Netlify');
-                // Get current language for thank you message
-                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                const thankYouMessages = {
-                    en: 'Thank you! We will be in touch soon.',
-                    de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
-                    fr: 'Merci! Nous vous contacterons bientôt.',
-                    he: 'תודה! ניצור קשר בקרוב.',
-                    ar: 'شكراً! سنتواصل معك قريباً.',
-                    es: '¡Gracias! Nos pondremos en contacto pronto.'
-                };
-                const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
-                
-                alert(thankYouMessage);
-                
-                // Reset form
-                this.reset();
-                
-                // Clear dynamically generated fields
-                const agesContainer = document.getElementById('childrenAgesContainer');
-                const questionsContainer = document.getElementById('childrenQuestionsContainer');
-                if (agesContainer) agesContainer.innerHTML = '';
-                if (questionsContainer) questionsContainer.innerHTML = '';
-            } else {
-                throw new Error('Form submission failed');
-            }
+            // Reset form
+            form.reset();
+            
+            // Clear dynamically generated fields
+            const agesContainer = document.getElementById('childrenAgesContainer');
+            const questionsContainer = document.getElementById('childrenQuestionsContainer');
+            if (agesContainer) agesContainer.innerHTML = '';
+            if (questionsContainer) questionsContainer.innerHTML = '';
         })
         .catch((error) => {
             console.error('Form submission error:', error);
