@@ -170,11 +170,22 @@ function handleInterviewForm() {
         }
         
         // Get form data (same approach as contact form)
-        const formData = new FormData(form);
+        const originalFormData = new FormData(form);
         
-        // Ensure form-name is included (required for Netlify)
-        if (!formData.has('form-name')) {
-            formData.append('form-name', 'interview');
+        // Ensure form-name is included and is first (Netlify requirement)
+        // Rebuild FormData with form-name first
+        let formData = new FormData();
+        formData.append('form-name', 'interview');
+        
+        // Add all other fields (skip form-name if it exists in original)
+        for (const [key, value] of originalFormData.entries()) {
+            if (key !== 'form-name') {
+                if (value instanceof File) {
+                    formData.append(key, value);
+                } else {
+                    formData.append(key, value);
+                }
+            }
         }
         
         // Convert to URL-encoded string
@@ -182,6 +193,7 @@ function handleInterviewForm() {
         console.log('Form data collected, submitting...');
         console.log('Form data string (first 500 chars):', encodedData.substring(0, 500));
         console.log('Form data length:', encodedData.length);
+        console.log('Form data starts with form-name?', encodedData.startsWith('form-name='));
         
         // Submit to Netlify (same approach as contact form)
         fetch('/', {
@@ -193,14 +205,22 @@ function handleInterviewForm() {
             console.log('Form submission response status:', response.status);
             console.log('Form submission response ok:', response.ok);
             
+            // Read response to check for any errors
+            const responseText = await response.text();
+            console.log('Response body (first 1000 chars):', responseText.substring(0, 1000));
+            
             // Check if response is successful
             if (!response.ok && response.status !== 200) {
-                const responseText = await response.text();
                 console.error('Form submission failed. Response:', responseText.substring(0, 500));
                 throw new Error(`Form submission failed with status ${response.status}`);
             }
             
-            console.log('Form submitted successfully');
+            // Check if response indicates form was processed
+            if (responseText.includes('Thank you') || responseText.includes('success') || response.status === 200) {
+                console.log('Form submitted successfully to Netlify');
+            } else {
+                console.warn('Form submission returned 200 but response body is unexpected:', responseText.substring(0, 200));
+            }
             // Get current language for thank you message
             const currentLang = localStorage.getItem('selectedLanguage') || 'en';
             const thankYouMessages = {
