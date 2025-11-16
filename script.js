@@ -234,7 +234,6 @@ function handleInterviewForm() {
             alert(errorMessage);
         });
     });
-    }
 }
 
 // Animation sequence for home page
