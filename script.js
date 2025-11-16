@@ -171,15 +171,35 @@ function handleInterviewForm() {
         
         // Get form data (same approach as contact form)
         const formData = new FormData(form);
+        
+        // Ensure form-name is included (required for Netlify)
+        if (!formData.has('form-name')) {
+            formData.append('form-name', 'interview');
+        }
+        
+        // Convert to URL-encoded string
+        const encodedData = new URLSearchParams(formData).toString();
         console.log('Form data collected, submitting...');
+        console.log('Form data string (first 500 chars):', encodedData.substring(0, 500));
+        console.log('Form data length:', encodedData.length);
         
         // Submit to Netlify (same approach as contact form)
         fetch('/', {
             method: 'POST',
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
+            body: encodedData
         })
-        .then(() => {
+        .then(async (response) => {
+            console.log('Form submission response status:', response.status);
+            console.log('Form submission response ok:', response.ok);
+            
+            // Check if response is successful
+            if (!response.ok && response.status !== 200) {
+                const responseText = await response.text();
+                console.error('Form submission failed. Response:', responseText.substring(0, 500));
+                throw new Error(`Form submission failed with status ${response.status}`);
+            }
+            
             console.log('Form submitted successfully');
             // Get current language for thank you message
             const currentLang = localStorage.getItem('selectedLanguage') || 'en';
