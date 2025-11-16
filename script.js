@@ -151,21 +151,68 @@ function handleInterviewForm() {
             
             // Check if form is valid using HTML5 validation
             if (this.checkValidity()) {
-                // Get form data
+                // Get form data and properly handle checkboxes
                 const formData = new FormData(this);
                 
-                // Submit to Netlify
+                // Build form data string for Netlify Forms
+                // Netlify Forms expects URL-encoded format
+                const formDataPairs = [];
+                
+                // Add all form fields (FormData automatically handles multiple values for checkboxes)
+                for (const [key, value] of formData.entries()) {
+                    formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+                }
+                
+                // Submit to Netlify Forms
                 fetch('/', {
                     method: 'POST',
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: new URLSearchParams(formData).toString()
+                    headers: { 
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: formDataPairs.join('&')
                 })
-                .then(() => {
-                    alert('Thank you for subscribing! We\'ll be in touch soon to schedule your interview.');
-                    this.reset();
+                .then((response) => {
+                    // Netlify Forms returns 200 on success
+                    if (response.ok || response.status === 200) {
+                        // Get current language for thank you message
+                        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                        const thankYouMessages = {
+                            en: 'Thank you! We will be in touch soon.',
+                            de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
+                            fr: 'Merci! Nous vous contacterons bientôt.',
+                            he: 'תודה! ניצור קשר בקרוב.',
+                            ar: 'شكراً! سنتواصل معك قريباً.',
+                            es: '¡Gracias! Nos pondremos en contacto pronto.'
+                        };
+                        const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
+                        
+                        alert(thankYouMessage);
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Clear dynamically generated fields
+                        const agesContainer = document.getElementById('childrenAgesContainer');
+                        const questionsContainer = document.getElementById('childrenQuestionsContainer');
+                        if (agesContainer) agesContainer.innerHTML = '';
+                        if (questionsContainer) questionsContainer.innerHTML = '';
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
                 })
                 .catch((error) => {
-                    alert('Sorry, there was an error submitting your survey. Please try again.');
+                    console.error('Form submission error:', error);
+                    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                    const errorMessages = {
+                        en: 'Sorry, there was an error submitting your survey. Please try again.',
+                        de: 'Entschuldigung, beim Absenden Ihrer Umfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+                        fr: 'Désolé, une erreur s\'est produite lors de l\'envoi de votre questionnaire. Veuillez réessayer.',
+                        he: 'מצטערים, אירעה שגיאה בשליחת השאלון. אנא נסה שוב.',
+                        ar: 'عذراً، حدث خطأ أثناء إرسال الاستبيان. يرجى المحاولة مرة أخرى.',
+                        es: 'Lo sentimos, hubo un error al enviar su cuestionario. Por favor, inténtelo de nuevo.'
+                    };
+                    const errorMessage = errorMessages[currentLang] || errorMessages.en;
+                    alert(errorMessage);
                 });
             } else {
                 // HTML5 validation will show error messages
