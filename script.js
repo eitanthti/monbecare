@@ -83,17 +83,33 @@ function handleContactForm() {
 
         // Simple validation
         if (firstName && lastName && email && message) {
+            // Ensure form-name is included (Netlify requirement)
+            if (!formData.has('form-name')) {
+                formData.append('form-name', 'contact');
+            }
+            
+            // Log what we're sending (for debugging)
+            const encodedData = new URLSearchParams(formData).toString();
+            console.log('Contact form data:', encodedData.substring(0, 200));
+            
             // Submit to Netlify
             fetch('/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
+                body: encodedData
             })
-                .then(() => {
-                    alert("Thank you for your message! We'll get back to you soon.");
-                    this.reset();
-                })
-                .catch(function () {
+                .then(function(response) {
+                    console.log('Contact form response status:', response.status);
+                    if (response.ok || response.status === 200) {
+                        alert("Thank you for your message! We'll get back to you soon.");
+                        this.reset();
+                    } else {
+                        console.error('Contact form submission failed with status:', response.status);
+                        alert('Sorry, there was an error sending your message. Please try again.');
+                    }
+                }.bind(this))
+                .catch(function (error) {
+                    console.error('Contact form submission error:', error);
                     alert('Sorry, there was an error sending your message. Please try again.');
                 });
         } else {
