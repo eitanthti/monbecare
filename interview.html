@@ -93,32 +93,28 @@
                             <input type="tel" name="phone" class="form-input" data-translate-placeholder="phone-placeholder" placeholder="(123) 456-7890">
                         </div>
 
+                        <!-- Number of Children Question (above Section 2) -->
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q5-label">How many children do you have? <span class="required">(required)</span></label>
+                            <input type="number" name="numberOfChildren" id="numberOfChildren" class="form-input" min="1" required>
+                        </div>
+
                         <!-- Section 2: Children Details -->
                         <h3 class="form-section-title" data-translate="section2-title">Section 2 - Children Details</h3>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q5-label">How many children do you have? <span class="required">(required)</span></label>
-                            <input type="number" name="numberOfChildren" class="form-input" min="1" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q6-label">What is the current age of each child? (e.g., 4 years, 2 years, 8 months) <span class="required">(required)</span></label>
-                            <textarea name="childrenAges" class="form-textarea" rows="3" data-translate-placeholder="q6-placeholder" placeholder="e.g., Child 1: 4 years, Child 2: 2 years, Child 3: 8 months" required></textarea>
-                        </div>
-
-                        <!-- Section 3: Feeding Method by Age -->
-                        <h3 class="form-section-title" data-translate="section3-title">Section 3 - Feeding Method by Age for Each Child</h3>
-                        <p class="section-description" data-translate="section3-description">Please answer each question for each child.</p>
+                        <!-- Container for dynamic children ages -->
+                        <div id="childrenAgesContainer"></div>
 
                         <!-- Container for per-child questions -->
-                        <div id="childrenQuestionsContainer"></div>
+                        <div id="childrenQuestionsContainer">
+                            <!-- Section 3 title will be inserted here when children are added -->
+                        </div>
 
                         <!-- Template for per-child questions (hidden) -->
                         <div id="childQuestionTemplate" style="display: none;">
                             <div class="child-question-group" data-child-index="">
                                 <h4 class="child-label" data-translate-child="">First child</h4>
                                 
-                                <!-- Section 3: Feeding Method by Age -->
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
                                     <select name="feeding0to3" class="form-input" required>
@@ -221,6 +217,12 @@
                                         <option value="other" data-translate="opt-other">Other</option>
                                     </select>
                                 </div>
+
+                                <!-- Comments field for Section 3 -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="section3-comments-label">Additional comments for this child <span class="required" data-translate="optional-text">(optional)</span></label>
+                                    <textarea name="section3Comments" class="form-textarea" rows="3" data-translate-placeholder="section3-comments-placeholder" placeholder="Any additional comments or information about this child..."></textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -301,6 +303,8 @@
                 'q6-placeholder': 'e.g., Child 1: 4 years, Child 2: 2 years, Child 3: 8 months',
                 'section3-title': 'Section 3 - Feeding Method by Age for Each Child',
                 'section3-description': 'Please answer each question for each child.',
+                'section3-comments-label': 'Additional comments for this child',
+                'section3-comments-placeholder': 'Any additional comments or information about this child...',
                 'q7-label': 'What was the main feeding method during months 0-3?',
                 'q8-label': 'What was the feeding method during age 3-6 months?',
                 'q9-label': 'What was the feeding method during age 6-12 months?',
@@ -380,6 +384,8 @@
                 'q6-placeholder': 'z.B. Kind 1: 4 Jahre, Kind 2: 2 Jahre, Kind 3: 8 Monate',
                 'section3-title': 'Abschnitt 3 - Fütterungsmethode nach Alter für jedes Kind',
                 'section3-description': 'Bitte beantworten Sie jede Frage für jedes Kind.',
+                'section3-comments-label': 'Zusätzliche Kommentare für dieses Kind',
+                'section3-comments-placeholder': 'Zusätzliche Kommentare oder Informationen zu diesem Kind...',
                 'q7-label': 'Wie war die Hauptfütterungsmethode in den Monaten 0-3?',
                 'q8-label': 'Wie war die Fütterungsmethode im Alter von 3-6 Monaten?',
                 'q9-label': 'Wie war die Fütterungsmethode im Alter von 6-12 Monaten?',
@@ -459,6 +465,8 @@
                 'q6-placeholder': 'par ex. Enfant 1: 4 ans, Enfant 2: 2 ans, Enfant 3: 8 mois',
                 'section3-title': 'Section 3 - Méthode d\'alimentation par âge pour chaque enfant',
                 'section3-description': 'Veuillez répondre à chaque question pour chaque enfant.',
+                'section3-comments-label': 'Commentaires supplémentaires pour cet enfant',
+                'section3-comments-placeholder': 'Tout commentaire ou information supplémentaire sur cet enfant...',
                 'q7-label': 'Quelle était la méthode d\'alimentation principale pendant les mois 0-3?',
                 'q8-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 3-6 mois?',
                 'q9-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 6-12 mois?',
@@ -538,6 +546,8 @@
                 'q6-placeholder': 'לדוגמה: ילד 1: 4 שנים, ילד 2: שנתיים, ילד 3: 8 חודשים',
                 'section3-title': 'שלב 3 - אופן ההאכלה לפי גיל לכל ילד',
                 'section3-description': 'נא לענות על כל שאלה עבור כל ילד.',
+                'section3-comments-label': 'הערות נוספות עבור ילד זה',
+                'section3-comments-placeholder': 'כל הערות או מידע נוסף על ילד זה...',
                 'q7-label': 'מה היה אופן ההאכלה העיקרי בחודשים 0 עד 3?',
                 'q8-label': 'מה היה אופן ההאכלה בתקופה בין גיל 3 עד 6 חודשים?',
                 'q9-label': 'מה היה אופן ההאכלה בתקופה בין גיל 6 עד 12 חודשים?',
@@ -617,6 +627,8 @@
                 'q6-placeholder': 'مثلاً: الطفل 1: 4 سنوات، الطفل 2: سنتان، الطفل 3: 8 أشهر',
                 'section3-title': 'القسم 3 - طريقة التغذية حسب العمر لكل طفل',
                 'section3-description': 'يرجى الإجابة على كل سؤال لكل طفل.',
+                'section3-comments-label': 'تعليقات إضافية لهذا الطفل',
+                'section3-comments-placeholder': 'أي تعليقات أو معلومات إضافية حول هذا الطفل...',
                 'q7-label': 'ما كانت طريقة التغذية الرئيسية خلال الأشهر 0-3؟',
                 'q8-label': 'ما كانت طريقة التغذية خلال العمر 3-6 أشهر؟',
                 'q9-label': 'ما كانت طريقة التغذية خلال العمر 6-12 شهراً؟',
@@ -696,6 +708,8 @@
                 'q6-placeholder': 'ej: Hijo 1: 4 años, Hijo 2: 2 años, Hijo 3: 8 meses',
                 'section3-title': 'Sección 3 - Método de alimentación por edad para cada hijo',
                 'section3-description': 'Por favor responde cada pregunta para cada hijo.',
+                'section3-comments-label': 'Comentarios adicionales para este hijo',
+                'section3-comments-placeholder': 'Cualquier comentario o información adicional sobre este hijo...',
                 'q7-label': '¿Cuál fue el método de alimentación principal durante los meses 0-3?',
                 'q8-label': '¿Cuál fue el método de alimentación durante la edad de 3-6 meses?',
                 'q9-label': '¿Cuál fue el método de alimentación durante la edad de 6-12 meses?',
@@ -858,6 +872,54 @@
             return labels[childIndex] || `Child ${childIndex + 1}`;
         }
 
+        // Function to generate children age fields for Section 2
+        function generateChildrenAges(numChildren, currentLang) {
+            const container = document.getElementById('childrenAgesContainer');
+            const langData = translations[currentLang] || translations.en;
+            
+            // Clear existing age fields
+            container.innerHTML = '';
+            
+            if (numChildren < 1) return;
+            
+            for (let i = 0; i < numChildren; i++) {
+                const childLabel = getChildLabel(currentLang, i);
+                const ageQuestionText = {
+                    en: 'What is the current age? (e.g., 4 years, 2 years, 8 months)',
+                    de: 'Wie alt ist das Kind derzeit? (z.B. 4 Jahre, 2 Jahre, 8 Monate)',
+                    fr: 'Quel est l\'âge actuel? (par ex. 4 ans, 2 ans, 8 mois)',
+                    he: 'מה הגיל הנוכחי? (לדוגמה: 4 שנים, שנתיים, 8 חודשים)',
+                    ar: 'ما هو العمر الحالي؟ (مثلاً: 4 سنوات، سنتان، 8 أشهر)',
+                    es: '¿Cuál es la edad actual? (ej: 4 años, 2 años, 8 meses)'
+                };
+                const ageQuestion = ageQuestionText[currentLang] || ageQuestionText.en;
+                
+                const formGroup = document.createElement('div');
+                formGroup.className = 'form-group full-width';
+                
+                const childLabelElement = document.createElement('h4');
+                childLabelElement.className = 'child-label';
+                childLabelElement.style.marginBottom = '0.5rem';
+                childLabelElement.textContent = childLabel;
+                
+                const label = document.createElement('label');
+                label.className = 'form-label';
+                label.innerHTML = `${ageQuestion} <span class="required">${langData['required-text'] || '(required)'}</span>`;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `childAge_child${i + 1}`;
+                input.className = 'form-input';
+                input.required = true;
+                input.placeholder = langData['q6-placeholder'] || 'e.g., 4 years, 2 years, 8 months';
+                
+                formGroup.appendChild(childLabelElement);
+                formGroup.appendChild(label);
+                formGroup.appendChild(input);
+                container.appendChild(formGroup);
+            }
+        }
+
         // Function to generate child questions
         function generateChildQuestions(numChildren, currentLang) {
             const container = document.getElementById('childrenQuestionsContainer');
@@ -867,6 +929,21 @@
             container.innerHTML = '';
             
             if (numChildren < 1) return;
+            
+            // Add Section 3 title and description at the beginning
+            const langData = translations[currentLang] || translations.en;
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.className = 'form-section-title';
+            sectionTitle.setAttribute('data-translate', 'section3-title');
+            sectionTitle.textContent = langData['section3-title'] || 'Section 3 - Feeding Method by Age for Each Child';
+            
+            const sectionDescription = document.createElement('p');
+            sectionDescription.className = 'section-description';
+            sectionDescription.setAttribute('data-translate', 'section3-description');
+            sectionDescription.textContent = langData['section3-description'] || 'Please answer each question for each child.';
+            
+            container.appendChild(sectionTitle);
+            container.appendChild(sectionDescription);
             
             for (let i = 0; i < numChildren; i++) {
                 // Clone the template
@@ -966,16 +1043,19 @@
             translatePage(selectedLanguage);
 
             // Watch for changes in number of children
-            const numberOfChildrenInput = document.querySelector('input[name="numberOfChildren"]');
+            const numberOfChildrenInput = document.getElementById('numberOfChildren');
             if (numberOfChildrenInput) {
                 numberOfChildrenInput.addEventListener('input', function() {
                     const numChildren = parseInt(this.value) || 0;
+                    generateChildrenAges(numChildren, selectedLanguage);
                     generateChildQuestions(numChildren, selectedLanguage);
                 });
                 
-                // Generate initial questions if value exists
+                // Generate initial age fields and questions if value exists
                 if (numberOfChildrenInput.value) {
-                    generateChildQuestions(parseInt(numberOfChildrenInput.value) || 0, selectedLanguage);
+                    const numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                    generateChildrenAges(numChildren, selectedLanguage);
+                    generateChildQuestions(numChildren, selectedLanguage);
                 }
             }
 
@@ -1002,10 +1082,11 @@
                     // Translate page
                     translatePage(selectedLanguage);
                     
-                    // Regenerate child questions with new language
-                    const numberOfChildrenInput = document.querySelector('input[name="numberOfChildren"]');
+                    // Regenerate child age fields and questions with new language
+                    const numberOfChildrenInput = document.getElementById('numberOfChildren');
                     if (numberOfChildrenInput && numberOfChildrenInput.value) {
                         const numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                        generateChildrenAges(numChildren, selectedLanguage);
                         generateChildQuestions(numChildren, selectedLanguage);
                     }
                     
