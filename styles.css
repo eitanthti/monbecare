@@ -1283,6 +1283,14 @@ body {
     box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
 }
 
+/* RTL support for Hebrew and Arabic */
+.language-btn[data-lang="he"],
+.language-btn[data-lang="ar"] {
+    direction: rtl;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.8rem;
+}
+
 .interview-container {
     max-width: 1400px;
     margin: 0 auto;
