@@ -131,6 +131,24 @@ function handleInterviewForm() {
                 return;
             }
             
+            // Validate aids checkboxes - at least one aid must be selected per child
+            let aidsCheckboxValid = true;
+            let missingAidsCheckboxes = [];
+            
+            for (let i = 1; i <= numberOfChildren; i++) {
+                const aidsCheckboxes = document.querySelectorAll(`input[name="aidsUsed_child${i}"]`);
+                const checked = Array.from(aidsCheckboxes).some(cb => cb.checked);
+                if (!checked) {
+                    aidsCheckboxValid = false;
+                    missingAidsCheckboxes.push(`Child ${i}`);
+                }
+            }
+            
+            if (!aidsCheckboxValid) {
+                alert('Please select at least one option for aids used during the first periods for: ' + missingAidsCheckboxes.join(', '));
+                return;
+            }
+            
             // Check if form is valid using HTML5 validation
             if (this.checkValidity()) {
                 // Get form data

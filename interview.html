@@ -163,6 +163,12 @@
                                     </select>
                                 </div>
 
+                                <!-- Additional comments field for Section 3 -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="section3-additional-comments-label">Additional comments <span class="required" data-translate="optional-text">(optional)</span></label>
+                                    <textarea name="section3AdditionalComments" class="form-textarea" rows="3" data-translate-placeholder="section3-additional-comments-placeholder" placeholder="Any additional comments..."></textarea>
+                                </div>
+
                                 <!-- Section 4: Stopping Breastfeeding -->
                                 <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
                                 <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
@@ -255,27 +261,46 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
-                                    <select name="aidsUsed" class="form-input" required>
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="nursing-pillow" data-translate="opt-nursing-pillow">Nursing pillow</option>
-                                        <option value="home-scale" data-translate="opt-home-scale">Home baby scale</option>
-                                        <option value="feeding-app" data-translate="opt-feeding-app">Feeding tracking app</option>
-                                        <option value="pumping" data-translate="opt-pumping">Pumping (manual / electric)</option>
-                                        <option value="no-aids" data-translate="opt-no-aids">I did not use aids</option>
-                                        <option value="other" data-translate="opt-other">Other</option>
-                                    </select>
+                                    <div class="checkbox-group">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_nursing-pillow" value="nursing-pillow" class="checkbox-input">
+                                            <label for="aids_nursing-pillow" class="checkbox-label" data-translate="opt-nursing-pillow">Nursing pillow</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_home-scale" value="home-scale" class="checkbox-input">
+                                            <label for="aids_home-scale" class="checkbox-label" data-translate="opt-home-scale">Home baby scale</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_feeding-app" value="feeding-app" class="checkbox-input">
+                                            <label for="aids_feeding-app" class="checkbox-label" data-translate="opt-feeding-app">Feeding tracking app</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_pumping" value="pumping" class="checkbox-input">
+                                            <label for="aids_pumping" class="checkbox-label" data-translate="opt-pumping">Pumping (manual / electric)</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_silicone-nipple" value="silicone-nipple" class="checkbox-input">
+                                            <label for="aids_silicone-nipple" class="checkbox-label" data-translate="opt-silicone-nipple">Silicone nipple</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_tube-feeding" value="tube-feeding" class="checkbox-input">
+                                            <label for="aids_tube-feeding" class="checkbox-label" data-translate="opt-tube-feeding">Tube feeding</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_no-aids" value="no-aids" class="checkbox-input">
+                                            <label for="aids_no-aids" class="checkbox-label" data-translate="opt-no-aids">I did not use aids</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="aidsUsed" id="aids_other" value="other" class="checkbox-input">
+                                            <label for="aids_other" class="checkbox-label" data-translate="opt-other">Other</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Comments field for Section 3 -->
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="section3-comments-label">Additional comments for this child <span class="required" data-translate="optional-text">(optional)</span></label>
                                     <textarea name="section3Comments" class="form-textarea" rows="3" data-translate-placeholder="section3-comments-placeholder" placeholder="Any additional comments or information about this child..."></textarea>
-                                </div>
-
-                                <!-- Additional open text comments field for Section 3 -->
-                                <div class="form-group full-width">
-                                    <label class="form-label" data-translate="section3-additional-comments-label">Additional comments <span class="required" data-translate="optional-text">(optional)</span></label>
-                                    <textarea name="section3AdditionalComments" class="form-textarea" rows="3" data-translate-placeholder="section3-additional-comments-placeholder" placeholder="Any additional comments..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -412,6 +437,8 @@
                 'opt-home-scale': 'Home baby scale',
                 'opt-feeding-app': 'Feeding tracking app',
                 'opt-pumping': 'Pumping (manual / electric)',
+                'opt-silicone-nipple': 'Silicone nipple',
+                'opt-tube-feeding': 'Tube feeding',
                 'opt-no-aids': 'I did not use aids',
                 'opt-not-interested': 'Not interested at all',
                 'opt-slightly-interested': 'Slightly interested',
@@ -497,6 +524,8 @@
                 'opt-home-scale': 'Babywaage für zu Hause',
                 'opt-feeding-app': 'Fütterungs-Tracking-App',
                 'opt-pumping': 'Abpumpen (manuell / elektrisch)',
+                'opt-silicone-nipple': 'Silikon-Sauger',
+                'opt-tube-feeding': 'Röhrenfütterung',
                 'opt-no-aids': 'Ich habe keine Hilfsmittel verwendet',
                 'opt-not-interested': 'Überhaupt nicht interessiert',
                 'opt-slightly-interested': 'Wenig interessiert',
@@ -582,6 +611,8 @@
                 'opt-home-scale': 'Balance bébé à domicile',
                 'opt-feeding-app': 'Application de suivi d\'alimentation',
                 'opt-pumping': 'Tire-lait (manuel / électrique)',
+                'opt-silicone-nipple': 'Tétine en silicone',
+                'opt-tube-feeding': 'Alimentation par sonde',
                 'opt-no-aids': 'Je n\'ai pas utilisé d\'aides',
                 'opt-not-interested': 'Pas du tout intéressée',
                 'opt-slightly-interested': 'Légèrement intéressée',
@@ -667,6 +698,8 @@
                 'opt-home-scale': 'משקל ביתי לתינוק',
                 'opt-feeding-app': 'אפליקציה למעקב האכלה',
                 'opt-pumping': 'שאיבה (ידנית / חשמלית)',
+                'opt-silicone-nipple': 'פטמת סיליקון',
+                'opt-tube-feeding': 'האכלה מצינורית',
                 'opt-no-aids': 'לא השתמשתי בעזרים',
                 'opt-not-interested': 'לא מעוניינת בכלל',
                 'opt-slightly-interested': 'מעט מעוניינת',
@@ -752,6 +785,8 @@
                 'opt-home-scale': 'ميزان أطفال منزلي',
                 'opt-feeding-app': 'تطبيق تتبع التغذية',
                 'opt-pumping': 'الشفط (يدوي / كهربائي)',
+                'opt-silicone-nipple': 'حلمة سيليكون',
+                'opt-tube-feeding': 'التغذية بالأنبوب',
                 'opt-no-aids': 'لم أستخدم مساعدات',
                 'opt-not-interested': 'لست مهتمة على الإطلاق',
                 'opt-slightly-interested': 'مهتمة قليلاً',
@@ -837,6 +872,8 @@
                 'opt-home-scale': 'Báscula para bebé en casa',
                 'opt-feeding-app': 'Aplicación de seguimiento de alimentación',
                 'opt-pumping': 'Extracción (manual / eléctrica)',
+                'opt-silicone-nipple': 'Pezón de silicona',
+                'opt-tube-feeding': 'Alimentación por sonda',
                 'opt-no-aids': 'No usé ayudas',
                 'opt-not-interested': 'No estoy interesada en absoluto',
                 'opt-slightly-interested': 'Ligeramente interesada',
