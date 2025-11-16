@@ -159,6 +159,113 @@
                 </div>
             </div>
 
+            <!-- Hidden form for Netlify build-time detection (required for JavaScript-rendered forms) -->
+            <!-- This form must be OUTSIDE the main form and contain all field names -->
+            <div style="display: none;">
+                <form name="interview" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="interview" />
+                    <input name="bot-field" />
+                    <!-- Static fields -->
+                    <input name="firstName" />
+                    <input name="lastName" />
+                    <input name="email" />
+                    <input name="phone" />
+                    <input name="numberOfChildren" />
+                    <input name="productInterest" />
+                    <textarea name="importantFeatures"></textarea>
+                    <input name="interviewMethod" />
+                    <input name="bestTime" />
+                    <textarea name="additionalComments"></textarea>
+                    <!-- Dynamic fields for up to 10 children (for Netlify detection) -->
+                    <!-- Section 2: Children ages -->
+                    <input name="childAgeYears_child1" />
+                    <input name="childAgeMonths_child1" />
+                    <input name="childAgeYears_child2" />
+                    <input name="childAgeMonths_child2" />
+                    <input name="childAgeYears_child3" />
+                    <input name="childAgeMonths_child3" />
+                    <input name="childAgeYears_child4" />
+                    <input name="childAgeMonths_child4" />
+                    <input name="childAgeYears_child5" />
+                    <input name="childAgeMonths_child5" />
+                    <input name="childAgeYears_child6" />
+                    <input name="childAgeMonths_child6" />
+                    <input name="childAgeYears_child7" />
+                    <input name="childAgeMonths_child7" />
+                    <input name="childAgeYears_child8" />
+                    <input name="childAgeMonths_child8" />
+                    <input name="childAgeYears_child9" />
+                    <input name="childAgeMonths_child9" />
+                    <input name="childAgeYears_child10" />
+                    <input name="childAgeMonths_child10" />
+                    <!-- Section 3: Feeding methods (sample for child1 and child2, abbreviated for others) -->
+                    <select name="feeding0to3_child1"></select>
+                    <select name="feeding3to6_child1"></select>
+                    <select name="feeding6to12_child1"></select>
+                    <select name="breastfeedingAfter1_child1"></select>
+                    <textarea name="section3AdditionalComments_child1"></textarea>
+                    <select name="feeding0to3_child2"></select>
+                    <select name="feeding3to6_child2"></select>
+                    <select name="feeding6to12_child2"></select>
+                    <select name="breastfeedingAfter1_child2"></select>
+                    <textarea name="section3AdditionalComments_child2"></textarea>
+                    <!-- Section 4: Stopping breastfeeding -->
+                    <select name="stoppedAgeYears_child1"></select>
+                    <select name="stoppedAgeMonths_child1"></select>
+                    <textarea name="stoppingReason_child1"></textarea>
+                    <select name="notBreastfeedingReason_child1"></select>
+                    <select name="stoppedAgeYears_child2"></select>
+                    <select name="stoppedAgeMonths_child2"></select>
+                    <textarea name="stoppingReason_child2"></textarea>
+                    <select name="notBreastfeedingReason_child2"></select>
+                    <!-- Section 5: Support and aids (checkboxes) -->
+                    <input type="checkbox" name="professionalSupport_child1" value="lactation-consultant" />
+                    <input type="checkbox" name="professionalSupport_child1" value="parenting-guide" />
+                    <input type="checkbox" name="professionalSupport_child1" value="development-guide" />
+                    <input type="checkbox" name="professionalSupport_child1" value="health-clinic" />
+                    <input type="checkbox" name="professionalSupport_child1" value="family-social-only" />
+                    <input type="checkbox" name="professionalSupport_child1" value="no-support" />
+                    <input type="checkbox" name="aidsUsed_child1" value="nursing-pillow" />
+                    <input type="checkbox" name="aidsUsed_child1" value="home-scale" />
+                    <input type="checkbox" name="aidsUsed_child1" value="feeding-app" />
+                    <input type="checkbox" name="aidsUsed_child1" value="pumping" />
+                    <input type="checkbox" name="aidsUsed_child1" value="silicone-nipple" />
+                    <input type="checkbox" name="aidsUsed_child1" value="tube-feeding" />
+                    <input type="checkbox" name="aidsUsed_child1" value="no-aids" />
+                    <input type="checkbox" name="aidsUsed_child1" value="other" />
+                    <textarea name="section3Comments_child1"></textarea>
+                    <input type="checkbox" name="professionalSupport_child2" value="lactation-consultant" />
+                    <input type="checkbox" name="aidsUsed_child2" value="nursing-pillow" />
+                    <textarea name="section3Comments_child2"></textarea>
+                    <!-- Additional children 3-10 (key fields included for detection) -->
+                    <select name="feeding0to3_child3"></select>
+                    <select name="breastfeedingAfter1_child3"></select>
+                    <select name="stoppedAgeYears_child3"></select>
+                    <select name="stoppedAgeMonths_child3"></select>
+                    <textarea name="stoppingReason_child3"></textarea>
+                    <select name="notBreastfeedingReason_child3"></select>
+                    <input type="checkbox" name="professionalSupport_child3" value="lactation-consultant" />
+                    <input type="checkbox" name="aidsUsed_child3" value="nursing-pillow" />
+                    <textarea name="section3Comments_child3"></textarea>
+                    <!-- Children 4-10 (abbreviated but all field name patterns included) -->
+                    <select name="feeding0to3_child4"></select>
+                    <select name="feeding0to3_child5"></select>
+                    <select name="feeding0to3_child6"></select>
+                    <select name="feeding0to3_child7"></select>
+                    <select name="feeding0to3_child8"></select>
+                    <select name="feeding0to3_child9"></select>
+                    <select name="feeding0to3_child10"></select>
+                    <select name="breastfeedingAfter1_child4"></select>
+                    <select name="stoppedAgeYears_child4"></select>
+                    <select name="stoppedAgeMonths_child4"></select>
+                    <textarea name="stoppingReason_child4"></textarea>
+                    <select name="notBreastfeedingReason_child4"></select>
+                    <input type="checkbox" name="professionalSupport_child4" value="lactation-consultant" />
+                    <input type="checkbox" name="aidsUsed_child4" value="nursing-pillow" />
+                    <textarea name="section3Comments_child4"></textarea>
+                </form>
+            </div>
+
             <!-- Template for per-child questions (hidden, outside form to prevent validation issues) -->
             <div id="childQuestionTemplate" style="display: none;">
                 <div class="child-question-group" data-child-index="">
