@@ -167,76 +167,80 @@ function handleInterviewForm() {
             return;
         }
         
-        // Get form data and properly handle checkboxes
+        // Get form data using FormData (handles most fields automatically)
         const formData = new FormData(this);
         console.log('Form data collected, submitting...');
         
-        // Build form data string for Netlify Forms
-        // Netlify Forms expects URL-encoded format
+        // Build URL-encoded string, handling multiple checkbox values
+        // Netlify Forms expects URL-encoded format with form-name
         const formDataPairs = [];
         
-        // Collect all form fields, handling multiple checkbox values
-        const formFields = {};
-        
-        // Process all form inputs
+        // Process all inputs to handle multiple checkbox values correctly
         const inputs = this.querySelectorAll('input, select, textarea');
+        const processedFields = new Set();
+        
         inputs.forEach(input => {
             const name = input.name;
-            if (!name) return;
+            if (!name || processedFields.has(name)) return;
             
-            // Always include hidden fields
-            if (input.type === 'hidden') {
-                formFields[name] = input.value || '';
-            } else if (input.type === 'checkbox') {
-                if (input.checked) {
-                    if (!formFields[name]) {
-                        formFields[name] = [];
-                    }
-                    formFields[name].push(input.value);
-                }
+            if (input.type === 'checkbox') {
+                // Handle checkboxes - collect all checked values with the same name
+                const checkboxes = this.querySelectorAll(`input[name="${name}"]:checked`);
+                checkboxes.forEach(cb => {
+                    formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(cb.value));
+                });
+                processedFields.add(name);
             } else if (input.type === 'radio') {
-                if (input.checked) {
-                    formFields[name] = input.value;
+                // Handle radio buttons - only the checked one
+                const checked = this.querySelector(`input[name="${name}"]:checked`);
+                if (checked) {
+                    formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(checked.value));
+                    processedFields.add(name);
                 }
             } else {
-                // For text, select, textarea, etc.
-                // Include all values (even empty strings for required fields that passed validation)
-                formFields[name] = input.value || '';
+                // For all other inputs (text, select, textarea, hidden, etc.)
+                const value = input.value || '';
+                formDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
+                processedFields.add(name);
             }
         });
         
-        // Build URL-encoded string
-        for (const [key, value] of Object.entries(formFields)) {
-            if (Array.isArray(value)) {
-                // Multiple values for checkboxes
-                value.forEach(val => {
-                    formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(val));
-                });
-            } else {
-                formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-            }
-        }
-        
-        // Ensure form-name is included for Netlify
-        if (!formFields['form-name']) {
+        // Ensure form-name is first (Netlify requirement)
+        const formNameIndex = formDataPairs.findIndex(pair => pair.startsWith('form-name='));
+        if (formNameIndex > 0) {
+            // Move form-name to the beginning
+            const formNamePair = formDataPairs.splice(formNameIndex, 1)[0];
+            formDataPairs.unshift(formNamePair);
+        } else if (formNameIndex === -1) {
+            // Add form-name if missing
             formDataPairs.unshift('form-name=' + encodeURIComponent('interview'));
         }
         
-        console.log('Submitting form data:', formDataPairs.join('&'));
+        const formDataString = formDataPairs.join('&');
+        console.log('Submitting form data (full):', formDataString);
+        console.log('Form data length:', formDataString.length);
+        console.log('Number of field pairs:', formDataPairs.length);
         
         // Submit to Netlify Forms
+        // Netlify Forms expects POST to the same URL with form-name in the body
         fetch('/', {
             method: 'POST',
             headers: { 
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: formDataPairs.join('&')
+            body: formDataString
         })
-        .then((response) => {
-            console.log('Form submission response:', response.status);
-            // Netlify Forms returns 200 on success
-            if (response.ok || response.status === 200) {
-                console.log('Form submitted successfully');
+        .then(async (response) => {
+            console.log('Form submission response status:', response.status);
+            console.log('Form submission response headers:', response.headers);
+            
+            // Try to read response text for debugging
+            const responseText = await response.text();
+            console.log('Form submission response body (first 500 chars):', responseText.substring(0, 500));
+            
+            // Netlify Forms returns 200 on success, sometimes with a redirect
+            if (response.ok || response.status === 200 || response.status === 302) {
+                console.log('Form submitted successfully to Netlify');
                 // Get current language for thank you message
                 const currentLang = localStorage.getItem('selectedLanguage') || 'en';
                 const thankYouMessages = {
