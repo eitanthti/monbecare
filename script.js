@@ -112,19 +112,11 @@ function handleInterviewForm() {
         interviewForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(this);
-            const firstName = formData.get('firstName');
-            const lastName = formData.get('lastName');
-            const email = formData.get('email');
-            const breastfeedingExperience = formData.get('breastfeedingExperience');
-            const challenges = formData.get('challenges');
-            const interestLevel = formData.get('interestLevel');
-            const desiredFeatures = formData.get('desiredFeatures');
-            const interviewMethod = formData.get('interviewMethod');
-            
-            // Simple validation
-            if (firstName && lastName && email && breastfeedingExperience && challenges && interestLevel && desiredFeatures && interviewMethod) {
+            // Check if form is valid using HTML5 validation
+            if (this.checkValidity()) {
+                // Get form data
+                const formData = new FormData(this);
+                
                 // Submit to Netlify
                 fetch('/', {
                     method: 'POST',
@@ -139,17 +131,8 @@ function handleInterviewForm() {
                     alert('Sorry, there was an error submitting your survey. Please try again.');
                 });
             } else {
-                // Show exactly which fields are missing
-                const missing = [];
-                if (!firstName) missing.push('First Name');
-                if (!lastName) missing.push('Last Name');
-                if (!email) missing.push('Email');
-                if (!breastfeedingExperience) missing.push('Breastfeeding Experience');
-                if (!challenges) missing.push('Challenges');
-                if (!interestLevel) missing.push('Interest Level');
-                if (!desiredFeatures) missing.push('Desired Features');
-                if (!interviewMethod) missing.push('Interview Method');
-                alert('Please fill in all required fields. Missing: ' + missing.join(', '));
+                // HTML5 validation will show error messages
+                this.reportValidity();
             }
         });
     }

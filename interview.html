@@ -42,23 +42,23 @@
         <!-- Language Selector -->
         <div class="language-selector">
             <div class="language-selector-container">
-                <p class="language-prompt">Select your preferred language:</p>
+                <p class="language-prompt" data-translate="language-prompt">Select your preferred language:</p>
                 <div class="language-buttons">
-                    <button class="language-btn" data-lang="ar">العربية</button>
-                    <button class="language-btn" data-lang="de">Deutsch</button>
                     <button class="language-btn" data-lang="en">English</button>
-                    <button class="language-btn" data-lang="es">Español</button>
+                    <button class="language-btn" data-lang="de">Deutsch</button>
                     <button class="language-btn" data-lang="fr">Français</button>
                     <button class="language-btn" data-lang="he">עברית</button>
+                    <button class="language-btn" data-lang="ar">العربية</button>
+                    <button class="language-btn" data-lang="es">Español</button>
                 </div>
             </div>
         </div>
 
         <div class="interview-container">
             <div class="interview-left">
-                <h1 class="interview-title">Subscribe to Interview</h1>
+                <h1 class="interview-title" data-translate="page-title">Subscribe to Interview</h1>
                 
-                <p class="interview-description">
+                <p class="interview-description" data-translate="page-description">
                     Help us shape the future of breastfeeding monitoring. By participating in our interview, you'll share valuable insights that will directly influence the development of MonBe. Fill out this short survey to subscribe.
                 </p>
 
@@ -93,62 +93,171 @@
                             <input type="tel" name="phone" class="form-input" placeholder="(123) 456-7890">
                         </div>
 
-                        <h3 class="form-section-title">Survey Questions</h3>
+                        <!-- Section 2: Children Details -->
+                        <h3 class="form-section-title" data-translate="section2-title">Section 2 - Children Details</h3>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Are you currently breastfeeding or have you breastfed in the past? <span class="required">(required)</span></label>
-                            <select name="breastfeedingExperience" class="form-input" required>
-                                <option value="">Please select...</option>
-                                <option value="currently-breastfeeding">Currently breastfeeding</option>
-                                <option value="breastfed-in-past">Breastfed in the past</option>
-                                <option value="planning-to-breastfeed">Planning to breastfeed</option>
-                                <option value="not-applicable">Not applicable</option>
+                            <label class="form-label" data-translate="q5-label">How many children do you have? <span class="required">(required)</span></label>
+                            <input type="number" name="numberOfChildren" class="form-input" min="1" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q6-label">What is the current age of each child? (e.g., 4 years, 2 years, 8 months) <span class="required">(required)</span></label>
+                            <textarea name="childrenAges" class="form-textarea" rows="3" data-translate-placeholder="q6-placeholder" placeholder="e.g., Child 1: 4 years, Child 2: 2 years, Child 3: 8 months" required></textarea>
+                        </div>
+
+                        <!-- Section 3: Feeding Method by Age -->
+                        <h3 class="form-section-title" data-translate="section3-title">Section 3 - Feeding Method by Age for Each Child</h3>
+                        <p class="section-description" data-translate="section3-description">Please answer each question for each child.</p>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
+                            <select name="feeding0to3" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
                             </select>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">What challenges have you faced or anticipate facing with breastfeeding? <span class="required">(required)</span></label>
-                            <textarea name="challenges" class="form-textarea" rows="4" placeholder="e.g., Latching issues, supply concerns, tracking feeding times, etc." required></textarea>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label class="form-label">How interested are you in a device that monitors breastfeeding? <span class="required">(required)</span></label>
-                            <select name="interestLevel" class="form-input" required>
-                                <option value="">Please select...</option>
-                                <option value="very-interested">Very interested</option>
-                                <option value="somewhat-interested">Somewhat interested</option>
-                                <option value="neutral">Neutral</option>
-                                <option value="not-interested">Not interested</option>
+                            <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
+                            <select name="feeding3to6" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
                             </select>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">What features would be most valuable to you in a breastfeeding monitor? <span class="required">(required)</span></label>
-                            <textarea name="desiredFeatures" class="form-textarea" rows="4" placeholder="e.g., Real-time monitoring, feeding duration tracking, milk volume estimation, etc." required></textarea>
+                            <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
+                            <select name="feeding6to12" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
+                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                            </select>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Preferred interview method <span class="required">(required)</span></label>
+                            <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
+                            <select name="breastfeedingAfter1" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="yes" data-translate="opt-yes">Yes</option>
+                                <option value="no" data-translate="opt-no">No</option>
+                            </select>
+                        </div>
+
+                        <!-- Section 4: Stopping Breastfeeding -->
+                        <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
+                        <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months") <span class="required">(required)</span></label>
+                            <textarea name="stoppedAge" class="form-textarea" rows="2" data-translate-placeholder="q11-placeholder" placeholder="e.g., I stopped at 5 months" required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
+                            <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
+                            <select name="notBreastfeedingReason" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
+                                <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
+                                <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
+                                <option value="combination" data-translate="opt-combination">Combination of factors</option>
+                                <option value="other" data-translate="opt-other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Section 5: Support and Assistance -->
+                        <h3 class="form-section-title" data-translate="section5-title">Section 5 - Support and Assistance</h3>
+                        <p class="section-description" data-translate="section5-description">For each child separately.</p>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
+                            <select name="professionalSupport" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="lactation-consultant" data-translate="opt-lactation-consultant">Lactation consultant</option>
+                                <option value="parenting-guide" data-translate="opt-parenting-guide">Parenting / Development guide</option>
+                                <option value="health-clinic" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</option>
+                                <option value="family-social-only" data-translate="opt-family-social-only">Family / Social support only</option>
+                                <option value="no-support" data-translate="opt-no-support">I did not receive support</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
+                            <select name="aidsUsed" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="nursing-pillow" data-translate="opt-nursing-pillow">Nursing pillow</option>
+                                <option value="home-scale" data-translate="opt-home-scale">Home baby scale</option>
+                                <option value="feeding-app" data-translate="opt-feeding-app">Feeding tracking app</option>
+                                <option value="pumping" data-translate="opt-pumping">Pumping (manual / electric)</option>
+                                <option value="no-aids" data-translate="opt-no-aids">I did not use aids</option>
+                                <option value="other" data-translate="opt-other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Section 6: Interest in Future Product -->
+                        <h3 class="form-section-title" data-translate="section6-title">Section 6 - Interest in Future Product</h3>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q16-label">How interested would you be in a small product that monitors breastfeeding and provides real-time information? <span class="required">(required)</span></label>
+                            <select name="productInterest" class="form-input" required>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="not-interested" data-translate="opt-not-interested">Not interested at all</option>
+                                <option value="slightly-interested" data-translate="opt-slightly-interested">Slightly interested</option>
+                                <option value="moderately-interested" data-translate="opt-moderately-interested">Moderately interested</option>
+                                <option value="very-interested" data-translate="opt-very-interested">Very interested</option>
+                                <option value="extremely-interested" data-translate="opt-extremely-interested">Extremely interested</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="q17-label">What features or capabilities would be most important to you in such a product? <span class="required">(required)</span></label>
+                            <textarea name="importantFeatures" class="form-textarea" rows="4" data-translate-placeholder="q17-placeholder" placeholder="Please describe the features that would be most important to you..." required></textarea>
+                        </div>
+
+                        <!-- Interview Coordination -->
+                        <h3 class="form-section-title" data-translate="section-interview-title">Interview Coordination</h3>
+
+                        <div class="form-group full-width">
+                            <label class="form-label" data-translate="interview-method-label">Preferred interview method <span class="required">(required)</span></label>
                             <select name="interviewMethod" class="form-input" required>
-                                <option value="">Please select...</option>
-                                <option value="video-call">Video call (Zoom, Google Meet, etc.)</option>
-                                <option value="phone-call">Phone call</option>
-                                <option value="in-person">In-person</option>
-                                <option value="email">Email exchange</option>
+                                <option value="" data-translate="select-option">Please select...</option>
+                                <option value="video-call" data-translate="opt-video-call">Video call (Zoom, Google Meet, etc.)</option>
+                                <option value="phone-call" data-translate="opt-phone-call">Phone call</option>
+                                <option value="in-person" data-translate="opt-in-person">In-person</option>
+                                <option value="email" data-translate="opt-email">Email exchange</option>
                             </select>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Best time to reach you <span class="required">(optional)</span></label>
-                            <input type="text" name="bestTime" class="form-input" placeholder="e.g., Weekday mornings, Evening after 6pm, etc.">
+                            <label class="form-label" data-translate="best-time-label">Best time to reach you <span class="required">(optional)</span></label>
+                            <input type="text" name="bestTime" class="form-input" data-translate-placeholder="best-time-placeholder" placeholder="e.g., Weekday mornings, Evening after 6pm, etc.">
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Additional comments or questions <span class="required">(optional)</span></label>
-                            <textarea name="additionalComments" class="form-textarea" rows="3" placeholder="Any additional information you'd like to share..."></textarea>
+                            <label class="form-label" data-translate="additional-comments-label">Additional comments or questions <span class="required">(optional)</span></label>
+                            <textarea name="additionalComments" class="form-textarea" rows="3" data-translate-placeholder="additional-comments-placeholder" placeholder="Any additional information you'd like to share..."></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn">SUBMIT SURVEY</button>
+                        <button type="submit" class="submit-btn" data-translate="submit-btn">SUBMIT SURVEY</button>
                     </form>
                 </div>
             </div>
@@ -161,10 +270,483 @@
 
     <script src="script.js"></script>
     <script>
+        // Translations object
+        const translations = {
+            en: {
+                'language-prompt': 'Select your preferred language:',
+                'page-title': 'Subscribe to Interview',
+                'page-description': 'Help us shape the future of breastfeeding monitoring. By participating in our interview, you\'ll share valuable insights that will directly influence the development of MonBe. Fill out this short survey to subscribe.',
+                'section2-title': 'Section 2 - Children Details',
+                'q5-label': 'How many children do you have?',
+                'q6-label': 'What is the current age of each child? (e.g., 4 years, 2 years, 8 months)',
+                'q6-placeholder': 'e.g., Child 1: 4 years, Child 2: 2 years, Child 3: 8 months',
+                'section3-title': 'Section 3 - Feeding Method by Age for Each Child',
+                'section3-description': 'Please answer each question for each child.',
+                'q7-label': 'What was the main feeding method during months 0-3?',
+                'q8-label': 'What was the feeding method during age 3-6 months?',
+                'q9-label': 'What was the feeding method during age 6-12 months?',
+                'q10-label': 'Did you continue breastfeeding after age 1 year?',
+                'section4-title': 'Section 4 - Stopping Breastfeeding',
+                'section4-description': 'Please answer for each child separately.',
+                'q11-label': 'If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months")',
+                'q11-placeholder': 'e.g., I stopped at 5 months',
+                'q12-label': 'What was the main reason for stopping breastfeeding?',
+                'q12-placeholder': 'Please describe the main reason...',
+                'q13-label': 'If you did not breastfeed at all - what was the reason?',
+                'section5-title': 'Section 5 - Support and Assistance',
+                'section5-description': 'For each child separately.',
+                'q14-label': 'Did you receive professional breastfeeding support?',
+                'q15-label': 'Did you use any aids during the first periods?',
+                'section6-title': 'Section 6 - Interest in Future Product',
+                'q16-label': 'How interested would you be in a small product that monitors breastfeeding and provides real-time information?',
+                'q17-label': 'What features or capabilities would be most important to you in such a product?',
+                'q17-placeholder': 'Please describe the features that would be most important to you...',
+                'section-interview-title': 'Interview Coordination',
+                'interview-method-label': 'Preferred interview method',
+                'best-time-label': 'Best time to reach you',
+                'best-time-placeholder': 'e.g., Weekday mornings, Evening after 6pm, etc.',
+                'additional-comments-label': 'Additional comments or questions',
+                'additional-comments-placeholder': 'Any additional information you\'d like to share...',
+                'submit-btn': 'SUBMIT SURVEY',
+                'select-option': 'Please select...',
+                'opt-breastfeeding-only': 'Breastfeeding only',
+                'opt-breastfeeding-formula': 'Breastfeeding + Formula',
+                'opt-breastfeeding-formula-complementary': 'Breastfeeding + Formula / Complementary food',
+                'opt-breastfeeding-pumping': 'Breastfeeding + Pumping',
+                'opt-pumping-only': 'Pumping only',
+                'opt-pumping-formula': 'Pumping + Formula',
+                'opt-formula-only': 'Formula only',
+                'opt-yes': 'Yes',
+                'opt-no': 'No',
+                'opt-early-decision': 'Early decision',
+                'opt-difficulty-pain': 'Difficulty / Pain',
+                'opt-baby-not-latching': 'Baby did not latch',
+                'opt-combination': 'Combination of factors',
+                'opt-other': 'Other',
+                'opt-lactation-consultant': 'Lactation consultant',
+                'opt-parenting-guide': 'Parenting / Development guide',
+                'opt-health-clinic': 'Health clinic (Tipat Halav)',
+                'opt-family-social-only': 'Family / Social support only',
+                'opt-no-support': 'I did not receive support',
+                'opt-nursing-pillow': 'Nursing pillow',
+                'opt-home-scale': 'Home baby scale',
+                'opt-feeding-app': 'Feeding tracking app',
+                'opt-pumping': 'Pumping (manual / electric)',
+                'opt-no-aids': 'I did not use aids',
+                'opt-not-interested': 'Not interested at all',
+                'opt-slightly-interested': 'Slightly interested',
+                'opt-moderately-interested': 'Moderately interested',
+                'opt-very-interested': 'Very interested',
+                'opt-extremely-interested': 'Extremely interested',
+                'opt-video-call': 'Video call (Zoom, Google Meet, etc.)',
+                'opt-phone-call': 'Phone call',
+                'opt-in-person': 'In-person',
+                'opt-email': 'Email exchange'
+            },
+            de: {
+                'language-prompt': 'Wählen Sie Ihre bevorzugte Sprache:',
+                'page-title': 'Für Interview anmelden',
+                'page-description': 'Helfen Sie uns, die Zukunft der Stillüberwachung zu gestalten. Durch Ihre Teilnahme an unserem Interview teilen Sie wertvolle Einblicke, die die Entwicklung von MonBe direkt beeinflussen werden. Füllen Sie diese kurze Umfrage aus, um sich anzumelden.',
+                'section2-title': 'Abschnitt 2 - Angaben zu den Kindern',
+                'q5-label': 'Wie viele Kinder haben Sie?',
+                'q6-label': 'Wie alt ist jedes Kind derzeit? (z.B. 4 Jahre, 2 Jahre, 8 Monate)',
+                'q6-placeholder': 'z.B. Kind 1: 4 Jahre, Kind 2: 2 Jahre, Kind 3: 8 Monate',
+                'section3-title': 'Abschnitt 3 - Fütterungsmethode nach Alter für jedes Kind',
+                'section3-description': 'Bitte beantworten Sie jede Frage für jedes Kind.',
+                'q7-label': 'Wie war die Hauptfütterungsmethode in den Monaten 0-3?',
+                'q8-label': 'Wie war die Fütterungsmethode im Alter von 3-6 Monaten?',
+                'q9-label': 'Wie war die Fütterungsmethode im Alter von 6-12 Monaten?',
+                'q10-label': 'Haben Sie nach dem ersten Lebensjahr weiter gestillt?',
+                'section4-title': 'Abschnitt 4 - Abstillen',
+                'section4-description': 'Bitte beantworten Sie für jedes Kind separat.',
+                'q11-label': 'Wenn Sie das Stillen beendet haben - in welchem Alter des Babys haben Sie aufgehört? (Bitte in Monaten angeben, z.B. "Ich habe mit 5 Monaten aufgehört")',
+                'q11-placeholder': 'z.B. Ich habe mit 5 Monaten aufgehört',
+                'q12-label': 'Was war der Hauptgrund für das Abstillen?',
+                'q12-placeholder': 'Bitte beschreiben Sie den Hauptgrund...',
+                'q13-label': 'Wenn Sie überhaupt nicht gestillt haben - was war der Grund?',
+                'section5-title': 'Abschnitt 5 - Unterstützung und Hilfe',
+                'section5-description': 'Für jedes Kind separat.',
+                'q14-label': 'Haben Sie professionelle Stillunterstützung erhalten?',
+                'q15-label': 'Haben Sie in den ersten Perioden Hilfsmittel verwendet?',
+                'section6-title': 'Abschnitt 6 - Interesse an zukünftigem Produkt',
+                'q16-label': 'Wie interessiert wären Sie an einem kleinen Produkt, das das Stillen überwacht und Echtzeitinformationen liefert?',
+                'q17-label': 'Welche Funktionen oder Fähigkeiten wären für Sie in einem solchen Produkt am wichtigsten?',
+                'q17-placeholder': 'Bitte beschreiben Sie die Funktionen, die für Sie am wichtigsten wären...',
+                'section-interview-title': 'Interview-Koordination',
+                'interview-method-label': 'Bevorzugte Interviewmethode',
+                'best-time-label': 'Beste Zeit, um Sie zu erreichen',
+                'best-time-placeholder': 'z.B. Wochentags morgens, Abends nach 18 Uhr, etc.',
+                'additional-comments-label': 'Zusätzliche Kommentare oder Fragen',
+                'additional-comments-placeholder': 'Zusätzliche Informationen, die Sie teilen möchten...',
+                'submit-btn': 'UMFRAGE ABSENDEN',
+                'select-option': 'Bitte auswählen...',
+                'opt-breastfeeding-only': 'Nur Stillen',
+                'opt-breastfeeding-formula': 'Stillen + Formel',
+                'opt-breastfeeding-formula-complementary': 'Stillen + Formel / Beikost',
+                'opt-breastfeeding-pumping': 'Stillen + Abpumpen',
+                'opt-pumping-only': 'Nur Abpumpen',
+                'opt-pumping-formula': 'Abpumpen + Formel',
+                'opt-formula-only': 'Nur Formel',
+                'opt-yes': 'Ja',
+                'opt-no': 'Nein',
+                'opt-early-decision': 'Frühe Entscheidung',
+                'opt-difficulty-pain': 'Schwierigkeit / Schmerzen',
+                'opt-baby-not-latching': 'Baby hat nicht angelegt',
+                'opt-combination': 'Kombination von Faktoren',
+                'opt-other': 'Andere',
+                'opt-lactation-consultant': 'Stillberaterin',
+                'opt-parenting-guide': 'Erziehungs- / Entwicklungsberater',
+                'opt-health-clinic': 'Gesundheitsklinik',
+                'opt-family-social-only': 'Nur familiäre / soziale Unterstützung',
+                'opt-no-support': 'Ich habe keine Unterstützung erhalten',
+                'opt-nursing-pillow': 'Stillkissen',
+                'opt-home-scale': 'Babywaage für zu Hause',
+                'opt-feeding-app': 'Fütterungs-Tracking-App',
+                'opt-pumping': 'Abpumpen (manuell / elektrisch)',
+                'opt-no-aids': 'Ich habe keine Hilfsmittel verwendet',
+                'opt-not-interested': 'Überhaupt nicht interessiert',
+                'opt-slightly-interested': 'Wenig interessiert',
+                'opt-moderately-interested': 'Mäßig interessiert',
+                'opt-very-interested': 'Sehr interessiert',
+                'opt-extremely-interested': 'Äußerst interessiert',
+                'opt-video-call': 'Videotelefonie (Zoom, Google Meet, etc.)',
+                'opt-phone-call': 'Telefonanruf',
+                'opt-in-person': 'Persönlich',
+                'opt-email': 'E-Mail-Austausch'
+            },
+            fr: {
+                'language-prompt': 'Sélectionnez votre langue préférée:',
+                'page-title': 'S\'inscrire à l\'entretien',
+                'page-description': 'Aidez-nous à façonner l\'avenir de la surveillance de l\'allaitement. En participant à notre entretien, vous partagerez des informations précieuses qui influenceront directement le développement de MonBe. Remplissez ce court questionnaire pour vous inscrire.',
+                'section2-title': 'Section 2 - Détails sur les enfants',
+                'q5-label': 'Combien d\'enfants avez-vous?',
+                'q6-label': 'Quel est l\'âge actuel de chaque enfant? (par ex. 4 ans, 2 ans, 8 mois)',
+                'q6-placeholder': 'par ex. Enfant 1: 4 ans, Enfant 2: 2 ans, Enfant 3: 8 mois',
+                'section3-title': 'Section 3 - Méthode d\'alimentation par âge pour chaque enfant',
+                'section3-description': 'Veuillez répondre à chaque question pour chaque enfant.',
+                'q7-label': 'Quelle était la méthode d\'alimentation principale pendant les mois 0-3?',
+                'q8-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 3-6 mois?',
+                'q9-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 6-12 mois?',
+                'q10-label': 'Avez-vous continué à allaiter après l\'âge d\'un an?',
+                'section4-title': 'Section 4 - Arrêt de l\'allaitement',
+                'section4-description': 'Veuillez répondre pour chaque enfant séparément.',
+                'q11-label': 'Si vous avez arrêté d\'allaiter - à quel âge du bébé avez-vous arrêté? (Veuillez préciser en mois clairement, par ex. "J\'ai arrêté à 5 mois")',
+                'q11-placeholder': 'par ex. J\'ai arrêté à 5 mois',
+                'q12-label': 'Quelle était la raison principale d\'arrêter l\'allaitement?',
+                'q12-placeholder': 'Veuillez décrire la raison principale...',
+                'q13-label': 'Si vous n\'avez pas allaité du tout - quelle était la raison?',
+                'section5-title': 'Section 5 - Soutien et assistance',
+                'section5-description': 'Pour chaque enfant séparément.',
+                'q14-label': 'Avez-vous reçu un soutien professionnel pour l\'allaitement?',
+                'q15-label': 'Avez-vous utilisé des aides pendant les premières périodes?',
+                'section6-title': 'Section 6 - Intérêt pour un produit futur',
+                'q16-label': 'Dans quelle mesure seriez-vous intéressée par un petit produit qui surveille l\'allaitement et fournit des informations en temps réel?',
+                'q17-label': 'Quelles fonctionnalités ou capacités seraient les plus importantes pour vous dans un tel produit?',
+                'q17-placeholder': 'Veuillez décrire les fonctionnalités qui seraient les plus importantes pour vous...',
+                'section-interview-title': 'Coordination de l\'entretien',
+                'interview-method-label': 'Méthode d\'entretien préférée',
+                'best-time-label': 'Meilleur moment pour vous joindre',
+                'best-time-placeholder': 'par ex. Matins en semaine, Soir après 18h, etc.',
+                'additional-comments-label': 'Commentaires ou questions supplémentaires',
+                'additional-comments-placeholder': 'Toute information supplémentaire que vous souhaitez partager...',
+                'submit-btn': 'SOUMETTRE LE QUESTIONNAIRE',
+                'select-option': 'Veuillez sélectionner...',
+                'opt-breastfeeding-only': 'Allaitement uniquement',
+                'opt-breastfeeding-formula': 'Allaitement + Lait maternisé',
+                'opt-breastfeeding-formula-complementary': 'Allaitement + Lait maternisé / Aliments complémentaires',
+                'opt-breastfeeding-pumping': 'Allaitement + Tire-lait',
+                'opt-pumping-only': 'Tire-lait uniquement',
+                'opt-pumping-formula': 'Tire-lait + Lait maternisé',
+                'opt-formula-only': 'Lait maternisé uniquement',
+                'opt-yes': 'Oui',
+                'opt-no': 'Non',
+                'opt-early-decision': 'Décision précoce',
+                'opt-difficulty-pain': 'Difficulté / Douleur',
+                'opt-baby-not-latching': 'Le bébé ne s\'est pas accroché',
+                'opt-combination': 'Combinaison de facteurs',
+                'opt-other': 'Autre',
+                'opt-lactation-consultant': 'Consultante en lactation',
+                'opt-parenting-guide': 'Guide parental / Développement',
+                'opt-health-clinic': 'Clinique de santé',
+                'opt-family-social-only': 'Soutien familial / social uniquement',
+                'opt-no-support': 'Je n\'ai pas reçu de soutien',
+                'opt-nursing-pillow': 'Coussin d\'allaitement',
+                'opt-home-scale': 'Balance bébé à domicile',
+                'opt-feeding-app': 'Application de suivi d\'alimentation',
+                'opt-pumping': 'Tire-lait (manuel / électrique)',
+                'opt-no-aids': 'Je n\'ai pas utilisé d\'aides',
+                'opt-not-interested': 'Pas du tout intéressée',
+                'opt-slightly-interested': 'Légèrement intéressée',
+                'opt-moderately-interested': 'Modérément intéressée',
+                'opt-very-interested': 'Très intéressée',
+                'opt-extremely-interested': 'Extrêmement intéressée',
+                'opt-video-call': 'Appel vidéo (Zoom, Google Meet, etc.)',
+                'opt-phone-call': 'Appel téléphonique',
+                'opt-in-person': 'En personne',
+                'opt-email': 'Échange par e-mail'
+            },
+            he: {
+                'language-prompt': 'בחר את השפה המועדפת שלך:',
+                'page-title': 'הירשם לראיון',
+                'page-description': 'עזרו לנו לעצב את עתיד ניטור ההנקה. על ידי השתתפות בראיון שלנו, תשתפו תובנות יקרות ערך שישפיעו ישירות על פיתוח MonBe. מלאו את הסקר הקצר הזה כדי להירשם.',
+                'section2-title': 'שלב 2 - פרטים על הילדים',
+                'q5-label': 'כמה ילדים יש לך?',
+                'q6-label': 'מה גיל כל ילד כיום? (לדוגמה: 4, שנתיים, 8 חודשים)',
+                'q6-placeholder': 'לדוגמה: ילד 1: 4 שנים, ילד 2: שנתיים, ילד 3: 8 חודשים',
+                'section3-title': 'שלב 3 - אופן ההאכלה לפי גיל לכל ילד',
+                'section3-description': 'נא לענות על כל שאלה עבור כל ילד.',
+                'q7-label': 'מה היה אופן ההאכלה העיקרי בחודשים 0 עד 3?',
+                'q8-label': 'מה היה אופן ההאכלה בתקופה בין גיל 3 עד 6 חודשים?',
+                'q9-label': 'מה היה אופן ההאכלה בתקופה בין גיל 6 עד 12 חודשים?',
+                'q10-label': 'האם המשכת להניק אחרי גיל שנה?',
+                'section4-title': 'שלב 4 - הפסקת הנקה',
+                'section4-description': 'לענות עבור כל ילד בנפרד.',
+                'q11-label': 'אם הפסקת להניק - באיזה גיל של התינוק הפסקת? (לציין בחודשים בצורה ברורה, לדוגמה: "הפסקתי בגיל 5 חודשים")',
+                'q11-placeholder': 'לדוגמה: הפסקתי בגיל 5 חודשים',
+                'q12-label': 'מה הסיבה העיקרית להפסקת ההנקה?',
+                'q12-placeholder': 'נא לתאר את הסיבה העיקרית...',
+                'q13-label': 'אם לא הנקת בכלל - מה הייתה הסיבה?',
+                'section5-title': 'שלב 5 - תמיכה וסיוע',
+                'section5-description': 'לכל ילד בנפרד.',
+                'q14-label': 'האם קיבלת ליווי מקצועי בהנקה?',
+                'q15-label': 'האם השתמשת בעזרים בתקופות הראשונות?',
+                'section6-title': 'שלב 6 - עניין במוצר עתידי',
+                'q16-label': 'עד כמה היית מתעניינת במוצר קטן שמנטר את ההנקה ונותן מידע בזמן אמת?',
+                'q17-label': 'מה היו התכונות או היכולות שהכי היו חשובות לך במוצר כזה?',
+                'q17-placeholder': 'נא לתאר את התכונות שהיו הכי חשובות לך...',
+                'section-interview-title': 'תיאום הראיון',
+                'interview-method-label': 'שיטת ראיון מועדפת',
+                'best-time-label': 'הזמן הטוב ביותר ליצירת קשר',
+                'best-time-placeholder': 'לדוגמה: בוקר בימי חול, ערב אחרי 18:00, וכו\'',
+                'additional-comments-label': 'הערות או שאלות נוספות',
+                'additional-comments-placeholder': 'כל מידע נוסף שתרצי לשתף...',
+                'submit-btn': 'שלח שאלון',
+                'select-option': 'אנא בחר...',
+                'opt-breastfeeding-only': 'הנקה בלבד',
+                'opt-breastfeeding-formula': 'הנקה + תמ"ל',
+                'opt-breastfeeding-formula-complementary': 'הנקה + תמ"ל / מזון משלים',
+                'opt-breastfeeding-pumping': 'הנקה + שאיבה',
+                'opt-pumping-only': 'שאיבה בלבד',
+                'opt-pumping-formula': 'שאיבה + תמ"ל',
+                'opt-formula-only': 'תמ"ל בלבד',
+                'opt-yes': 'כן',
+                'opt-no': 'לא',
+                'opt-early-decision': 'החלטה מראש',
+                'opt-difficulty-pain': 'קושי / כאבים',
+                'opt-baby-not-latching': 'התינוק לא ינק',
+                'opt-combination': 'שילוב של דברים',
+                'opt-other': 'אחר',
+                'opt-lactation-consultant': 'יועצת הנקה',
+                'opt-parenting-guide': 'מדריכת הורות / התפתחות',
+                'opt-health-clinic': 'טיפת חלב',
+                'opt-family-social-only': 'ליווי משפחתי / חברתי בלבד',
+                'opt-no-support': 'לא קיבלתי ליווי',
+                'opt-nursing-pillow': 'כרית הנקה',
+                'opt-home-scale': 'משקל ביתי לתינוק',
+                'opt-feeding-app': 'אפליקציה למעקב האכלה',
+                'opt-pumping': 'שאיבה (ידנית / חשמלית)',
+                'opt-no-aids': 'לא השתמשתי בעזרים',
+                'opt-not-interested': 'לא מעוניינת בכלל',
+                'opt-slightly-interested': 'מעט מעוניינת',
+                'opt-moderately-interested': 'בינונית',
+                'opt-very-interested': 'מאוד מעוניינת',
+                'opt-extremely-interested': 'מעוניינת מאוד',
+                'opt-video-call': 'שיחת וידאו (Zoom, Google Meet, וכו\')',
+                'opt-phone-call': 'שיחת טלפון',
+                'opt-in-person': 'פגישה אישית',
+                'opt-email': 'חילופי אימייל'
+            },
+            ar: {
+                'language-prompt': 'اختر لغتك المفضلة:',
+                'page-title': 'الاشتراك في المقابلة',
+                'page-description': 'ساعدينا في تشكيل مستقبل مراقبة الرضاعة الطبيعية. من خلال المشاركة في مقابلتنا، ستشاركين رؤى قيمة ستؤثر مباشرة على تطوير MonBe. املئي هذا الاستبيان القصير للاشتراك.',
+                'section2-title': 'القسم 2 - تفاصيل عن الأطفال',
+                'q5-label': 'كم طفلاً لديك؟',
+                'q6-label': 'ما هو العمر الحالي لكل طفل؟ (مثلاً: 4 سنوات، سنتان، 8 أشهر)',
+                'q6-placeholder': 'مثلاً: الطفل 1: 4 سنوات، الطفل 2: سنتان، الطفل 3: 8 أشهر',
+                'section3-title': 'القسم 3 - طريقة التغذية حسب العمر لكل طفل',
+                'section3-description': 'يرجى الإجابة على كل سؤال لكل طفل.',
+                'q7-label': 'ما كانت طريقة التغذية الرئيسية خلال الأشهر 0-3؟',
+                'q8-label': 'ما كانت طريقة التغذية خلال العمر 3-6 أشهر؟',
+                'q9-label': 'ما كانت طريقة التغذية خلال العمر 6-12 شهراً؟',
+                'q10-label': 'هل استمريت في الرضاعة الطبيعية بعد عمر السنة؟',
+                'section4-title': 'القسم 4 - التوقف عن الرضاعة الطبيعية',
+                'section4-description': 'يرجى الإجابة لكل طفل على حدة.',
+                'q11-label': 'إذا توقفت عن الرضاعة الطبيعية - في أي عمر من الطفل توقفت؟ (يرجى التحديد بالأشهر بوضوح، مثلاً: "توقفت في عمر 5 أشهر")',
+                'q11-placeholder': 'مثلاً: توقفت في عمر 5 أشهر',
+                'q12-label': 'ما كان السبب الرئيسي للتوقف عن الرضاعة الطبيعية؟',
+                'q12-placeholder': 'يرجى وصف السبب الرئيسي...',
+                'q13-label': 'إذا لم ترضعي على الإطلاق - ما كان السبب؟',
+                'section5-title': 'القسم 5 - الدعم والمساعدة',
+                'section5-description': 'لكل طفل على حدة.',
+                'q14-label': 'هل تلقيت دعمًا مهنيًا للرضاعة الطبيعية؟',
+                'q15-label': 'هل استخدمت أي مساعدات خلال الفترات الأولى؟',
+                'section6-title': 'القسم 6 - الاهتمام بمنتج مستقبلي',
+                'q16-label': 'إلى أي مدى ستكونين مهتمة بمنتج صغير يراقب الرضاعة الطبيعية ويوفر معلومات في الوقت الفعلي؟',
+                'q17-label': 'ما هي الميزات أو القدرات التي ستكون الأكثر أهمية لك في مثل هذا المنتج؟',
+                'q17-placeholder': 'يرجى وصف الميزات التي ستكون الأكثر أهمية لك...',
+                'section-interview-title': 'تنسيق المقابلة',
+                'interview-method-label': 'طريقة المقابلة المفضلة',
+                'best-time-label': 'أفضل وقت للوصول إليك',
+                'best-time-placeholder': 'مثلاً: صباح أيام الأسبوع، مساءً بعد الساعة 6 مساءً، إلخ',
+                'additional-comments-label': 'تعليقات أو أسئلة إضافية',
+                'additional-comments-placeholder': 'أي معلومات إضافية ترغبين في مشاركتها...',
+                'submit-btn': 'إرسال الاستبيان',
+                'select-option': 'يرجى الاختيار...',
+                'opt-breastfeeding-only': 'الرضاعة الطبيعية فقط',
+                'opt-breastfeeding-formula': 'الرضاعة الطبيعية + الحليب الصناعي',
+                'opt-breastfeeding-formula-complementary': 'الرضاعة الطبيعية + الحليب الصناعي / الطعام التكميلي',
+                'opt-breastfeeding-pumping': 'الرضاعة الطبيعية + الشفط',
+                'opt-pumping-only': 'الشفط فقط',
+                'opt-pumping-formula': 'الشفط + الحليب الصناعي',
+                'opt-formula-only': 'الحليب الصناعي فقط',
+                'opt-yes': 'نعم',
+                'opt-no': 'لا',
+                'opt-early-decision': 'قرار مبكر',
+                'opt-difficulty-pain': 'صعوبة / ألم',
+                'opt-baby-not-latching': 'الطفل لم يلتصق',
+                'opt-combination': 'مزيج من العوامل',
+                'opt-other': 'أخرى',
+                'opt-lactation-consultant': 'استشارية الرضاعة الطبيعية',
+                'opt-parenting-guide': 'مرشدة الأبوة / النمو',
+                'opt-health-clinic': 'عيادة صحية',
+                'opt-family-social-only': 'دعم عائلي / اجتماعي فقط',
+                'opt-no-support': 'لم أتلق دعمًا',
+                'opt-nursing-pillow': 'وسادة الرضاعة',
+                'opt-home-scale': 'ميزان أطفال منزلي',
+                'opt-feeding-app': 'تطبيق تتبع التغذية',
+                'opt-pumping': 'الشفط (يدوي / كهربائي)',
+                'opt-no-aids': 'لم أستخدم مساعدات',
+                'opt-not-interested': 'لست مهتمة على الإطلاق',
+                'opt-slightly-interested': 'مهتمة قليلاً',
+                'opt-moderately-interested': 'مهتمة بشكل متوسط',
+                'opt-very-interested': 'مهتمة جداً',
+                'opt-extremely-interested': 'مهتمة للغاية',
+                'opt-video-call': 'مكالمة فيديو (Zoom، Google Meet، إلخ)',
+                'opt-phone-call': 'مكالمة هاتفية',
+                'opt-in-person': 'شخصيًا',
+                'opt-email': 'تبادل البريد الإلكتروني'
+            },
+            es: {
+                'language-prompt': 'Selecciona tu idioma preferido:',
+                'page-title': 'Suscribirse a la entrevista',
+                'page-description': 'Ayúdanos a dar forma al futuro del monitoreo de la lactancia. Al participar en nuestra entrevista, compartirás información valiosa que influirá directamente en el desarrollo de MonBe. Completa esta breve encuesta para suscribirte.',
+                'section2-title': 'Sección 2 - Detalles sobre los niños',
+                'q5-label': '¿Cuántos hijos tienes?',
+                'q6-label': '¿Cuál es la edad actual de cada hijo? (ej: 4 años, 2 años, 8 meses)',
+                'q6-placeholder': 'ej: Hijo 1: 4 años, Hijo 2: 2 años, Hijo 3: 8 meses',
+                'section3-title': 'Sección 3 - Método de alimentación por edad para cada hijo',
+                'section3-description': 'Por favor responde cada pregunta para cada hijo.',
+                'q7-label': '¿Cuál fue el método de alimentación principal durante los meses 0-3?',
+                'q8-label': '¿Cuál fue el método de alimentación durante la edad de 3-6 meses?',
+                'q9-label': '¿Cuál fue el método de alimentación durante la edad de 6-12 meses?',
+                'q10-label': '¿Continuaste amamantando después del año de edad?',
+                'section4-title': 'Sección 4 - Dejar de amamantar',
+                'section4-description': 'Por favor responde para cada hijo por separado.',
+                'q11-label': 'Si dejaste de amamantar - ¿a qué edad del bebé dejaste? (Por favor especifica en meses claramente, ej: "Dejé a los 5 meses")',
+                'q11-placeholder': 'ej: Dejé a los 5 meses',
+                'q12-label': '¿Cuál fue la razón principal para dejar de amamantar?',
+                'q12-placeholder': 'Por favor describe la razón principal...',
+                'q13-label': 'Si no amamantaste en absoluto - ¿cuál fue la razón?',
+                'section5-title': 'Sección 5 - Apoyo y asistencia',
+                'section5-description': 'Para cada hijo por separado.',
+                'q14-label': '¿Recibiste apoyo profesional para la lactancia?',
+                'q15-label': '¿Usaste alguna ayuda durante los primeros períodos?',
+                'section6-title': 'Sección 6 - Interés en producto futuro',
+                'q16-label': '¿Qué tan interesada estarías en un producto pequeño que monitoree la lactancia y proporcione información en tiempo real?',
+                'q17-label': '¿Qué características o capacidades serían más importantes para ti en tal producto?',
+                'q17-placeholder': 'Por favor describe las características que serían más importantes para ti...',
+                'section-interview-title': 'Coordinación de la entrevista',
+                'interview-method-label': 'Método de entrevista preferido',
+                'best-time-label': 'Mejor momento para contactarte',
+                'best-time-placeholder': 'ej: Mañanas entre semana, Tarde después de las 6pm, etc.',
+                'additional-comments-label': 'Comentarios o preguntas adicionales',
+                'additional-comments-placeholder': 'Cualquier información adicional que te gustaría compartir...',
+                'submit-btn': 'ENVIAR CUESTIONARIO',
+                'select-option': 'Por favor selecciona...',
+                'opt-breastfeeding-only': 'Solo lactancia materna',
+                'opt-breastfeeding-formula': 'Lactancia materna + Fórmula',
+                'opt-breastfeeding-formula-complementary': 'Lactancia materna + Fórmula / Alimento complementario',
+                'opt-breastfeeding-pumping': 'Lactancia materna + Extracción',
+                'opt-pumping-only': 'Solo extracción',
+                'opt-pumping-formula': 'Extracción + Fórmula',
+                'opt-formula-only': 'Solo fórmula',
+                'opt-yes': 'Sí',
+                'opt-no': 'No',
+                'opt-early-decision': 'Decisión temprana',
+                'opt-difficulty-pain': 'Dificultad / Dolor',
+                'opt-baby-not-latching': 'El bebé no se prendió',
+                'opt-combination': 'Combinación de factores',
+                'opt-other': 'Otro',
+                'opt-lactation-consultant': 'Consultora de lactancia',
+                'opt-parenting-guide': 'Guía de crianza / Desarrollo',
+                'opt-health-clinic': 'Clínica de salud',
+                'opt-family-social-only': 'Solo apoyo familiar / social',
+                'opt-no-support': 'No recibí apoyo',
+                'opt-nursing-pillow': 'Almohada de lactancia',
+                'opt-home-scale': 'Báscula para bebé en casa',
+                'opt-feeding-app': 'Aplicación de seguimiento de alimentación',
+                'opt-pumping': 'Extracción (manual / eléctrica)',
+                'opt-no-aids': 'No usé ayudas',
+                'opt-not-interested': 'No estoy interesada en absoluto',
+                'opt-slightly-interested': 'Ligeramente interesada',
+                'opt-moderately-interested': 'Moderadamente interesada',
+                'opt-very-interested': 'Muy interesada',
+                'opt-extremely-interested': 'Extremadamente interesada',
+                'opt-video-call': 'Llamada de video (Zoom, Google Meet, etc.)',
+                'opt-phone-call': 'Llamada telefónica',
+                'opt-in-person': 'En persona',
+                'opt-email': 'Intercambio por correo electrónico'
+            }
+        };
+
+        // Translation function
+        function translatePage(lang) {
+            const langData = translations[lang] || translations.en;
+            
+            // Translate all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (langData[key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        // For inputs, update placeholder if it has data-translate-placeholder
+                        const placeholderKey = element.getAttribute('data-translate-placeholder');
+                        if (placeholderKey && langData[placeholderKey]) {
+                            element.placeholder = langData[placeholderKey];
+                        }
+                    } else if (element.tagName === 'OPTION') {
+                        element.textContent = langData[key];
+                    } else {
+                        element.textContent = langData[key];
+                    }
+                }
+            });
+
+            // Translate placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (langData[key]) {
+                    element.placeholder = langData[key];
+                }
+            });
+
+            // Set page direction for RTL languages
+            if (lang === 'he' || lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+                document.querySelector('.interview-left').setAttribute('dir', 'rtl');
+            } else {
+                document.body.setAttribute('dir', 'ltr');
+                document.querySelector('.interview-left').setAttribute('dir', 'ltr');
+            }
+        }
+
         // Language selector functionality
         document.addEventListener('DOMContentLoaded', function() {
             const languageButtons = document.querySelectorAll('.language-btn');
             let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
+            // Translate page on load
+            translatePage(selectedLanguage);
 
             // Set initial selected language
             languageButtons.forEach(btn => {
@@ -185,6 +767,9 @@
                     // Store selected language
                     selectedLanguage = this.dataset.lang;
                     localStorage.setItem('selectedLanguage', selectedLanguage);
+                    
+                    // Translate page
+                    translatePage(selectedLanguage);
                     
                     // Add language to form as hidden field
                     let langInput = document.getElementById('selectedLanguage');

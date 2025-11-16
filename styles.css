@@ -1346,6 +1346,44 @@ body {
     margin-top: 0;
 }
 
+.section-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+/* RTL support for Hebrew and Arabic */
+body[dir="rtl"] .interview-left,
+.interview-left[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="rtl"] .form-row,
+.interview-left[dir="rtl"] .form-row {
+    direction: rtl;
+}
+
+body[dir="rtl"] .form-label,
+.interview-left[dir="rtl"] .form-label {
+    text-align: right;
+}
+
+body[dir="rtl"] .form-input,
+body[dir="rtl"] .form-textarea,
+.interview-left[dir="rtl"] .form-input,
+.interview-left[dir="rtl"] .form-textarea {
+    text-align: right;
+    direction: rtl;
+}
+
+body[dir="rtl"] .form-section-title,
+.interview-left[dir="rtl"] .form-section-title {
+    text-align: right;
+}
+
 .interview-form-section {
     margin-top: 1.5rem;
 }
