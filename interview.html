@@ -993,7 +993,12 @@
 
         // Function to generate children age fields for Section 2
         function generateChildrenAges(numChildren, currentLang) {
+            console.log('generateChildrenAges called with:', numChildren, currentLang);
             const container = document.getElementById('childrenAgesContainer');
+            if (!container) {
+                console.error('childrenAgesContainer not found!');
+                return;
+            }
             const langData = translations[currentLang] || translations.en;
             
             // Clear existing age fields
@@ -1092,8 +1097,17 @@
 
         // Function to generate child questions
         function generateChildQuestions(numChildren, currentLang) {
+            console.log('generateChildQuestions called with:', numChildren, currentLang);
             const container = document.getElementById('childrenQuestionsContainer');
+            if (!container) {
+                console.error('childrenQuestionsContainer not found!');
+                return;
+            }
             const template = document.getElementById('childQuestionTemplate');
+            if (!template) {
+                console.error('childQuestionTemplate not found!');
+                return;
+            }
             
             // Clear existing questions
             container.innerHTML = '';
@@ -1236,18 +1250,29 @@
             // Watch for changes in number of children
             const numberOfChildrenInput = document.getElementById('numberOfChildren');
             if (numberOfChildrenInput) {
+                console.log('Number of children input found, attaching event listener');
                 numberOfChildrenInput.addEventListener('input', function() {
                     const numChildren = parseInt(this.value) || 0;
-                    generateChildrenAges(numChildren, selectedLanguage);
-                    generateChildQuestions(numChildren, selectedLanguage);
+                    console.log('Number of children changed to:', numChildren);
+                    if (typeof generateChildrenAges === 'function' && typeof generateChildQuestions === 'function') {
+                        generateChildrenAges(numChildren, selectedLanguage);
+                        generateChildQuestions(numChildren, selectedLanguage);
+                    } else {
+                        console.error('Functions not found! generateChildrenAges:', typeof generateChildrenAges, 'generateChildQuestions:', typeof generateChildQuestions);
+                    }
                 });
                 
                 // Generate initial age fields and questions if value exists
                 if (numberOfChildrenInput.value) {
                     const numChildren = parseInt(numberOfChildrenInput.value) || 0;
-                    generateChildrenAges(numChildren, selectedLanguage);
-                    generateChildQuestions(numChildren, selectedLanguage);
+                    console.log('Initial number of children:', numChildren);
+                    if (typeof generateChildrenAges === 'function' && typeof generateChildQuestions === 'function') {
+                        generateChildrenAges(numChildren, selectedLanguage);
+                        generateChildQuestions(numChildren, selectedLanguage);
+                    }
                 }
+            } else {
+                console.error('Number of children input not found!');
             }
 
             // Set initial selected language
