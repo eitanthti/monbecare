@@ -233,7 +233,7 @@ function handleInterviewForm() {
             const errorMessage = errorMessages[currentLang] || errorMessages.en;
             alert(errorMessage);
         });
-        });
+    });
     }
 }
 
