@@ -112,6 +112,25 @@ function handleInterviewForm() {
         interviewForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Validate checkboxes - at least one professional support must be selected per child
+            const numberOfChildren = parseInt(document.getElementById('numberOfChildren')?.value) || 0;
+            let checkboxValid = true;
+            let missingCheckboxes = [];
+            
+            for (let i = 1; i <= numberOfChildren; i++) {
+                const checkboxes = document.querySelectorAll(`input[name="professionalSupport_child${i}"]`);
+                const checked = Array.from(checkboxes).some(cb => cb.checked);
+                if (!checked) {
+                    checkboxValid = false;
+                    missingCheckboxes.push(`Child ${i}`);
+                }
+            }
+            
+            if (!checkboxValid) {
+                alert('Please select at least one option for professional breastfeeding support for: ' + missingCheckboxes.join(', '));
+                return;
+            }
+            
             // Check if form is valid using HTML5 validation
             if (this.checkValidity()) {
                 // Get form data

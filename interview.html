@@ -195,14 +195,32 @@
 
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
-                                    <select name="professionalSupport" class="form-input" required>
-                                        <option value="" data-translate="select-option">Please select...</option>
-                                        <option value="lactation-consultant" data-translate="opt-lactation-consultant">Lactation consultant</option>
-                                        <option value="parenting-guide" data-translate="opt-parenting-guide">Parenting / Development guide</option>
-                                        <option value="health-clinic" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</option>
-                                        <option value="family-social-only" data-translate="opt-family-social-only">Family / Social support only</option>
-                                        <option value="no-support" data-translate="opt-no-support">I did not receive support</option>
-                                    </select>
+                                    <div class="checkbox-group">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_lactation" value="lactation-consultant" class="checkbox-input">
+                                            <label for="support_lactation" class="checkbox-label" data-translate="opt-lactation-consultant">Lactation consultant</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_parenting" value="parenting-guide" class="checkbox-input">
+                                            <label for="support_parenting" class="checkbox-label" data-translate="opt-parenting-guide">Parenting guide</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_development" value="development-guide" class="checkbox-input">
+                                            <label for="support_development" class="checkbox-label" data-translate="opt-development-guide">Development guide</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_health-clinic" value="health-clinic" class="checkbox-input">
+                                            <label for="support_health-clinic" class="checkbox-label" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_family-social" value="family-social-only" class="checkbox-input">
+                                            <label for="support_family-social" class="checkbox-label" data-translate="opt-family-social-only">Family / Social support only</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" name="professionalSupport" id="support_none" value="no-support" class="checkbox-input">
+                                            <label for="support_none" class="checkbox-label" data-translate="opt-no-support">I did not receive support</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group full-width">
@@ -347,7 +365,8 @@
                 'opt-combination': 'Combination of factors',
                 'opt-other': 'Other',
                 'opt-lactation-consultant': 'Lactation consultant',
-                'opt-parenting-guide': 'Parenting / Development guide',
+                'opt-parenting-guide': 'Parenting guide',
+                'opt-development-guide': 'Development guide',
                 'opt-health-clinic': 'Health clinic (Tipat Halav)',
                 'opt-family-social-only': 'Family / Social support only',
                 'opt-no-support': 'I did not receive support',
@@ -428,7 +447,8 @@
                 'opt-combination': 'Kombination von Faktoren',
                 'opt-other': 'Andere',
                 'opt-lactation-consultant': 'Stillberaterin',
-                'opt-parenting-guide': 'Erziehungs- / Entwicklungsberater',
+                'opt-parenting-guide': 'Erziehungsberater',
+                'opt-development-guide': 'Entwicklungsberater',
                 'opt-health-clinic': 'Gesundheitsklinik',
                 'opt-family-social-only': 'Nur familiäre / soziale Unterstützung',
                 'opt-no-support': 'Ich habe keine Unterstützung erhalten',
@@ -509,7 +529,8 @@
                 'opt-combination': 'Combinaison de facteurs',
                 'opt-other': 'Autre',
                 'opt-lactation-consultant': 'Consultante en lactation',
-                'opt-parenting-guide': 'Guide parental / Développement',
+                'opt-parenting-guide': 'Guide parental',
+                'opt-development-guide': 'Guide de développement',
                 'opt-health-clinic': 'Clinique de santé',
                 'opt-family-social-only': 'Soutien familial / social uniquement',
                 'opt-no-support': 'Je n\'ai pas reçu de soutien',
@@ -590,7 +611,8 @@
                 'opt-combination': 'שילוב של דברים',
                 'opt-other': 'אחר',
                 'opt-lactation-consultant': 'יועצת הנקה',
-                'opt-parenting-guide': 'מדריכת הורות / התפתחות',
+                'opt-parenting-guide': 'מדריכת הורות',
+                'opt-development-guide': 'מדריכת התפתחות',
                 'opt-health-clinic': 'טיפת חלב',
                 'opt-family-social-only': 'ליווי משפחתי / חברתי בלבד',
                 'opt-no-support': 'לא קיבלתי ליווי',
@@ -671,7 +693,8 @@
                 'opt-combination': 'مزيج من العوامل',
                 'opt-other': 'أخرى',
                 'opt-lactation-consultant': 'استشارية الرضاعة الطبيعية',
-                'opt-parenting-guide': 'مرشدة الأبوة / النمو',
+                'opt-parenting-guide': 'مرشدة الأبوة',
+                'opt-development-guide': 'مرشدة النمو',
                 'opt-health-clinic': 'عيادة صحية',
                 'opt-family-social-only': 'دعم عائلي / اجتماعي فقط',
                 'opt-no-support': 'لم أتلق دعمًا',
@@ -752,7 +775,8 @@
                 'opt-combination': 'Combinación de factores',
                 'opt-other': 'Otro',
                 'opt-lactation-consultant': 'Consultora de lactancia',
-                'opt-parenting-guide': 'Guía de crianza / Desarrollo',
+                'opt-parenting-guide': 'Guía de crianza',
+                'opt-development-guide': 'Guía de desarrollo',
                 'opt-health-clinic': 'Clínica de salud',
                 'opt-family-social-only': 'Solo apoyo familiar / social',
                 'opt-no-support': 'No recibí apoyo',
@@ -790,47 +814,52 @@
                     } else if (element.tagName === 'OPTION') {
                         element.textContent = langData[key];
                     } else if (element.tagName === 'LABEL') {
-                        // For labels, check if there are required/optional spans to preserve
-                        const requiredSpan = element.querySelector('span.required[data-translate="required-text"]');
-                        const optionalSpan = element.querySelector('span.required[data-translate="optional-text"]');
-                        
-                        if (requiredSpan || optionalSpan) {
-                            // Preserve the span and update the text before it
-                            const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
-                            if (spanText) {
-                                (requiredSpan || optionalSpan).textContent = spanText;
-                            }
-                            // Update the main label text (everything before the span)
-                            const labelText = langData[key];
-                            if (labelText) {
-                                // Find the text node before the span and update it
-                                let textNode = null;
-                                for (let node of element.childNodes) {
-                                    if (node.nodeType === 3) { // Text node
-                                        textNode = node;
-                                    } else if (node === (requiredSpan || optionalSpan)) {
-                                        break;
+                        // Handle checkbox labels differently
+                        if (element.classList.contains('checkbox-label')) {
+                            element.textContent = langData[key];
+                        } else {
+                            // For labels, check if there are required/optional spans to preserve
+                            const requiredSpan = element.querySelector('span.required[data-translate="required-text"]');
+                            const optionalSpan = element.querySelector('span.required[data-translate="optional-text"]');
+                            
+                            if (requiredSpan || optionalSpan) {
+                                // Preserve the span and update the text before it
+                                const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
+                                if (spanText) {
+                                    (requiredSpan || optionalSpan).textContent = spanText;
+                                }
+                                // Update the main label text (everything before the span)
+                                const labelText = langData[key];
+                                if (labelText) {
+                                    // Find the text node before the span and update it
+                                    let textNode = null;
+                                    for (let node of element.childNodes) {
+                                        if (node.nodeType === 3) { // Text node
+                                            textNode = node;
+                                        } else if (node === (requiredSpan || optionalSpan)) {
+                                            break;
+                                        }
+                                    }
+                                    if (textNode) {
+                                        textNode.textContent = labelText + ' ';
+                                    } else {
+                                        // Insert text before the span
+                                        element.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
                                     }
                                 }
-                                if (textNode) {
-                                    textNode.textContent = labelText + ' ';
-                                } else {
-                                    // Insert text before the span
-                                    element.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
-                                }
-                            }
-                        } else {
-                            // Check if label contains hardcoded (required) or (optional) text
-                            const labelText = langData[key];
-                            if (labelText) {
-                                // Get current HTML to check for required/optional spans
-                                const currentHTML = element.innerHTML;
-                                if (currentHTML.includes('<span class="required">(required)</span>')) {
-                                    element.innerHTML = labelText + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
-                                } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
-                                    element.innerHTML = labelText + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
-                                } else {
-                                    element.textContent = labelText;
+                            } else {
+                                // Check if label contains hardcoded (required) or (optional) text
+                                const labelText = langData[key];
+                                if (labelText) {
+                                    // Get current HTML to check for required/optional spans
+                                    const currentHTML = element.innerHTML;
+                                    if (currentHTML.includes('<span class="required">(required)</span>')) {
+                                        element.innerHTML = labelText + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
+                                    } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
+                                        element.innerHTML = labelText + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
+                                    } else {
+                                        element.textContent = labelText;
+                                    }
                                 }
                             }
                         }
@@ -962,6 +991,19 @@
                     }
                 });
                 
+                // Update checkbox IDs and label "for" attributes to be unique per child
+                clone.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    if (checkbox.id) {
+                        const oldId = checkbox.id;
+                        const newId = `${oldId}_child${i + 1}`;
+                        checkbox.id = newId;
+                        const label = clone.querySelector(`label[for="${oldId}"]`);
+                        if (label) {
+                            label.setAttribute('for', newId);
+                        }
+                    }
+                });
+                
                 // Translate the cloned element
                 translateElement(clone, currentLang);
                 
@@ -985,38 +1027,43 @@
                     } else if (el.tagName === 'OPTION') {
                         el.textContent = langData[key];
                     } else if (el.tagName === 'LABEL') {
-                        const requiredSpan = el.querySelector('span.required[data-translate="required-text"]');
-                        const optionalSpan = el.querySelector('span.required[data-translate="optional-text"]');
-                        
-                        if (requiredSpan || optionalSpan) {
-                            const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
-                            if (spanText) {
-                                (requiredSpan || optionalSpan).textContent = spanText;
-                            }
-                            const labelText = langData[key];
-                            if (labelText) {
-                                let textNode = null;
-                                for (let node of el.childNodes) {
-                                    if (node.nodeType === 3) {
-                                        textNode = node;
-                                    } else if (node === (requiredSpan || optionalSpan)) {
-                                        break;
+                        // Handle checkbox labels differently
+                        if (el.classList.contains('checkbox-label')) {
+                            el.textContent = langData[key];
+                        } else {
+                            const requiredSpan = el.querySelector('span.required[data-translate="required-text"]');
+                            const optionalSpan = el.querySelector('span.required[data-translate="optional-text"]');
+                            
+                            if (requiredSpan || optionalSpan) {
+                                const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
+                                if (spanText) {
+                                    (requiredSpan || optionalSpan).textContent = spanText;
+                                }
+                                const labelText = langData[key];
+                                if (labelText) {
+                                    let textNode = null;
+                                    for (let node of el.childNodes) {
+                                        if (node.nodeType === 3) {
+                                            textNode = node;
+                                        } else if (node === (requiredSpan || optionalSpan)) {
+                                            break;
+                                        }
+                                    }
+                                    if (textNode) {
+                                        textNode.textContent = labelText + ' ';
+                                    } else {
+                                        el.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
                                     }
                                 }
-                                if (textNode) {
-                                    textNode.textContent = labelText + ' ';
-                                } else {
-                                    el.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
-                                }
-                            }
-                        } else {
-                            const currentHTML = el.innerHTML;
-                            if (currentHTML.includes('<span class="required">(required)</span>')) {
-                                el.innerHTML = langData[key] + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
-                            } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
-                                el.innerHTML = langData[key] + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
                             } else {
-                                el.textContent = langData[key];
+                                const currentHTML = el.innerHTML;
+                                if (currentHTML.includes('<span class="required">(required)</span>')) {
+                                    el.innerHTML = langData[key] + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
+                                } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
+                                    el.innerHTML = langData[key] + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
+                                } else {
+                                    el.textContent = langData[key];
+                                }
                             }
                         }
                     } else {

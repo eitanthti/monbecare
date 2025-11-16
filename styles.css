@@ -1372,6 +1372,42 @@ body {
     border-bottom: 2px solid #e1e5e9;
 }
 
+/* Checkbox Group Styles */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.2rem;
+    cursor: pointer;
+    accent-color: #2c3e50;
+    flex-shrink: 0;
+}
+
+.checkbox-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: #2c3e50;
+    cursor: pointer;
+    line-height: 1.5;
+    user-select: none;
+}
+
+.checkbox-label:hover {
+    color: #1a252f;
+}
+
 /* RTL support for Hebrew and Arabic */
 body[dir="rtl"] .interview-left,
 .interview-left[dir="rtl"] {
@@ -1489,6 +1525,19 @@ body[dir="rtl"] .form-section-title,
         font-size: 1.5rem;
         margin-bottom: 1rem;
     }
+
+    .checkbox-group {
+        gap: 0.8rem;
+    }
+
+    .checkbox-input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .checkbox-label {
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1538,5 +1587,18 @@ body[dir="rtl"] .form-section-title,
     .child-label {
         font-size: 1.3rem;
         margin-bottom: 0.8rem;
+    }
+
+    .checkbox-group {
+        gap: 0.7rem;
+    }
+
+    .checkbox-input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .checkbox-label {
+        font-size: 0.9rem;
     }
 }
