@@ -105,6 +105,56 @@ function handleContactForm() {
     }
 }
 
+// Form submission handler for interview form
+function handleInterviewForm() {
+    const interviewForm = document.getElementById('interviewForm');
+    if (interviewForm) {
+        interviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const firstName = formData.get('firstName');
+            const lastName = formData.get('lastName');
+            const email = formData.get('email');
+            const breastfeedingExperience = formData.get('breastfeedingExperience');
+            const challenges = formData.get('challenges');
+            const interestLevel = formData.get('interestLevel');
+            const desiredFeatures = formData.get('desiredFeatures');
+            const interviewMethod = formData.get('interviewMethod');
+            
+            // Simple validation
+            if (firstName && lastName && email && breastfeedingExperience && challenges && interestLevel && desiredFeatures && interviewMethod) {
+                // Submit to Netlify
+                fetch('/', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(() => {
+                    alert('Thank you for subscribing! We\'ll be in touch soon to schedule your interview.');
+                    this.reset();
+                })
+                .catch((error) => {
+                    alert('Sorry, there was an error submitting your survey. Please try again.');
+                });
+            } else {
+                // Show exactly which fields are missing
+                const missing = [];
+                if (!firstName) missing.push('First Name');
+                if (!lastName) missing.push('Last Name');
+                if (!email) missing.push('Email');
+                if (!breastfeedingExperience) missing.push('Breastfeeding Experience');
+                if (!challenges) missing.push('Challenges');
+                if (!interestLevel) missing.push('Interest Level');
+                if (!desiredFeatures) missing.push('Desired Features');
+                if (!interviewMethod) missing.push('Interview Method');
+                alert('Please fill in all required fields. Missing: ' + missing.join(', '));
+            }
+        });
+    }
+}
+
 // Animation sequence for home page
 function startAnimation() {
     const hero = document.querySelector('.hero');
@@ -166,6 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle contact form
     handleContactForm();
+    
+    // Handle interview form
+    handleInterviewForm();
     
     // Start animation sequence for home page after 0.5 seconds
     setTimeout(function() {

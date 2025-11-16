@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Subscription - MonBe Inc.</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.monbecare.com/interview.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="logo">MonBe Inc.</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="our-story.html">Our Story</a></li>
+                <li><a href="pitch.html">Pitch</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Interview Subscription Page -->
+    <section class="interview-page">
+        <div class="interview-container">
+            <div class="interview-left">
+                <h1 class="interview-title">Subscribe to Interview</h1>
+                
+                <p class="interview-description">
+                    Help us shape the future of breastfeeding monitoring. By participating in our interview, you'll share valuable insights that will directly influence the development of MonBe. Fill out this short survey to subscribe.
+                </p>
+
+                <div class="interview-form-section">
+                    <form name="interview" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="interviewForm">
+                        <!-- Hidden field for spam protection -->
+                        <input type="hidden" name="form-name" value="interview" />
+                        <p style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <h3 class="form-section-title">Contact Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name <span class="required">(required)</span></label>
+                                <input type="text" name="firstName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name <span class="required">(required)</span></label>
+                                <input type="text" name="lastName" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Email <span class="required">(required)</span></label>
+                            <input type="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Phone Number <span class="required">(optional)</span></label>
+                            <input type="tel" name="phone" class="form-input" placeholder="(123) 456-7890">
+                        </div>
+
+                        <h3 class="form-section-title">Survey Questions</h3>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Are you currently breastfeeding or have you breastfed in the past? <span class="required">(required)</span></label>
+                            <select name="breastfeedingExperience" class="form-input" required>
+                                <option value="">Please select...</option>
+                                <option value="currently-breastfeeding">Currently breastfeeding</option>
+                                <option value="breastfed-in-past">Breastfed in the past</option>
+                                <option value="planning-to-breastfeed">Planning to breastfeed</option>
+                                <option value="not-applicable">Not applicable</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">What challenges have you faced or anticipate facing with breastfeeding? <span class="required">(required)</span></label>
+                            <textarea name="challenges" class="form-textarea" rows="4" placeholder="e.g., Latching issues, supply concerns, tracking feeding times, etc." required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">How interested are you in a device that monitors breastfeeding? <span class="required">(required)</span></label>
+                            <select name="interestLevel" class="form-input" required>
+                                <option value="">Please select...</option>
+                                <option value="very-interested">Very interested</option>
+                                <option value="somewhat-interested">Somewhat interested</option>
+                                <option value="neutral">Neutral</option>
+                                <option value="not-interested">Not interested</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">What features would be most valuable to you in a breastfeeding monitor? <span class="required">(required)</span></label>
+                            <textarea name="desiredFeatures" class="form-textarea" rows="4" placeholder="e.g., Real-time monitoring, feeding duration tracking, milk volume estimation, etc." required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Preferred interview method <span class="required">(required)</span></label>
+                            <select name="interviewMethod" class="form-input" required>
+                                <option value="">Please select...</option>
+                                <option value="video-call">Video call (Zoom, Google Meet, etc.)</option>
+                                <option value="phone-call">Phone call</option>
+                                <option value="in-person">In-person</option>
+                                <option value="email">Email exchange</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Best time to reach you <span class="required">(optional)</span></label>
+                            <input type="text" name="bestTime" class="form-input" placeholder="e.g., Weekday mornings, Evening after 6pm, etc.">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Additional comments or questions <span class="required">(optional)</span></label>
+                            <textarea name="additionalComments" class="form-textarea" rows="3" placeholder="Any additional information you'd like to share..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">SUBMIT SURVEY</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="interview-right">
+                <!-- Background image or content can be added here -->
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
