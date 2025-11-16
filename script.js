@@ -108,116 +108,131 @@ function handleContactForm() {
 // Form submission handler for interview form
 function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
-    if (interviewForm) {
-        interviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate checkboxes - at least one professional support must be selected per child
-            const numberOfChildren = parseInt(document.getElementById('numberOfChildren')?.value) || 0;
-            let checkboxValid = true;
-            let missingCheckboxes = [];
-            
-            for (let i = 1; i <= numberOfChildren; i++) {
-                const checkboxes = document.querySelectorAll(`input[name="professionalSupport_child${i}"]`);
-                const checked = Array.from(checkboxes).some(cb => cb.checked);
-                if (!checked) {
-                    checkboxValid = false;
-                    missingCheckboxes.push(`Child ${i}`);
-                }
+    if (!interviewForm) {
+        console.error('Interview form not found!');
+        return;
+    }
+    
+    console.log('Interview form handler attached');
+    
+    interviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Form submit event triggered');
+        
+        // Check if form is valid using HTML5 validation first
+        if (!this.checkValidity()) {
+            console.log('Form validation failed');
+            this.reportValidity();
+            return;
+        }
+        
+        console.log('Form HTML5 validation passed');
+        
+        // Validate checkboxes - at least one professional support must be selected per child
+        const numberOfChildren = parseInt(document.getElementById('numberOfChildren')?.value) || 0;
+        console.log('Number of children:', numberOfChildren);
+        
+        let checkboxValid = true;
+        let missingCheckboxes = [];
+        
+        for (let i = 1; i <= numberOfChildren; i++) {
+            const checkboxes = document.querySelectorAll(`input[name="professionalSupport_child${i}"]`);
+            const checked = Array.from(checkboxes).some(cb => cb.checked);
+            if (!checked) {
+                checkboxValid = false;
+                missingCheckboxes.push(`Child ${i}`);
             }
-            
-            if (!checkboxValid) {
-                alert('Please select at least one option for professional breastfeeding support for: ' + missingCheckboxes.join(', '));
-                return;
+        }
+        
+        if (!checkboxValid) {
+            alert('Please select at least one option for professional breastfeeding support for: ' + missingCheckboxes.join(', '));
+            return;
+        }
+        
+        // Validate aids checkboxes - at least one aid must be selected per child
+        let aidsCheckboxValid = true;
+        let missingAidsCheckboxes = [];
+        
+        for (let i = 1; i <= numberOfChildren; i++) {
+            const aidsCheckboxes = document.querySelectorAll(`input[name="aidsUsed_child${i}"]`);
+            const checked = Array.from(aidsCheckboxes).some(cb => cb.checked);
+            if (!checked) {
+                aidsCheckboxValid = false;
+                missingAidsCheckboxes.push(`Child ${i}`);
             }
-            
-            // Validate aids checkboxes - at least one aid must be selected per child
-            let aidsCheckboxValid = true;
-            let missingAidsCheckboxes = [];
-            
-            for (let i = 1; i <= numberOfChildren; i++) {
-                const aidsCheckboxes = document.querySelectorAll(`input[name="aidsUsed_child${i}"]`);
-                const checked = Array.from(aidsCheckboxes).some(cb => cb.checked);
-                if (!checked) {
-                    aidsCheckboxValid = false;
-                    missingAidsCheckboxes.push(`Child ${i}`);
-                }
-            }
-            
-            if (!aidsCheckboxValid) {
-                alert('Please select at least one option for aids used during the first periods for: ' + missingAidsCheckboxes.join(', '));
-                return;
-            }
-            
-            // Check if form is valid using HTML5 validation
-            if (this.checkValidity()) {
-                // Get form data and properly handle checkboxes
-                const formData = new FormData(this);
+        }
+        
+        if (!aidsCheckboxValid) {
+            alert('Please select at least one option for aids used during the first periods for: ' + missingAidsCheckboxes.join(', '));
+            return;
+        }
+        
+        // Get form data and properly handle checkboxes
+        const formData = new FormData(this);
+        console.log('Form data collected, submitting...');
+        
+        // Build form data string for Netlify Forms
+        // Netlify Forms expects URL-encoded format
+        const formDataPairs = [];
+        
+        // Add all form fields (FormData automatically handles multiple values for checkboxes)
+        for (const [key, value] of formData.entries()) {
+            formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+        }
+        
+        // Submit to Netlify Forms
+        fetch('/', {
+            method: 'POST',
+            headers: { 
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formDataPairs.join('&')
+        })
+        .then((response) => {
+            console.log('Form submission response:', response.status);
+            // Netlify Forms returns 200 on success
+            if (response.ok || response.status === 200) {
+                console.log('Form submitted successfully');
+                // Get current language for thank you message
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                const thankYouMessages = {
+                    en: 'Thank you! We will be in touch soon.',
+                    de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
+                    fr: 'Merci! Nous vous contacterons bientôt.',
+                    he: 'תודה! ניצור קשר בקרוב.',
+                    ar: 'شكراً! سنتواصل معك قريباً.',
+                    es: '¡Gracias! Nos pondremos en contacto pronto.'
+                };
+                const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
                 
-                // Build form data string for Netlify Forms
-                // Netlify Forms expects URL-encoded format
-                const formDataPairs = [];
+                alert(thankYouMessage);
                 
-                // Add all form fields (FormData automatically handles multiple values for checkboxes)
-                for (const [key, value] of formData.entries()) {
-                    formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-                }
+                // Reset form
+                this.reset();
                 
-                // Submit to Netlify Forms
-                fetch('/', {
-                    method: 'POST',
-                    headers: { 
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: formDataPairs.join('&')
-                })
-                .then((response) => {
-                    // Netlify Forms returns 200 on success
-                    if (response.ok || response.status === 200) {
-                        // Get current language for thank you message
-                        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                        const thankYouMessages = {
-                            en: 'Thank you! We will be in touch soon.',
-                            de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
-                            fr: 'Merci! Nous vous contacterons bientôt.',
-                            he: 'תודה! ניצור קשר בקרוב.',
-                            ar: 'شكراً! سنتواصل معك قريباً.',
-                            es: '¡Gracias! Nos pondremos en contacto pronto.'
-                        };
-                        const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
-                        
-                        alert(thankYouMessage);
-                        
-                        // Reset form
-                        this.reset();
-                        
-                        // Clear dynamically generated fields
-                        const agesContainer = document.getElementById('childrenAgesContainer');
-                        const questionsContainer = document.getElementById('childrenQuestionsContainer');
-                        if (agesContainer) agesContainer.innerHTML = '';
-                        if (questionsContainer) questionsContainer.innerHTML = '';
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Form submission error:', error);
-                    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                    const errorMessages = {
-                        en: 'Sorry, there was an error submitting your survey. Please try again.',
-                        de: 'Entschuldigung, beim Absenden Ihrer Umfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-                        fr: 'Désolé, une erreur s\'est produite lors de l\'envoi de votre questionnaire. Veuillez réessayer.',
-                        he: 'מצטערים, אירעה שגיאה בשליחת השאלון. אנא נסה שוב.',
-                        ar: 'عذراً، حدث خطأ أثناء إرسال الاستبيان. يرجى المحاولة مرة أخرى.',
-                        es: 'Lo sentimos, hubo un error al enviar su cuestionario. Por favor, inténtelo de nuevo.'
-                    };
-                    const errorMessage = errorMessages[currentLang] || errorMessages.en;
-                    alert(errorMessage);
-                });
+                // Clear dynamically generated fields
+                const agesContainer = document.getElementById('childrenAgesContainer');
+                const questionsContainer = document.getElementById('childrenQuestionsContainer');
+                if (agesContainer) agesContainer.innerHTML = '';
+                if (questionsContainer) questionsContainer.innerHTML = '';
             } else {
-                // HTML5 validation will show error messages
-                this.reportValidity();
+                throw new Error('Form submission failed');
             }
+        })
+        .catch((error) => {
+            console.error('Form submission error:', error);
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+            const errorMessages = {
+                en: 'Sorry, there was an error submitting your survey. Please try again.',
+                de: 'Entschuldigung, beim Absenden Ihrer Umfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+                fr: 'Désolé, une erreur s\'est produite lors de l\'envoi de votre questionnaire. Veuillez réessayer.',
+                he: 'מצטערים, אירעה שגיאה בשליחת השאלון. אנא נסה שוב.',
+                ar: 'عذراً، حدث خطأ أثناء إرسال الاستبيان. يرجى المحاولة مرة أخرى.',
+                es: 'Lo sentimos, hubo un error al enviar su cuestionario. Por favor, inténtelo de nuevo.'
+            };
+            const errorMessage = errorMessages[currentLang] || errorMessages.en;
+            alert(errorMessage);
+        });
         });
     }
 }

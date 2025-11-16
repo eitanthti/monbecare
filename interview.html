@@ -1230,6 +1230,9 @@
             // Translate page on load
             translatePage(selectedLanguage);
 
+            // Handle interview form submission
+            handleInterviewForm();
+
             // Watch for changes in number of children
             const numberOfChildrenInput = document.getElementById('numberOfChildren');
             if (numberOfChildrenInput) {
