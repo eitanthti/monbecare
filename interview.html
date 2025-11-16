@@ -168,8 +168,38 @@
                                 <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
 
                                 <div class="form-group full-width">
-                                    <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months") <span class="required">(required)</span></label>
-                                    <textarea name="stoppedAge" class="form-textarea" rows="2" data-translate-placeholder="q11-placeholder" placeholder="e.g., I stopped at 5 months" required></textarea>
+                                    <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? <span class="required">(required)</span></label>
+                                    <div class="age-inputs-container">
+                                        <div>
+                                            <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="years-label">Years</label>
+                                            <select name="stoppedAgeYears" class="form-input" required>
+                                                <option value="" data-translate="select-option">Please select...</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="form-label" style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-translate="months-label">Months</label>
+                                            <select name="stoppedAgeMonths" class="form-input" required>
+                                                <option value="" data-translate="select-option">Please select...</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group full-width">
@@ -240,6 +270,12 @@
                                 <div class="form-group full-width">
                                     <label class="form-label" data-translate="section3-comments-label">Additional comments for this child <span class="required" data-translate="optional-text">(optional)</span></label>
                                     <textarea name="section3Comments" class="form-textarea" rows="3" data-translate-placeholder="section3-comments-placeholder" placeholder="Any additional comments or information about this child..."></textarea>
+                                </div>
+
+                                <!-- Additional open text comments field for Section 3 -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="section3-additional-comments-label">Additional comments <span class="required" data-translate="optional-text">(optional)</span></label>
+                                    <textarea name="section3AdditionalComments" class="form-textarea" rows="3" data-translate-placeholder="section3-additional-comments-placeholder" placeholder="Any additional comments..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -330,8 +366,9 @@
                 'q10-label': 'Did you continue breastfeeding after age 1 year?',
                 'section4-title': 'Section 4 - Stopping Breastfeeding',
                 'section4-description': 'Please answer for each child separately.',
-                'q11-label': 'If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months")',
-                'q11-placeholder': 'e.g., I stopped at 5 months',
+                'q11-label': 'If you stopped breastfeeding - at what age of the baby did you stop?',
+                'section3-additional-comments-label': 'Additional comments',
+                'section3-additional-comments-placeholder': 'Any additional comments...',
                 'q12-label': 'What was the main reason for stopping breastfeeding?',
                 'q12-placeholder': 'Please describe the main reason...',
                 'q13-label': 'If you did not breastfeed at all - what was the reason?',
@@ -413,7 +450,9 @@
                 'q10-label': 'Haben Sie nach dem ersten Lebensjahr weiter gestillt?',
                 'section4-title': 'Abschnitt 4 - Abstillen',
                 'section4-description': 'Bitte beantworten Sie für jedes Kind separat.',
-                'q11-label': 'Wenn Sie das Stillen beendet haben - in welchem Alter des Babys haben Sie aufgehört? (Bitte in Monaten angeben, z.B. "Ich habe mit 5 Monaten aufgehört")',
+                'q11-label': 'Wenn Sie das Stillen beendet haben - in welchem Alter des Babys haben Sie aufgehört?',
+                'section3-additional-comments-label': 'Zusätzliche Kommentare',
+                'section3-additional-comments-placeholder': 'Zusätzliche Kommentare...',
                 'q11-placeholder': 'z.B. Ich habe mit 5 Monaten aufgehört',
                 'q12-label': 'Was war der Hauptgrund für das Abstillen?',
                 'q12-placeholder': 'Bitte beschreiben Sie den Hauptgrund...',
@@ -496,7 +535,9 @@
                 'q10-label': 'Avez-vous continué à allaiter après l\'âge d\'un an?',
                 'section4-title': 'Section 4 - Arrêt de l\'allaitement',
                 'section4-description': 'Veuillez répondre pour chaque enfant séparément.',
-                'q11-label': 'Si vous avez arrêté d\'allaiter - à quel âge du bébé avez-vous arrêté? (Veuillez préciser en mois clairement, par ex. "J\'ai arrêté à 5 mois")',
+                'q11-label': 'Si vous avez arrêté d\'allaiter - à quel âge du bébé avez-vous arrêté?',
+                'section3-additional-comments-label': 'Commentaires supplémentaires',
+                'section3-additional-comments-placeholder': 'Tout commentaire supplémentaire...',
                 'q11-placeholder': 'par ex. J\'ai arrêté à 5 mois',
                 'q12-label': 'Quelle était la raison principale d\'arrêter l\'allaitement?',
                 'q12-placeholder': 'Veuillez décrire la raison principale...',
@@ -579,7 +620,9 @@
                 'q10-label': 'האם המשכת להניק אחרי גיל שנה?',
                 'section4-title': 'שלב 4 - הפסקת הנקה',
                 'section4-description': 'לענות עבור כל ילד בנפרד.',
-                'q11-label': 'אם הפסקת להניק - באיזה גיל של התינוק הפסקת? (לציין בחודשים בצורה ברורה, לדוגמה: "הפסקתי בגיל 5 חודשים")',
+                'q11-label': 'אם הפסקת להניק - באיזה גיל של התינוק הפסקת?',
+                'section3-additional-comments-label': 'הערות נוספות',
+                'section3-additional-comments-placeholder': 'כל הערות נוספות...',
                 'q11-placeholder': 'לדוגמה: הפסקתי בגיל 5 חודשים',
                 'q12-label': 'מה הסיבה העיקרית להפסקת ההנקה?',
                 'q12-placeholder': 'נא לתאר את הסיבה העיקרית...',
@@ -662,7 +705,9 @@
                 'q10-label': 'هل استمريت في الرضاعة الطبيعية بعد عمر السنة؟',
                 'section4-title': 'القسم 4 - التوقف عن الرضاعة الطبيعية',
                 'section4-description': 'يرجى الإجابة لكل طفل على حدة.',
-                'q11-label': 'إذا توقفت عن الرضاعة الطبيعية - في أي عمر من الطفل توقفت؟ (يرجى التحديد بالأشهر بوضوح، مثلاً: "توقفت في عمر 5 أشهر")',
+                'q11-label': 'إذا توقفت عن الرضاعة الطبيعية - في أي عمر من الطفل توقفت؟',
+                'section3-additional-comments-label': 'تعليقات إضافية',
+                'section3-additional-comments-placeholder': 'أي تعليقات إضافية...',
                 'q11-placeholder': 'مثلاً: توقفت في عمر 5 أشهر',
                 'q12-label': 'ما كان السبب الرئيسي للتوقف عن الرضاعة الطبيعية؟',
                 'q12-placeholder': 'يرجى وصف السبب الرئيسي...',
@@ -745,7 +790,9 @@
                 'q10-label': '¿Continuaste amamantando después del año de edad?',
                 'section4-title': 'Sección 4 - Dejar de amamantar',
                 'section4-description': 'Por favor responde para cada hijo por separado.',
-                'q11-label': 'Si dejaste de amamantar - ¿a qué edad del bebé dejaste? (Por favor especifica en meses claramente, ej: "Dejé a los 5 meses")',
+                'q11-label': 'Si dejaste de amamantar - ¿a qué edad del bebé dejaste?',
+                'section3-additional-comments-label': 'Comentarios adicionales',
+                'section3-additional-comments-placeholder': 'Cualquier comentario adicional...',
                 'q11-placeholder': 'ej: Dejé a los 5 meses',
                 'q12-label': '¿Cuál fue la razón principal para dejar de amamantar?',
                 'q12-placeholder': 'Por favor describe la razón principal...',
