@@ -39,6 +39,21 @@
 
     <!-- Interview Subscription Page -->
     <section class="interview-page">
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <div class="language-selector-container">
+                <p class="language-prompt">Select your preferred language:</p>
+                <div class="language-buttons">
+                    <button class="language-btn" data-lang="en">English</button>
+                    <button class="language-btn" data-lang="nl">Dutch</button>
+                    <button class="language-btn" data-lang="fr">French</button>
+                    <button class="language-btn" data-lang="he">Hebrew</button>
+                    <button class="language-btn" data-lang="ar">Arabic (Saudi)</button>
+                    <button class="language-btn" data-lang="es">Spanish</button>
+                </div>
+            </div>
+        </div>
+
         <div class="interview-container">
             <div class="interview-left">
                 <h1 class="interview-title">Subscribe to Interview</h1>
@@ -145,6 +160,57 @@
     </section>
 
     <script src="script.js"></script>
+    <script>
+        // Language selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButtons = document.querySelectorAll('.language-btn');
+            let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
+            // Set initial selected language
+            languageButtons.forEach(btn => {
+                if (btn.dataset.lang === selectedLanguage) {
+                    btn.classList.add('selected');
+                }
+            });
+
+            // Handle language button clicks
+            languageButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove selected class from all buttons
+                    languageButtons.forEach(b => b.classList.remove('selected'));
+                    
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                    
+                    // Store selected language
+                    selectedLanguage = this.dataset.lang;
+                    localStorage.setItem('selectedLanguage', selectedLanguage);
+                    
+                    // Add language to form as hidden field
+                    let langInput = document.getElementById('selectedLanguage');
+                    if (!langInput) {
+                        langInput = document.createElement('input');
+                        langInput.type = 'hidden';
+                        langInput.id = 'selectedLanguage';
+                        langInput.name = 'selectedLanguage';
+                        document.getElementById('interviewForm').appendChild(langInput);
+                    }
+                    langInput.value = selectedLanguage;
+                });
+            });
+
+            // Add language to form on page load
+            let langInput = document.getElementById('selectedLanguage');
+            if (!langInput) {
+                langInput = document.createElement('input');
+                langInput.type = 'hidden';
+                langInput.id = 'selectedLanguage';
+                langInput.name = 'selectedLanguage';
+                document.getElementById('interviewForm').appendChild(langInput);
+            }
+            langInput.value = selectedLanguage;
+        });
+    </script>
 </body>
 </html>
 
