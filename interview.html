@@ -317,8 +317,9 @@
                 'optional-text': '(optional)',
                 'section2-title': 'Section 2 - Children Details',
                 'q5-label': 'How many children do you have?',
-                'q6-label': 'What is the current age of each child? (e.g., 4 years, 2 years, 8 months)',
-                'q6-placeholder': 'e.g., Child 1: 4 years, Child 2: 2 years, Child 3: 8 months',
+                'q6-label': 'What is the current age?',
+                'years-label': 'Years',
+                'months-label': 'Months',
                 'section3-title': 'Section 3 - Feeding Method by Age for Each Child',
                 'section3-description': 'Please answer each question for each child.',
                 'section3-comments-label': 'Additional comments for this child',
@@ -399,8 +400,9 @@
                 'optional-text': '(optional)',
                 'section2-title': 'Abschnitt 2 - Angaben zu den Kindern',
                 'q5-label': 'Wie viele Kinder haben Sie?',
-                'q6-label': 'Wie alt ist jedes Kind derzeit? (z.B. 4 Jahre, 2 Jahre, 8 Monate)',
-                'q6-placeholder': 'z.B. Kind 1: 4 Jahre, Kind 2: 2 Jahre, Kind 3: 8 Monate',
+                'q6-label': 'Wie alt ist das Kind derzeit?',
+                'years-label': 'Jahre',
+                'months-label': 'Monate',
                 'section3-title': 'Abschnitt 3 - Fütterungsmethode nach Alter für jedes Kind',
                 'section3-description': 'Bitte beantworten Sie jede Frage für jedes Kind.',
                 'section3-comments-label': 'Zusätzliche Kommentare für dieses Kind',
@@ -481,8 +483,9 @@
                 'optional-text': '(optionnel)',
                 'section2-title': 'Section 2 - Détails sur les enfants',
                 'q5-label': 'Combien d\'enfants avez-vous?',
-                'q6-label': 'Quel est l\'âge actuel de chaque enfant? (par ex. 4 ans, 2 ans, 8 mois)',
-                'q6-placeholder': 'par ex. Enfant 1: 4 ans, Enfant 2: 2 ans, Enfant 3: 8 mois',
+                'q6-label': 'Quel est l\'âge actuel?',
+                'years-label': 'Ans',
+                'months-label': 'Mois',
                 'section3-title': 'Section 3 - Méthode d\'alimentation par âge pour chaque enfant',
                 'section3-description': 'Veuillez répondre à chaque question pour chaque enfant.',
                 'section3-comments-label': 'Commentaires supplémentaires pour cet enfant',
@@ -563,8 +566,9 @@
                 'optional-text': '(אופציונלי)',
                 'section2-title': 'שלב 2 - פרטים על הילדים',
                 'q5-label': 'כמה ילדים יש לך?',
-                'q6-label': 'מה גיל כל ילד כיום? (לדוגמה: 4, שנתיים, 8 חודשים)',
-                'q6-placeholder': 'לדוגמה: ילד 1: 4 שנים, ילד 2: שנתיים, ילד 3: 8 חודשים',
+                'q6-label': 'מה הגיל הנוכחי?',
+                'years-label': 'שנים',
+                'months-label': 'חודשים',
                 'section3-title': 'שלב 3 - אופן ההאכלה לפי גיל לכל ילד',
                 'section3-description': 'נא לענות על כל שאלה עבור כל ילד.',
                 'section3-comments-label': 'הערות נוספות עבור ילד זה',
@@ -645,8 +649,9 @@
                 'optional-text': '(اختياري)',
                 'section2-title': 'القسم 2 - تفاصيل عن الأطفال',
                 'q5-label': 'كم طفلاً لديك؟',
-                'q6-label': 'ما هو العمر الحالي لكل طفل؟ (مثلاً: 4 سنوات، سنتان، 8 أشهر)',
-                'q6-placeholder': 'مثلاً: الطفل 1: 4 سنوات، الطفل 2: سنتان، الطفل 3: 8 أشهر',
+                'q6-label': 'ما هو العمر الحالي?',
+                'years-label': 'سنوات',
+                'months-label': 'أشهر',
                 'section3-title': 'القسم 3 - طريقة التغذية حسب العمر لكل طفل',
                 'section3-description': 'يرجى الإجابة على كل سؤال لكل طفل.',
                 'section3-comments-label': 'تعليقات إضافية لهذا الطفل',
@@ -727,8 +732,9 @@
                 'optional-text': '(opcional)',
                 'section2-title': 'Sección 2 - Detalles sobre los niños',
                 'q5-label': '¿Cuántos hijos tienes?',
-                'q6-label': '¿Cuál es la edad actual de cada hijo? (ej: 4 años, 2 años, 8 meses)',
-                'q6-placeholder': 'ej: Hijo 1: 4 años, Hijo 2: 2 años, Hijo 3: 8 meses',
+                'q6-label': '¿Cuál es la edad actual?',
+                'years-label': 'Años',
+                'months-label': 'Meses',
                 'section3-title': 'Sección 3 - Método de alimentación por edad para cada hijo',
                 'section3-description': 'Por favor responde cada pregunta para cada hijo.',
                 'section3-comments-label': 'Comentarios adicionales para este hijo',
@@ -913,15 +919,7 @@
             
             for (let i = 0; i < numChildren; i++) {
                 const childLabel = getChildLabel(currentLang, i);
-                const ageQuestionText = {
-                    en: 'What is the current age? (e.g., 4 years, 2 years, 8 months)',
-                    de: 'Wie alt ist das Kind derzeit? (z.B. 4 Jahre, 2 Jahre, 8 Monate)',
-                    fr: 'Quel est l\'âge actuel? (par ex. 4 ans, 2 ans, 8 mois)',
-                    he: 'מה הגיל הנוכחי? (לדוגמה: 4 שנים, שנתיים, 8 חודשים)',
-                    ar: 'ما هو العمر الحالي؟ (مثلاً: 4 سنوات، سنتان، 8 أشهر)',
-                    es: '¿Cuál es la edad actual? (ej: 4 años, 2 años, 8 meses)'
-                };
-                const ageQuestion = ageQuestionText[currentLang] || ageQuestionText.en;
+                const ageQuestion = langData['q6-label'] || 'What is the current age?';
                 
                 const formGroup = document.createElement('div');
                 formGroup.className = 'form-group full-width';
@@ -933,18 +931,77 @@
                 
                 const label = document.createElement('label');
                 label.className = 'form-label';
-                label.innerHTML = `${ageQuestion} <span class="required">${langData['required-text'] || '(required)'}</span>`;
+                label.textContent = ageQuestion;
                 
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.name = `childAge_child${i + 1}`;
-                input.className = 'form-input';
-                input.required = true;
-                input.placeholder = langData['q6-placeholder'] || 'e.g., 4 years, 2 years, 8 months';
+                // Create container for age dropdowns
+                const ageContainer = document.createElement('div');
+                ageContainer.className = 'age-inputs-container';
+                ageContainer.style.display = 'flex';
+                ageContainer.style.gap = '1rem';
+                ageContainer.style.alignItems = 'flex-end';
+                
+                // Years dropdown
+                const yearsWrapper = document.createElement('div');
+                yearsWrapper.style.flex = '1';
+                
+                const yearsLabel = document.createElement('label');
+                yearsLabel.className = 'form-label';
+                yearsLabel.style.fontSize = '0.9rem';
+                yearsLabel.style.marginBottom = '0.5rem';
+                yearsLabel.textContent = langData['years-label'] || 'Years';
+                
+                const yearsSelect = document.createElement('select');
+                yearsSelect.name = `childAgeYears_child${i + 1}`;
+                yearsSelect.className = 'form-input';
+                yearsSelect.required = true;
+                
+                // Add years options (0 to 15+)
+                for (let y = 0; y <= 15; y++) {
+                    const option = document.createElement('option');
+                    option.value = y;
+                    option.textContent = y.toString();
+                    yearsSelect.appendChild(option);
+                }
+                const option15Plus = document.createElement('option');
+                option15Plus.value = '15+';
+                option15Plus.textContent = '15+';
+                yearsSelect.appendChild(option15Plus);
+                
+                yearsWrapper.appendChild(yearsLabel);
+                yearsWrapper.appendChild(yearsSelect);
+                
+                // Months dropdown
+                const monthsWrapper = document.createElement('div');
+                monthsWrapper.style.flex = '1';
+                
+                const monthsLabel = document.createElement('label');
+                monthsLabel.className = 'form-label';
+                monthsLabel.style.fontSize = '0.9rem';
+                monthsLabel.style.marginBottom = '0.5rem';
+                monthsLabel.textContent = langData['months-label'] || 'Months';
+                
+                const monthsSelect = document.createElement('select');
+                monthsSelect.name = `childAgeMonths_child${i + 1}`;
+                monthsSelect.className = 'form-input';
+                monthsSelect.required = true;
+                
+                // Add months options (0 to 12)
+                for (let m = 0; m <= 12; m++) {
+                    const option = document.createElement('option');
+                    option.value = m;
+                    option.textContent = m.toString();
+                    monthsSelect.appendChild(option);
+                }
+                
+                monthsWrapper.appendChild(monthsLabel);
+                monthsWrapper.appendChild(monthsSelect);
+                
+                ageContainer.appendChild(yearsWrapper);
+                ageContainer.appendChild(monthsWrapper);
                 
                 formGroup.appendChild(childLabelElement);
                 formGroup.appendChild(label);
-                formGroup.appendChild(input);
+                formGroup.appendChild(ageContainer);
                 container.appendChild(formGroup);
             }
         }
