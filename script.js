@@ -66,7 +66,10 @@ function checkPitchAccess() {
 // Form submission handler for contact form
 function handleContactForm() {
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
+    if (!contactForm) {
+        // Form doesn't exist on this page - silently return (this is normal)
+        return;
+    }
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -102,14 +105,13 @@ function handleContactForm() {
                 alert('Please fill in all required fields. Missing: ' + missing.join(', '));
             }
         });
-    }
 }
 
 // Form submission handler for interview form
 function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
     if (!interviewForm) {
-        console.error('Interview form not found!');
+        // Form doesn't exist on this page - silently return (this is normal)
         return;
     }
     
