@@ -70,27 +70,27 @@
                             <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                         </p>
 
-                        <h3 class="form-section-title">Contact Information</h3>
+                        <h3 class="form-section-title" data-translate="section1-title">Contact Information</h3>
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">First Name <span class="required">(required)</span></label>
+                                <label class="form-label"><span data-translate="first-name-label">First Name</span> <span class="required" data-translate="required-text">(required)</span></label>
                                 <input type="text" name="firstName" class="form-input" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Last Name <span class="required">(required)</span></label>
+                                <label class="form-label"><span data-translate="last-name-label">Last Name</span> <span class="required" data-translate="required-text">(required)</span></label>
                                 <input type="text" name="lastName" class="form-input" required>
                             </div>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Email <span class="required">(required)</span></label>
+                            <label class="form-label"><span data-translate="email-label">Email</span> <span class="required" data-translate="required-text">(required)</span></label>
                             <input type="email" name="email" class="form-input" required>
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Phone Number <span class="required">(optional)</span></label>
-                            <input type="tel" name="phone" class="form-input" placeholder="(123) 456-7890">
+                            <label class="form-label"><span data-translate="phone-label">Phone Number</span> <span class="required" data-translate="optional-text">(optional)</span></label>
+                            <input type="tel" name="phone" class="form-input" data-translate-placeholder="phone-placeholder" placeholder="(123) 456-7890">
                         </div>
 
                         <!-- Section 2: Children Details -->
@@ -110,107 +110,118 @@
                         <h3 class="form-section-title" data-translate="section3-title">Section 3 - Feeding Method by Age for Each Child</h3>
                         <p class="section-description" data-translate="section3-description">Please answer each question for each child.</p>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
-                            <select name="feeding0to3" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
-                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                            </select>
-                        </div>
+                        <!-- Container for per-child questions -->
+                        <div id="childrenQuestionsContainer"></div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
-                            <select name="feeding3to6" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
-                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                            </select>
-                        </div>
+                        <!-- Template for per-child questions (hidden) -->
+                        <div id="childQuestionTemplate" style="display: none;">
+                            <div class="child-question-group" data-child-index="">
+                                <h4 class="child-label" data-translate-child="">First child</h4>
+                                
+                                <!-- Section 3: Feeding Method by Age -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q7-label">What was the main feeding method during months 0-3? <span class="required">(required)</span></label>
+                                    <select name="feeding0to3" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                                    </select>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
-                            <select name="feeding6to12" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
-                                <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
-                                <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
-                                <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
-                                <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
-                                <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
-                            </select>
-                        </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q8-label">What was the feeding method during age 3-6 months? <span class="required">(required)</span></label>
+                                    <select name="feeding3to6" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula">Breastfeeding + Formula</option>
+                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                                    </select>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
-                            <select name="breastfeedingAfter1" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="yes" data-translate="opt-yes">Yes</option>
-                                <option value="no" data-translate="opt-no">No</option>
-                            </select>
-                        </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
+                                    <select name="feeding6to12" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                                        <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
+                                        <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                                        <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                                        <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                                        <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                                    </select>
+                                </div>
 
-                        <!-- Section 4: Stopping Breastfeeding -->
-                        <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
-                        <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q10-label">Did you continue breastfeeding after age 1 year? <span class="required">(required)</span></label>
+                                    <select name="breastfeedingAfter1" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="yes" data-translate="opt-yes">Yes</option>
+                                        <option value="no" data-translate="opt-no">No</option>
+                                    </select>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months") <span class="required">(required)</span></label>
-                            <textarea name="stoppedAge" class="form-textarea" rows="2" data-translate-placeholder="q11-placeholder" placeholder="e.g., I stopped at 5 months" required></textarea>
-                        </div>
+                                <!-- Section 4: Stopping Breastfeeding -->
+                                <h3 class="form-section-title" data-translate="section4-title">Section 4 - Stopping Breastfeeding</h3>
+                                <p class="section-description" data-translate="section4-description">Please answer for each child separately.</p>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
-                            <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." required></textarea>
-                        </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q11-label">If you stopped breastfeeding - at what age of the baby did you stop? (Please specify in months clearly, e.g., "I stopped at 5 months") <span class="required">(required)</span></label>
+                                    <textarea name="stoppedAge" class="form-textarea" rows="2" data-translate-placeholder="q11-placeholder" placeholder="e.g., I stopped at 5 months" required></textarea>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
-                            <select name="notBreastfeedingReason" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
-                                <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
-                                <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
-                                <option value="combination" data-translate="opt-combination">Combination of factors</option>
-                                <option value="other" data-translate="opt-other">Other</option>
-                            </select>
-                        </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q12-label">What was the main reason for stopping breastfeeding? <span class="required">(required)</span></label>
+                                    <textarea name="stoppingReason" class="form-textarea" rows="4" data-translate-placeholder="q12-placeholder" placeholder="Please describe the main reason..." required></textarea>
+                                </div>
 
-                        <!-- Section 5: Support and Assistance -->
-                        <h3 class="form-section-title" data-translate="section5-title">Section 5 - Support and Assistance</h3>
-                        <p class="section-description" data-translate="section5-description">For each child separately.</p>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q13-label">If you did not breastfeed at all - what was the reason? <span class="required">(required)</span></label>
+                                    <select name="notBreastfeedingReason" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
+                                        <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
+                                        <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
+                                        <option value="combination" data-translate="opt-combination">Combination of factors</option>
+                                        <option value="other" data-translate="opt-other">Other</option>
+                                    </select>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
-                            <select name="professionalSupport" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="lactation-consultant" data-translate="opt-lactation-consultant">Lactation consultant</option>
-                                <option value="parenting-guide" data-translate="opt-parenting-guide">Parenting / Development guide</option>
-                                <option value="health-clinic" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</option>
-                                <option value="family-social-only" data-translate="opt-family-social-only">Family / Social support only</option>
-                                <option value="no-support" data-translate="opt-no-support">I did not receive support</option>
-                            </select>
-                        </div>
+                                <!-- Section 5: Support and Assistance -->
+                                <h3 class="form-section-title" data-translate="section5-title">Section 5 - Support and Assistance</h3>
+                                <p class="section-description" data-translate="section5-description">For each child separately.</p>
 
-                        <div class="form-group full-width">
-                            <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
-                            <select name="aidsUsed" class="form-input" required>
-                                <option value="" data-translate="select-option">Please select...</option>
-                                <option value="nursing-pillow" data-translate="opt-nursing-pillow">Nursing pillow</option>
-                                <option value="home-scale" data-translate="opt-home-scale">Home baby scale</option>
-                                <option value="feeding-app" data-translate="opt-feeding-app">Feeding tracking app</option>
-                                <option value="pumping" data-translate="opt-pumping">Pumping (manual / electric)</option>
-                                <option value="no-aids" data-translate="opt-no-aids">I did not use aids</option>
-                                <option value="other" data-translate="opt-other">Other</option>
-                            </select>
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q14-label">Did you receive professional breastfeeding support? <span class="required">(required)</span></label>
+                                    <select name="professionalSupport" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="lactation-consultant" data-translate="opt-lactation-consultant">Lactation consultant</option>
+                                        <option value="parenting-guide" data-translate="opt-parenting-guide">Parenting / Development guide</option>
+                                        <option value="health-clinic" data-translate="opt-health-clinic">Health clinic (Tipat Halav)</option>
+                                        <option value="family-social-only" data-translate="opt-family-social-only">Family / Social support only</option>
+                                        <option value="no-support" data-translate="opt-no-support">I did not receive support</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="form-label" data-translate="q15-label">Did you use any aids during the first periods? <span class="required">(required)</span></label>
+                                    <select name="aidsUsed" class="form-input" required>
+                                        <option value="" data-translate="select-option">Please select...</option>
+                                        <option value="nursing-pillow" data-translate="opt-nursing-pillow">Nursing pillow</option>
+                                        <option value="home-scale" data-translate="opt-home-scale">Home baby scale</option>
+                                        <option value="feeding-app" data-translate="opt-feeding-app">Feeding tracking app</option>
+                                        <option value="pumping" data-translate="opt-pumping">Pumping (manual / electric)</option>
+                                        <option value="no-aids" data-translate="opt-no-aids">I did not use aids</option>
+                                        <option value="other" data-translate="opt-other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Section 6: Interest in Future Product -->
@@ -276,6 +287,14 @@
                 'language-prompt': 'Select your preferred language:',
                 'page-title': 'Subscribe to Interview',
                 'page-description': 'Help us shape the future of breastfeeding monitoring. By participating in our interview, you\'ll share valuable insights that will directly influence the development of MonBe. Fill out this short survey to subscribe.',
+                'section1-title': 'Contact Information',
+                'first-name-label': 'First Name',
+                'last-name-label': 'Last Name',
+                'email-label': 'Email',
+                'phone-label': 'Phone Number',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(required)',
+                'optional-text': '(optional)',
                 'section2-title': 'Section 2 - Children Details',
                 'q5-label': 'How many children do you have?',
                 'q6-label': 'What is the current age of each child? (e.g., 4 years, 2 years, 8 months)',
@@ -347,6 +366,14 @@
                 'language-prompt': 'Wählen Sie Ihre bevorzugte Sprache:',
                 'page-title': 'Für Interview anmelden',
                 'page-description': 'Helfen Sie uns, die Zukunft der Stillüberwachung zu gestalten. Durch Ihre Teilnahme an unserem Interview teilen Sie wertvolle Einblicke, die die Entwicklung von MonBe direkt beeinflussen werden. Füllen Sie diese kurze Umfrage aus, um sich anzumelden.',
+                'section1-title': 'Kontaktinformationen',
+                'first-name-label': 'Vorname',
+                'last-name-label': 'Nachname',
+                'email-label': 'E-Mail',
+                'phone-label': 'Telefonnummer',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(erforderlich)',
+                'optional-text': '(optional)',
                 'section2-title': 'Abschnitt 2 - Angaben zu den Kindern',
                 'q5-label': 'Wie viele Kinder haben Sie?',
                 'q6-label': 'Wie alt ist jedes Kind derzeit? (z.B. 4 Jahre, 2 Jahre, 8 Monate)',
@@ -418,6 +445,14 @@
                 'language-prompt': 'Sélectionnez votre langue préférée:',
                 'page-title': 'S\'inscrire à l\'entretien',
                 'page-description': 'Aidez-nous à façonner l\'avenir de la surveillance de l\'allaitement. En participant à notre entretien, vous partagerez des informations précieuses qui influenceront directement le développement de MonBe. Remplissez ce court questionnaire pour vous inscrire.',
+                'section1-title': 'Informations de contact',
+                'first-name-label': 'Prénom',
+                'last-name-label': 'Nom de famille',
+                'email-label': 'E-mail',
+                'phone-label': 'Numéro de téléphone',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(obligatoire)',
+                'optional-text': '(optionnel)',
                 'section2-title': 'Section 2 - Détails sur les enfants',
                 'q5-label': 'Combien d\'enfants avez-vous?',
                 'q6-label': 'Quel est l\'âge actuel de chaque enfant? (par ex. 4 ans, 2 ans, 8 mois)',
@@ -489,6 +524,14 @@
                 'language-prompt': 'בחר את השפה המועדפת שלך:',
                 'page-title': 'הירשם לראיון',
                 'page-description': 'עזרו לנו לעצב את עתיד ניטור ההנקה. על ידי השתתפות בראיון שלנו, תשתפו תובנות יקרות ערך שישפיעו ישירות על פיתוח MonBe. מלאו את הסקר הקצר הזה כדי להירשם.',
+                'section1-title': 'פרטי יצירת קשר',
+                'first-name-label': 'שם פרטי',
+                'last-name-label': 'שם משפחה',
+                'email-label': 'אימייל',
+                'phone-label': 'מספר טלפון',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(נדרש)',
+                'optional-text': '(אופציונלי)',
                 'section2-title': 'שלב 2 - פרטים על הילדים',
                 'q5-label': 'כמה ילדים יש לך?',
                 'q6-label': 'מה גיל כל ילד כיום? (לדוגמה: 4, שנתיים, 8 חודשים)',
@@ -560,6 +603,14 @@
                 'language-prompt': 'اختر لغتك المفضلة:',
                 'page-title': 'الاشتراك في المقابلة',
                 'page-description': 'ساعدينا في تشكيل مستقبل مراقبة الرضاعة الطبيعية. من خلال المشاركة في مقابلتنا، ستشاركين رؤى قيمة ستؤثر مباشرة على تطوير MonBe. املئي هذا الاستبيان القصير للاشتراك.',
+                'section1-title': 'معلومات الاتصال',
+                'first-name-label': 'الاسم الأول',
+                'last-name-label': 'اسم العائلة',
+                'email-label': 'البريد الإلكتروني',
+                'phone-label': 'رقم الهاتف',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(مطلوب)',
+                'optional-text': '(اختياري)',
                 'section2-title': 'القسم 2 - تفاصيل عن الأطفال',
                 'q5-label': 'كم طفلاً لديك؟',
                 'q6-label': 'ما هو العمر الحالي لكل طفل؟ (مثلاً: 4 سنوات، سنتان، 8 أشهر)',
@@ -631,6 +682,14 @@
                 'language-prompt': 'Selecciona tu idioma preferido:',
                 'page-title': 'Suscribirse a la entrevista',
                 'page-description': 'Ayúdanos a dar forma al futuro del monitoreo de la lactancia. Al participar en nuestra entrevista, compartirás información valiosa que influirá directamente en el desarrollo de MonBe. Completa esta breve encuesta para suscribirte.',
+                'section1-title': 'Información de contacto',
+                'first-name-label': 'Nombre',
+                'last-name-label': 'Apellido',
+                'email-label': 'Correo electrónico',
+                'phone-label': 'Número de teléfono',
+                'phone-placeholder': '(123) 456-7890',
+                'required-text': '(requerido)',
+                'optional-text': '(opcional)',
                 'section2-title': 'Sección 2 - Detalles sobre los niños',
                 'q5-label': '¿Cuántos hijos tienes?',
                 'q6-label': '¿Cuál es la edad actual de cada hijo? (ej: 4 años, 2 años, 8 meses)',
@@ -716,6 +775,51 @@
                         }
                     } else if (element.tagName === 'OPTION') {
                         element.textContent = langData[key];
+                    } else if (element.tagName === 'LABEL') {
+                        // For labels, check if there are required/optional spans to preserve
+                        const requiredSpan = element.querySelector('span.required[data-translate="required-text"]');
+                        const optionalSpan = element.querySelector('span.required[data-translate="optional-text"]');
+                        
+                        if (requiredSpan || optionalSpan) {
+                            // Preserve the span and update the text before it
+                            const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
+                            if (spanText) {
+                                (requiredSpan || optionalSpan).textContent = spanText;
+                            }
+                            // Update the main label text (everything before the span)
+                            const labelText = langData[key];
+                            if (labelText) {
+                                // Find the text node before the span and update it
+                                let textNode = null;
+                                for (let node of element.childNodes) {
+                                    if (node.nodeType === 3) { // Text node
+                                        textNode = node;
+                                    } else if (node === (requiredSpan || optionalSpan)) {
+                                        break;
+                                    }
+                                }
+                                if (textNode) {
+                                    textNode.textContent = labelText + ' ';
+                                } else {
+                                    // Insert text before the span
+                                    element.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
+                                }
+                            }
+                        } else {
+                            // Check if label contains hardcoded (required) or (optional) text
+                            const labelText = langData[key];
+                            if (labelText) {
+                                // Get current HTML to check for required/optional spans
+                                const currentHTML = element.innerHTML;
+                                if (currentHTML.includes('<span class="required">(required)</span>')) {
+                                    element.innerHTML = labelText + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
+                                } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
+                                    element.innerHTML = labelText + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
+                                } else {
+                                    element.textContent = labelText;
+                                }
+                            }
+                        }
                     } else {
                         element.textContent = langData[key];
                     }
@@ -740,6 +844,119 @@
             }
         }
 
+        // Function to get child label translation
+        function getChildLabel(lang, childIndex) {
+            const childLabels = {
+                en: ['First child', 'Second child', 'Third child', 'Fourth child', 'Fifth child', 'Sixth child', 'Seventh child', 'Eighth child', 'Ninth child', 'Tenth child'],
+                de: ['Erstes Kind', 'Zweites Kind', 'Drittes Kind', 'Viertes Kind', 'Fünftes Kind', 'Sechstes Kind', 'Siebentes Kind', 'Achtes Kind', 'Neuntes Kind', 'Zehntes Kind'],
+                fr: ['Premier enfant', 'Deuxième enfant', 'Troisième enfant', 'Quatrième enfant', 'Cinquième enfant', 'Sixième enfant', 'Septième enfant', 'Huitième enfant', 'Neuvième enfant', 'Dixième enfant'],
+                he: ['ילד ראשון', 'ילד שני', 'ילד שלישי', 'ילד רביעי', 'ילד חמישי', 'ילד שישי', 'ילד שביעי', 'ילד שמיני', 'ילד תשיעי', 'ילד עשירי'],
+                ar: ['الطفل الأول', 'الطفل الثاني', 'الطفل الثالث', 'الطفل الرابع', 'الطفل الخامس', 'الطفل السادس', 'الطفل السابع', 'الطفل الثامن', 'الطفل التاسع', 'الطفل العاشر'],
+                es: ['Primer hijo', 'Segundo hijo', 'Tercer hijo', 'Cuarto hijo', 'Quinto hijo', 'Sexto hijo', 'Séptimo hijo', 'Octavo hijo', 'Noveno hijo', 'Décimo hijo']
+            };
+            const labels = childLabels[lang] || childLabels.en;
+            return labels[childIndex] || `Child ${childIndex + 1}`;
+        }
+
+        // Function to generate child questions
+        function generateChildQuestions(numChildren, currentLang) {
+            const container = document.getElementById('childrenQuestionsContainer');
+            const template = document.getElementById('childQuestionTemplate');
+            
+            // Clear existing questions
+            container.innerHTML = '';
+            
+            if (numChildren < 1) return;
+            
+            for (let i = 0; i < numChildren; i++) {
+                // Clone the template
+                const clone = template.querySelector('.child-question-group').cloneNode(true);
+                clone.setAttribute('data-child-index', i);
+                
+                // Update child label
+                const childLabel = clone.querySelector('.child-label');
+                childLabel.textContent = getChildLabel(currentLang, i);
+                
+                // Update all input/select/textarea names to include child index
+                clone.querySelectorAll('input, select, textarea').forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    if (originalName) {
+                        input.setAttribute('name', `${originalName}_child${i + 1}`);
+                    }
+                });
+                
+                // Translate the cloned element
+                translateElement(clone, currentLang);
+                
+                container.appendChild(clone);
+            }
+        }
+
+        // Function to translate a single element and its children
+        function translateElement(element, lang) {
+            const langData = translations[lang] || translations.en;
+            
+            // Translate all elements with data-translate attribute
+            element.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (langData[key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        const placeholderKey = el.getAttribute('data-translate-placeholder');
+                        if (placeholderKey && langData[placeholderKey]) {
+                            el.placeholder = langData[placeholderKey];
+                        }
+                    } else if (el.tagName === 'OPTION') {
+                        el.textContent = langData[key];
+                    } else if (el.tagName === 'LABEL') {
+                        const requiredSpan = el.querySelector('span.required[data-translate="required-text"]');
+                        const optionalSpan = el.querySelector('span.required[data-translate="optional-text"]');
+                        
+                        if (requiredSpan || optionalSpan) {
+                            const spanText = requiredSpan ? langData['required-text'] : langData['optional-text'];
+                            if (spanText) {
+                                (requiredSpan || optionalSpan).textContent = spanText;
+                            }
+                            const labelText = langData[key];
+                            if (labelText) {
+                                let textNode = null;
+                                for (let node of el.childNodes) {
+                                    if (node.nodeType === 3) {
+                                        textNode = node;
+                                    } else if (node === (requiredSpan || optionalSpan)) {
+                                        break;
+                                    }
+                                }
+                                if (textNode) {
+                                    textNode.textContent = labelText + ' ';
+                                } else {
+                                    el.insertBefore(document.createTextNode(labelText + ' '), (requiredSpan || optionalSpan));
+                                }
+                            }
+                        } else {
+                            const currentHTML = el.innerHTML;
+                            if (currentHTML.includes('<span class="required">(required)</span>')) {
+                                el.innerHTML = langData[key] + ' <span class="required">' + (langData['required-text'] || '(required)') + '</span>';
+                            } else if (currentHTML.includes('<span class="required">(optional)</span>')) {
+                                el.innerHTML = langData[key] + ' <span class="required">' + (langData['optional-text'] || '(optional)') + '</span>';
+                            } else {
+                                el.textContent = langData[key];
+                            }
+                        }
+                    } else {
+                        el.textContent = langData[key];
+                    }
+                }
+            });
+            
+            // Translate placeholders
+            element.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-translate-placeholder');
+                if (langData[key]) {
+                    el.placeholder = langData[key];
+                }
+            });
+        }
+
         // Language selector functionality
         document.addEventListener('DOMContentLoaded', function() {
             const languageButtons = document.querySelectorAll('.language-btn');
@@ -747,6 +964,20 @@
 
             // Translate page on load
             translatePage(selectedLanguage);
+
+            // Watch for changes in number of children
+            const numberOfChildrenInput = document.querySelector('input[name="numberOfChildren"]');
+            if (numberOfChildrenInput) {
+                numberOfChildrenInput.addEventListener('input', function() {
+                    const numChildren = parseInt(this.value) || 0;
+                    generateChildQuestions(numChildren, selectedLanguage);
+                });
+                
+                // Generate initial questions if value exists
+                if (numberOfChildrenInput.value) {
+                    generateChildQuestions(parseInt(numberOfChildrenInput.value) || 0, selectedLanguage);
+                }
+            }
 
             // Set initial selected language
             languageButtons.forEach(btn => {
@@ -770,6 +1001,13 @@
                     
                     // Translate page
                     translatePage(selectedLanguage);
+                    
+                    // Regenerate child questions with new language
+                    const numberOfChildrenInput = document.querySelector('input[name="numberOfChildren"]');
+                    if (numberOfChildrenInput && numberOfChildrenInput.value) {
+                        const numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                        generateChildQuestions(numChildren, selectedLanguage);
+                    }
                     
                     // Add language to form as hidden field
                     let langInput = document.getElementById('selectedLanguage');
