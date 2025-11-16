@@ -175,10 +175,54 @@ function handleInterviewForm() {
         // Netlify Forms expects URL-encoded format
         const formDataPairs = [];
         
-        // Add all form fields (FormData automatically handles multiple values for checkboxes)
-        for (const [key, value] of formData.entries()) {
-            formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+        // Collect all form fields, handling multiple checkbox values
+        const formFields = {};
+        
+        // Process all form inputs
+        const inputs = this.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            const name = input.name;
+            if (!name) return;
+            
+            // Always include hidden fields
+            if (input.type === 'hidden') {
+                formFields[name] = input.value || '';
+            } else if (input.type === 'checkbox') {
+                if (input.checked) {
+                    if (!formFields[name]) {
+                        formFields[name] = [];
+                    }
+                    formFields[name].push(input.value);
+                }
+            } else if (input.type === 'radio') {
+                if (input.checked) {
+                    formFields[name] = input.value;
+                }
+            } else {
+                // For text, select, textarea, etc.
+                // Include all values (even empty strings for required fields that passed validation)
+                formFields[name] = input.value || '';
+            }
+        });
+        
+        // Build URL-encoded string
+        for (const [key, value] of Object.entries(formFields)) {
+            if (Array.isArray(value)) {
+                // Multiple values for checkboxes
+                value.forEach(val => {
+                    formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(val));
+                });
+            } else {
+                formDataPairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+            }
         }
+        
+        // Ensure form-name is included for Netlify
+        if (!formFields['form-name']) {
+            formDataPairs.unshift('form-name=' + encodeURIComponent('interview'));
+        }
+        
+        console.log('Submitting form data:', formDataPairs.join('&'));
         
         // Submit to Netlify Forms
         fetch('/', {
