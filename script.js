@@ -134,14 +134,18 @@ function handleInterviewForm() {
     console.log('Interview form handler attached');
 
     interviewForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        console.log('Form submit event triggered');
+
         const form = this;
 
         if (!form.checkValidity()) {
-            console.log('Form validation failed (HTML5)');
-            e.preventDefault();
+            console.log('Form validation failed');
             form.reportValidity();
             return;
         }
+
+        console.log('Form HTML5 validation passed');
 
         const numberInput = document.getElementById('numberOfChildren');
         let numberOfChildren = 0;
@@ -165,7 +169,6 @@ function handleInterviewForm() {
         }
 
         if (!checkboxValid) {
-            e.preventDefault();
             alert(
                 'Please select at least one option for professional breastfeeding support for: ' +
                 missingCheckboxes.join(', ')
@@ -188,7 +191,6 @@ function handleInterviewForm() {
         }
 
         if (!aidsCheckboxValid) {
-            e.preventDefault();
             alert(
                 'Please select at least one option for aids used during the first periods for: ' +
                 missingAidsCheckboxes.join(', ')
@@ -196,7 +198,50 @@ function handleInterviewForm() {
             return;
         }
 
-        console.log('All validations passed - submitting to Netlify');
+        const formData = new FormData(form);
+        console.log('Form data collected, submitting...');
+
+        fetch('/', {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        })
+            .then(function () {
+                console.log('Form submitted successfully');
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                const thankYouMessages = {
+                    en: 'Thank you! We will be in touch soon.',
+                    de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
+                    fr: 'Merci! Nous vous contacterons bientôt.',
+                    he: 'תודה! ניצור קשר בקרוב.',
+                    ar: 'شكراً! سنتواصل איתך בקרוב.',
+                    es: '¡Gracias! Nos pondremos en contacto pronto.'
+                };
+                const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
+
+                alert(thankYouMessage);
+
+                form.reset();
+
+                const agesContainer = document.getElementById('childrenAgesContainer');
+                const questionsContainer = document.getElementById('childrenQuestionsContainer');
+                if (agesContainer) agesContainer.innerHTML = '';
+                if (questionsContainer) questionsContainer.innerHTML = '';
+            })
+            .catch(function (error) {
+                console.error('Form submission error:', error);
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                const errorMessages = {
+                    en: 'Sorry, there was an error submitting your survey. Please try again.',
+                    de: 'Entschuldigung, beim Absenden Ihrer Umfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+                    fr: 'Désolé, une erreur s\'est produite lors de l\'envoi de votre questionnaire. Veuillez réessayer.',
+                    he: 'מצטערים, אירעה שגיאה בשליחת השאלון. אנא נסה שוב.',
+                    ar: 'عذراً، حدث خطأ أثناء إرسال الاستبيان. يرجى المحاولة مرة أخرى.',
+                    es: 'Lo sentimos, hubo un error al enviar su cuestionario. Por favor, inténtelo de nuevo.'
+                };
+                const errorMessage = errorMessages[currentLang] || errorMessages.en;
+                alert(errorMessage);
+            });
     });
 }
 
