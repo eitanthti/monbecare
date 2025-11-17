@@ -166,6 +166,7 @@ function handleInterviewForm() {
 
         const entries = [];
         formData.forEach((value, key) => {
+            if (key === 'form-name' || key === 'bot-field') return;
             entries.push({ name: key, value });
         });
 
@@ -200,6 +201,8 @@ function populateReviewFormFields(entries) {
     container.innerHTML = '';
 
     entries.forEach(({ name, value }) => {
+        if (name === 'form-name' || name === 'bot-field') return;
+
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = name;
