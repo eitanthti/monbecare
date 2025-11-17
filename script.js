@@ -332,10 +332,8 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // CRITICAL: Prevent default submission and use fetch instead
+    // Natural form submission (no fetch) - Netlify will handle it
     reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        
         console.log('=== FORM SUBMISSION STARTED ===');
 
         const container = document.getElementById('finalFieldsContainer');
@@ -344,64 +342,25 @@ function handleInterviewReviewPage() {
         console.log('Hidden inputs at submit time:', hiddenInputs.length);
         
         if (hiddenInputs.length === 0) {
+            e.preventDefault();
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        // Build FormData from the form (which includes hidden inputs)
-        const formData = new FormData(reviewForm);
-        
-        // Verify form-name is present
-        if (!formData.has('form-name')) {
-            console.warn('Adding form-name');
-            formData.append('form-name', 'interview');
-        }
-        
-        // Count fields
-        let fieldCount = 0;
+        // Log what's being submitted
         const fieldNames = [];
-        formData.forEach((value, key) => {
-            fieldCount++;
-            if (fieldNames.length < 20) {
-                fieldNames.push(key);
-            }
-        });
+        for (let i = 0; i < Math.min(20, hiddenInputs.length); i++) {
+            fieldNames.push(hiddenInputs[i].name);
+        }
+        console.log('Submitting', hiddenInputs.length, 'fields:', fieldNames);
         
-        console.log('Total fields in FormData:', fieldCount);
-        console.log('Sample field names:', fieldNames);
-
-        // Encode for Netlify
-        const encodedData = new URLSearchParams(formData).toString();
-        console.log('Encoded data length:', encodedData.length, 'characters');
-        console.log('First 500 chars:', encodedData.substring(0, 500));
-
-        // Submit via fetch
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encodedData
-        })
-            .then(function (response) {
-                console.log('=== RESPONSE RECEIVED ===');
-                console.log('Status:', response.status);
-                console.log('OK:', response.ok);
-                
-                if (response.ok || response.status === 200) {
-                    console.log('✅ SUCCESS');
-                    sessionStorage.removeItem('interviewSubmission');
-                    alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
-                    window.location.href = 'index.html';
-                } else {
-                    console.error('❌ FAILED - Status:', response.status);
-                    alert('There was an error (status ' + response.status + '). Please try again.');
-                }
-            })
-            .catch(function (error) {
-                console.error('=== NETWORK ERROR ===');
-                console.error('Error:', error);
-                alert('Network error. Please check your connection and try again.');
-            });
+        // Clear sessionStorage before form submits naturally
+        sessionStorage.removeItem('interviewSubmission');
+        
+        // Let form submit naturally to Netlify - NO preventDefault()
+        // Netlify will process all hidden inputs and redirect
+        console.log('✅ Form submitting naturally to Netlify...');
     });
 }
 
@@ -453,8 +412,16 @@ function toggleFAQ(faqNumber) {
     }
 }
 
+// Version logging
+function logVersion() {
+    console.log('v1.3.0');
+}
+
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function () {
+    // Log version on every page load
+    logVersion();
+    
     checkPitchAccess();
     handleContactForm();
     handleInterviewForm();
