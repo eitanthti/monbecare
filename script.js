@@ -254,13 +254,23 @@ function populateReviewSummary(entries) {
 
 function populateReviewFormFields(entries) {
     const container = document.getElementById('formFieldsContainer');
+    const debugInfo = document.getElementById('debugInfo');
+
     if (!container) {
         console.error('❌ formFieldsContainer not found!');
         return 0;
     }
-    
+
     container.innerHTML = '';
     console.log('=== POPULATING REAL FORM FIELDS ===');
+    console.log('Entries received:', entries.length);
+
+    // Show debug info on page
+    let debugHtml = `<strong>Entries received:</strong> ${entries.length}<br>`;
+    debugHtml += '<strong>Sample entries:</strong><br>';
+    entries.slice(0, 5).forEach((entry, i) => {
+        debugHtml += `&nbsp;&nbsp;${entry.name}: ${entry.value}<br>`;
+    });
 
     // Group entries by name (for checkboxes that have multiple values)
     const grouped = {};
@@ -269,6 +279,11 @@ function populateReviewFormFields(entries) {
         if (!grouped[name]) grouped[name] = [];
         grouped[name].push(value || '');
     });
+
+    debugHtml += `<strong>Grouped fields:</strong> ${Object.keys(grouped).length}<br>`;
+    debugInfo.innerHTML = debugHtml;
+
+    console.log('Grouped fields:', Object.keys(grouped).length);
 
     let fieldCount = 0;
     
@@ -335,17 +350,34 @@ function populateReviewFormFields(entries) {
     });
 
     console.log('✅ Created', fieldCount, 'real form fields');
-    
+
+    // Update debug info with field creation results
+    debugHtml += `<strong>Fields created:</strong> ${fieldCount}<br>`;
+    debugHtml += '<strong>Field list:</strong><br>';
+
     // Verify they're in the DOM and form
     const allFields = container.querySelectorAll('input, select, textarea');
     console.log('Verification: Found', allFields.length, 'form fields in DOM');
-    
+
+    allFields.forEach((field, index) => {
+        if (index < 10) { // Show first 10 fields
+            const value = field.type === 'checkbox' ? (field.checked ? field.value : 'unchecked') : field.value;
+            debugHtml += `&nbsp;&nbsp;${field.name} (${field.tagName.toLowerCase()}): ${value}<br>`;
+        }
+    });
+
+    if (allFields.length > 10) {
+        debugHtml += `&nbsp;&nbsp;... and ${allFields.length - 10} more fields<br>`;
+    }
+
+    debugInfo.innerHTML = debugHtml;
+
     const form = document.getElementById('interviewReviewForm');
     if (form) {
         const fieldsInForm = form.querySelectorAll('input, select, textarea');
         console.log('Fields inside form:', fieldsInForm.length);
     }
-    
+
     return fieldCount;
 }
 

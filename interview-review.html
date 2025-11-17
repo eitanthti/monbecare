@@ -47,8 +47,11 @@
                         <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                     </p>
 
-                    <!-- Real form fields populated by JavaScript - hidden but real inputs -->
-                    <div id="formFieldsContainer" style="display: none;"></div>
+                    <!-- Real form fields populated by JavaScript - temporarily visible for debugging -->
+                    <div id="formFieldsContainer" style="display: block; border: 1px solid red; padding: 10px; margin: 10px 0; background: #ffebee;">
+                        <h4 style="color: red; margin: 0 0 10px 0;">DEBUG: Form Fields (should be populated)</h4>
+                        <div id="debugInfo" style="font-size: 12px; color: #666;"></div>
+                    </div>
 
                     <div class="review-actions">
                         <button type="submit" class="submit-btn">Confirm & Submit</button>
