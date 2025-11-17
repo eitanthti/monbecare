@@ -1696,3 +1696,137 @@ body[dir="rtl"] .form-section-title,
         width: 100%;
     }
 }
+
+/* Version Log Styles */
+.version-log {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+    padding: 4rem 2rem;
+    min-height: 60vh;
+}
+
+.version-log .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.version-log-title {
+    font-size: 2.5rem;
+    color: #2d5a7b;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.version-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.version-entry {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid #2d5a7b;
+}
+
+.version-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.version-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e8eef5;
+}
+
+.version-number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d5a7b;
+    background: linear-gradient(135deg, #2d5a7b 0%, #4a7a9e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.version-date {
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+.version-changes h4 {
+    color: #2d3748;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.version-changes ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.version-changes li {
+    color: #4a5568;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.version-changes li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #2d5a7b;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .version-log {
+        padding: 3rem 1rem;
+    }
+
+    .version-log-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .version-entry {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .version-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .version-number {
+        font-size: 1.2rem;
+    }
+
+    .version-date {
+        font-size: 0.85rem;
+    }
+
+    .version-changes h4 {
+        font-size: 1rem;
+    }
+
+    .version-changes li {
+        font-size: 0.9rem;
+        padding-left: 1.2rem;
+    }
+}
