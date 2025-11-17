@@ -129,7 +129,7 @@ function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
     if (!interviewForm) return;
 
-    interviewForm.addEventListener('submit', function(e) {
+    interviewForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         if (!this.checkValidity()) {
@@ -167,12 +167,62 @@ function handleInterviewForm() {
         const entries = [];
         formData.forEach((value, key) => {
             if (key === 'form-name' || key === 'bot-field') return;
-            entries.push({ name: key, value });
+            entries.push({ name: key, value: value });
         });
 
         sessionStorage.setItem('interviewSubmission', JSON.stringify(entries));
+
         window.location.href = 'interview-review.html';
     });
+}
+
+function getReviewLabel(fieldName) {
+    if (fieldName === 'firstName') return 'First name';
+    if (fieldName === 'lastName') return 'Last name';
+    if (fieldName === 'email') return 'Email';
+    if (fieldName === 'phone') return 'Phone number';
+    if (fieldName === 'numberOfChildren') return 'Number of children';
+    if (fieldName === 'selectedLanguage') return 'Selected language';
+
+    let m = fieldName.match(/^childAgeYears_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - age (years)';
+    m = fieldName.match(/^childAgeMonths_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - age (months)';
+
+    m = fieldName.match(/^feeding0to3_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding age 0 to 3 months';
+    m = fieldName.match(/^feeding3to6_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding age 3 to 6 months';
+    m = fieldName.match(/^feeding6to12_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding age 6 to 12 months';
+    m = fieldName.match(/^breastfeedingAfter1_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - breastfeeding after age 1';
+    m = fieldName.match(/^section3AdditionalComments_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding comments';
+
+    m = fieldName.match(/^stoppedAgeYears_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - age stopped breastfeeding (years)';
+    m = fieldName.match(/^stoppedAgeMonths_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - age stopped breastfeeding (months)';
+    m = fieldName.match(/^stoppingReason_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - reason for stopping breastfeeding';
+    m = fieldName.match(/^notBreastfeedingReason_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - reason for not breastfeeding';
+
+    m = fieldName.match(/^professionalSupport_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - professional support';
+    m = fieldName.match(/^aidsUsed_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - aids used';
+    m = fieldName.match(/^section3Comments_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - additional comments';
+
+    if (fieldName === 'productInterest') return 'Interest in breastfeeding monitor';
+    if (fieldName === 'importantFeatures') return 'Important features';
+    if (fieldName === 'interviewMethod') return 'Preferred interview method';
+    if (fieldName === 'bestTime') return 'Best time to reach you';
+    if (fieldName === 'additionalComments') return 'Additional comments';
+
+    return fieldName;
 }
 
 function populateReviewSummary(entries) {
@@ -180,15 +230,27 @@ function populateReviewSummary(entries) {
     if (!summaryList) return;
 
     summaryList.innerHTML = '';
+
+    const grouped = {};
     entries.forEach(({ name, value }) => {
+        if (!grouped[name]) grouped[name] = [];
+        grouped[name].push(value);
+    });
+
+    Object.keys(grouped).forEach((name) => {
+        const values = grouped[name];
+
         const row = document.createElement('div');
         row.className = 'review-row';
+
         const label = document.createElement('span');
         label.className = 'review-label';
-        label.textContent = name;
+        label.textContent = getReviewLabel(name);
+
         const val = document.createElement('span');
         val.className = 'review-value';
-        val.textContent = value;
+        val.textContent = values.join(', ');
+
         row.appendChild(label);
         row.appendChild(val);
         summaryList.appendChild(row);
@@ -222,16 +284,17 @@ function handleInterviewReviewPage() {
     }
 
     const entries = JSON.parse(stored);
+
     populateReviewSummary(entries);
     populateReviewFormFields(entries);
 
-    reviewForm.addEventListener('submit', function() {
+    reviewForm.addEventListener('submit', function () {
         sessionStorage.removeItem('interviewSubmission');
     });
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
-        editBtn.addEventListener('click', function() {
+        editBtn.addEventListener('click', function () {
             window.location.href = 'interview.html';
         });
     }
