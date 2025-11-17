@@ -321,57 +321,10 @@ function handleInterviewReviewPage() {
         });
     }
 
-    reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const dataFromStorage = JSON.parse(
-            sessionStorage.getItem('interviewSubmission') || '[]'
-        );
-
-        if (!dataFromStorage.length) {
-            alert('Session expired. Please fill the interview again.');
-            window.location.href = 'interview.html';
-            return;
-        }
-
-        // Build FormData for Netlify
-        const formData = new FormData();
-        formData.append('form-name', 'interview');
-
-        dataFromStorage.forEach(({ name, value }) => {
-            formData.append(name, value);
-        });
-
-        const encoded = new URLSearchParams(formData).toString();
-        console.log(
-            'Interview review encoded data (first 400 chars):',
-            encoded.substring(0, 400)
-        );
-
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encoded
-        })
-            .then(function (response) {
-                console.log('Interview review response status:', response.status);
-                if (response.ok || response.status === 200) {
-                    alert('Thank you, your interview answers were sent successfully.');
-                    sessionStorage.removeItem('interviewSubmission');
-                    // Redirect or show thank you
-                    window.location.href = 'home.html';
-                } else {
-                    alert(
-                        'Sorry, there was an error sending your interview. Please try again.'
-                    );
-                }
-            })
-            .catch(function (error) {
-                console.error('Interview review submit error:', error);
-                alert(
-                    'Sorry, there was an error sending your interview. Please try again.'
-                );
-            });
+    reviewForm.addEventListener('submit', function () {
+        // Clear sessionStorage on submit - let the form submit normally to Netlify
+        // All hidden inputs created by populateReviewFormFields() will be submitted
+        sessionStorage.removeItem('interviewSubmission');
     });
 }
 
