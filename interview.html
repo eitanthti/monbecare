@@ -98,16 +98,18 @@
                             <input type="number" name="numberOfChildren" id="numberOfChildren" class="form-input" min="1" max="5" required>
                         </div>
 
-                        <!-- Section 2: Children Details -->
-                        <h3 class="form-section-title" data-translate="section2-title">Section 2 - Children Details</h3>
+                        <!-- Section 2: Children Details (dynamic content lives INSIDE FORM for Netlify) -->
+                        <section class="children-details-section">
+                            <h3 class="form-section-title" data-translate="section2-title">Section 2 - Children Details</h3>
 
-                        <!-- Container for dynamic children ages -->
-                        <div id="childrenAgesContainer"></div>
+                            <!-- Container for dynamic children ages -->
+                            <div id="childrenAgesContainer"></div>
 
-                        <!-- Container for per-child questions -->
-                        <div id="childrenQuestionsContainer">
-                            <!-- Section 3 title will be inserted here when children are added -->
-                        </div>
+                            <!-- Container for per-child questions -->
+                            <div id="childrenQuestionsContainer">
+                                <!-- Section 3 title will be inserted here when children are added -->
+                            </div>
+                        </section>
 
                         <!-- Section 6: Interest in Future Product -->
                         <h3 class="form-section-title" data-translate="section6-title">Section 6 - Interest in Future Product</h3>
