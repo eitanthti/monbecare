@@ -308,11 +308,23 @@ function handleInterviewReviewPage() {
     }
 
     const entries = JSON.parse(stored);
+    console.log('Review page - entries loaded:', entries.length, 'fields');
+    console.log('Sample entries:', entries.slice(0, 5));
 
     // Show a nice summary
     populateReviewSummary(entries);
-    // Optional: keep hidden inputs for debugging etc.
+    // Create hidden inputs for Netlify submission
     populateReviewFormFields(entries);
+    
+    // Verify hidden inputs were created
+    const container = document.getElementById('finalFieldsContainer');
+    if (container) {
+        const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
+        console.log('Hidden inputs created:', hiddenInputs.length);
+        if (hiddenInputs.length > 0) {
+            console.log('Sample hidden input:', hiddenInputs[0].name, '=', hiddenInputs[0].value);
+        }
+    }
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -321,10 +333,22 @@ function handleInterviewReviewPage() {
         });
     }
 
-    reviewForm.addEventListener('submit', function () {
+    reviewForm.addEventListener('submit', function (e) {
+        // Verify form has all hidden inputs before submitting
+        const container = document.getElementById('finalFieldsContainer');
+        const hiddenInputs = container ? container.querySelectorAll('input[type="hidden"]') : [];
+        console.log('Form submitting with', hiddenInputs.length, 'hidden fields');
+        
+        // Log first few field names to verify
+        if (hiddenInputs.length > 0) {
+            console.log('Field names being submitted:', Array.from(hiddenInputs).slice(0, 5).map(inp => inp.name));
+        }
+        
         // Clear sessionStorage on submit - let the form submit normally to Netlify
         // All hidden inputs created by populateReviewFormFields() will be submitted
         sessionStorage.removeItem('interviewSubmission');
+        
+        // Form will submit normally (no preventDefault) so Netlify receives all fields
     });
 }
 
