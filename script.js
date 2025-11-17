@@ -253,50 +253,100 @@ function populateReviewSummary(entries) {
 }
 
 function populateReviewFormFields(entries) {
-    const container = document.getElementById('finalFieldsContainer');
+    const container = document.getElementById('formFieldsContainer');
     if (!container) {
-        console.error('❌ finalFieldsContainer not found!');
+        console.error('❌ formFieldsContainer not found!');
         return 0;
     }
     
     container.innerHTML = '';
-    console.log('=== POPULATING HIDDEN FIELDS ===');
+    console.log('=== POPULATING REAL FORM FIELDS ===');
 
-    // Don't skip form-name or bot-field - we need everything!
-    let inputCount = 0;
-    
+    // Group entries by name (for checkboxes that have multiple values)
+    const grouped = {};
     entries.forEach(({ name, value }) => {
-        // Skip Netlify meta fields as they're already in the form
         if (name === 'form-name' || name === 'bot-field') return;
+        if (!grouped[name]) grouped[name] = [];
+        grouped[name].push(value || '');
+    });
+
+    let fieldCount = 0;
+    
+    // Create real form fields based on field type
+    Object.keys(grouped).forEach((name) => {
+        const values = grouped[name];
         
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value || ''; // Ensure we always have a value, even if empty
-        input.setAttribute('data-field', name); // Add identifier for debugging
-        container.appendChild(input);
-        inputCount++;
+        // Determine field type based on name pattern
+        if (name.includes('professionalSupport_') || name.includes('aidsUsed_')) {
+            // Checkboxes - create one for each value
+            values.forEach((value) => {
+                if (value) { // Only create if value exists
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = name;
+                    checkbox.value = value;
+                    checkbox.checked = true; // They were selected
+                    container.appendChild(checkbox);
+                    fieldCount++;
+                }
+            });
+        } else if (name.includes('importantFeatures') || 
+                   name.includes('additionalComments') || 
+                   name.includes('section3AdditionalComments_') ||
+                   name.includes('stoppingReason_') ||
+                   name.includes('section3Comments_')) {
+            // Textareas
+            const textarea = document.createElement('textarea');
+            textarea.name = name;
+            textarea.value = values[0] || '';
+            container.appendChild(textarea);
+            fieldCount++;
+        } else if (name.includes('productInterest') ||
+                   name.includes('interviewMethod') ||
+                   name.includes('feeding') ||
+                   name.includes('breastfeedingAfter') ||
+                   name.includes('stoppedAgeYears') ||
+                   name.includes('stoppedAgeMonths') ||
+                   name.includes('notBreastfeedingReason')) {
+            // Selects - create select with value
+            const select = document.createElement('select');
+            select.name = name;
+            const option = document.createElement('option');
+            option.value = values[0] || '';
+            option.textContent = values[0] || '';
+            option.selected = true;
+            select.appendChild(option);
+            container.appendChild(select);
+            fieldCount++;
+        } else {
+            // Regular text/number inputs
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = name;
+            input.value = values[0] || '';
+            container.appendChild(input);
+            fieldCount++;
+        }
         
         // Debug first 5 fields
-        if (inputCount <= 5) {
-            console.log('Created input:', name, '=', (value || '').substring(0, 50));
+        if (fieldCount <= 5) {
+            console.log('Created field:', name, '=', (values[0] || '').substring(0, 50));
         }
     });
 
-    console.log('✅ Created', inputCount, 'hidden inputs');
+    console.log('✅ Created', fieldCount, 'real form fields');
     
-    // Verify they're in the DOM
-    const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
-    console.log('Verification: Found', hiddenInputs.length, 'hidden inputs in DOM');
+    // Verify they're in the DOM and form
+    const allFields = container.querySelectorAll('input, select, textarea');
+    console.log('Verification: Found', allFields.length, 'form fields in DOM');
     
-    // Verify they're inside the form
     const form = document.getElementById('interviewReviewForm');
     if (form) {
-        const inputsInForm = form.querySelectorAll('input[type="hidden"]');
-        console.log('Inputs inside form:', inputsInForm.length);
+        const fieldsInForm = form.querySelectorAll('input, select, textarea');
+        console.log('Fields inside form:', fieldsInForm.length);
     }
     
-    return inputCount;
+    return fieldCount;
 }
 
 // Step 2 on review page - CRITICAL FIX
@@ -333,71 +383,46 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // Dual submission: Email + Netlify
+    // Form submission to Netlify
     reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
         console.log('=== FORM SUBMISSION STARTED ===');
 
-        const container = document.getElementById('finalFieldsContainer');
-        const hiddenInputs = container ? container.querySelectorAll('input[type="hidden"]') : [];
+        const container = document.getElementById('formFieldsContainer');
+        const formFields = container ? container.querySelectorAll('input, select, textarea') : [];
         
-        console.log('Hidden inputs at submit time:', hiddenInputs.length);
+        console.log('Form fields at submit time:', formFields.length);
         
-        if (hiddenInputs.length === 0) {
+        // Validate that we have data
+        if (formFields.length === 0) {
+            e.preventDefault(); // Only prevent if no data
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        // Get all form data from sessionStorage
-        const stored = sessionStorage.getItem('interviewSubmission');
-        if (!stored) {
-            alert('No form data found. Please go back and fill out the form again.');
-            window.location.href = 'interview.html';
-            return;
+        // Verify all fields are actually in the form
+        const allFormFields = reviewForm.querySelectorAll('input, select, textarea');
+        console.log('Total form fields in form:', allFormFields.length);
+        
+        if (allFormFields.length < formFields.length) {
+            console.warn('⚠️ Some form fields may not be in the form!');
         }
 
-        const entries = JSON.parse(stored);
-        
-        // Format data for email
-        let emailBody = 'New Interview Submission\n';
-        emailBody += '='.repeat(50) + '\n\n';
-        
-        entries.forEach(function({ name, value }) {
-            const label = getReviewLabel(name);
-            emailBody += label + ': ' + value + '\n';
+        // Log what we're submitting (first 5 fields for debugging)
+        console.log('Submitting to Netlify with', formFields.length, 'fields');
+        formFields.forEach(function(field, index) {
+            if (index < 5) {
+                const value = field.type === 'checkbox' ? (field.checked ? field.value : '') : field.value;
+                console.log('Field:', field.name, '=', (value || '').substring(0, 50));
+            }
         });
-
-        console.log('Sending via email...');
         
-        // Initialize EmailJS (configure at https://www.emailjs.com/)
-        // TODO: Replace these values with your EmailJS credentials
-        emailjs.init('YOUR_PUBLIC_KEY_HERE'); 
+        // Clean up sessionStorage
+        sessionStorage.removeItem('interviewSubmission');
         
-        // Send email to eitan.h@monbecare.com
-        emailjs.send('YOUR_SERVICE_ID_HERE', 'YOUR_TEMPLATE_ID_HERE', {
-            to_email: 'eitan.h@monbecare.com',
-            subject: 'New Interview Submission - MonBe',
-            message: emailBody,
-            from_name: entries.find(e => e.name === 'firstName')?.value || 'User',
-            reply_to: entries.find(e => e.name === 'email')?.value || ''
-        })
-        .then(function(response) {
-            console.log('✅ Email sent successfully:', response.status, response.text);
-            
-            // Also submit to Netlify
-            console.log('Submitting to Netlify...');
-            sessionStorage.removeItem('interviewSubmission');
-            reviewForm.submit();
-        })
-        .catch(function(error) {
-            console.error('❌ Email failed:', error);
-            
-            // Still try Netlify even if email fails
-            console.log('Email failed, trying Netlify anyway...');
-            sessionStorage.removeItem('interviewSubmission');
-            reviewForm.submit();
-        });
+        // Let the form submit naturally to Netlify
+        // (don't call preventDefault, so natural HTML form submission happens)
+        console.log('Form submitting naturally to Netlify with real form fields...');
     });
 }
 

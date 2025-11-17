@@ -32,7 +32,7 @@
 
                 <div id="reviewSummaryList" class="review-summary"></div>
 
-                <!-- This form submits naturally to Netlify -->
+                <!-- This form submits naturally to Netlify with real form fields -->
                 <form name="interview" 
                       method="POST"
                       action="/thank-you.html" 
@@ -47,8 +47,8 @@
                         <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                     </p>
 
-                    <!-- Hidden fields will be inserted here by JavaScript -->
-                    <div id="finalFieldsContainer"></div>
+                    <!-- Real form fields populated by JavaScript - hidden but real inputs -->
+                    <div id="formFieldsContainer" style="display: none;"></div>
 
                     <div class="review-actions">
                         <button type="submit" class="submit-btn">Confirm & Submit</button>
@@ -215,8 +215,6 @@
         </form>
     </div>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
