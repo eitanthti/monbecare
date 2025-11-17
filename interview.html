@@ -163,7 +163,7 @@
             <!-- Hidden form for Netlify build-time detection (required for dynamic fields) -->
             <!-- This form is ONLY for Netlify to detect field names - the main form submits normally -->
             <div style="display: none;">
-                <form name="interview" data-netlify="true" data-netlify-honeypot="bot-field">
+                <form name="interview" netlify netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="interview" />
                     <input name="bot-field" />
                     <!-- Static fields -->
@@ -177,6 +177,7 @@
                     <input name="interviewMethod" />
                     <input name="bestTime" />
                     <textarea name="additionalComments"></textarea>
+                    <input name="selectedLanguage" />
                     <!-- Dynamic fields for up to 5 children (for Netlify detection) -->
                     <!-- Section 2: Children ages -->
                     <input name="childAgeYears_child1" />
