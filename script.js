@@ -349,124 +349,35 @@ function handleInterviewReviewPage() {
     }
 
     reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Get the stored entries from sessionStorage (this is the source of truth)
-        const stored = sessionStorage.getItem('interviewSubmission');
-        if (!stored) {
-            alert('No form data found. Please go back and fill out the form again.');
-            window.location.href = 'interview.html';
-            return;
-        }
-
-        const entries = JSON.parse(stored);
-        console.log('Submitting interview form with', entries.length, 'total entries from sessionStorage');
-
-        // Verify hidden inputs were created
+        // Verify hidden inputs were created before allowing submission
         const container = document.getElementById('finalFieldsContainer');
         const hiddenInputs = container ? container.querySelectorAll('input[type="hidden"]') : [];
-        console.log('Hidden inputs in DOM:', hiddenInputs.length);
+        
+        console.log('Form submitting with', hiddenInputs.length, 'hidden fields');
         
         if (hiddenInputs.length === 0) {
+            e.preventDefault();
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
-
-        // Build FormData explicitly from entries to ensure ALL data is included
-        // This is more reliable than relying on FormData(this) for dynamically added fields
-        const formData = new FormData();
-        
-        // Add form-name (required by Netlify)
-        formData.append('form-name', 'interview');
-        
-        // Add bot-field (empty, for honeypot)
-        formData.append('bot-field', '');
-        
-        // Add ALL entries from sessionStorage (this ensures we get everything from interview-review)
-        // Group entries by name to handle multiple values (checkboxes)
-        const groupedEntries = {};
-        entries.forEach(({ name, value }) => {
-            // Skip Netlify meta fields (we already added them above)
-            if (name === 'form-name' || name === 'bot-field') return;
-            
-            if (!groupedEntries[name]) {
-                groupedEntries[name] = [];
-            }
-            groupedEntries[name].push(value);
-        });
-
-        // Add all fields to FormData (multiple values for checkboxes)
-        Object.keys(groupedEntries).forEach(name => {
-            groupedEntries[name].forEach(value => {
-                formData.append(name, value);
-            });
-        });
-
-        // Verify all fields are in FormData
-        const allFieldNames = Array.from(formData.keys());
-        console.log('Total unique field names in FormData:', allFieldNames.length);
-        console.log('Field names:', allFieldNames);
-        
-        // Count total entries (including multiple values for same field)
-        let totalEntries = 0;
-        formData.forEach(() => totalEntries++);
-        console.log('Total field entries (including multiple values):', totalEntries);
         
         // Log sample values for verification
         const sampleFields = [];
-        formData.forEach((value, key) => {
-            if (sampleFields.length < 15) {
-                const displayValue = typeof value === 'string' ? (value.length > 50 ? value.substring(0, 50) + '...' : value) : value;
-                sampleFields.push(key + '=' + displayValue);
-            }
-        });
+        for (let i = 0; i < Math.min(15, hiddenInputs.length); i++) {
+            const inp = hiddenInputs[i];
+            const displayValue = inp.value.length > 50 ? inp.value.substring(0, 50) + '...' : inp.value;
+            sampleFields.push(inp.name + '=' + displayValue);
+        }
         console.log('Sample fields being submitted:', sampleFields);
+        console.log('Total hidden inputs:', hiddenInputs.length);
         
-        // Submit to Netlify using AJAX (as per Netlify docs for JavaScript-rendered forms)
-        // Requirements: URL-encode body, include Content-Type header
-        const encodedData = new URLSearchParams(formData).toString();
-        console.log('Encoded data length:', encodedData.length, 'characters');
+        // Clear sessionStorage - form will submit naturally to Netlify
+        sessionStorage.removeItem('interviewSubmission');
         
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encodedData
-        })
-            .then(function (response) {
-                console.log('Interview form response status:', response.status);
-                console.log('Response headers:', response.headers);
-                
-                // Get response text to see what Netlify actually returned
-                return response.text().then(function (responseText) {
-                    console.log('Response body (first 500 chars):', responseText.substring(0, 500));
-                    
-                    // Check if response contains success indicators
-                    const isSuccess = response.ok && (
-                        responseText.includes('Thank you') || 
-                        responseText.includes('success') || 
-                        responseText.includes('form') ||
-                        response.status === 200
-                    );
-                    
-                    if (isSuccess) {
-                        // Clear sessionStorage on success
-                        sessionStorage.removeItem('interviewSubmission');
-                        alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
-                        // Redirect to home page
-                        window.location.href = 'index.html';
-                    } else {
-                        console.error('Interview form submission may have failed. Status:', response.status);
-                        console.error('Full response:', responseText);
-                        alert('Sorry, there was an error submitting your form. Please check the console for details and try again.');
-                    }
-                });
-            })
-            .catch(function (error) {
-                console.error('Interview form submission error:', error);
-                console.error('Error details:', error.message, error.stack);
-                alert('Sorry, there was an error submitting your form. Please try again.');
-            });
+        // Let the form submit naturally - Netlify will handle it
+        // No preventDefault(), no fetch() - just natural HTML form submission
+        console.log('Form submitting naturally to Netlify...');
     });
 }
 
