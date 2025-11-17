@@ -127,121 +127,46 @@ function handleContactForm() {
 // Form submission handler for interview form
 function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
-    if (!interviewForm) {
-        return;
-    }
+    if (!interviewForm) return;
 
-    console.log('Interview form handler attached');
+    interviewForm.addEventListener('submit', function(e) {
 
-    interviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        console.log('Form submit event triggered');
-
-        const form = this;
-
-        if (!form.checkValidity()) {
-            console.log('Form validation failed');
-            form.reportValidity();
+        // HTML5 validation
+        if (!this.checkValidity()) {
+            e.preventDefault();
+            this.reportValidity();
             return;
         }
 
-        console.log('Form HTML5 validation passed');
+        const numChildren = parseInt(document.getElementById('numberOfChildren').value || '0');
 
-        const numberInput = document.getElementById('numberOfChildren');
-        let numberOfChildren = 0;
-        if (numberInput && numberInput.value !== '') {
-            numberOfChildren = parseInt(numberInput.value, 10) || 0;
-        }
-        console.log('Number of children:', numberOfChildren);
+        let missingPS = [];
+        let missingAids = [];
 
-        let checkboxValid = true;
-        let missingCheckboxes = [];
+        for (let i = 1; i <= numChildren; i++) {
+            const ps = document.querySelectorAll('input[name="professionalSupport_child' + i + '"]');
+            const aids = document.querySelectorAll('input[name="aidsUsed_child' + i + '"]');
 
-        for (let i = 1; i <= numberOfChildren; i++) {
-            const checkboxes = document.querySelectorAll(
-                'input[name="professionalSupport_child' + i + '"]'
-            );
-            const checked = Array.from(checkboxes).some(function (cb) { return cb.checked; });
-            if (!checked) {
-                checkboxValid = false;
-                missingCheckboxes.push('Child ' + i);
-            }
+            if (!Array.from(ps).some(cb => cb.checked)) missingPS.push('Child ' + i);
+            if (!Array.from(aids).some(cb => cb.checked)) missingAids.push('Child ' + i);
         }
 
-        if (!checkboxValid) {
-            alert(
-                'Please select at least one option for professional breastfeeding support for: ' +
-                missingCheckboxes.join(', ')
-            );
+        if (missingPS.length > 0) {
+            e.preventDefault();
+            alert('Select at least one professional support option for: ' + missingPS.join(', '));
             return;
         }
 
-        let aidsCheckboxValid = true;
-        let missingAidsCheckboxes = [];
-
-        for (let i = 1; i <= numberOfChildren; i++) {
-            const aidsCheckboxes = document.querySelectorAll(
-                'input[name="aidsUsed_child' + i + '"]'
-            );
-            const checked = Array.from(aidsCheckboxes).some(function (cb) { return cb.checked; });
-            if (!checked) {
-                aidsCheckboxValid = false;
-                missingAidsCheckboxes.push('Child ' + i);
-            }
-        }
-
-        if (!aidsCheckboxValid) {
-            alert(
-                'Please select at least one option for aids used during the first periods for: ' +
-                missingAidsCheckboxes.join(', ')
-            );
+        if (missingAids.length > 0) {
+            e.preventDefault();
+            alert('Select at least one aids option for: ' + missingAids.join(', '));
             return;
         }
 
-        const formData = new FormData(form);
-        console.log('Form data collected, submitting...');
+        // DO NOT PREVENT DEFAULT HERE
+        // Let Netlify capture all fields automatically
 
-        fetch('/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-        })
-            .then(function () {
-                console.log('Form submitted successfully');
-                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                const thankYouMessages = {
-                    en: 'Thank you! We will be in touch soon.',
-                    de: 'Vielen Dank! Wir werden uns bald bei Ihnen melden.',
-                    fr: 'Merci! Nous vous contacterons bientôt.',
-                    he: 'תודה! ניצור קשר בקרוב.',
-                    ar: 'شكراً! سنتواصل איתך בקרוב.',
-                    es: '¡Gracias! Nos pondremos en contacto pronto.'
-                };
-                const thankYouMessage = thankYouMessages[currentLang] || thankYouMessages.en;
-
-                alert(thankYouMessage);
-
-                form.reset();
-
-                const agesContainer = document.getElementById('childrenAgesContainer');
-                const questionsContainer = document.getElementById('childrenQuestionsContainer');
-                if (agesContainer) agesContainer.innerHTML = '';
-                if (questionsContainer) questionsContainer.innerHTML = '';
-            })
-            .catch(function (error) {
-                console.error('Form submission error:', error);
-                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                const errorMessages = {
-                    en: 'Sorry, there was an error submitting your survey. Please try again.',
-                    de: 'Entschuldigung, beim Absenden Ihrer Umfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-                    fr: 'Désolé, une erreur s\'est produite lors de l\'envoi de votre questionnaire. Veuillez réessayer.',
-                    he: 'מצטערים, אירעה שגיאה בשליחת השאלון. אנא נסה שוב.',
-                    ar: 'عذراً، حدث خطأ أثناء إرسال الاستبيان. يرجى المحاولة مرة أخرى.',
-                    es: 'Lo sentimos, hubo un error al enviar su cuestionario. Por favor, inténtelo de nuevo.'
-                };
-                const errorMessage = errorMessages[currentLang] || errorMessages.en;
-                alert(errorMessage);
-            });
+        console.log("All validations passed - form will submit normally.");
     });
 }
 
