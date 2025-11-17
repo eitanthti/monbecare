@@ -449,9 +449,15 @@ function toggleFAQ(faqNumber) {
     }
 }
 
+// ============================================
+// VERSION - UPDATE THIS WITH EACH COMMIT
+// ============================================
+const APP_VERSION = '1.3.1';
+// ============================================
+
 // Version logging
 function logVersion() {
-    console.log('v1.3.0');
+    console.log('v' + APP_VERSION);
 }
 
 // Initialize page-specific functionality
