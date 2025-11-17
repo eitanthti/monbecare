@@ -130,15 +130,14 @@ function handleInterviewForm() {
     if (!interviewForm) return;
 
     interviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        // HTML5 validation
         if (!this.checkValidity()) {
-            e.preventDefault();
             this.reportValidity();
             return;
         }
 
-        const numChildren = parseInt(document.getElementById('numberOfChildren').value || '0');
+        const numChildren = parseInt(document.getElementById('numberOfChildren').value || '0', 10);
 
         let missingPS = [];
         let missingAids = [];
@@ -152,22 +151,87 @@ function handleInterviewForm() {
         }
 
         if (missingPS.length > 0) {
-            e.preventDefault();
             alert('Select at least one professional support option for: ' + missingPS.join(', '));
             return;
         }
 
         if (missingAids.length > 0) {
-            e.preventDefault();
             alert('Select at least one aids option for: ' + missingAids.join(', '));
             return;
         }
 
-        // DO NOT PREVENT DEFAULT HERE
-        // Let Netlify capture all fields automatically
+        const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        const formData = new FormData(this);
+        formData.set('selectedLanguage', selectedLanguage);
 
-        console.log("All validations passed - form will submit normally.");
+        const entries = [];
+        formData.forEach((value, key) => {
+            entries.push({ name: key, value });
+        });
+
+        sessionStorage.setItem('interviewSubmission', JSON.stringify(entries));
+        window.location.href = 'interview-review.html';
     });
+}
+
+function populateReviewSummary(entries) {
+    const summaryList = document.getElementById('reviewSummaryList');
+    if (!summaryList) return;
+
+    summaryList.innerHTML = '';
+    entries.forEach(({ name, value }) => {
+        const row = document.createElement('div');
+        row.className = 'review-row';
+        const label = document.createElement('span');
+        label.className = 'review-label';
+        label.textContent = name;
+        const val = document.createElement('span');
+        val.className = 'review-value';
+        val.textContent = value;
+        row.appendChild(label);
+        row.appendChild(val);
+        summaryList.appendChild(row);
+    });
+}
+
+function populateReviewFormFields(entries) {
+    const container = document.getElementById('finalFieldsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    entries.forEach(({ name, value }) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        container.appendChild(input);
+    });
+}
+
+function handleInterviewReviewPage() {
+    const reviewForm = document.getElementById('interviewReviewForm');
+    if (!reviewForm) return;
+
+    const stored = sessionStorage.getItem('interviewSubmission');
+    if (!stored) {
+        window.location.href = 'interview.html';
+        return;
+    }
+
+    const entries = JSON.parse(stored);
+    populateReviewSummary(entries);
+    populateReviewFormFields(entries);
+
+    reviewForm.addEventListener('submit', function() {
+        sessionStorage.removeItem('interviewSubmission');
+    });
+
+    const editBtn = document.getElementById('editInterviewBtn');
+    if (editBtn) {
+        editBtn.addEventListener('click', function() {
+            window.location.href = 'interview.html';
+        });
+    }
 }
 
 // Animation sequence for home page
@@ -234,6 +298,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle interview form
     handleInterviewForm();
+
+    // Handle review page
+    handleInterviewReviewPage();
 
     // Start animation sequence for home page after 0.5 seconds
     setTimeout(function () {

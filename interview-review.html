@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Interview Submission | MonBe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">MonBe Inc.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="our-story.html">Our Story</a></li>
+                <li><a href="pitch.html">Pitch</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="interview.html">Interview</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="interview-page review-page">
+        <div class="interview-container">
+            <div class="interview-left">
+                <h1>Review Your Interview Submission</h1>
+                <p class="review-description">
+                    Please review your answers below. If everything looks good, click
+                    <strong>Confirm & Submit</strong> to send your responses. To make changes, use the
+                    <strong>Go Back & Edit</strong> button.
+                </p>
+
+                <div id="reviewSummaryList" class="review-summary"></div>
+
+                <form name="interview" method="POST" action="/interview.html"
+                      data-netlify="true" data-netlify-honeypot="bot-field"
+                      id="interviewReviewForm" class="review-form">
+                    <input type="hidden" name="form-name" value="interview" />
+                    <p style="display: none;">
+                        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                    </p>
+
+                    <div id="finalFieldsContainer"></div>
+
+                    <div class="review-actions">
+                        <button type="submit" class="submit-btn">Confirm & Submit</button>
+                        <button type="button" class="secondary-btn" id="editInterviewBtn">Go Back & Edit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="interview-right">
+                <div class="info-card">
+                    <h3>What happens next?</h3>
+                    <p>Once submitted, we’ll review your information and reach out to coordinate the interview.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
