@@ -295,35 +295,9 @@ function handleInterviewReviewPage() {
         });
     }
 
-    reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(reviewForm);
-
-        if (!formData.has('form-name')) {
-            formData.append('form-name', 'interview');
-        }
-
-        const encodedData = new URLSearchParams(formData).toString();
-        console.log('Interview final payload:', encodedData.substring(0, 300));
-
-        fetch('/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encodedData
-        })
-            .then(function (response) {
-                if (response.ok || response.status === 200) {
-                    alert('Thank you! Your interview responses were submitted successfully.');
-                    sessionStorage.removeItem('interviewSubmission');
-                    window.location.href = 'interview.html?submitted=1';
-                } else {
-                    alert('Error submitting the form. Please try again.');
-                }
-            })
-            .catch(function (error) {
-                alert('Network error. Please try again.');
-            });
+    reviewForm.addEventListener('submit', function () {
+        // Clear sessionStorage on submit - let the form submit normally to Netlify
+        sessionStorage.removeItem('interviewSubmission');
     });
 }
 
