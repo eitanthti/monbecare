@@ -55,7 +55,7 @@ function checkPitchAccess() {
             passwordContainer.style.display = 'none';
             pitchContent.classList.add('unlocked');
         }
-        // Clean the URL so the param doesn't persist on refresh/share
+        // Clean the URL so the param does not persist on refresh/share
         if (window.history && window.history.replaceState) {
             const cleanUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, cleanUrl);
@@ -67,7 +67,7 @@ function checkPitchAccess() {
 function handleContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) {
-        // Form doesn't exist on this page - silently return (this is normal)
+        // Form does not exist on this page - silently return
         return;
     }
 
@@ -87,27 +87,27 @@ function handleContactForm() {
             if (!formData.has('form-name')) {
                 formData.append('form-name', 'contact');
             }
-            
-            // Log what we're sending (for debugging)
+
+            // Encode data
             const encodedData = new URLSearchParams(formData).toString();
             console.log('Contact form data:', encodedData.substring(0, 200));
-            
+
             // Submit to Netlify
             fetch('/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: encodedData
             })
-                .then(function(response) {
+                .then(function (response) {
                     console.log('Contact form response status:', response.status);
                     if (response.ok || response.status === 200) {
-                        alert("Thank you for your message! We'll get back to you soon.");
-                        this.reset();
+                        alert("Thank you for your message! We will get back to you soon.");
+                        contactForm.reset();
                     } else {
                         console.error('Contact form submission failed with status:', response.status);
                         alert('Sorry, there was an error sending your message. Please try again.');
                     }
-                }.bind(this))
+                })
                 .catch(function (error) {
                     console.error('Contact form submission error:', error);
                     alert('Sorry, there was an error sending your message. Please try again.');
@@ -125,6 +125,7 @@ function handleContactForm() {
 }
 
 // Form submission handler for interview form
+// Step 1 - validate and store answers in sessionStorage, then go to review page
 function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
     if (!interviewForm) return;
@@ -132,31 +133,49 @@ function handleInterviewForm() {
     interviewForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
+        // HTML5 validation
         if (!this.checkValidity()) {
             this.reportValidity();
             return;
         }
 
-        const numChildren = parseInt(document.getElementById('numberOfChildren').value || '0', 10);
+        const numChildren = parseInt(
+            document.getElementById('numberOfChildren').value || '0',
+            10
+        );
 
         let missingPS = [];
         let missingAids = [];
 
         for (let i = 1; i <= numChildren; i++) {
-            const ps = document.querySelectorAll('input[name="professionalSupport_child' + i + '"]');
-            const aids = document.querySelectorAll('input[name="aidsUsed_child' + i + '"]');
+            const ps = document.querySelectorAll(
+                'input[name="professionalSupport_child' + i + '"]'
+            );
+            const aids = document.querySelectorAll(
+                'input[name="aidsUsed_child' + i + '"]'
+            );
 
-            if (!Array.from(ps).some(cb => cb.checked)) missingPS.push('Child ' + i);
-            if (!Array.from(aids).some(cb => cb.checked)) missingAids.push('Child ' + i);
+            if (!Array.from(ps).some(cb => cb.checked)) {
+                missingPS.push('Child ' + i);
+            }
+            if (!Array.from(aids).some(cb => cb.checked)) {
+                missingAids.push('Child ' + i);
+            }
         }
 
         if (missingPS.length > 0) {
-            alert('Select at least one professional support option for: ' + missingPS.join(', '));
+            alert(
+                'Select at least one professional support option for: ' +
+                missingPS.join(', ')
+            );
             return;
         }
 
         if (missingAids.length > 0) {
-            alert('Select at least one aids option for: ' + missingAids.join(', '));
+            alert(
+                'Select at least one aids option for: ' +
+                missingAids.join(', ')
+            );
             return;
         }
 
@@ -166,12 +185,15 @@ function handleInterviewForm() {
 
         const entries = [];
         formData.forEach((value, key) => {
+            // Do not store Netlify meta fields
             if (key === 'form-name' || key === 'bot-field') return;
             entries.push({ name: key, value: value });
         });
 
+        // Store in sessionStorage for the review page
         sessionStorage.setItem('interviewSubmission', JSON.stringify(entries));
 
+        // Go to review page
         window.location.href = 'interview-review.html';
     });
 }
@@ -257,6 +279,7 @@ function populateReviewSummary(entries) {
     });
 }
 
+// This is now only visual, Netlify submission uses fetch from entries
 function populateReviewFormFields(entries) {
     const container = document.getElementById('finalFieldsContainer');
     if (!container) return;
@@ -273,6 +296,7 @@ function populateReviewFormFields(entries) {
     });
 }
 
+// Step 2 on review page - show summary and send to Netlify on confirm
 function handleInterviewReviewPage() {
     const reviewForm = document.getElementById('interviewReviewForm');
     if (!reviewForm) return;
@@ -285,7 +309,9 @@ function handleInterviewReviewPage() {
 
     const entries = JSON.parse(stored);
 
+    // Show a nice summary
     populateReviewSummary(entries);
+    // Optional: keep hidden inputs for debugging etc.
     populateReviewFormFields(entries);
 
     const editBtn = document.getElementById('editInterviewBtn');
@@ -295,9 +321,57 @@ function handleInterviewReviewPage() {
         });
     }
 
-    reviewForm.addEventListener('submit', function () {
-        // Clear sessionStorage on submit - let the form submit normally to Netlify
-        sessionStorage.removeItem('interviewSubmission');
+    reviewForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const dataFromStorage = JSON.parse(
+            sessionStorage.getItem('interviewSubmission') || '[]'
+        );
+
+        if (!dataFromStorage.length) {
+            alert('Session expired. Please fill the interview again.');
+            window.location.href = 'interview.html';
+            return;
+        }
+
+        // Build FormData for Netlify
+        const formData = new FormData();
+        formData.append('form-name', 'interview');
+
+        dataFromStorage.forEach(({ name, value }) => {
+            formData.append(name, value);
+        });
+
+        const encoded = new URLSearchParams(formData).toString();
+        console.log(
+            'Interview review encoded data (first 400 chars):',
+            encoded.substring(0, 400)
+        );
+
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encoded
+        })
+            .then(function (response) {
+                console.log('Interview review response status:', response.status);
+                if (response.ok || response.status === 200) {
+                    alert('Thank you, your interview answers were sent successfully.');
+                    sessionStorage.removeItem('interviewSubmission');
+                    // Redirect or show thank you
+                    window.location.href = 'home.html';
+                } else {
+                    alert(
+                        'Sorry, there was an error sending your interview. Please try again.'
+                    );
+                }
+            })
+            .catch(function (error) {
+                console.error('Interview review submit error:', error);
+                alert(
+                    'Sorry, there was an error sending your interview. Please try again.'
+                );
+            });
     });
 }
 
@@ -316,7 +390,7 @@ function startAnimation() {
         hero.classList.add('color-transition');
     }, 1000);
 
-    // Step 2: After 1.5 seconds, fade in the tagline (overlapping with MonBe fade)
+    // Step 2: After 1.5 seconds, fade in the tagline
     setTimeout(function () {
         tagline.classList.add('fade-in');
     }, 1500);
@@ -363,10 +437,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handle contact form
     handleContactForm();
 
-    // Handle interview form
+    // Handle interview form (on interview.html)
     handleInterviewForm();
 
-    // Handle review page
+    // Handle review page (on interview-review.html)
     handleInterviewReviewPage();
 
     // Start animation sequence for home page after 0.5 seconds
