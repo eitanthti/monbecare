@@ -279,21 +279,36 @@ function populateReviewSummary(entries) {
     });
 }
 
-// This is now only visual, Netlify submission uses fetch from entries
+// Create hidden form inputs for all entries - Netlify will submit these naturally
 function populateReviewFormFields(entries) {
     const container = document.getElementById('finalFieldsContainer');
     if (!container) return;
     container.innerHTML = '';
 
+    // Group entries by name to handle multiple values (checkboxes)
+    const groupedEntries = {};
     entries.forEach(({ name, value }) => {
         if (name === 'form-name' || name === 'bot-field') return;
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value;
-        container.appendChild(input);
+        if (!groupedEntries[name]) {
+            groupedEntries[name] = [];
+        }
+        groupedEntries[name].push(value);
     });
+
+    // Create hidden inputs for all fields
+    // For fields with multiple values (checkboxes), create multiple inputs with same name
+    Object.keys(groupedEntries).forEach(name => {
+        groupedEntries[name].forEach(value => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            container.appendChild(input);
+        });
+    });
+
+    console.log('Created hidden inputs for', Object.keys(groupedEntries).length, 'unique field names');
+    console.log('Total hidden inputs:', container.querySelectorAll('input[type="hidden"]').length);
 }
 
 // Step 2 on review page - show summary and send to Netlify on confirm
@@ -334,21 +349,107 @@ function handleInterviewReviewPage() {
     }
 
     reviewForm.addEventListener('submit', function (e) {
-        // Verify form has all hidden inputs before submitting
+        e.preventDefault();
+
+        // Get the stored entries from sessionStorage (this is the source of truth)
+        const stored = sessionStorage.getItem('interviewSubmission');
+        if (!stored) {
+            alert('No form data found. Please go back and fill out the form again.');
+            window.location.href = 'interview.html';
+            return;
+        }
+
+        const entries = JSON.parse(stored);
+        console.log('Submitting interview form with', entries.length, 'total entries from sessionStorage');
+
+        // Verify hidden inputs were created
         const container = document.getElementById('finalFieldsContainer');
         const hiddenInputs = container ? container.querySelectorAll('input[type="hidden"]') : [];
-        console.log('Form submitting with', hiddenInputs.length, 'hidden fields');
+        console.log('Hidden inputs in DOM:', hiddenInputs.length);
         
-        // Log first few field names to verify
-        if (hiddenInputs.length > 0) {
-            console.log('Field names being submitted:', Array.from(hiddenInputs).slice(0, 5).map(inp => inp.name));
+        if (hiddenInputs.length === 0) {
+            alert('No form data found. Please go back and fill out the form again.');
+            window.location.href = 'interview.html';
+            return;
         }
+
+        // Build FormData explicitly from entries to ensure ALL data is included
+        // This is more reliable than relying on FormData(this) for dynamically added fields
+        const formData = new FormData();
         
-        // Clear sessionStorage on submit - let the form submit normally to Netlify
-        // All hidden inputs created by populateReviewFormFields() will be submitted
-        sessionStorage.removeItem('interviewSubmission');
+        // Add form-name (required by Netlify)
+        formData.append('form-name', 'interview');
         
-        // Form will submit normally (no preventDefault) so Netlify receives all fields
+        // Add bot-field (empty, for honeypot)
+        formData.append('bot-field', '');
+        
+        // Add ALL entries from sessionStorage (this ensures we get everything from interview-review)
+        // Group entries by name to handle multiple values (checkboxes)
+        const groupedEntries = {};
+        entries.forEach(({ name, value }) => {
+            // Skip Netlify meta fields (we already added them above)
+            if (name === 'form-name' || name === 'bot-field') return;
+            
+            if (!groupedEntries[name]) {
+                groupedEntries[name] = [];
+            }
+            groupedEntries[name].push(value);
+        });
+
+        // Add all fields to FormData (multiple values for checkboxes)
+        Object.keys(groupedEntries).forEach(name => {
+            groupedEntries[name].forEach(value => {
+                formData.append(name, value);
+            });
+        });
+
+        // Verify all fields are in FormData
+        const allFieldNames = Array.from(formData.keys());
+        console.log('Total unique field names in FormData:', allFieldNames.length);
+        console.log('Field names:', allFieldNames);
+        
+        // Count total entries (including multiple values for same field)
+        let totalEntries = 0;
+        formData.forEach(() => totalEntries++);
+        console.log('Total field entries (including multiple values):', totalEntries);
+        
+        // Log sample values for verification
+        const sampleFields = [];
+        formData.forEach((value, key) => {
+            if (sampleFields.length < 15) {
+                const displayValue = typeof value === 'string' ? (value.length > 50 ? value.substring(0, 50) + '...' : value) : value;
+                sampleFields.push(key + '=' + displayValue);
+            }
+        });
+        console.log('Sample fields being submitted:', sampleFields);
+        
+        // Submit to Netlify using AJAX (as per Netlify docs for JavaScript-rendered forms)
+        // Requirements: URL-encode body, include Content-Type header
+        const encodedData = new URLSearchParams(formData).toString();
+        console.log('Encoded data length:', encodedData.length, 'characters');
+        
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encodedData
+        })
+            .then(function (response) {
+                console.log('Interview form response status:', response.status);
+                if (response.ok || response.status === 200) {
+                    // Clear sessionStorage on success
+                    sessionStorage.removeItem('interviewSubmission');
+                    alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('Interview form submission failed with status:', response.status);
+                    alert('Sorry, there was an error submitting your form. Please try again.');
+                }
+            })
+            .catch(function (error) {
+                console.error('Interview form submission error:', error);
+                alert('Sorry, there was an error submitting your form. Please try again.');
+            });
     });
 }
 
