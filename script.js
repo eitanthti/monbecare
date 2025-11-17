@@ -435,19 +435,36 @@ function handleInterviewReviewPage() {
         })
             .then(function (response) {
                 console.log('Interview form response status:', response.status);
-                if (response.ok || response.status === 200) {
-                    // Clear sessionStorage on success
-                    sessionStorage.removeItem('interviewSubmission');
-                    alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
-                    // Redirect to home page
-                    window.location.href = 'index.html';
-                } else {
-                    console.error('Interview form submission failed with status:', response.status);
-                    alert('Sorry, there was an error submitting your form. Please try again.');
-                }
+                console.log('Response headers:', response.headers);
+                
+                // Get response text to see what Netlify actually returned
+                return response.text().then(function (responseText) {
+                    console.log('Response body (first 500 chars):', responseText.substring(0, 500));
+                    
+                    // Check if response contains success indicators
+                    const isSuccess = response.ok && (
+                        responseText.includes('Thank you') || 
+                        responseText.includes('success') || 
+                        responseText.includes('form') ||
+                        response.status === 200
+                    );
+                    
+                    if (isSuccess) {
+                        // Clear sessionStorage on success
+                        sessionStorage.removeItem('interviewSubmission');
+                        alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
+                        // Redirect to home page
+                        window.location.href = 'index.html';
+                    } else {
+                        console.error('Interview form submission may have failed. Status:', response.status);
+                        console.error('Full response:', responseText);
+                        alert('Sorry, there was an error submitting your form. Please check the console for details and try again.');
+                    }
+                });
             })
             .catch(function (error) {
                 console.error('Interview form submission error:', error);
+                console.error('Error details:', error.message, error.stack);
                 alert('Sorry, there was an error submitting your form. Please try again.');
             });
     });
