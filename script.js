@@ -256,43 +256,44 @@ function populateReviewFormFields(entries) {
     const container = document.getElementById('finalFieldsContainer');
     if (!container) {
         console.error('❌ finalFieldsContainer not found!');
-        return;
+        return 0;
     }
     
     container.innerHTML = '';
     console.log('=== POPULATING HIDDEN FIELDS ===');
 
-    const groupedEntries = {};
-    entries.forEach(({ name, value }) => {
-        if (name === 'form-name' || name === 'bot-field') return;
-        if (!groupedEntries[name]) {
-            groupedEntries[name] = [];
-        }
-        groupedEntries[name].push(value);
-    });
-
-    console.log('Unique field names:', Object.keys(groupedEntries).length);
-
+    // Don't skip form-name or bot-field - we need everything!
     let inputCount = 0;
-    Object.keys(groupedEntries).forEach(name => {
-        groupedEntries[name].forEach(value => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = name;
-            input.value = value;
-            container.appendChild(input);
-            inputCount++;
-        });
+    
+    entries.forEach(({ name, value }) => {
+        // Skip Netlify meta fields as they're already in the form
+        if (name === 'form-name' || name === 'bot-field') return;
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value || ''; // Ensure we always have a value, even if empty
+        input.setAttribute('data-field', name); // Add identifier for debugging
+        container.appendChild(input);
+        inputCount++;
+        
+        // Debug first 5 fields
+        if (inputCount <= 5) {
+            console.log('Created input:', name, '=', (value || '').substring(0, 50));
+        }
     });
 
     console.log('✅ Created', inputCount, 'hidden inputs');
     
-    // Verify
+    // Verify they're in the DOM
     const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
     console.log('Verification: Found', hiddenInputs.length, 'hidden inputs in DOM');
     
-    if (hiddenInputs.length > 0) {
-        console.log('Sample:', hiddenInputs[0].name, '=', hiddenInputs[0].value.substring(0, 50));
+    // Verify they're inside the form
+    const form = document.getElementById('interviewReviewForm');
+    if (form) {
+        const inputsInForm = form.querySelectorAll('input[type="hidden"]');
+        console.log('Inputs inside form:', inputsInForm.length);
     }
     
     return inputCount;
@@ -332,8 +333,9 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // Natural form submission (no fetch) - Netlify will handle it
+    // Dual submission: Email + Netlify
     reviewForm.addEventListener('submit', function (e) {
+        e.preventDefault();
         console.log('=== FORM SUBMISSION STARTED ===');
 
         const container = document.getElementById('finalFieldsContainer');
@@ -342,25 +344,60 @@ function handleInterviewReviewPage() {
         console.log('Hidden inputs at submit time:', hiddenInputs.length);
         
         if (hiddenInputs.length === 0) {
-            e.preventDefault();
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        // Log what's being submitted
-        const fieldNames = [];
-        for (let i = 0; i < Math.min(20, hiddenInputs.length); i++) {
-            fieldNames.push(hiddenInputs[i].name);
+        // Get all form data from sessionStorage
+        const stored = sessionStorage.getItem('interviewSubmission');
+        if (!stored) {
+            alert('No form data found. Please go back and fill out the form again.');
+            window.location.href = 'interview.html';
+            return;
         }
-        console.log('Submitting', hiddenInputs.length, 'fields:', fieldNames);
+
+        const entries = JSON.parse(stored);
         
-        // Clear sessionStorage before form submits naturally
-        sessionStorage.removeItem('interviewSubmission');
+        // Format data for email
+        let emailBody = 'New Interview Submission\n';
+        emailBody += '='.repeat(50) + '\n\n';
         
-        // Let form submit naturally to Netlify - NO preventDefault()
-        // Netlify will process all hidden inputs and redirect
-        console.log('✅ Form submitting naturally to Netlify...');
+        entries.forEach(function({ name, value }) {
+            const label = getReviewLabel(name);
+            emailBody += label + ': ' + value + '\n';
+        });
+
+        console.log('Sending via email...');
+        
+        // Initialize EmailJS (configure at https://www.emailjs.com/)
+        // TODO: Replace these values with your EmailJS credentials
+        emailjs.init('YOUR_PUBLIC_KEY_HERE'); 
+        
+        // Send email to eitan.h@monbecare.com
+        emailjs.send('YOUR_SERVICE_ID_HERE', 'YOUR_TEMPLATE_ID_HERE', {
+            to_email: 'eitan.h@monbecare.com',
+            subject: 'New Interview Submission - MonBe',
+            message: emailBody,
+            from_name: entries.find(e => e.name === 'firstName')?.value || 'User',
+            reply_to: entries.find(e => e.name === 'email')?.value || ''
+        })
+        .then(function(response) {
+            console.log('✅ Email sent successfully:', response.status, response.text);
+            
+            // Also submit to Netlify
+            console.log('Submitting to Netlify...');
+            sessionStorage.removeItem('interviewSubmission');
+            reviewForm.submit();
+        })
+        .catch(function(error) {
+            console.error('❌ Email failed:', error);
+            
+            // Still try Netlify even if email fails
+            console.log('Email failed, trying Netlify anyway...');
+            sessionStorage.removeItem('interviewSubmission');
+            reviewForm.submit();
+        });
     });
 }
 
