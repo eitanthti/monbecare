@@ -13,18 +13,12 @@ function checkPassword(event) {
     const errorElement = document.getElementById('passwordError');
 
     if (password === correctPassword) {
-        // Hide password container and show pitch content
         document.getElementById('passwordContainer').style.display = 'none';
         document.getElementById('pitchContent').classList.add('unlocked');
-
-        // Store access in session
         sessionStorage.setItem('pitchAccess', 'granted');
     } else {
-        // Show error message
         errorElement.classList.add('show');
         document.getElementById('passwordInput').value = '';
-
-        // Hide error after 3 seconds
         setTimeout(function () {
             errorElement.classList.remove('show');
         }, 3000);
@@ -33,7 +27,6 @@ function checkPassword(event) {
 
 // Check if user already has access when navigating to pitch page
 function checkPitchAccess() {
-    // Session-based access
     if (sessionStorage.getItem('pitchAccess') === 'granted') {
         const passwordContainer = document.getElementById('passwordContainer');
         const pitchContent = document.getElementById('pitchContent');
@@ -44,7 +37,6 @@ function checkPitchAccess() {
         return;
     }
 
-    // URL parameter based access (e.g., pitch.html?access=monbe2025)
     const urlParams = new URLSearchParams(window.location.search);
     const accessParam = urlParams.get('access');
     if (accessParam && accessParam === 'monbe2025') {
@@ -55,7 +47,6 @@ function checkPitchAccess() {
             passwordContainer.style.display = 'none';
             pitchContent.classList.add('unlocked');
         }
-        // Clean the URL so the param does not persist on refresh/share
         if (window.history && window.history.replaceState) {
             const cleanUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, cleanUrl);
@@ -66,54 +57,42 @@ function checkPitchAccess() {
 // Form submission handler for contact form
 function handleContactForm() {
     const contactForm = document.getElementById('contactForm');
-    if (!contactForm) {
-        // Form does not exist on this page - silently return
-        return;
-    }
+    if (!contactForm) return;
 
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Get form data
         const formData = new FormData(this);
         const firstName = formData.get('firstName');
         const lastName = formData.get('lastName');
         const email = formData.get('email');
         const message = formData.get('message');
 
-        // Simple validation
         if (firstName && lastName && email && message) {
-            // Ensure form-name is included (Netlify requirement)
             if (!formData.has('form-name')) {
                 formData.append('form-name', 'contact');
             }
 
-            // Encode data
             const encodedData = new URLSearchParams(formData).toString();
-            console.log('Contact form data:', encodedData.substring(0, 200));
 
-            // Submit to Netlify
             fetch('/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: encodedData
             })
                 .then(function (response) {
-                    console.log('Contact form response status:', response.status);
                     if (response.ok || response.status === 200) {
                         alert("Thank you for your message! We will get back to you soon.");
                         contactForm.reset();
                     } else {
-                        console.error('Contact form submission failed with status:', response.status);
                         alert('Sorry, there was an error sending your message. Please try again.');
                     }
                 })
                 .catch(function (error) {
-                    console.error('Contact form submission error:', error);
+                    console.error('Contact form error:', error);
                     alert('Sorry, there was an error sending your message. Please try again.');
                 });
         } else {
-            // Show exactly which fields are missing
             const missing = [];
             if (!firstName) missing.push('First Name');
             if (!lastName) missing.push('Last Name');
@@ -125,7 +104,6 @@ function handleContactForm() {
 }
 
 // Form submission handler for interview form
-// Step 1 - validate and store answers in sessionStorage, then go to review page
 function handleInterviewForm() {
     const interviewForm = document.getElementById('interviewForm');
     if (!interviewForm) return;
@@ -133,7 +111,6 @@ function handleInterviewForm() {
     interviewForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // HTML5 validation
         if (!this.checkValidity()) {
             this.reportValidity();
             return;
@@ -185,15 +162,11 @@ function handleInterviewForm() {
 
         const entries = [];
         formData.forEach((value, key) => {
-            // Do not store Netlify meta fields
             if (key === 'form-name' || key === 'bot-field') return;
             entries.push({ name: key, value: value });
         });
 
-        // Store in sessionStorage for the review page
         sessionStorage.setItem('interviewSubmission', JSON.stringify(entries));
-
-        // Go to review page
         window.location.href = 'interview-review.html';
     });
 }
@@ -279,13 +252,16 @@ function populateReviewSummary(entries) {
     });
 }
 
-// Create hidden form inputs for all entries - Netlify will submit these naturally
 function populateReviewFormFields(entries) {
     const container = document.getElementById('finalFieldsContainer');
-    if (!container) return;
+    if (!container) {
+        console.error('❌ finalFieldsContainer not found!');
+        return;
+    }
+    
     container.innerHTML = '';
+    console.log('=== POPULATING HIDDEN FIELDS ===');
 
-    // Group entries by name to handle multiple values (checkboxes)
     const groupedEntries = {};
     entries.forEach(({ name, value }) => {
         if (name === 'form-name' || name === 'bot-field') return;
@@ -295,8 +271,9 @@ function populateReviewFormFields(entries) {
         groupedEntries[name].push(value);
     });
 
-    // Create hidden inputs for all fields
-    // For fields with multiple values (checkboxes), create multiple inputs with same name
+    console.log('Unique field names:', Object.keys(groupedEntries).length);
+
+    let inputCount = 0;
     Object.keys(groupedEntries).forEach(name => {
         groupedEntries[name].forEach(value => {
             const input = document.createElement('input');
@@ -304,14 +281,24 @@ function populateReviewFormFields(entries) {
             input.name = name;
             input.value = value;
             container.appendChild(input);
+            inputCount++;
         });
     });
 
-    console.log('Created hidden inputs for', Object.keys(groupedEntries).length, 'unique field names');
-    console.log('Total hidden inputs:', container.querySelectorAll('input[type="hidden"]').length);
+    console.log('✅ Created', inputCount, 'hidden inputs');
+    
+    // Verify
+    const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
+    console.log('Verification: Found', hiddenInputs.length, 'hidden inputs in DOM');
+    
+    if (hiddenInputs.length > 0) {
+        console.log('Sample:', hiddenInputs[0].name, '=', hiddenInputs[0].value.substring(0, 50));
+    }
+    
+    return inputCount;
 }
 
-// Step 2 on review page - show summary and send to Netlify on confirm
+// Step 2 on review page - CRITICAL FIX
 function handleInterviewReviewPage() {
     const reviewForm = document.getElementById('interviewReviewForm');
     if (!reviewForm) return;
@@ -323,22 +310,19 @@ function handleInterviewReviewPage() {
     }
 
     const entries = JSON.parse(stored);
-    console.log('Review page - entries loaded:', entries.length, 'fields');
-    console.log('Sample entries:', entries.slice(0, 5));
+    console.log('=== REVIEW PAGE LOADED ===');
+    console.log('Entries from sessionStorage:', entries.length);
 
-    // Show a nice summary
+    // Show summary
     populateReviewSummary(entries);
-    // Create hidden inputs for Netlify submission
-    populateReviewFormFields(entries);
     
-    // Verify hidden inputs were created
-    const container = document.getElementById('finalFieldsContainer');
-    if (container) {
-        const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
-        console.log('Hidden inputs created:', hiddenInputs.length);
-        if (hiddenInputs.length > 0) {
-            console.log('Sample hidden input:', hiddenInputs[0].name, '=', hiddenInputs[0].value);
-        }
+    // Create hidden inputs IMMEDIATELY
+    const inputCount = populateReviewFormFields(entries);
+    
+    if (inputCount === 0) {
+        console.error('❌ CRITICAL: No hidden inputs were created!');
+        alert('Error loading form data. Please go back and try again.');
+        return;
     }
 
     const editBtn = document.getElementById('editInterviewBtn');
@@ -348,36 +332,76 @@ function handleInterviewReviewPage() {
         });
     }
 
+    // CRITICAL: Prevent default submission and use fetch instead
     reviewForm.addEventListener('submit', function (e) {
-        // Verify hidden inputs were created before allowing submission
+        e.preventDefault();
+        
+        console.log('=== FORM SUBMISSION STARTED ===');
+
         const container = document.getElementById('finalFieldsContainer');
         const hiddenInputs = container ? container.querySelectorAll('input[type="hidden"]') : [];
         
-        console.log('Form submitting with', hiddenInputs.length, 'hidden fields');
+        console.log('Hidden inputs at submit time:', hiddenInputs.length);
         
         if (hiddenInputs.length === 0) {
-            e.preventDefault();
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
+
+        // Build FormData from the form (which includes hidden inputs)
+        const formData = new FormData(reviewForm);
         
-        // Log sample values for verification
-        const sampleFields = [];
-        for (let i = 0; i < Math.min(15, hiddenInputs.length); i++) {
-            const inp = hiddenInputs[i];
-            const displayValue = inp.value.length > 50 ? inp.value.substring(0, 50) + '...' : inp.value;
-            sampleFields.push(inp.name + '=' + displayValue);
+        // Verify form-name is present
+        if (!formData.has('form-name')) {
+            console.warn('Adding form-name');
+            formData.append('form-name', 'interview');
         }
-        console.log('Sample fields being submitted:', sampleFields);
-        console.log('Total hidden inputs:', hiddenInputs.length);
         
-        // Clear sessionStorage - form will submit naturally to Netlify
-        sessionStorage.removeItem('interviewSubmission');
+        // Count fields
+        let fieldCount = 0;
+        const fieldNames = [];
+        formData.forEach((value, key) => {
+            fieldCount++;
+            if (fieldNames.length < 20) {
+                fieldNames.push(key);
+            }
+        });
         
-        // Let the form submit naturally - Netlify will handle it
-        // No preventDefault(), no fetch() - just natural HTML form submission
-        console.log('Form submitting naturally to Netlify...');
+        console.log('Total fields in FormData:', fieldCount);
+        console.log('Sample field names:', fieldNames);
+
+        // Encode for Netlify
+        const encodedData = new URLSearchParams(formData).toString();
+        console.log('Encoded data length:', encodedData.length, 'characters');
+        console.log('First 500 chars:', encodedData.substring(0, 500));
+
+        // Submit via fetch
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encodedData
+        })
+            .then(function (response) {
+                console.log('=== RESPONSE RECEIVED ===');
+                console.log('Status:', response.status);
+                console.log('OK:', response.ok);
+                
+                if (response.ok || response.status === 200) {
+                    console.log('✅ SUCCESS');
+                    sessionStorage.removeItem('interviewSubmission');
+                    alert("Thank you! Your interview submission has been received. We'll be in touch soon.");
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('❌ FAILED - Status:', response.status);
+                    alert('There was an error (status ' + response.status + '). Please try again.');
+                }
+            })
+            .catch(function (error) {
+                console.error('=== NETWORK ERROR ===');
+                console.error('Error:', error);
+                alert('Network error. Please check your connection and try again.');
+            });
     });
 }
 
@@ -390,18 +414,15 @@ function startAnimation() {
 
     if (!hero || !brandName || !tagline || !connectBtn) return;
 
-    // Step 1: After 1 second, start fade out of MonBe and transition background
     setTimeout(function () {
         brandName.classList.add('fade-out');
         hero.classList.add('color-transition');
     }, 1000);
 
-    // Step 2: After 1.5 seconds, fade in the tagline
     setTimeout(function () {
         tagline.classList.add('fade-in');
     }, 1500);
 
-    // Step 3: After 2.5 seconds, fade in the button
     setTimeout(function () {
         connectBtn.classList.add('fade-in');
     }, 2500);
@@ -414,7 +435,6 @@ function toggleFAQ(faqNumber) {
     const question = answer.previousElementSibling;
 
     if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
-        // Close all other FAQs
         document.querySelectorAll('.faq-answer').forEach(function (faq) {
             if (faq.id !== 'faq-' + faqNumber) {
                 faq.style.maxHeight = '0px';
@@ -423,12 +443,10 @@ function toggleFAQ(faqNumber) {
             }
         });
 
-        // Open current FAQ
         answer.style.maxHeight = answer.scrollHeight + 'px';
         icon.textContent = '−';
         question.style.backgroundColor = '#f8f9fa';
     } else {
-        // Close current FAQ
         answer.style.maxHeight = '0px';
         icon.textContent = '+';
         question.style.backgroundColor = '';
@@ -437,22 +455,12 @@ function toggleFAQ(faqNumber) {
 
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function () {
-    // Check for existing pitch access
     checkPitchAccess();
-
-    // Handle contact form
     handleContactForm();
-
-    // Handle interview form (on interview.html)
     handleInterviewForm();
-
-    // Handle review page (on interview-review.html)
     handleInterviewReviewPage();
 
-    // Start animation sequence for home page after 0.5 seconds
     setTimeout(function () {
         startAnimation();
     }, 500);
-
-    // (Removed QR rendering on-site by request)
 });
