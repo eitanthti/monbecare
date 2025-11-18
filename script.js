@@ -376,10 +376,7 @@ function handleInterviewReviewPage() {
     // Show summary on the page
     populateReviewSummary(entries);
 
-    // Fill the static fields inside the review form
-    applyEntriesToForm(reviewForm, entries);
-
-    // Create a Set of field names that have data
+    // STEP 1: Create a Set of field names that have data (BEFORE filling)
     const fieldsWithData = new Set();
     entries.forEach(function(entry) {
         if (entry.name && entry.value) {
@@ -387,31 +384,40 @@ function handleInterviewReviewPage() {
         }
     });
 
-    // Remove all fields from the hidden-fields div that don't have data
+    console.log('Fields with data:', Array.from(fieldsWithData));
+
+    // STEP 2: Remove unused fields BEFORE filling them
     const hiddenFieldsDiv = reviewForm.querySelector('.hidden-fields');
     if (hiddenFieldsDiv) {
         const allFields = hiddenFieldsDiv.querySelectorAll('input, select, textarea');
+        let removedCount = 0;
         allFields.forEach(function(field) {
             const fieldName = field.getAttribute('name');
-            // Keep the field only if it has data OR if it's a checkbox/radio that might be checked
+            
             if (field.type === 'checkbox' || field.type === 'radio') {
-                // For checkboxes/radios, keep them only if they should be checked based on data
+                // For checkboxes/radios, keep only if this specific value should be checked
                 const shouldKeep = entries.some(function(entry) {
                     return entry.name === fieldName && entry.value === field.value;
                 });
                 if (!shouldKeep) {
                     field.remove();
+                    removedCount++;
                 }
             } else {
-                // For other fields, remove if no data
-                if (!fieldsWithData.has(fieldName) || !field.value) {
+                // For other fields, remove if this field name has no data
+                if (!fieldsWithData.has(fieldName)) {
                     field.remove();
+                    removedCount++;
                 }
             }
         });
+        console.log('Removed', removedCount, 'unused fields');
     }
 
-    console.log('Cleaned up unused fields - only submitting fields with data');
+    // STEP 3: Now fill the remaining fields with data
+    applyEntriesToForm(reviewForm, entries);
+    
+    console.log('Form ready for submission with only relevant fields');
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
