@@ -1,24 +1,51 @@
+// ============================================
+// IN-MEMORY STORAGE REPLACEMENT
+// ============================================
+const inMemoryStorage = {
+    data: {},
+    getItem: function(key) {
+        return this.data[key] || null;
+    },
+    setItem: function(key, value) {
+        this.data[key] = value;
+    },
+    removeItem: function(key) {
+        delete this.data[key];
+    }
+};
+
 // Mobile menu toggle
 function toggleMobileMenu() {
     const navLinks = document.getElementById('navLinks');
-    navLinks.classList.toggle('mobile-open');
+    if (navLinks) {
+        navLinks.classList.toggle('mobile-open');
+    }
 }
 
 // Password protection for pitch page
 function checkPassword(event) {
     event.preventDefault();
 
-    const password = document.getElementById('passwordInput').value;
-    const correctPassword = 'monbe2025';
+    const passwordInput = document.getElementById('passwordInput');
     const errorElement = document.getElementById('passwordError');
+    
+    if (!passwordInput || !errorElement) return;
 
+    const password = passwordInput.value.trim();
+    const correctPassword = 'monbe2025'; // Note: Move to server-side for real security
+    
     if (password === correctPassword) {
-        document.getElementById('passwordContainer').style.display = 'none';
-        document.getElementById('pitchContent').classList.add('unlocked');
-        sessionStorage.setItem('pitchAccess', 'granted');
+        const passwordContainer = document.getElementById('passwordContainer');
+        const pitchContent = document.getElementById('pitchContent');
+        
+        if (passwordContainer && pitchContent) {
+            passwordContainer.style.display = 'none';
+            pitchContent.classList.add('unlocked');
+            inMemoryStorage.setItem('pitchAccess', 'granted');
+        }
     } else {
         errorElement.classList.add('show');
-        document.getElementById('passwordInput').value = '';
+        passwordInput.value = '';
         setTimeout(function () {
             errorElement.classList.remove('show');
         }, 3000);
@@ -27,7 +54,7 @@ function checkPassword(event) {
 
 // Check if user already has access when navigating to pitch page
 function checkPitchAccess() {
-    if (sessionStorage.getItem('pitchAccess') === 'granted') {
+    if (inMemoryStorage.getItem('pitchAccess') === 'granted') {
         const passwordContainer = document.getElementById('passwordContainer');
         const pitchContent = document.getElementById('pitchContent');
         if (passwordContainer && pitchContent) {
@@ -40,7 +67,7 @@ function checkPitchAccess() {
     const urlParams = new URLSearchParams(window.location.search);
     const accessParam = urlParams.get('access');
     if (accessParam && accessParam === 'monbe2025') {
-        sessionStorage.setItem('pitchAccess', 'granted');
+        inMemoryStorage.setItem('pitchAccess', 'granted');
         const passwordContainer = document.getElementById('passwordContainer');
         const pitchContent = document.getElementById('pitchContent');
         if (passwordContainer && pitchContent) {
@@ -54,6 +81,14 @@ function checkPitchAccess() {
     }
 }
 
+// Sanitize input to prevent XSS
+function sanitizeInput(input) {
+    if (typeof input !== 'string') return input;
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+
 // Form submission handler for contact form
 function handleContactForm() {
     const contactForm = document.getElementById('contactForm');
@@ -63,10 +98,10 @@ function handleContactForm() {
         e.preventDefault();
 
         const formData = new FormData(this);
-        const firstName = formData.get('firstName');
-        const lastName = formData.get('lastName');
-        const email = formData.get('email');
-        const message = formData.get('message');
+        const firstName = sanitizeInput(formData.get('firstName'));
+        const lastName = sanitizeInput(formData.get('lastName'));
+        const email = sanitizeInput(formData.get('email'));
+        const message = sanitizeInput(formData.get('message'));
 
         if (firstName && lastName && email && message) {
             if (!formData.has('form-name')) {
@@ -81,11 +116,11 @@ function handleContactForm() {
                 body: encodedData
             })
                 .then(function (response) {
-                    if (response.ok || response.status === 200) {
+                    if (response.ok) {
                         alert("Thank you for your message! We will get back to you soon.");
                         contactForm.reset();
                     } else {
-                        alert('Sorry, there was an error sending your message. Please try again.');
+                        throw new Error('Form submission failed');
                     }
                 })
                 .catch(function (error) {
@@ -116,10 +151,10 @@ function handleInterviewForm() {
             return;
         }
 
-        const numChildren = parseInt(
-            document.getElementById('numberOfChildren').value || '0',
-            10
-        );
+        const numChildrenInput = document.getElementById('numberOfChildren');
+        if (!numChildrenInput) return;
+
+        const numChildren = parseInt(numChildrenInput.value || '0', 10);
 
         let missingPS = [];
         let missingAids = [];
@@ -132,10 +167,10 @@ function handleInterviewForm() {
                 'input[name="aidsUsed_child' + i + '"]'
             );
 
-            if (!Array.from(ps).some(cb => cb.checked)) {
+            if (ps.length > 0 && !Array.from(ps).some(cb => cb.checked)) {
                 missingPS.push('Child ' + i);
             }
-            if (!Array.from(aids).some(cb => cb.checked)) {
+            if (aids.length > 0 && !Array.from(aids).some(cb => cb.checked)) {
                 missingAids.push('Child ' + i);
             }
         }
@@ -156,17 +191,17 @@ function handleInterviewForm() {
             return;
         }
 
-        const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        const selectedLanguage = inMemoryStorage.getItem('selectedLanguage') || 'en';
         const formData = new FormData(this);
         formData.set('selectedLanguage', selectedLanguage);
 
         const entries = [];
         formData.forEach((value, key) => {
             if (key === 'form-name' || key === 'bot-field') return;
-            entries.push({ name: key, value: value });
+            entries.push({ name: key, value: sanitizeInput(value) });
         });
 
-        sessionStorage.setItem('interviewSubmission', JSON.stringify(entries));
+        inMemoryStorage.setItem('interviewSubmission', JSON.stringify(entries));
         window.location.href = 'interview-review.html';
     });
 }
@@ -254,18 +289,28 @@ function populateReviewSummary(entries) {
 
 function populateReviewFormFields(entries) {
     const container = document.getElementById('formFieldsContainer');
-    if (container) {
-        container.innerHTML = '';
-    }
+    if (!container) return 0;
+
+    container.innerHTML = '';
+    
+    // Create hidden inputs for all form data
+    entries.forEach(({ name, value }) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value || '';
+        container.appendChild(input);
+    });
+    
     return entries.length;
 }
 
-// Step 2 on review page - CRITICAL FIX
+// Step 2 on review page - FIXED
 function handleInterviewReviewPage() {
     const reviewForm = document.getElementById('interviewReviewForm');
     if (!reviewForm) return;
 
-    const stored = sessionStorage.getItem('interviewSubmission');
+    const stored = inMemoryStorage.getItem('interviewSubmission');
     console.log('=== REVIEW PAGE LOADED ===');
 
     if (!stored) {
@@ -273,18 +318,29 @@ function handleInterviewReviewPage() {
         return;
     }
 
-    const entries = JSON.parse(stored);
-    console.log('Entries loaded:', entries.length);
+    let entries;
+    try {
+        entries = JSON.parse(stored);
+        console.log('Entries loaded:', entries.length);
+    } catch (error) {
+        console.error('Error parsing stored data:', error);
+        alert('Error loading form data. Please go back and try again.');
+        window.location.href = 'interview.html';
+        return;
+    }
 
     // Show summary
     populateReviewSummary(entries);
     
+    // Populate hidden form fields
     const inputCount = populateReviewFormFields(entries);
     if (inputCount === 0) {
         console.error('❌ No fields available to submit!');
         alert('Error loading form data. Please go back and try again.');
         return;
     }
+
+    console.log('✅ Created', inputCount, 'hidden form fields');
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -298,14 +354,22 @@ function handleInterviewReviewPage() {
         e.preventDefault();
         console.log('=== FORM SUBMISSION STARTED (AJAX) ===');
 
-        const stored = sessionStorage.getItem('interviewSubmission');
+        const stored = inMemoryStorage.getItem('interviewSubmission');
         if (!stored) {
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        const entries = JSON.parse(stored);
+        let entries;
+        try {
+            entries = JSON.parse(stored);
+        } catch (error) {
+            console.error('Error parsing stored data:', error);
+            alert('Error loading form data. Please go back and try again.');
+            return;
+        }
+
         const payload = new URLSearchParams();
         payload.append('form-name', 'interview');
 
@@ -326,12 +390,12 @@ function handleInterviewReviewPage() {
             body: payload.toString()
         })
             .then(function (response) {
-                if (!response.ok && response.status !== 200) {
-                    throw new Error('Netlify submission failed');
+                if (!response.ok) {
+                    throw new Error('Netlify submission failed with status: ' + response.status);
                 }
 
                 console.log('✅ Netlify submission successful');
-                sessionStorage.removeItem('interviewSubmission');
+                inMemoryStorage.removeItem('interviewSubmission');
                 window.location.href = 'thank-you.html';
             })
             .catch(function (error) {
@@ -364,25 +428,37 @@ function startAnimation() {
     }, 2500);
 }
 
-// FAQ Toggle Function
+// FAQ Toggle Function - FIXED
 function toggleFAQ(faqNumber) {
     const answer = document.getElementById('faq-' + faqNumber);
+    if (!answer || !answer.previousElementSibling) return;
+    
     const icon = answer.previousElementSibling.querySelector('.faq-icon');
     const question = answer.previousElementSibling;
+    
+    if (!icon) return;
 
-    if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+    // Get current max-height, treating undefined/empty as closed
+    const currentMaxHeight = answer.style.maxHeight;
+    const isClosed = !currentMaxHeight || currentMaxHeight === '0px';
+
+    if (isClosed) {
+        // Close all other FAQs
         document.querySelectorAll('.faq-answer').forEach(function (faq) {
             if (faq.id !== 'faq-' + faqNumber) {
                 faq.style.maxHeight = '0px';
-                faq.previousElementSibling.querySelector('.faq-icon').textContent = '+';
-                faq.previousElementSibling.style.backgroundColor = '';
+                const otherIcon = faq.previousElementSibling ? faq.previousElementSibling.querySelector('.faq-icon') : null;
+                if (otherIcon) otherIcon.textContent = '+';
+                if (faq.previousElementSibling) faq.previousElementSibling.style.backgroundColor = '';
             }
         });
 
+        // Open this FAQ
         answer.style.maxHeight = answer.scrollHeight + 'px';
         icon.textContent = '−';
         question.style.backgroundColor = '#f8f9fa';
     } else {
+        // Close this FAQ
         answer.style.maxHeight = '0px';
         icon.textContent = '+';
         question.style.backgroundColor = '';
@@ -392,7 +468,7 @@ function toggleFAQ(faqNumber) {
 // ============================================
 // VERSION - UPDATE THIS WITH EACH COMMIT
 // ============================================
-const APP_VERSION = '1.3.1';
+const APP_VERSION = '2.0.0';
 // ============================================
 
 // Version logging
