@@ -287,65 +287,45 @@ function populateReviewFormFields(entries) {
 
     let fieldCount = 0;
     
-    // Create real form fields based on field type
+    // Create simple text inputs for all fields to ensure basic functionality
     Object.keys(grouped).forEach((name) => {
         const values = grouped[name];
-        
-        // Determine field type based on name pattern
+
+        // For checkboxes with multiple values, create multiple inputs
         if (name.includes('professionalSupport_') || name.includes('aidsUsed_')) {
-            // Checkboxes - create one for each value
-            values.forEach((value) => {
+            values.forEach((value, index) => {
                 if (value) { // Only create if value exists
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.name = name;
-                    checkbox.value = value;
-                    checkbox.checked = true; // They were selected
-                    container.appendChild(checkbox);
+                    const input = document.createElement('input');
+                    input.type = 'text'; // Use text input instead of checkbox for simplicity
+                    input.name = name;
+                    input.value = value;
+                    input.setAttribute('data-checkbox-value', value);
+                    container.appendChild(input);
                     fieldCount++;
+
+                    // Add a label to show it's a checkbox value
+                    const label = document.createElement('small');
+                    label.textContent = ` (checkbox: ${value})`;
+                    label.style.color = '#666';
+                    container.appendChild(label);
+                    container.appendChild(document.createElement('br'));
                 }
             });
-        } else if (name.includes('importantFeatures') || 
-                   name.includes('additionalComments') || 
-                   name.includes('section3AdditionalComments_') ||
-                   name.includes('stoppingReason_') ||
-                   name.includes('section3Comments_')) {
-            // Textareas
-            const textarea = document.createElement('textarea');
-            textarea.name = name;
-            textarea.value = values[0] || '';
-            container.appendChild(textarea);
-            fieldCount++;
-        } else if (name.includes('productInterest') ||
-                   name.includes('interviewMethod') ||
-                   name.includes('feeding') ||
-                   name.includes('breastfeedingAfter') ||
-                   name.includes('stoppedAgeYears') ||
-                   name.includes('stoppedAgeMonths') ||
-                   name.includes('notBreastfeedingReason')) {
-            // Selects - create select with value
-            const select = document.createElement('select');
-            select.name = name;
-            const option = document.createElement('option');
-            option.value = values[0] || '';
-            option.textContent = values[0] || '';
-            option.selected = true;
-            select.appendChild(option);
-            container.appendChild(select);
-            fieldCount++;
         } else {
-            // Regular text/number inputs
+            // Regular text input for all other fields
             const input = document.createElement('input');
             input.type = 'text';
             input.name = name;
-            input.value = values[0] || '';
+            input.value = values.join(', '); // Join multiple values with comma
+            input.style.width = '300px'; // Make inputs visible
+            input.style.margin = '2px 0';
             container.appendChild(input);
             fieldCount++;
         }
-        
-        // Debug first 5 fields
-        if (fieldCount <= 5) {
-            console.log('Created field:', name, '=', (values[0] || '').substring(0, 50));
+
+        // Debug logging
+        if (fieldCount <= 10) {
+            console.log('Created field:', name, '=', values.join(', '));
         }
     });
 
@@ -353,22 +333,12 @@ function populateReviewFormFields(entries) {
 
     // Update debug info with field creation results
     debugHtml += `<strong>Fields created:</strong> ${fieldCount}<br>`;
-    debugHtml += '<strong>Field list:</strong><br>';
 
     // Verify they're in the DOM and form
-    const allFields = container.querySelectorAll('input, select, textarea');
+    const allFields = container.querySelectorAll('input');
     console.log('Verification: Found', allFields.length, 'form fields in DOM');
 
-    allFields.forEach((field, index) => {
-        if (index < 10) { // Show first 10 fields
-            const value = field.type === 'checkbox' ? (field.checked ? field.value : 'unchecked') : field.value;
-            debugHtml += `&nbsp;&nbsp;${field.name} (${field.tagName.toLowerCase()}): ${value}<br>`;
-        }
-    });
-
-    if (allFields.length > 10) {
-        debugHtml += `&nbsp;&nbsp;... and ${allFields.length - 10} more fields<br>`;
-    }
+    debugHtml += `<strong>All ${allFields.length} fields should be visible above and submitted to Netlify.</strong>`;
 
     debugInfo.innerHTML = debugHtml;
 
@@ -387,26 +357,36 @@ function handleInterviewReviewPage() {
     if (!reviewForm) return;
 
     const stored = sessionStorage.getItem('interviewSubmission');
+    console.log('=== REVIEW PAGE LOADED ===');
+    console.log('Stored data:', stored);
+
     if (!stored) {
+        console.log('No stored data found, redirecting to interview.html');
+        alert('No form data found. Please fill out the interview form first.');
         window.location.href = 'interview.html';
         return;
     }
 
     const entries = JSON.parse(stored);
-    console.log('=== REVIEW PAGE LOADED ===');
-    console.log('Entries from sessionStorage:', entries.length);
+    console.log('Parsed entries from sessionStorage:', entries.length);
+    console.log('First few entries:', entries.slice(0, 3));
 
     // Show summary
     populateReviewSummary(entries);
     
-    // Create hidden inputs IMMEDIATELY
+    // Create form fields IMMEDIATELY
+    console.log('About to create form fields...');
     const inputCount = populateReviewFormFields(entries);
-    
+    console.log('Form field creation returned:', inputCount);
+
     if (inputCount === 0) {
-        console.error('❌ CRITICAL: No hidden inputs were created!');
+        console.error('❌ CRITICAL: No form fields were created!');
         alert('Error loading form data. Please go back and try again.');
         return;
     }
+
+    console.log('✅ Successfully created', inputCount, 'form fields');
+    alert('Form loaded successfully with ' + inputCount + ' fields. You can now review and submit.');
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -440,12 +420,11 @@ function handleInterviewReviewPage() {
             console.warn('⚠️ Some form fields may not be in the form!');
         }
 
-        // Log what we're submitting (first 5 fields for debugging)
+        // Log what we're submitting (first 10 fields for debugging)
         console.log('Submitting to Netlify with', formFields.length, 'fields');
         formFields.forEach(function(field, index) {
-            if (index < 5) {
-                const value = field.type === 'checkbox' ? (field.checked ? field.value : '') : field.value;
-                console.log('Field:', field.name, '=', (value || '').substring(0, 50));
+            if (index < 10) {
+                console.log('Field:', field.name, '=', field.value || '(empty)');
             }
         });
         
