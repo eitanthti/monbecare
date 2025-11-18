@@ -254,94 +254,10 @@ function populateReviewSummary(entries) {
 
 function populateReviewFormFields(entries) {
     const container = document.getElementById('formFieldsContainer');
-    const reviewForm = document.getElementById('interviewReviewForm');
-    const debugInfo = document.getElementById('debugInfo');
-
-    if (!container || !reviewForm) {
-        console.error('❌ formFieldsContainer or form not found!');
-        return 0;
+    if (container) {
+        container.innerHTML = '';
     }
-
-    container.innerHTML = '';
-    console.log('=== POPULATING REAL FORM FIELDS ===');
-    console.log('Entries received:', entries.length);
-
-    // Show debug info on page
-    let debugHtml = `<strong>Entries received:</strong> ${entries.length}<br>`;
-    debugHtml += '<strong>Sample entries:</strong><br>';
-    entries.slice(0, 5).forEach((entry, i) => {
-        debugHtml += `&nbsp;&nbsp;${entry.name}: ${entry.value}<br>`;
-    });
-
-    // Group entries by name (for checkboxes that have multiple values)
-    const grouped = {};
-    entries.forEach(({ name, value }) => {
-        if (name === 'form-name' || name === 'bot-field') return;
-        if (!grouped[name]) grouped[name] = [];
-        grouped[name].push(value || '');
-    });
-
-    debugHtml += `<strong>Grouped fields:</strong> ${Object.keys(grouped).length}<br>`;
-    debugInfo.innerHTML = debugHtml;
-
-    console.log('Grouped fields:', Object.keys(grouped).length);
-
-    let fieldCount = 0;
-    
-    // Create simple text inputs for all fields to ensure basic functionality
-    Object.keys(grouped).forEach((name) => {
-        const values = grouped[name];
-
-        // Create hidden inputs directly in the form (not in container)
-        const input = document.createElement('input');
-        input.type = 'hidden'; // Make them hidden now that we know they work
-        input.name = name;
-        input.value = values.join(', '); // Join multiple values with comma
-
-        // Append directly to form element to ensure submission
-        reviewForm.appendChild(input);
-        fieldCount++;
-
-        // Also add a visible copy to the debug container
-        const visibleInput = input.cloneNode(true);
-        visibleInput.type = 'text';
-        visibleInput.style.width = '300px';
-        visibleInput.style.margin = '2px 0';
-        visibleInput.readOnly = true; // Make it read-only so user can't edit
-        container.appendChild(visibleInput);
-
-        // Add label showing the field name
-        const label = document.createElement('small');
-        label.textContent = `${name}:`;
-        label.style.color = '#666';
-        label.style.display = 'block';
-        container.insertBefore(label, visibleInput);
-
-        // Debug logging
-        if (fieldCount <= 10) {
-            console.log('Created field:', name, '=', values.join(', '));
-        }
-    });
-
-    console.log('✅ Created', fieldCount, 'real form fields');
-
-    // Update debug info with field creation results
-    debugHtml += `<strong>Fields created:</strong> ${fieldCount} (hidden in form + visible for debugging)<br>`;
-
-    // Verify they're in the DOM and form
-    const visibleFields = container.querySelectorAll('input');
-    const hiddenFields = reviewForm.querySelectorAll('input[type="hidden"]');
-    console.log('Verification: Found', visibleFields.length, 'visible fields and', hiddenFields.length, 'hidden fields');
-
-    debugHtml += `<strong>✅ Created ${hiddenFields.length} hidden fields in form + ${visibleFields.length} visible fields for debugging.</strong>`;
-    debugHtml += `<br><strong>Hidden fields will be submitted to Netlify.</strong>`;
-
-    debugInfo.innerHTML = debugHtml;
-
-    const fieldsInForm = reviewForm.querySelectorAll('input, select, textarea');
-    console.log('Fields inside form:', fieldsInForm.length);
-
-    return fieldCount;
+    return entries.length;
 }
 
 // Step 2 on review page - CRITICAL FIX
@@ -351,35 +267,24 @@ function handleInterviewReviewPage() {
 
     const stored = sessionStorage.getItem('interviewSubmission');
     console.log('=== REVIEW PAGE LOADED ===');
-    console.log('Stored data:', stored);
 
     if (!stored) {
-        console.log('No stored data found, redirecting to interview.html');
-        alert('No form data found. Please fill out the interview form first.');
         window.location.href = 'interview.html';
         return;
     }
 
     const entries = JSON.parse(stored);
-    console.log('Parsed entries from sessionStorage:', entries.length);
-    console.log('First few entries:', entries.slice(0, 3));
+    console.log('Entries loaded:', entries.length);
 
     // Show summary
     populateReviewSummary(entries);
     
-    // Create form fields IMMEDIATELY
-    console.log('About to create form fields...');
     const inputCount = populateReviewFormFields(entries);
-    console.log('Form field creation returned:', inputCount);
-
     if (inputCount === 0) {
-        console.error('❌ CRITICAL: No form fields were created!');
+        console.error('❌ No fields available to submit!');
         alert('Error loading form data. Please go back and try again.');
         return;
     }
-
-    console.log('✅ Successfully created', inputCount, 'form fields');
-    alert('Form loaded successfully with ' + inputCount + ' fields. You can now review and submit.');
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -390,40 +295,49 @@ function handleInterviewReviewPage() {
 
     // Form submission to Netlify
     reviewForm.addEventListener('submit', function (e) {
-        console.log('=== FORM SUBMISSION STARTED ===');
+        e.preventDefault();
+        console.log('=== FORM SUBMISSION STARTED (AJAX) ===');
 
-        // Get all hidden inputs in the form (these are the actual submitted fields)
-        const hiddenInputs = reviewForm.querySelectorAll('input[type="hidden"]');
-        console.log('Hidden form fields at submit time:', hiddenInputs.length);
-
-        // Validate that we have data (exclude form-name and bot-field)
-        const dataFields = Array.from(hiddenInputs).filter(input =>
-            input.name !== 'form-name' && input.name !== 'bot-field'
-        );
-
-        if (dataFields.length === 0) {
-            e.preventDefault(); // Only prevent if no data
+        const stored = sessionStorage.getItem('interviewSubmission');
+        if (!stored) {
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        console.log('Data fields to submit:', dataFields.length);
+        const entries = JSON.parse(stored);
+        const payload = new URLSearchParams();
+        payload.append('form-name', 'interview');
 
-        // Log what we're submitting (first 10 fields for debugging)
-        console.log('Submitting to Netlify with', dataFields.length, 'data fields');
-        dataFields.forEach(function(field, index) {
-            if (index < 10) {
-                console.log('Field:', field.name, '=', field.value || '(empty)');
-            }
+        entries.forEach(({ name, value }) => {
+            payload.append(name, value || '');
         });
-        
-        // Clean up sessionStorage
-        sessionStorage.removeItem('interviewSubmission');
-        
-        // Let the form submit naturally to Netlify
-        // (don't call preventDefault, so natural HTML form submission happens)
-        console.log('Form submitting naturally to Netlify with real form fields...');
+
+        // Debug first few fields
+        entries.slice(0, 5).forEach(({ name, value }) => {
+            console.log('Submitting field:', name, '=', value);
+        });
+
+        fetch('/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: payload.toString()
+        })
+            .then(function (response) {
+                if (!response.ok && response.status !== 200) {
+                    throw new Error('Netlify submission failed');
+                }
+
+                console.log('✅ Netlify submission successful');
+                sessionStorage.removeItem('interviewSubmission');
+                window.location.href = 'thank-you.html';
+            })
+            .catch(function (error) {
+                console.error('❌ Netlify submission error:', error);
+                alert('There was a problem sending your form. Please try again.');
+            });
     });
 }
 
