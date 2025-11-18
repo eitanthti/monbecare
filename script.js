@@ -314,25 +314,34 @@ function populateReviewSummary(entries) {
     });
 }
 
-function populateReviewFormFields(entries) {
-    const container = document.getElementById('formFieldsContainer');
-    if (!container) return 0;
+// Helper to apply entries into the static form fields
+function applyEntriesToForm(form, entries) {
+    if (!form || !Array.isArray(entries)) return;
 
-    container.innerHTML = '';
-    
-    // Create hidden inputs for all form data
-    entries.forEach(({ name, value }) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value || '';
-        container.appendChild(input);
+    entries.forEach(function (entry) {
+        var name = entry.name;
+        var value = entry.value || '';
+        if (!name) return;
+
+        var fields = form.querySelectorAll('[name="' + name + '"]');
+        if (!fields || fields.length === 0) return;
+
+        fields.forEach(function (field) {
+            if (field.type === 'checkbox' || field.type === 'radio') {
+                // For checkboxes or radios, match by value
+                if (field.value === value) {
+                    field.checked = true;
+                }
+            } else if (field.tagName === 'SELECT') {
+                field.value = value;
+            } else {
+                field.value = value;
+            }
+        });
     });
-    
-    return entries.length;
 }
 
-// Step 2 on review page
+// Step 2 on review page - FIXED
 function handleInterviewReviewPage() {
     const reviewForm = document.getElementById('interviewReviewForm');
     if (!reviewForm) return;
@@ -364,18 +373,11 @@ function handleInterviewReviewPage() {
         return;
     }
 
-    // Show summary
+    // Show summary on the page
     populateReviewSummary(entries);
-    
-    // Populate hidden form fields
-    const inputCount = populateReviewFormFields(entries);
-    if (inputCount === 0) {
-        console.error('No fields available to submit');
-        alert('Error loading form data. Please go back and try again.');
-        return;
-    }
 
-    console.log('Created', inputCount, 'hidden form fields');
+    // Fill the static fields inside the review form
+    applyEntriesToForm(reviewForm, entries);
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -384,7 +386,7 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // Clear stored draft on successful browser submission
+    // When user submits, let browser submit normally and clear storage
     reviewForm.addEventListener('submit', function () {
         inMemoryStorage.removeItem('interviewSubmission');
     });

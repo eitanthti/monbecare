@@ -32,7 +32,7 @@
 
                 <div id="reviewSummaryList" class="review-summary"></div>
 
-                <!-- This form submits naturally to Netlify with real form fields -->
+                <!-- Main Netlify form with all static fields -->
                 <form name="interview" 
                       method="POST"
                       action="/thank-you.html" 
@@ -47,8 +47,150 @@
                         <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                     </p>
 
-                    <!-- Hidden container used by JavaScript when needed -->
-                    <div id="formFieldsContainer" style="display: none;"></div>
+                    <!-- Hidden static fields that Netlify will read -->
+                    <div class="hidden-fields" style="display: none;">
+                        <input name="firstName" />
+                        <input name="lastName" />
+                        <input name="email" />
+                        <input name="phone" />
+                        <input name="numberOfChildren" />
+                        <input name="productInterest" />
+                        <textarea name="importantFeatures"></textarea>
+                        <input name="interviewMethod" />
+                        <input name="bestTime" />
+                        <textarea name="additionalComments"></textarea>
+                        <input name="selectedLanguage" />
+                        <input name="childAgeYears_child1" />
+                        <input name="childAgeMonths_child1" />
+                        <input name="childAgeYears_child2" />
+                        <input name="childAgeMonths_child2" />
+                        <input name="childAgeYears_child3" />
+                        <input name="childAgeMonths_child3" />
+                        <input name="childAgeYears_child4" />
+                        <input name="childAgeMonths_child4" />
+                        <input name="childAgeYears_child5" />
+                        <input name="childAgeMonths_child5" />
+                        <select name="feeding0to3_child1"></select>
+                        <select name="feeding3to6_child1"></select>
+                        <select name="feeding6to12_child1"></select>
+                        <select name="breastfeedingAfter1_child1"></select>
+                        <textarea name="section3AdditionalComments_child1"></textarea>
+                        <select name="feeding0to3_child2"></select>
+                        <select name="feeding3to6_child2"></select>
+                        <select name="feeding6to12_child2"></select>
+                        <select name="breastfeedingAfter1_child2"></select>
+                        <textarea name="section3AdditionalComments_child2"></textarea>
+                        <select name="feeding0to3_child3"></select>
+                        <select name="feeding3to6_child3"></select>
+                        <select name="feeding6to12_child3"></select>
+                        <select name="breastfeedingAfter1_child3"></select>
+                        <textarea name="section3AdditionalComments_child3"></textarea>
+                        <select name="feeding0to3_child4"></select>
+                        <select name="feeding3to6_child4"></select>
+                        <select name="feeding6to12_child4"></select>
+                        <select name="breastfeedingAfter1_child4"></select>
+                        <textarea name="section3AdditionalComments_child4"></textarea>
+                        <select name="feeding0to3_child5"></select>
+                        <select name="feeding3to6_child5"></select>
+                        <select name="feeding6to12_child5"></select>
+                        <select name="breastfeedingAfter1_child5"></select>
+                        <textarea name="section3AdditionalComments_child5"></textarea>
+                        <select name="stoppedAgeYears_child1"></select>
+                        <select name="stoppedAgeMonths_child1"></select>
+                        <textarea name="stoppingReason_child1"></textarea>
+                        <select name="notBreastfeedingReason_child1"></select>
+                        <select name="stoppedAgeYears_child2"></select>
+                        <select name="stoppedAgeMonths_child2"></select>
+                        <textarea name="stoppingReason_child2"></textarea>
+                        <select name="notBreastfeedingReason_child2"></select>
+                        <select name="stoppedAgeYears_child3"></select>
+                        <select name="stoppedAgeMonths_child3"></select>
+                        <textarea name="stoppingReason_child3"></textarea>
+                        <select name="notBreastfeedingReason_child3"></select>
+                        <select name="stoppedAgeYears_child4"></select>
+                        <select name="stoppedAgeMonths_child4"></select>
+                        <textarea name="stoppingReason_child4"></textarea>
+                        <select name="notBreastfeedingReason_child4"></select>
+                        <select name="stoppedAgeYears_child5"></select>
+                        <select name="stoppedAgeMonths_child5"></select>
+                        <textarea name="stoppingReason_child5"></textarea>
+                        <select name="notBreastfeedingReason_child5"></select>
+                        <input type="checkbox" name="professionalSupport_child1" value="lactation-consultant" />
+                        <input type="checkbox" name="professionalSupport_child1" value="parenting-guide" />
+                        <input type="checkbox" name="professionalSupport_child1" value="development-guide" />
+                        <input type="checkbox" name="professionalSupport_child1" value="health-clinic" />
+                        <input type="checkbox" name="professionalSupport_child1" value="family-social-only" />
+                        <input type="checkbox" name="professionalSupport_child1" value="no-support" />
+                        <input type="checkbox" name="aidsUsed_child1" value="nursing-pillow" />
+                        <input type="checkbox" name="aidsUsed_child1" value="home-scale" />
+                        <input type="checkbox" name="aidsUsed_child1" value="feeding-app" />
+                        <input type="checkbox" name="aidsUsed_child1" value="pumping" />
+                        <input type="checkbox" name="aidsUsed_child1" value="silicone-nipple" />
+                        <input type="checkbox" name="aidsUsed_child1" value="tube-feeding" />
+                        <input type="checkbox" name="aidsUsed_child1" value="no-aids" />
+                        <input type="checkbox" name="aidsUsed_child1" value="other" />
+                        <textarea name="section3Comments_child1"></textarea>
+                        <input type="checkbox" name="professionalSupport_child2" value="lactation-consultant" />
+                        <input type="checkbox" name="professionalSupport_child2" value="parenting-guide" />
+                        <input type="checkbox" name="professionalSupport_child2" value="development-guide" />
+                        <input type="checkbox" name="professionalSupport_child2" value="health-clinic" />
+                        <input type="checkbox" name="professionalSupport_child2" value="family-social-only" />
+                        <input type="checkbox" name="professionalSupport_child2" value="no-support" />
+                        <input type="checkbox" name="aidsUsed_child2" value="nursing-pillow" />
+                        <input type="checkbox" name="aidsUsed_child2" value="home-scale" />
+                        <input type="checkbox" name="aidsUsed_child2" value="feeding-app" />
+                        <input type="checkbox" name="aidsUsed_child2" value="pumping" />
+                        <input type="checkbox" name="aidsUsed_child2" value="silicone-nipple" />
+                        <input type="checkbox" name="aidsUsed_child2" value="tube-feeding" />
+                        <input type="checkbox" name="aidsUsed_child2" value="no-aids" />
+                        <input type="checkbox" name="aidsUsed_child2" value="other" />
+                        <textarea name="section3Comments_child2"></textarea>
+                        <input type="checkbox" name="professionalSupport_child3" value="lactation-consultant" />
+                        <input type="checkbox" name="professionalSupport_child3" value="parenting-guide" />
+                        <input type="checkbox" name="professionalSupport_child3" value="development-guide" />
+                        <input type="checkbox" name="professionalSupport_child3" value="health-clinic" />
+                        <input type="checkbox" name="professionalSupport_child3" value="family-social-only" />
+                        <input type="checkbox" name="professionalSupport_child3" value="no-support" />
+                        <input type="checkbox" name="aidsUsed_child3" value="nursing-pillow" />
+                        <input type="checkbox" name="aidsUsed_child3" value="home-scale" />
+                        <input type="checkbox" name="aidsUsed_child3" value="feeding-app" />
+                        <input type="checkbox" name="aidsUsed_child3" value="pumping" />
+                        <input type="checkbox" name="aidsUsed_child3" value="silicone-nipple" />
+                        <input type="checkbox" name="aidsUsed_child3" value="tube-feeding" />
+                        <input type="checkbox" name="aidsUsed_child3" value="no-aids" />
+                        <input type="checkbox" name="aidsUsed_child3" value="other" />
+                        <textarea name="section3Comments_child3"></textarea>
+                        <input type="checkbox" name="professionalSupport_child4" value="lactation-consultant" />
+                        <input type="checkbox" name="professionalSupport_child4" value="parenting-guide" />
+                        <input type="checkbox" name="professionalSupport_child4" value="development-guide" />
+                        <input type="checkbox" name="professionalSupport_child4" value="health-clinic" />
+                        <input type="checkbox" name="professionalSupport_child4" value="family-social-only" />
+                        <input type="checkbox" name="professionalSupport_child4" value="no-support" />
+                        <input type="checkbox" name="aidsUsed_child4" value="nursing-pillow" />
+                        <input type="checkbox" name="aidsUsed_child4" value="home-scale" />
+                        <input type="checkbox" name="aidsUsed_child4" value="feeding-app" />
+                        <input type="checkbox" name="aidsUsed_child4" value="pumping" />
+                        <input type="checkbox" name="aidsUsed_child4" value="silicone-nipple" />
+                        <input type="checkbox" name="aidsUsed_child4" value="tube-feeding" />
+                        <input type="checkbox" name="aidsUsed_child4" value="no-aids" />
+                        <input type="checkbox" name="aidsUsed_child4" value="other" />
+                        <textarea name="section3Comments_child4"></textarea>
+                        <input type="checkbox" name="professionalSupport_child5" value="lactation-consultant" />
+                        <input type="checkbox" name="professionalSupport_child5" value="parenting-guide" />
+                        <input type="checkbox" name="professionalSupport_child5" value="development-guide" />
+                        <input type="checkbox" name="professionalSupport_child5" value="health-clinic" />
+                        <input type="checkbox" name="professionalSupport_child5" value="family-social-only" />
+                        <input type="checkbox" name="professionalSupport_child5" value="no-support" />
+                        <input type="checkbox" name="aidsUsed_child5" value="nursing-pillow" />
+                        <input type="checkbox" name="aidsUsed_child5" value="home-scale" />
+                        <input type="checkbox" name="aidsUsed_child5" value="feeding-app" />
+                        <input type="checkbox" name="aidsUsed_child5" value="pumping" />
+                        <input type="checkbox" name="aidsUsed_child5" value="silicone-nipple" />
+                        <input type="checkbox" name="aidsUsed_child5" value="tube-feeding" />
+                        <input type="checkbox" name="aidsUsed_child5" value="no-aids" />
+                        <input type="checkbox" name="aidsUsed_child5" value="other" />
+                        <textarea name="section3Comments_child5"></textarea>
+                    </div>
 
                     <div class="review-actions">
                         <button type="submit" class="submit-btn">Confirm & Submit</button>
@@ -64,156 +206,6 @@
             </div>
         </div>
     </section>
-
-    <!-- CRITICAL: Hidden form for Netlify build-time detection -->
-    <!-- Netlify MUST see this form during deploy to set up form handling -->
-    <div style="display: none;">
-        <form name="interview" netlify netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="interview" />
-            <input name="bot-field" />
-            <input name="firstName" />
-            <input name="lastName" />
-            <input name="email" />
-            <input name="phone" />
-            <input name="numberOfChildren" />
-            <input name="productInterest" />
-            <textarea name="importantFeatures"></textarea>
-            <input name="interviewMethod" />
-            <input name="bestTime" />
-            <textarea name="additionalComments"></textarea>
-            <input name="selectedLanguage" />
-            <input name="childAgeYears_child1" />
-            <input name="childAgeMonths_child1" />
-            <input name="childAgeYears_child2" />
-            <input name="childAgeMonths_child2" />
-            <input name="childAgeYears_child3" />
-            <input name="childAgeMonths_child3" />
-            <input name="childAgeYears_child4" />
-            <input name="childAgeMonths_child4" />
-            <input name="childAgeYears_child5" />
-            <input name="childAgeMonths_child5" />
-            <select name="feeding0to3_child1"></select>
-            <select name="feeding3to6_child1"></select>
-            <select name="feeding6to12_child1"></select>
-            <select name="breastfeedingAfter1_child1"></select>
-            <textarea name="section3AdditionalComments_child1"></textarea>
-            <select name="feeding0to3_child2"></select>
-            <select name="feeding3to6_child2"></select>
-            <select name="feeding6to12_child2"></select>
-            <select name="breastfeedingAfter1_child2"></select>
-            <textarea name="section3AdditionalComments_child2"></textarea>
-            <select name="feeding0to3_child3"></select>
-            <select name="feeding3to6_child3"></select>
-            <select name="feeding6to12_child3"></select>
-            <select name="breastfeedingAfter1_child3"></select>
-            <textarea name="section3AdditionalComments_child3"></textarea>
-            <select name="feeding0to3_child4"></select>
-            <select name="feeding3to6_child4"></select>
-            <select name="feeding6to12_child4"></select>
-            <select name="breastfeedingAfter1_child4"></select>
-            <textarea name="section3AdditionalComments_child4"></textarea>
-            <select name="feeding0to3_child5"></select>
-            <select name="feeding3to6_child5"></select>
-            <select name="feeding6to12_child5"></select>
-            <select name="breastfeedingAfter1_child5"></select>
-            <textarea name="section3AdditionalComments_child5"></textarea>
-            <select name="stoppedAgeYears_child1"></select>
-            <select name="stoppedAgeMonths_child1"></select>
-            <textarea name="stoppingReason_child1"></textarea>
-            <select name="notBreastfeedingReason_child1"></select>
-            <select name="stoppedAgeYears_child2"></select>
-            <select name="stoppedAgeMonths_child2"></select>
-            <textarea name="stoppingReason_child2"></textarea>
-            <select name="notBreastfeedingReason_child2"></select>
-            <select name="stoppedAgeYears_child3"></select>
-            <select name="stoppedAgeMonths_child3"></select>
-            <textarea name="stoppingReason_child3"></textarea>
-            <select name="notBreastfeedingReason_child3"></select>
-            <select name="stoppedAgeYears_child4"></select>
-            <select name="stoppedAgeMonths_child4"></select>
-            <textarea name="stoppingReason_child4"></textarea>
-            <select name="notBreastfeedingReason_child4"></select>
-            <select name="stoppedAgeYears_child5"></select>
-            <select name="stoppedAgeMonths_child5"></select>
-            <textarea name="stoppingReason_child5"></textarea>
-            <select name="notBreastfeedingReason_child5"></select>
-            <input type="checkbox" name="professionalSupport_child1" value="lactation-consultant" />
-            <input type="checkbox" name="professionalSupport_child1" value="parenting-guide" />
-            <input type="checkbox" name="professionalSupport_child1" value="development-guide" />
-            <input type="checkbox" name="professionalSupport_child1" value="health-clinic" />
-            <input type="checkbox" name="professionalSupport_child1" value="family-social-only" />
-            <input type="checkbox" name="professionalSupport_child1" value="no-support" />
-            <input type="checkbox" name="aidsUsed_child1" value="nursing-pillow" />
-            <input type="checkbox" name="aidsUsed_child1" value="home-scale" />
-            <input type="checkbox" name="aidsUsed_child1" value="feeding-app" />
-            <input type="checkbox" name="aidsUsed_child1" value="pumping" />
-            <input type="checkbox" name="aidsUsed_child1" value="silicone-nipple" />
-            <input type="checkbox" name="aidsUsed_child1" value="tube-feeding" />
-            <input type="checkbox" name="aidsUsed_child1" value="no-aids" />
-            <input type="checkbox" name="aidsUsed_child1" value="other" />
-            <textarea name="section3Comments_child1"></textarea>
-            <input type="checkbox" name="professionalSupport_child2" value="lactation-consultant" />
-            <input type="checkbox" name="professionalSupport_child2" value="parenting-guide" />
-            <input type="checkbox" name="professionalSupport_child2" value="development-guide" />
-            <input type="checkbox" name="professionalSupport_child2" value="health-clinic" />
-            <input type="checkbox" name="professionalSupport_child2" value="family-social-only" />
-            <input type="checkbox" name="professionalSupport_child2" value="no-support" />
-            <input type="checkbox" name="aidsUsed_child2" value="nursing-pillow" />
-            <input type="checkbox" name="aidsUsed_child2" value="home-scale" />
-            <input type="checkbox" name="aidsUsed_child2" value="feeding-app" />
-            <input type="checkbox" name="aidsUsed_child2" value="pumping" />
-            <input type="checkbox" name="aidsUsed_child2" value="silicone-nipple" />
-            <input type="checkbox" name="aidsUsed_child2" value="tube-feeding" />
-            <input type="checkbox" name="aidsUsed_child2" value="no-aids" />
-            <input type="checkbox" name="aidsUsed_child2" value="other" />
-            <textarea name="section3Comments_child2"></textarea>
-            <input type="checkbox" name="professionalSupport_child3" value="lactation-consultant" />
-            <input type="checkbox" name="professionalSupport_child3" value="parenting-guide" />
-            <input type="checkbox" name="professionalSupport_child3" value="development-guide" />
-            <input type="checkbox" name="professionalSupport_child3" value="health-clinic" />
-            <input type="checkbox" name="professionalSupport_child3" value="family-social-only" />
-            <input type="checkbox" name="professionalSupport_child3" value="no-support" />
-            <input type="checkbox" name="aidsUsed_child3" value="nursing-pillow" />
-            <input type="checkbox" name="aidsUsed_child3" value="home-scale" />
-            <input type="checkbox" name="aidsUsed_child3" value="feeding-app" />
-            <input type="checkbox" name="aidsUsed_child3" value="pumping" />
-            <input type="checkbox" name="aidsUsed_child3" value="silicone-nipple" />
-            <input type="checkbox" name="aidsUsed_child3" value="tube-feeding" />
-            <input type="checkbox" name="aidsUsed_child3" value="no-aids" />
-            <input type="checkbox" name="aidsUsed_child3" value="other" />
-            <textarea name="section3Comments_child3"></textarea>
-            <input type="checkbox" name="professionalSupport_child4" value="lactation-consultant" />
-            <input type="checkbox" name="professionalSupport_child4" value="parenting-guide" />
-            <input type="checkbox" name="professionalSupport_child4" value="development-guide" />
-            <input type="checkbox" name="professionalSupport_child4" value="health-clinic" />
-            <input type="checkbox" name="professionalSupport_child4" value="family-social-only" />
-            <input type="checkbox" name="professionalSupport_child4" value="no-support" />
-            <input type="checkbox" name="aidsUsed_child4" value="nursing-pillow" />
-            <input type="checkbox" name="aidsUsed_child4" value="home-scale" />
-            <input type="checkbox" name="aidsUsed_child4" value="feeding-app" />
-            <input type="checkbox" name="aidsUsed_child4" value="pumping" />
-            <input type="checkbox" name="aidsUsed_child4" value="silicone-nipple" />
-            <input type="checkbox" name="aidsUsed_child4" value="tube-feeding" />
-            <input type="checkbox" name="aidsUsed_child4" value="no-aids" />
-            <input type="checkbox" name="aidsUsed_child4" value="other" />
-            <textarea name="section3Comments_child4"></textarea>
-            <input type="checkbox" name="professionalSupport_child5" value="lactation-consultant" />
-            <input type="checkbox" name="professionalSupport_child5" value="parenting-guide" />
-            <input type="checkbox" name="professionalSupport_child5" value="development-guide" />
-            <input type="checkbox" name="professionalSupport_child5" value="health-clinic" />
-            <input type="checkbox" name="professionalSupport_child5" value="family-social-only" />
-            <input type="checkbox" name="professionalSupport_child5" value="no-support" />
-            <input type="checkbox" name="aidsUsed_child5" value="nursing-pillow" />
-            <input type="checkbox" name="aidsUsed_child5" value="home-scale" />
-            <input type="checkbox" name="aidsUsed_child5" value="feeding-app" />
-            <input type="checkbox" name="aidsUsed_child5" value="pumping" />
-            <input type="checkbox" name="aidsUsed_child5" value="silicone-nipple" />
-            <input type="checkbox" name="aidsUsed_child5" value="tube-feeding" />
-            <input type="checkbox" name="aidsUsed_child5" value="no-aids" />
-            <input type="checkbox" name="aidsUsed_child5" value="other" />
-            <textarea name="section3Comments_child5"></textarea>
-        </form>
-    </div>
 
     <script src="script.js"></script>
 </body>
