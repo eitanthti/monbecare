@@ -287,45 +287,22 @@ function populateReviewSummary(entries) {
     });
 }
 
-function buildSubmissionSummary(entries) {
-    const grouped = {};
-
-    entries.forEach(({ name, value }) => {
-        if (name === 'form-name' || name === 'bot-field') return;
-        if (!grouped[name]) grouped[name] = [];
-        grouped[name].push(value || '');
-    });
-
-    const lines = [];
-    Object.keys(grouped).forEach((name) => {
-        const label = getReviewLabel(name);
-        const textValue = grouped[name].join(', ');
-        lines.push(label + ': ' + textValue);
-    });
-
-    return lines.join('\n');
-}
-
 function populateReviewFormFields(entries) {
-    const reviewForm = document.getElementById('interviewReviewForm');
-    if (!reviewForm) return 0;
+    const container = document.getElementById('formFieldsContainer');
+    if (!container) return 0;
 
-    const existingSummary = reviewForm.querySelector('input[name="submission_summary"]');
-    if (existingSummary) {
-        existingSummary.remove();
-    }
-
-    const summaryText = buildSubmissionSummary(entries);
-    if (!summaryText) return 0;
-
-    const summaryInput = document.createElement('input');
-    summaryInput.type = 'hidden';
-    summaryInput.name = 'submission_summary';
-    summaryInput.value = summaryText;
-    reviewForm.appendChild(summaryInput);
-
-    console.log('✅ Prepared submission summary with', summaryText.split('\n').length, 'lines');
-    return 1;
+    container.innerHTML = '';
+    
+    // Create hidden inputs for all form data
+    entries.forEach(({ name, value }) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value || '';
+        container.appendChild(input);
+    });
+    
+    return entries.length;
 }
 
 // Step 2 on review page - FIXED
@@ -374,17 +351,57 @@ function handleInterviewReviewPage() {
 
     // Form submission to Netlify
     reviewForm.addEventListener('submit', function (e) {
-        const summaryField = reviewForm.querySelector('input[name="submission_summary"]');
-        if (!summaryField || !summaryField.value) {
-            e.preventDefault();
-            alert('Unable to submit: summary data missing. Please go back and try again.');
+        e.preventDefault();
+        console.log('=== FORM SUBMISSION STARTED (AJAX) ===');
+
+        const stored = inMemoryStorage.getItem('interviewSubmission');
+        if (!stored) {
+            alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        console.log('Submitting summary to Netlify. Length:', summaryField.value.length);
-        inMemoryStorage.removeItem('interviewSubmission');
-        // Allow natural submission (no preventDefault)
+        let entries;
+        try {
+            entries = JSON.parse(stored);
+        } catch (error) {
+            console.error('Error parsing stored data:', error);
+            alert('Error loading form data. Please go back and try again.');
+            return;
+        }
+
+        const payload = new URLSearchParams();
+        payload.append('form-name', 'interview');
+
+        entries.forEach(({ name, value }) => {
+            payload.append(name, value || '');
+        });
+
+        // Debug first few fields
+        entries.slice(0, 5).forEach(({ name, value }) => {
+            console.log('Submitting field:', name, '=', value);
+        });
+
+        fetch('/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: payload.toString()
+        })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Netlify submission failed with status: ' + response.status);
+                }
+
+                console.log('✅ Netlify submission successful');
+                inMemoryStorage.removeItem('interviewSubmission');
+                window.location.href = 'thank-you.html';
+            })
+            .catch(function (error) {
+                console.error('❌ Netlify submission error:', error);
+                alert('There was a problem sending your form. Please try again.');
+            });
     });
 }
 
