@@ -148,10 +148,15 @@
                             <select name="interviewMethod" class="form-input" required>
                                 <option value="" data-translate="select-option">Please select...</option>
                                 <option value="video-call" data-translate="opt-video-call">Video call (Zoom, Google Meet, etc.)</option>
-                                <option value="phone-call" data-translate="opt-phone-call">Phone call</option>
                                 <option value="in-person" data-translate="opt-in-person">In-person</option>
-                                <option value="email" data-translate="opt-email">Email exchange</option>
                             </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="recordingConsent" value="yes">
+                                <span data-translate="recording-consent-label">I agree that the interview can be recorded for internal use only</span>
+                            </label>
                         </div>
 
                         <div class="form-group full-width">
@@ -184,6 +189,7 @@
                     <input name="productInterest" />
                     <textarea name="importantFeatures"></textarea>
                     <input name="interviewMethod" />
+                    <input type="checkbox" name="recordingConsent" />
                     <input name="bestTime" />
                     <textarea name="additionalComments"></textarea>
                     <input name="selectedLanguage" />
@@ -553,6 +559,7 @@
                 'q17-placeholder': 'Please describe the features that would be most important to you...',
                 'section-interview-title': 'Interview Coordination',
                 'interview-method-label': 'Preferred interview method',
+                'recording-consent-label': 'I agree that the interview can be recorded for internal use only',
                 'best-time-label': 'Best time to reach you',
                 'best-time-placeholder': 'e.g., Weekday mornings, Evening after 6pm, etc.',
                 'additional-comments-label': 'Additional comments or questions',
@@ -647,6 +654,7 @@
                 'q17-placeholder': 'Bitte beschreiben Sie die Funktionen, die für Sie am wichtigsten wären...',
                 'section-interview-title': 'Interview-Koordination',
                 'interview-method-label': 'Bevorzugte Interviewmethode',
+                'recording-consent-label': 'Ich bin einverstanden, dass das Interview nur für internen Gebrauch aufgezeichnet werden kann',
                 'best-time-label': 'Beste Zeit, um Sie zu erreichen',
                 'best-time-placeholder': 'z.B. Wochentags morgens, Abends nach 18 Uhr, etc.',
                 'additional-comments-label': 'Zusätzliche Kommentare oder Fragen',
@@ -741,6 +749,7 @@
                 'q17-placeholder': 'Veuillez décrire les fonctionnalités qui seraient les plus importantes pour vous...',
                 'section-interview-title': 'Coordination de l\'entretien',
                 'interview-method-label': 'Méthode d\'entretien préférée',
+                'recording-consent-label': 'J\'accepte que l\'entretien puisse être enregistré uniquement pour un usage interne',
                 'best-time-label': 'Meilleur moment pour vous joindre',
                 'best-time-placeholder': 'par ex. Matins en semaine, Soir après 18h, etc.',
                 'additional-comments-label': 'Commentaires ou questions supplémentaires',
@@ -835,6 +844,7 @@
                 'q17-placeholder': 'נא לתאר את התכונות שהיו הכי חשובות לך...',
                 'section-interview-title': 'תיאום הראיון',
                 'interview-method-label': 'שיטת ראיון מועדפת',
+                'recording-consent-label': 'אני מסכימה שהראיון יוקלט לשימוש פנימי בלבד',
                 'best-time-label': 'הזמן הטוב ביותר ליצירת קשר',
                 'best-time-placeholder': 'לדוגמה: בוקר בימי חול, ערב אחרי 18:00, וכו\'',
                 'additional-comments-label': 'הערות או שאלות נוספות',

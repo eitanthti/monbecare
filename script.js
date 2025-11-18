@@ -286,6 +286,7 @@ function getReviewLabel(fieldName) {
     if (fieldName === 'productInterest') return 'Interest in breastfeeding monitor';
     if (fieldName === 'importantFeatures') return 'Important features';
     if (fieldName === 'interviewMethod') return 'Preferred interview method';
+    if (fieldName === 'recordingConsent') return 'Recording consent';
     if (fieldName === 'bestTime') return 'Best time to reach you';
     if (fieldName === 'additionalComments') return 'Additional comments';
 
