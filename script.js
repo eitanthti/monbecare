@@ -256,8 +256,10 @@ function getReviewLabel(fieldName) {
     if (m) return 'Child ' + m[1] + ' - feeding age 0 to 3 months';
     m = fieldName.match(/^feeding3to6_child(\d+)$/);
     if (m) return 'Child ' + m[1] + ' - feeding age 3 to 6 months';
-    m = fieldName.match(/^feeding6to12_child(\d+)$/);
-    if (m) return 'Child ' + m[1] + ' - feeding age 6 to 12 months';
+    m = fieldName.match(/^feeding6to9_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding age 6 to 9 months';
+    m = fieldName.match(/^feeding9to12_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - feeding age 9 to 12 months';
     m = fieldName.match(/^breastfeedingAfter1_child(\d+)$/);
     if (m) return 'Child ' + m[1] + ' - breastfeeding after age 1';
     m = fieldName.match(/^section3AdditionalComments_child(\d+)$/);

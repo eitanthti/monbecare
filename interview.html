@@ -198,17 +198,20 @@
                     <!-- Section 3: Feeding methods for all children -->
                     <select name="feeding0to3_child1"></select>
                     <select name="feeding3to6_child1"></select>
-                    <select name="feeding6to12_child1"></select>
+                    <select name="feeding6to9_child1"></select>
+                    <select name="feeding9to12_child1"></select>
                     <select name="breastfeedingAfter1_child1"></select>
                     <textarea name="section3AdditionalComments_child1"></textarea>
                     <select name="feeding0to3_child2"></select>
                     <select name="feeding3to6_child2"></select>
-                    <select name="feeding6to12_child2"></select>
+                    <select name="feeding6to9_child2"></select>
+                    <select name="feeding9to12_child2"></select>
                     <select name="breastfeedingAfter1_child2"></select>
                     <textarea name="section3AdditionalComments_child2"></textarea>
                     <select name="feeding0to3_child3"></select>
                     <select name="feeding3to6_child3"></select>
-                    <select name="feeding6to12_child3"></select>
+                    <select name="feeding6to9_child3"></select>
+                    <select name="feeding9to12_child3"></select>
                     <select name="breastfeedingAfter1_child3"></select>
                     <textarea name="section3AdditionalComments_child3"></textarea>
                     <!-- Section 4: Stopping breastfeeding for all children -->
@@ -305,8 +308,21 @@
                     </div>
 
                     <div class="form-group full-width">
-                        <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-12 months? <span class="required">(required)</span></label>
-                        <select name="feeding6to12" class="form-input" data-required="true">
+                        <label class="form-label" data-translate="q9-label">What was the feeding method during age 6-9 months? <span class="required">(required)</span></label>
+                        <select name="feeding6to9" class="form-input" data-required="true">
+                            <option value="" data-translate="select-option">Please select...</option>
+                            <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
+                            <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
+                            <option value="breastfeeding-pumping" data-translate="opt-breastfeeding-pumping">Breastfeeding + Pumping</option>
+                            <option value="pumping-only" data-translate="opt-pumping-only">Pumping only</option>
+                            <option value="pumping-formula" data-translate="opt-pumping-formula">Pumping + Formula</option>
+                            <option value="formula-only" data-translate="opt-formula-only">Formula only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q9b-label">What was the feeding method during age 9-12 months? <span class="required">(required)</span></label>
+                        <select name="feeding9to12" class="form-input" data-required="true">
                             <option value="" data-translate="select-option">Please select...</option>
                             <option value="breastfeeding-only" data-translate="opt-breastfeeding-only">Breastfeeding only</option>
                             <option value="breastfeeding-formula" data-translate="opt-breastfeeding-formula-complementary">Breastfeeding + Formula / Complementary food</option>
@@ -504,7 +520,8 @@
                 'section3-comments-placeholder': 'Any additional comments or information about this child...',
                 'q7-label': 'What was the main feeding method during months 0-3?',
                 'q8-label': 'What was the feeding method during age 3-6 months?',
-                'q9-label': 'What was the feeding method during age 6-12 months?',
+                'q9-label': 'What was the feeding method during age 6-9 months?',
+                'q9b-label': 'What was the feeding method during age 9-12 months?',
                 'q10-label': 'Did you continue breastfeeding after age 1 year?',
                 'section4-title': 'Section 4 - Stopping Breastfeeding',
                 'section4-description': 'Please answer for each child separately.',
@@ -593,7 +610,8 @@
                 'section3-comments-placeholder': 'Zusätzliche Kommentare oder Informationen zu diesem Kind...',
                 'q7-label': 'Wie war die Hauptfütterungsmethode in den Monaten 0-3?',
                 'q8-label': 'Wie war die Fütterungsmethode im Alter von 3-6 Monaten?',
-                'q9-label': 'Wie war die Fütterungsmethode im Alter von 6-12 Monaten?',
+                'q9-label': 'Wie war die Fütterungsmethode im Alter von 6-9 Monaten?',
+                'q9b-label': 'Wie war die Fütterungsmethode im Alter von 9-12 Monaten?',
                 'q10-label': 'Haben Sie nach dem ersten Lebensjahr weiter gestillt?',
                 'section4-title': 'Abschnitt 4 - Abstillen',
                 'section4-description': 'Bitte beantworten Sie für jedes Kind separat.',
@@ -683,7 +701,8 @@
                 'section3-comments-placeholder': 'Tout commentaire ou information supplémentaire sur cet enfant...',
                 'q7-label': 'Quelle était la méthode d\'alimentation principale pendant les mois 0-3?',
                 'q8-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 3-6 mois?',
-                'q9-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 6-12 mois?',
+                'q9-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 6-9 mois?',
+                'q9b-label': 'Quelle était la méthode d\'alimentation pendant l\'âge de 9-12 mois?',
                 'q10-label': 'Avez-vous continué à allaiter après l\'âge d\'un an?',
                 'section4-title': 'Section 4 - Arrêt de l\'allaitement',
                 'section4-description': 'Veuillez répondre pour chaque enfant séparément.',
@@ -773,7 +792,8 @@
                 'section3-comments-placeholder': 'כל הערות או מידע נוסף על ילד זה...',
                 'q7-label': 'מה היה אופן ההאכלה העיקרי בחודשים 0 עד 3?',
                 'q8-label': 'מה היה אופן ההאכלה בתקופה בין גיל 3 עד 6 חודשים?',
-                'q9-label': 'מה היה אופן ההאכלה בתקופה בין גיל 6 עד 12 חודשים?',
+                'q9-label': 'מה היה אופן ההאכלה בתקופה בין גיל 6 עד 9 חודשים?',
+                'q9b-label': 'מה היה אופן ההאכלה בתקופה בין גיל 9 עד 12 חודשים?',
                 'q10-label': 'האם המשכת להניק אחרי גיל שנה?',
                 'section4-title': 'שלב 4 - הפסקת הנקה',
                 'section4-description': 'לענות עבור כל ילד בנפרד.',
