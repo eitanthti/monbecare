@@ -254,10 +254,11 @@ function populateReviewSummary(entries) {
 
 function populateReviewFormFields(entries) {
     const container = document.getElementById('formFieldsContainer');
+    const reviewForm = document.getElementById('interviewReviewForm');
     const debugInfo = document.getElementById('debugInfo');
 
-    if (!container) {
-        console.error('❌ formFieldsContainer not found!');
+    if (!container || !reviewForm) {
+        console.error('❌ formFieldsContainer or form not found!');
         return 0;
     }
 
@@ -291,37 +292,30 @@ function populateReviewFormFields(entries) {
     Object.keys(grouped).forEach((name) => {
         const values = grouped[name];
 
-        // For checkboxes with multiple values, create multiple inputs
-        if (name.includes('professionalSupport_') || name.includes('aidsUsed_')) {
-            values.forEach((value, index) => {
-                if (value) { // Only create if value exists
-                    const input = document.createElement('input');
-                    input.type = 'text'; // Use text input instead of checkbox for simplicity
-                    input.name = name;
-                    input.value = value;
-                    input.setAttribute('data-checkbox-value', value);
-                    container.appendChild(input);
-                    fieldCount++;
+        // Create hidden inputs directly in the form (not in container)
+        const input = document.createElement('input');
+        input.type = 'hidden'; // Make them hidden now that we know they work
+        input.name = name;
+        input.value = values.join(', '); // Join multiple values with comma
 
-                    // Add a label to show it's a checkbox value
-                    const label = document.createElement('small');
-                    label.textContent = ` (checkbox: ${value})`;
-                    label.style.color = '#666';
-                    container.appendChild(label);
-                    container.appendChild(document.createElement('br'));
-                }
-            });
-        } else {
-            // Regular text input for all other fields
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = name;
-            input.value = values.join(', '); // Join multiple values with comma
-            input.style.width = '300px'; // Make inputs visible
-            input.style.margin = '2px 0';
-            container.appendChild(input);
-            fieldCount++;
-        }
+        // Append directly to form element to ensure submission
+        reviewForm.appendChild(input);
+        fieldCount++;
+
+        // Also add a visible copy to the debug container
+        const visibleInput = input.cloneNode(true);
+        visibleInput.type = 'text';
+        visibleInput.style.width = '300px';
+        visibleInput.style.margin = '2px 0';
+        visibleInput.readOnly = true; // Make it read-only so user can't edit
+        container.appendChild(visibleInput);
+
+        // Add label showing the field name
+        const label = document.createElement('small');
+        label.textContent = `${name}:`;
+        label.style.color = '#666';
+        label.style.display = 'block';
+        container.insertBefore(label, visibleInput);
 
         // Debug logging
         if (fieldCount <= 10) {
@@ -332,21 +326,20 @@ function populateReviewFormFields(entries) {
     console.log('✅ Created', fieldCount, 'real form fields');
 
     // Update debug info with field creation results
-    debugHtml += `<strong>Fields created:</strong> ${fieldCount}<br>`;
+    debugHtml += `<strong>Fields created:</strong> ${fieldCount} (hidden in form + visible for debugging)<br>`;
 
     // Verify they're in the DOM and form
-    const allFields = container.querySelectorAll('input');
-    console.log('Verification: Found', allFields.length, 'form fields in DOM');
+    const visibleFields = container.querySelectorAll('input');
+    const hiddenFields = reviewForm.querySelectorAll('input[type="hidden"]');
+    console.log('Verification: Found', visibleFields.length, 'visible fields and', hiddenFields.length, 'hidden fields');
 
-    debugHtml += `<strong>All ${allFields.length} fields should be visible above and submitted to Netlify.</strong>`;
+    debugHtml += `<strong>✅ Created ${hiddenFields.length} hidden fields in form + ${visibleFields.length} visible fields for debugging.</strong>`;
+    debugHtml += `<br><strong>Hidden fields will be submitted to Netlify.</strong>`;
 
     debugInfo.innerHTML = debugHtml;
 
-    const form = document.getElementById('interviewReviewForm');
-    if (form) {
-        const fieldsInForm = form.querySelectorAll('input, select, textarea');
-        console.log('Fields inside form:', fieldsInForm.length);
-    }
+    const fieldsInForm = reviewForm.querySelectorAll('input, select, textarea');
+    console.log('Fields inside form:', fieldsInForm.length);
 
     return fieldCount;
 }
@@ -399,30 +392,27 @@ function handleInterviewReviewPage() {
     reviewForm.addEventListener('submit', function (e) {
         console.log('=== FORM SUBMISSION STARTED ===');
 
-        const container = document.getElementById('formFieldsContainer');
-        const formFields = container ? container.querySelectorAll('input, select, textarea') : [];
-        
-        console.log('Form fields at submit time:', formFields.length);
-        
-        // Validate that we have data
-        if (formFields.length === 0) {
+        // Get all hidden inputs in the form (these are the actual submitted fields)
+        const hiddenInputs = reviewForm.querySelectorAll('input[type="hidden"]');
+        console.log('Hidden form fields at submit time:', hiddenInputs.length);
+
+        // Validate that we have data (exclude form-name and bot-field)
+        const dataFields = Array.from(hiddenInputs).filter(input =>
+            input.name !== 'form-name' && input.name !== 'bot-field'
+        );
+
+        if (dataFields.length === 0) {
             e.preventDefault(); // Only prevent if no data
             alert('No form data found. Please go back and fill out the form again.');
             window.location.href = 'interview.html';
             return;
         }
 
-        // Verify all fields are actually in the form
-        const allFormFields = reviewForm.querySelectorAll('input, select, textarea');
-        console.log('Total form fields in form:', allFormFields.length);
-        
-        if (allFormFields.length < formFields.length) {
-            console.warn('⚠️ Some form fields may not be in the form!');
-        }
+        console.log('Data fields to submit:', dataFields.length);
 
         // Log what we're submitting (first 10 fields for debugging)
-        console.log('Submitting to Netlify with', formFields.length, 'fields');
-        formFields.forEach(function(field, index) {
+        console.log('Submitting to Netlify with', dataFields.length, 'data fields');
+        dataFields.forEach(function(field, index) {
             if (index < 10) {
                 console.log('Field:', field.name, '=', field.value || '(empty)');
             }
