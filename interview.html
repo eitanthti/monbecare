@@ -219,14 +219,17 @@
                     <select name="stoppedAgeMonths_child1"></select>
                     <textarea name="stoppingReason_child1"></textarea>
                     <select name="notBreastfeedingReason_child1"></select>
+                    <textarea name="notBreastfeedingReasonDetails_child1"></textarea>
                     <select name="stoppedAgeYears_child2"></select>
                     <select name="stoppedAgeMonths_child2"></select>
                     <textarea name="stoppingReason_child2"></textarea>
                     <select name="notBreastfeedingReason_child2"></select>
+                    <textarea name="notBreastfeedingReasonDetails_child2"></textarea>
                     <select name="stoppedAgeYears_child3"></select>
                     <select name="stoppedAgeMonths_child3"></select>
                     <textarea name="stoppingReason_child3"></textarea>
                     <select name="notBreastfeedingReason_child3"></select>
+                    <textarea name="notBreastfeedingReasonDetails_child3"></textarea>
                     <!-- Section 5: Support and aids (checkboxes) for all children -->
                     <input type="checkbox" name="professionalSupport_child1" value="lactation-consultant" />
                     <input type="checkbox" name="professionalSupport_child1" value="parenting-guide" />
@@ -399,9 +402,15 @@
                             <option value="early-decision" data-translate="opt-early-decision">Early decision</option>
                             <option value="difficulty-pain" data-translate="opt-difficulty-pain">Difficulty / Pain</option>
                             <option value="baby-not-latching" data-translate="opt-baby-not-latching">Baby did not latch</option>
+                            <option value="stress-amount-eating" data-translate="opt-stress-amount-eating">Concern about amount of milk the baby is consuming</option>
                             <option value="combination" data-translate="opt-combination">Combination of factors</option>
                             <option value="other" data-translate="opt-other">Other</option>
                         </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" data-translate="q13b-label">Additional details <span class="required" data-translate="optional-text">(optional)</span></label>
+                        <textarea name="notBreastfeedingReasonDetails" class="form-textarea" rows="3" data-translate-placeholder="q13b-placeholder" placeholder="Please provide additional details if you'd like..."></textarea>
                     </div>
 
                     <!-- Section 5: Support and Assistance -->
@@ -531,6 +540,9 @@
                 'q12-label': 'What was the main reason for stopping breastfeeding?',
                 'q12-placeholder': 'Please describe the main reason...',
                 'q13-label': 'If you did not breastfeed at all - what was the reason?',
+                'q13b-label': 'Additional details',
+                'q13b-placeholder': 'Please provide additional details if you\'d like...',
+                'opt-stress-amount-eating': 'Concern about amount of milk the baby is consuming',
                 'section5-title': 'Section 5 - Support and Assistance',
                 'section5-description': 'For each child separately.',
                 'q14-label': 'Did you receive professional breastfeeding support?',
@@ -622,6 +634,9 @@
                 'q12-label': 'Was war der Hauptgrund für das Abstillen?',
                 'q12-placeholder': 'Bitte beschreiben Sie den Hauptgrund...',
                 'q13-label': 'Wenn Sie überhaupt nicht gestillt haben - was war der Grund?',
+                'q13b-label': 'Zusätzliche Details',
+                'q13b-placeholder': 'Bitte geben Sie zusätzliche Details an, wenn Sie möchten...',
+                'opt-stress-amount-eating': 'Sorge über die Milchmenge, die das Baby aufnimmt',
                 'section5-title': 'Abschnitt 5 - Unterstützung und Hilfe',
                 'section5-description': 'Für jedes Kind separat.',
                 'q14-label': 'Haben Sie professionelle Stillunterstützung erhalten?',
@@ -713,6 +728,9 @@
                 'q12-label': 'Quelle était la raison principale d\'arrêter l\'allaitement?',
                 'q12-placeholder': 'Veuillez décrire la raison principale...',
                 'q13-label': 'Si vous n\'avez pas allaité du tout - quelle était la raison?',
+                'q13b-label': 'Détails supplémentaires',
+                'q13b-placeholder': 'Veuillez fournir des détails supplémentaires si vous le souhaitez...',
+                'opt-stress-amount-eating': 'Inquiétude concernant la quantité de lait que le bébé consomme',
                 'section5-title': 'Section 5 - Soutien et assistance',
                 'section5-description': 'Pour chaque enfant séparément.',
                 'q14-label': 'Avez-vous reçu un soutien professionnel pour l\'allaitement?',
@@ -804,6 +822,9 @@
                 'q12-label': 'מה הסיבה העיקרית להפסקת ההנקה?',
                 'q12-placeholder': 'נא לתאר את הסיבה העיקרית...',
                 'q13-label': 'אם לא הנקת בכלל - מה הייתה הסיבה?',
+                'q13b-label': 'פרטים נוספים',
+                'q13b-placeholder': 'נא לספק פרטים נוספים אם תרצי...',
+                'opt-stress-amount-eating': 'דאגה לגבי כמות החלב התינוק יונק',
                 'section5-title': 'שלב 5 - תמיכה וסיוע',
                 'section5-description': 'לכל ילד בנפרד.',
                 'q14-label': 'האם קיבלת ליווי מקצועי בהנקה?',

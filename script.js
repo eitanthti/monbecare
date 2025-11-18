@@ -273,6 +273,8 @@ function getReviewLabel(fieldName) {
     if (m) return 'Child ' + m[1] + ' - reason for stopping breastfeeding';
     m = fieldName.match(/^notBreastfeedingReason_child(\d+)$/);
     if (m) return 'Child ' + m[1] + ' - reason for not breastfeeding';
+    m = fieldName.match(/^notBreastfeedingReasonDetails_child(\d+)$/);
+    if (m) return 'Child ' + m[1] + ' - not breastfeeding reason details';
 
     m = fieldName.match(/^professionalSupport_child(\d+)$/);
     if (m) return 'Child ' + m[1] + ' - professional support';
