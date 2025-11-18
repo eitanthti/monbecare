@@ -384,65 +384,9 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // Form submission to Netlify
-    reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        console.log('=== FORM SUBMISSION STARTED (AJAX) ===');
-
-        const stored = inMemoryStorage.getItem('interviewSubmission');
-        if (!stored) {
-            alert('No form data found. Please go back and fill out the form again.');
-            window.location.href = 'interview.html';
-            return;
-        }
-
-        let entries;
-        try {
-            entries = JSON.parse(stored);
-        } catch (error) {
-            console.error('Error parsing stored data at submit:', error);
-            alert('Error loading form data. Please go back and try again.');
-            return;
-        }
-
-        if (!Array.isArray(entries) || entries.length === 0) {
-            console.error('Entries empty at submit');
-            alert('Error loading form data. Please go back and try again.');
-            return;
-        }
-
-        const payload = new URLSearchParams();
-        payload.append('form-name', 'interview');
-
-        entries.forEach(({ name, value }) => {
-            payload.append(name, value || '');
-        });
-
-        // Debug first few fields
-        entries.slice(0, 5).forEach(({ name, value }) => {
-            console.log('Submitting field:', name, '=', value);
-        });
-
-        fetch('/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: payload.toString()
-        })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Netlify submission failed with status: ' + response.status);
-                }
-
-                console.log('Netlify submission successful');
-                inMemoryStorage.removeItem('interviewSubmission');
-                window.location.href = 'thank-you.html';
-            })
-            .catch(function (error) {
-                console.error('Netlify submission error:', error);
-                alert('There was a problem sending your form. Please try again.');
-            });
+    // Clear stored draft on successful browser submission
+    reviewForm.addEventListener('submit', function () {
+        inMemoryStorage.removeItem('interviewSubmission');
     });
 }
 
