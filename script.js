@@ -379,6 +379,40 @@ function handleInterviewReviewPage() {
     // Fill the static fields inside the review form
     applyEntriesToForm(reviewForm, entries);
 
+    // Create a Set of field names that have data
+    const fieldsWithData = new Set();
+    entries.forEach(function(entry) {
+        if (entry.name && entry.value) {
+            fieldsWithData.add(entry.name);
+        }
+    });
+
+    // Remove all fields from the hidden-fields div that don't have data
+    const hiddenFieldsDiv = reviewForm.querySelector('.hidden-fields');
+    if (hiddenFieldsDiv) {
+        const allFields = hiddenFieldsDiv.querySelectorAll('input, select, textarea');
+        allFields.forEach(function(field) {
+            const fieldName = field.getAttribute('name');
+            // Keep the field only if it has data OR if it's a checkbox/radio that might be checked
+            if (field.type === 'checkbox' || field.type === 'radio') {
+                // For checkboxes/radios, keep them only if they should be checked based on data
+                const shouldKeep = entries.some(function(entry) {
+                    return entry.name === fieldName && entry.value === field.value;
+                });
+                if (!shouldKeep) {
+                    field.remove();
+                }
+            } else {
+                // For other fields, remove if no data
+                if (!fieldsWithData.has(fieldName) || !field.value) {
+                    field.remove();
+                }
+            }
+        });
+    }
+
+    console.log('Cleaned up unused fields - only submitting fields with data');
+
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
         editBtn.addEventListener('click', function () {
@@ -388,6 +422,7 @@ function handleInterviewReviewPage() {
 
     // When user submits, let browser submit normally and clear storage
     reviewForm.addEventListener('submit', function () {
+        console.log('Submitting form to Netlify...');
         inMemoryStorage.removeItem('interviewSubmission');
     });
 }
