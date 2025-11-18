@@ -94,8 +94,17 @@
 
                         <!-- Number of Children Question (above Section 2) -->
                         <div class="form-group full-width">
-                            <label class="form-label" data-translate="q5-label">How many children do you have? <span class="required">(required)</span></label>
-                            <input type="number" name="numberOfChildren" id="numberOfChildren" class="form-input" min="1" max="3" required>
+                            <label class="form-label" data-translate="q5-label">How many children do you have? If you are pregnant, fill "comming soon". <span class="required">(required)</span></label>
+                            <select name="numberOfChildren" id="numberOfChildren" class="form-input" required>
+                                <option value="" disabled selected data-translate="select-option">Select an option</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="comming soon" data-translate="comming-soon-option">Comming soon</option>
+                            </select>
+                            <div id="commingSoonNote" style="display: none; margin-top: 10px; padding: 10px; background-color: #e8f4f8; border-left: 4px solid #4a90e2; border-radius: 4px;">
+                                <p style="margin: 0; color: #2c5aa0; font-size: 14px;" data-translate="comming-soon-note">Please refer to the questions in a hypothetical way - what would you do.</p>
+                            </div>
                         </div>
 
                         <!-- Section 2: Children Details (dynamic content lives INSIDE FORM for Netlify) -->
@@ -482,7 +491,10 @@
                 'required-text': '(required)',
                 'optional-text': '(optional)',
                 'section2-title': 'Section 2 - Children Details',
-                'q5-label': 'How many children do you have?',
+                'q5-label': 'How many children do you have? If you are pregnant, fill "comming soon".',
+                'comming-soon-option': 'Comming soon',
+                'comming-soon-note': 'Please refer to the questions in a hypothetical way - what would you do.',
+                'future-child-label': 'Your future child',
                 'q6-label': 'What is the current age?',
                 'years-label': 'Years',
                 'months-label': 'Months',
@@ -568,7 +580,10 @@
                 'required-text': '(erforderlich)',
                 'optional-text': '(optional)',
                 'section2-title': 'Abschnitt 2 - Angaben zu den Kindern',
-                'q5-label': 'Wie viele Kinder haben Sie?',
+                'q5-label': 'Wie viele Kinder haben Sie? Wenn Sie schwanger sind, wählen Sie "Demnächst".',
+                'comming-soon-option': 'Demnächst',
+                'comming-soon-note': 'Bitte beziehen Sie sich auf die Fragen hypothetisch - was würden Sie tun.',
+                'future-child-label': 'Ihr zukünftiges Kind',
                 'q6-label': 'Wie alt ist das Kind derzeit?',
                 'years-label': 'Jahre',
                 'months-label': 'Monate',
@@ -655,7 +670,10 @@
                 'required-text': '(obligatoire)',
                 'optional-text': '(optionnel)',
                 'section2-title': 'Section 2 - Détails sur les enfants',
-                'q5-label': 'Combien d\'enfants avez-vous?',
+                'q5-label': 'Combien d\'enfants avez-vous? Si vous êtes enceinte, sélectionnez "Bientôt".',
+                'comming-soon-option': 'Bientôt',
+                'comming-soon-note': 'Veuillez vous référer aux questions de manière hypothétique - que feriez-vous.',
+                'future-child-label': 'Votre futur enfant',
                 'q6-label': 'Quel est l\'âge actuel?',
                 'years-label': 'Ans',
                 'months-label': 'Mois',
@@ -742,7 +760,10 @@
                 'required-text': '(נדרש)',
                 'optional-text': '(אופציונלי)',
                 'section2-title': 'שלב 2 - פרטים על הילדים',
-                'q5-label': 'כמה ילדים יש לך?',
+                'q5-label': 'כמה ילדים יש לך? אם את בהריון, סמני "בקרוב".',
+                'comming-soon-option': 'בקרוב',
+                'comming-soon-note': 'התייחסי לשאלות מה היית עושה באופן היפותטי.',
+                'future-child-label': 'הילד העתידי שלך',
                 'q6-label': 'מה הגיל הנוכחי?',
                 'years-label': 'שנים',
                 'months-label': 'חודשים',
@@ -1100,6 +1121,8 @@
         function generateChildrenAges(numChildren, currentLang) {
             const container = document.getElementById('childrenAgesContainer');
             const langData = translations[currentLang] || translations.en;
+            const numberOfChildrenInput = document.getElementById('numberOfChildren');
+            const isCommingSoon = numberOfChildrenInput && numberOfChildrenInput.value === 'comming soon';
             
             // Clear existing age fields
             container.innerHTML = '';
@@ -1107,7 +1130,7 @@
             if (numChildren < 1) return;
             
             for (let i = 0; i < numChildren; i++) {
-                const childLabel = getChildLabel(currentLang, i);
+                const childLabel = isCommingSoon ? (langData['future-child-label'] || 'Your future child') : getChildLabel(currentLang, i);
                 const ageQuestion = langData['q6-label'] || 'What is the current age?';
                 
                 const formGroup = document.createElement('div');
@@ -1199,6 +1222,8 @@
         function generateChildQuestions(numChildren, currentLang) {
             const container = document.getElementById('childrenQuestionsContainer');
             const template = document.getElementById('childQuestionTemplate');
+            const numberOfChildrenInput = document.getElementById('numberOfChildren');
+            const isCommingSoon = numberOfChildrenInput && numberOfChildrenInput.value === 'comming soon';
             
             // Clear existing questions
             container.innerHTML = '';
@@ -1227,7 +1252,7 @@
                 
                 // Update child label
                 const childLabel = clone.querySelector('.child-label');
-                childLabel.textContent = getChildLabel(currentLang, i);
+                childLabel.textContent = isCommingSoon ? (langData['future-child-label'] || 'Your future child') : getChildLabel(currentLang, i);
                 
                 // Update all input/select/textarea names to include child index
                 clone.querySelectorAll('input, select, textarea').forEach(input => {
@@ -1344,22 +1369,40 @@
 
             // Watch for changes in number of children
             const numberOfChildrenInput = document.getElementById('numberOfChildren');
+            const commingSoonNote = document.getElementById('commingSoonNote');
+            
             if (numberOfChildrenInput) {
-                numberOfChildrenInput.addEventListener('input', function() {
-                    let numChildren = parseInt(this.value) || 0;
-                    // Enforce maximum of 3 children
-                    if (numChildren > 3) {
-                        this.value = 3;
-                        numChildren = 3;
-                        alert('Maximum 3 children allowed');
+                numberOfChildrenInput.addEventListener('change', function() {
+                    let numChildren = 0;
+                    
+                    // Handle "comming soon" option - treat as 1 child
+                    if (this.value === 'comming soon') {
+                        numChildren = 1;
+                        if (commingSoonNote) {
+                            commingSoonNote.style.display = 'block';
+                        }
+                    } else {
+                        numChildren = parseInt(this.value) || 0;
+                        if (commingSoonNote) {
+                            commingSoonNote.style.display = 'none';
+                        }
                     }
+                    
                     generateChildrenAges(numChildren, selectedLanguage);
                     generateChildQuestions(numChildren, selectedLanguage);
                 });
                 
                 // Generate initial age fields and questions if value exists
                 if (numberOfChildrenInput.value) {
-                    const numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                    let numChildren = 0;
+                    if (numberOfChildrenInput.value === 'comming soon') {
+                        numChildren = 1;
+                        if (commingSoonNote) {
+                            commingSoonNote.style.display = 'block';
+                        }
+                    } else {
+                        numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                    }
                     generateChildrenAges(numChildren, selectedLanguage);
                     generateChildQuestions(numChildren, selectedLanguage);
                 }
@@ -1391,7 +1434,12 @@
                     // Regenerate child age fields and questions with new language
                     const numberOfChildrenInput = document.getElementById('numberOfChildren');
                     if (numberOfChildrenInput && numberOfChildrenInput.value) {
-                        const numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                        let numChildren = 0;
+                        if (numberOfChildrenInput.value === 'comming soon') {
+                            numChildren = 1;
+                        } else {
+                            numChildren = parseInt(numberOfChildrenInput.value) || 0;
+                        }
                         generateChildrenAges(numChildren, selectedLanguage);
                         generateChildQuestions(numChildren, selectedLanguage);
                     }

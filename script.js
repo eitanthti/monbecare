@@ -180,7 +180,13 @@ function handleInterviewForm() {
         const numChildrenInput = document.getElementById('numberOfChildren');
         if (!numChildrenInput) return;
 
-        const numChildren = parseInt(numChildrenInput.value || '0', 10);
+        // Handle "comming soon" as 1 child
+        let numChildren = 0;
+        if (numChildrenInput.value === 'comming soon') {
+            numChildren = 1;
+        } else {
+            numChildren = parseInt(numChildrenInput.value || '0', 10);
+        }
 
         let missingPS = [];
         let missingAids = [];
