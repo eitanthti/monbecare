@@ -1,18 +1,44 @@
 // ============================================
-// IN-MEMORY STORAGE REPLACEMENT
+// IN-MEMORY + SESSION STORAGE WRAPPER
 // ============================================
-const inMemoryStorage = {
-    data: {},
-    getItem: function(key) {
-        return this.data[key] || null;
-    },
-    setItem: function(key, value) {
-        this.data[key] = value;
-    },
-    removeItem: function(key) {
-        delete this.data[key];
+// Uses sessionStorage when available so data survives between pages
+// Falls back to simple in-memory object if not available (for bots, old browsers, etc.)
+const inMemoryStorage = (() => {
+    const memoryStore = {
+        data: {},
+        getItem: function (key) {
+            return Object.prototype.hasOwnProperty.call(this.data, key)
+                ? this.data[key]
+                : null;
+        },
+        setItem: function (key, value) {
+            this.data[key] = String(value);
+        },
+        removeItem: function (key) {
+            delete this.data[key];
+        }
+    };
+
+    try {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+            return {
+                getItem: function (key) {
+                    return window.sessionStorage.getItem(key);
+                },
+                setItem: function (key, value) {
+                    window.sessionStorage.setItem(key, String(value));
+                },
+                removeItem: function (key) {
+                    window.sessionStorage.removeItem(key);
+                }
+            };
+        }
+    } catch (err) {
+        console.warn('Session storage not available - using in-memory fallback', err);
     }
-};
+
+    return memoryStore;
+})();
 
 // Mobile menu toggle
 function toggleMobileMenu() {
@@ -201,6 +227,7 @@ function handleInterviewForm() {
             entries.push({ name: key, value: sanitizeInput(value) });
         });
 
+        // Save to storage so review page can read it
         inMemoryStorage.setItem('interviewSubmission', JSON.stringify(entries));
         window.location.href = 'interview-review.html';
     });
@@ -305,7 +332,7 @@ function populateReviewFormFields(entries) {
     return entries.length;
 }
 
-// Step 2 on review page - FIXED
+// Step 2 on review page
 function handleInterviewReviewPage() {
     const reviewForm = document.getElementById('interviewReviewForm');
     if (!reviewForm) return;
@@ -314,6 +341,7 @@ function handleInterviewReviewPage() {
     console.log('=== REVIEW PAGE LOADED ===');
 
     if (!stored) {
+        console.warn('No stored submission found - redirecting back to interview');
         window.location.href = 'interview.html';
         return;
     }
@@ -329,18 +357,25 @@ function handleInterviewReviewPage() {
         return;
     }
 
+    if (!Array.isArray(entries) || entries.length === 0) {
+        console.error('Stored entries are empty');
+        alert('Error loading form data. Please go back and try again.');
+        window.location.href = 'interview.html';
+        return;
+    }
+
     // Show summary
     populateReviewSummary(entries);
     
     // Populate hidden form fields
     const inputCount = populateReviewFormFields(entries);
     if (inputCount === 0) {
-        console.error('❌ No fields available to submit!');
+        console.error('No fields available to submit');
         alert('Error loading form data. Please go back and try again.');
         return;
     }
 
-    console.log('✅ Created', inputCount, 'hidden form fields');
+    console.log('Created', inputCount, 'hidden form fields');
 
     const editBtn = document.getElementById('editInterviewBtn');
     if (editBtn) {
@@ -365,7 +400,13 @@ function handleInterviewReviewPage() {
         try {
             entries = JSON.parse(stored);
         } catch (error) {
-            console.error('Error parsing stored data:', error);
+            console.error('Error parsing stored data at submit:', error);
+            alert('Error loading form data. Please go back and try again.');
+            return;
+        }
+
+        if (!Array.isArray(entries) || entries.length === 0) {
+            console.error('Entries empty at submit');
             alert('Error loading form data. Please go back and try again.');
             return;
         }
@@ -394,12 +435,12 @@ function handleInterviewReviewPage() {
                     throw new Error('Netlify submission failed with status: ' + response.status);
                 }
 
-                console.log('✅ Netlify submission successful');
+                console.log('Netlify submission successful');
                 inMemoryStorage.removeItem('interviewSubmission');
                 window.location.href = 'thank-you.html';
             })
             .catch(function (error) {
-                console.error('❌ Netlify submission error:', error);
+                console.error('Netlify submission error:', error);
                 alert('There was a problem sending your form. Please try again.');
             });
     });
@@ -428,7 +469,7 @@ function startAnimation() {
     }, 2500);
 }
 
-// FAQ Toggle Function - FIXED
+// FAQ Toggle Function
 function toggleFAQ(faqNumber) {
     const answer = document.getElementById('faq-' + faqNumber);
     if (!answer || !answer.previousElementSibling) return;
@@ -438,12 +479,10 @@ function toggleFAQ(faqNumber) {
     
     if (!icon) return;
 
-    // Get current max-height, treating undefined/empty as closed
     const currentMaxHeight = answer.style.maxHeight;
     const isClosed = !currentMaxHeight || currentMaxHeight === '0px';
 
     if (isClosed) {
-        // Close all other FAQs
         document.querySelectorAll('.faq-answer').forEach(function (faq) {
             if (faq.id !== 'faq-' + faqNumber) {
                 faq.style.maxHeight = '0px';
@@ -453,12 +492,10 @@ function toggleFAQ(faqNumber) {
             }
         });
 
-        // Open this FAQ
         answer.style.maxHeight = answer.scrollHeight + 'px';
         icon.textContent = '−';
         question.style.backgroundColor = '#f8f9fa';
     } else {
-        // Close this FAQ
         answer.style.maxHeight = '0px';
         icon.textContent = '+';
         question.style.backgroundColor = '';
@@ -468,7 +505,7 @@ function toggleFAQ(faqNumber) {
 // ============================================
 // VERSION - UPDATE THIS WITH EACH COMMIT
 // ============================================
-const APP_VERSION = '2.0.0';
+const APP_VERSION = '2.0.1';
 // ============================================
 
 // Version logging
@@ -478,7 +515,6 @@ function logVersion() {
 
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function () {
-    // Log version on every page load
     logVersion();
     
     checkPitchAccess();
