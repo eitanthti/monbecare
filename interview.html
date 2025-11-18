@@ -1346,7 +1346,13 @@
             const numberOfChildrenInput = document.getElementById('numberOfChildren');
             if (numberOfChildrenInput) {
                 numberOfChildrenInput.addEventListener('input', function() {
-                    const numChildren = parseInt(this.value) || 0;
+                    let numChildren = parseInt(this.value) || 0;
+                    // Enforce maximum of 3 children
+                    if (numChildren > 3) {
+                        this.value = 3;
+                        numChildren = 3;
+                        alert('Maximum 3 children allowed');
+                    }
                     generateChildrenAges(numChildren, selectedLanguage);
                     generateChildQuestions(numChildren, selectedLanguage);
                 });
