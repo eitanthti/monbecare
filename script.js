@@ -318,27 +318,45 @@ function populateReviewSummary(entries) {
 function applyEntriesToForm(form, entries) {
     if (!form || !Array.isArray(entries)) return;
 
+    console.log('=== APPLYING ENTRIES TO FORM ===');
+    let applied = 0;
+    let notFound = 0;
+
     entries.forEach(function (entry) {
         var name = entry.name;
         var value = entry.value || '';
         if (!name) return;
 
         var fields = form.querySelectorAll('[name="' + name + '"]');
-        if (!fields || fields.length === 0) return;
+        
+        if (!fields || fields.length === 0) {
+            console.warn('Field NOT FOUND in form:', name, '=', value);
+            notFound++;
+            return;
+        }
 
         fields.forEach(function (field) {
             if (field.type === 'checkbox' || field.type === 'radio') {
                 // For checkboxes or radios, match by value
                 if (field.value === value) {
                     field.checked = true;
+                    applied++;
+                    if (applied <= 10) {
+                        console.log('✓ Checkbox checked:', name, '=', value);
+                    }
                 }
-            } else if (field.tagName === 'SELECT') {
-                field.value = value;
             } else {
+                // For all other fields (inputs, textareas), set value directly
                 field.value = value;
+                applied++;
+                if (applied <= 10) {
+                    console.log('✓ Field set:', name, '=', value);
+                }
             }
         });
     });
+    
+    console.log(`✅ Applied ${applied} values, ${notFound} fields not found in HTML`);
 }
 
 // Step 2 on review page - FIXED
@@ -426,9 +444,22 @@ function handleInterviewReviewPage() {
         });
     }
 
-    // When user submits, let browser submit normally and clear storage
-    reviewForm.addEventListener('submit', function () {
-        console.log('Submitting form to Netlify...');
+    // When user submits, log what's being sent and clear storage
+    reviewForm.addEventListener('submit', function (e) {
+        // Log what's being submitted before it goes
+        const formData = new FormData(reviewForm);
+        console.log('=== FORM SUBMITTING TO NETLIFY ===');
+        console.log('Total fields being submitted:', Array.from(formData.keys()).length);
+        console.log('Field names:', Array.from(formData.keys()));
+        console.log('First 10 fields with values:');
+        let count = 0;
+        for (let [name, value] of formData.entries()) {
+            if (count < 10) {
+                console.log(`  ${name}: ${value}`);
+                count++;
+            }
+        }
+        
         inMemoryStorage.removeItem('interviewSubmission');
     });
 }
