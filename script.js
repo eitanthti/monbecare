@@ -120,47 +120,11 @@ function handleContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
 
+    // Let the form submit naturally to Netlify
+    // No e.preventDefault() - form will submit natively
     contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-        const firstName = sanitizeInput(formData.get('firstName'));
-        const lastName = sanitizeInput(formData.get('lastName'));
-        const email = sanitizeInput(formData.get('email'));
-        const message = sanitizeInput(formData.get('message'));
-
-        if (firstName && lastName && email && message) {
-            if (!formData.has('form-name')) {
-                formData.append('form-name', 'contact');
-            }
-
-            const encodedData = new URLSearchParams(formData).toString();
-
-            fetch('/', {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encodedData
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        alert("Thank you for your message! We will get back to you soon.");
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                })
-                .catch(function (error) {
-                    console.error('Contact form error:', error);
-                    alert('Sorry, there was an error sending your message. Please try again.');
-                });
-        } else {
-            const missing = [];
-            if (!firstName) missing.push('First Name');
-            if (!lastName) missing.push('Last Name');
-            if (!email) missing.push('Email');
-            if (!message) missing.push('Message');
-            alert('Please fill in all required fields. Missing: ' + missing.join(', '));
-        }
+        console.log('Contact form submitting naturally to Netlify...');
+        // Form will submit to action="/thank-you.html" with Netlify processing
     });
 }
 
