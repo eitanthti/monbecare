@@ -48,8 +48,17 @@ function toggleMobileMenu() {
     }
 }
 
+// SHA-256 hash function for password verification
+async function hashPassword(password) {
+    const msgBuffer = new TextEncoder().encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
 // Password protection for pitch page
-function checkPassword(event) {
+async function checkPassword(event) {
     event.preventDefault();
 
     const passwordInput = document.getElementById('passwordInput');
@@ -58,28 +67,38 @@ function checkPassword(event) {
     if (!passwordInput || !errorElement) return;
 
     const password = passwordInput.value.trim();
-    const correctPassword = 'monbe2025'; // Note: Move to server-side for real security
+    // Hashed version of the password - more secure than plain text
+    // To generate a new hash: echo -n "your-password" | openssl dgst -sha256
+    const correctPasswordHash = '73095a13bb5b2e0b829a8057cd5abc0819c8a78ecd5ad797337389fcae96f313';
     
-    if (password === correctPassword) {
-        const passwordContainer = document.getElementById('passwordContainer');
-        const pitchContent = document.getElementById('pitchContent');
+    try {
+        const passwordHash = await hashPassword(password);
         
-        if (passwordContainer && pitchContent) {
-            passwordContainer.style.display = 'none';
-            pitchContent.classList.add('unlocked');
-            inMemoryStorage.setItem('pitchAccess', 'granted');
+        if (passwordHash === correctPasswordHash) {
+            const passwordContainer = document.getElementById('passwordContainer');
+            const pitchContent = document.getElementById('pitchContent');
+            
+            if (passwordContainer && pitchContent) {
+                passwordContainer.style.display = 'none';
+                pitchContent.classList.add('unlocked');
+                inMemoryStorage.setItem('pitchAccess', 'granted');
+            }
+        } else {
+            errorElement.classList.add('show');
+            passwordInput.value = '';
+            setTimeout(function () {
+                errorElement.classList.remove('show');
+            }, 3000);
         }
-    } else {
+    } catch (error) {
+        console.error('Password hashing error:', error);
+        errorElement.textContent = 'An error occurred. Please try again.';
         errorElement.classList.add('show');
-        passwordInput.value = '';
-        setTimeout(function () {
-            errorElement.classList.remove('show');
-        }, 3000);
     }
 }
 
 // Check if user already has access when navigating to pitch page
-function checkPitchAccess() {
+async function checkPitchAccess() {
     if (inMemoryStorage.getItem('pitchAccess') === 'granted') {
         const passwordContainer = document.getElementById('passwordContainer');
         const pitchContent = document.getElementById('pitchContent');
@@ -92,17 +111,26 @@ function checkPitchAccess() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const accessParam = urlParams.get('access');
-    if (accessParam && accessParam === 'monbe2025') {
-        inMemoryStorage.setItem('pitchAccess', 'granted');
-        const passwordContainer = document.getElementById('passwordContainer');
-        const pitchContent = document.getElementById('pitchContent');
-        if (passwordContainer && pitchContent) {
-            passwordContainer.style.display = 'none';
-            pitchContent.classList.add('unlocked');
-        }
-        if (window.history && window.history.replaceState) {
-            const cleanUrl = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, document.title, cleanUrl);
+    if (accessParam) {
+        try {
+            const correctPasswordHash = '73095a13bb5b2e0b829a8057cd5abc0819c8a78ecd5ad797337389fcae96f313';
+            const paramHash = await hashPassword(accessParam);
+            
+            if (paramHash === correctPasswordHash) {
+                inMemoryStorage.setItem('pitchAccess', 'granted');
+                const passwordContainer = document.getElementById('passwordContainer');
+                const pitchContent = document.getElementById('pitchContent');
+                if (passwordContainer && pitchContent) {
+                    passwordContainer.style.display = 'none';
+                    pitchContent.classList.add('unlocked');
+                }
+                if (window.history && window.history.replaceState) {
+                    const cleanUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+            }
+        } catch (error) {
+            console.error('Password verification error:', error);
         }
     }
 }
