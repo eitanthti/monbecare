@@ -216,6 +216,131 @@
                 display: none;
             }
         }
+
+        /* Language Selector for Story Page */
+        .story-page .language-selector {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #e1e5e9;
+            padding: 1rem 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .story-page .language-selector-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .story-page .language-prompt {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .story-page .language-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .story-page .language-btn {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #d1d5db;
+            padding: 0.6rem 1.4rem;
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .story-page .language-btn:hover {
+            background: #2c3e50;
+            color: white;
+            border-color: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
+        }
+
+        .story-page .language-btn.selected {
+            background: #2c3e50;
+            color: white;
+            border-color: #2c3e50;
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+        }
+
+        .story-page .language-btn[data-lang="he"],
+        .story-page .language-btn[data-lang="ar"] {
+            direction: rtl;
+            font-size: 1rem;
+        }
+
+        /* Adjust story sections to account for language selector */
+        .story-section {
+            padding-top: 10rem;
+        }
+
+        @media (max-width: 768px) {
+            .story-page .language-selector {
+                top: 60px;
+                padding: 0.8rem 0;
+            }
+
+            .story-page .language-selector-container {
+                padding: 0 1rem;
+            }
+
+            .story-page .language-prompt {
+                font-size: 0.95rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .story-page .language-buttons {
+                gap: 0.5rem;
+            }
+
+            .story-page .language-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .story-section {
+                padding-top: 8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .story-page .language-selector {
+                padding: 0.6rem 0;
+            }
+
+            .story-page .language-prompt {
+                font-size: 0.85rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .story-page .language-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            .story-section {
+                padding-top: 7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -240,90 +365,105 @@
 
     <!-- Our Story Page -->
     <section class="story-page">
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <div class="language-selector-container">
+                <p class="language-prompt" data-translate="language-prompt">Select your preferred language:</p>
+                <div class="language-buttons">
+                    <button class="language-btn" data-lang="en">English</button>
+                    <button class="language-btn" data-lang="de">Deutsch</button>
+                    <button class="language-btn" data-lang="fr">Français</button>
+                    <button class="language-btn" data-lang="he">עברית</button>
+                    <button class="language-btn" data-lang="ar">العربية</button>
+                    <button class="language-btn" data-lang="es">Español</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Section 1 -->
         <div class="story-section active" id="section1">
             <div class="story-content">
-                <p class="story-text">
+                <p class="story-text" data-translate="section1-text">
                     Becoming a parent is the most beautiful gift - and the most overwhelming.<br>
                     You hold your baby close, you listen, you watch, you try to read every tiny signal.<br>
                     But there's always one question that creates more worry than anything else:
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 2 -->
         <div class="story-section" id="section2">
             <div class="story-content">
-                <p class="story-text highlight">
+                <p class="story-text highlight" data-translate="section2-text">
                     "Is my baby eating enough?"
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 3 -->
         <div class="story-section" id="section3">
             <div class="story-content">
-                <p class="story-text">
+                <p class="story-text" data-translate="section3-text">
                     For generations, parents have lived with this uncertainty.<br>
                     The only answers were indirect - counting wet diapers, weighing the baby every few days, or relying on guesswork. These methods leave parents anxious, second-guessing themselves, and sometimes giving up on breastfeeding sooner than they wanted.
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 4 -->
         <div class="story-section" id="section4">
             <div class="story-content">
-                <p class="story-text emphasis">
+                <p class="story-text emphasis" data-translate="section4-text1">
                     At MonBe, we believe it shouldn't be this way.<br>
                     We believe parents deserve clarity, calm, and confidence - without disrupting the natural bond of breastfeeding.
                 </p>
-                <p class="story-text">
+                <p class="story-text" data-translate="section4-text2">
                     That's why we created <strong>MonBe</strong>, a gentle, smart sticker that listens to your baby's sucking, swallowing, and breathing, and gives you real-time insights into feeding - <strong>without changing how you nurse.</strong>
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 5 -->
         <div class="story-section" id="section5">
             <div class="story-content">
-                <p class="story-text quote">
+                <p class="story-text quote" data-translate="section5-text1">
                     With MonBe, the darkness of uncertainty becomes light.<br>
                     The stress of "not knowing" is replaced with peace of mind.
                 </p>
-                <p class="story-text">
+                <p class="story-text" data-translate="section5-text2">
                     MonBe was born from our own journey as parents - those 3 AM moments of doubt, the sleepless nights, the questions with no answers, and the determination to find a better way. We want every family to feel sure, supported, and connected.
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 6 -->
         <div class="story-section" id="section6">
             <div class="story-content">
-                <p class="story-text emphasis">
+                <p class="story-text emphasis" data-translate="section6-text1">
                     Because breastfeeding is not just about nutrition.<br>
                     It's about trust.<br>
                     It's about closeness.<br>
                     It's about knowing you are enough.
                 </p>
-                <p class="story-text">
+                <p class="story-text" data-translate="section6-text2">
                     Because every parent deserves to know.
                 </p>
             </div>
-            <div class="scroll-indicator">Scroll to continue</div>
+            <div class="scroll-indicator" data-translate="scroll-indicator">Scroll to continue</div>
         </div>
 
         <!-- Section 7 -->
         <div class="story-section" id="section7">
             <div class="story-content">
-                <p class="story-text final">
+                <p class="story-text final" data-translate="section7-text">
                     MonBe - see your baby feed.
                 </p>
-                <a href="contact.html" class="story-cta-button">Contact Us</a>
+                <a href="contact.html" class="story-cta-button" data-translate="cta-button">Contact Us</a>
             </div>
         </div>
 
@@ -342,6 +482,147 @@
 
     <script src="script.js"></script>
     <script>
+        // Translations for Our Story page
+        const translations = {
+            en: {
+                'language-prompt': 'Select your preferred language:',
+                'scroll-indicator': 'Scroll to continue',
+                'section1-text': 'Becoming a parent is the most beautiful gift - and the most overwhelming.<br>You hold your baby close, you listen, you watch, you try to read every tiny signal.<br>But there\'s always one question that creates more worry than anything else:',
+                'section2-text': '"Is my baby eating enough?"',
+                'section3-text': 'For generations, parents have lived with this uncertainty.<br>The only answers were indirect - counting wet diapers, weighing the baby every few days, or relying on guesswork. These methods leave parents anxious, second-guessing themselves, and sometimes giving up on breastfeeding sooner than they wanted.',
+                'section4-text1': 'At MonBe, we believe it shouldn\'t be this way.<br>We believe parents deserve clarity, calm, and confidence - without disrupting the natural bond of breastfeeding.',
+                'section4-text2': 'That\'s why we created <strong>MonBe</strong>, a gentle, smart sticker that listens to your baby\'s sucking, swallowing, and breathing, and gives you real-time insights into feeding - <strong>without changing how you nurse.</strong>',
+                'section5-text1': 'With MonBe, the darkness of uncertainty becomes light.<br>The stress of "not knowing" is replaced with peace of mind.',
+                'section5-text2': 'MonBe was born from our own journey as parents - those 3 AM moments of doubt, the sleepless nights, the questions with no answers, and the determination to find a better way. We want every family to feel sure, supported, and connected.',
+                'section6-text1': 'Because breastfeeding is not just about nutrition.<br>It\'s about trust.<br>It\'s about closeness.<br>It\'s about knowing you are enough.',
+                'section6-text2': 'Because every parent deserves to know.',
+                'section7-text': 'MonBe - see your baby feed.',
+                'cta-button': 'Contact Us'
+            },
+            de: {
+                'language-prompt': 'Wählen Sie Ihre bevorzugte Sprache:',
+                'scroll-indicator': 'Scrollen Sie weiter',
+                'section1-text': 'Eltern zu werden ist das schönste Geschenk - und das überwältigendste.<br>Sie halten Ihr Baby nah, Sie hören zu, Sie beobachten, Sie versuchen jedes winzige Signal zu lesen.<br>Aber es gibt immer eine Frage, die mehr Sorgen bereitet als alles andere:',
+                'section2-text': '"Isst mein Baby genug?"',
+                'section3-text': 'Seit Generationen leben Eltern mit dieser Unsicherheit.<br>Die einzigen Antworten waren indirekt - nasse Windeln zählen, das Baby alle paar Tage wiegen oder sich auf Vermutungen verlassen. Diese Methoden machen Eltern ängstlich, lassen sie an sich zweifeln und manchmal früher als gewünscht mit dem Stillen aufhören.',
+                'section4-text1': 'Bei MonBe glauben wir, dass es nicht so sein sollte.<br>Wir glauben, dass Eltern Klarheit, Ruhe und Zuversicht verdienen - ohne die natürliche Bindung des Stillens zu stören.',
+                'section4-text2': 'Deshalb haben wir <strong>MonBe</strong> entwickelt, einen sanften, intelligenten Aufkleber, der auf das Saugen, Schlucken und Atmen Ihres Babys hört und Ihnen Echtzeit-Einblicke in die Ernährung gibt - <strong>ohne zu ändern, wie Sie stillen.</strong>',
+                'section5-text1': 'Mit MonBe wird die Dunkelheit der Unsicherheit zu Licht.<br>Der Stress des „Nicht-Wissens" wird durch Seelenfrieden ersetzt.',
+                'section5-text2': 'MonBe wurde aus unserer eigenen Reise als Eltern geboren - diese 3-Uhr-morgens-Momente des Zweifels, die schlaflosen Nächte, die Fragen ohne Antworten und die Entschlossenheit, einen besseren Weg zu finden. Wir möchten, dass jede Familie sich sicher, unterstützt und verbunden fühlt.',
+                'section6-text1': 'Denn Stillen ist nicht nur Ernährung.<br>Es geht um Vertrauen.<br>Es geht um Nähe.<br>Es geht darum zu wissen, dass Sie genug sind.',
+                'section6-text2': 'Denn jeder Elternteil verdient es zu wissen.',
+                'section7-text': 'MonBe - sehen Sie Ihr Baby füttern.',
+                'cta-button': 'Kontaktieren Sie uns'
+            },
+            fr: {
+                'language-prompt': 'Sélectionnez votre langue préférée:',
+                'scroll-indicator': 'Faites défiler pour continuer',
+                'section1-text': 'Devenir parent est le plus beau cadeau - et le plus accablant.<br>Vous tenez votre bébé près de vous, vous écoutez, vous regardez, vous essayez de lire chaque petit signal.<br>Mais il y a toujours une question qui crée plus d\'inquiétude que tout le reste:',
+                'section2-text': '"Mon bébé mange-t-il assez?"',
+                'section3-text': 'Depuis des générations, les parents vivent avec cette incertitude.<br>Les seules réponses étaient indirectes - compter les couches mouillées, peser le bébé tous les quelques jours, ou se fier à des conjectures. Ces méthodes rendent les parents anxieux, les font douter d\'eux-mêmes et parfois abandonner l\'allaitement plus tôt qu\'ils ne le voulaient.',
+                'section4-text1': 'Chez MonBe, nous pensons que cela ne devrait pas être ainsi.<br>Nous pensons que les parents méritent clarté, calme et confiance - sans perturber le lien naturel de l\'allaitement.',
+                'section4-text2': 'C\'est pourquoi nous avons créé <strong>MonBe</strong>, un autocollant doux et intelligent qui écoute la succion, la déglutition et la respiration de votre bébé, et vous donne des informations en temps réel sur l\'alimentation - <strong>sans changer votre façon d\'allaiter.</strong>',
+                'section5-text1': 'Avec MonBe, l\'obscurité de l\'incertitude devient lumière.<br>Le stress de « ne pas savoir » est remplacé par la tranquillité d\'esprit.',
+                'section5-text2': 'MonBe est né de notre propre parcours en tant que parents - ces moments de doute à 3 heures du matin, les nuits blanches, les questions sans réponses, et la détermination à trouver une meilleure façon. Nous voulons que chaque famille se sente sûre, soutenue et connectée.',
+                'section6-text1': 'Parce que l\'allaitement ne concerne pas seulement la nutrition.<br>Il s\'agit de confiance.<br>Il s\'agit de proximité.<br>Il s\'agit de savoir que vous êtes suffisante.',
+                'section6-text2': 'Parce que chaque parent mérite de savoir.',
+                'section7-text': 'MonBe - voyez votre bébé se nourrir.',
+                'cta-button': 'Nous contacter'
+            },
+            he: {
+                'language-prompt': 'בחר את השפה המועדפת שלך:',
+                'scroll-indicator': 'גלול כדי להמשיך',
+                'section1-text': 'להיות הורה זו המתנה היפה ביותר - והמכריעה ביותר.<br>את מחזיקה את התינוק קרוב, מקשיבה, מתבוננת, מנסה לקרוא כל אות זעיר.<br>אבל תמיד יש שאלה אחת שיוצרת יותר דאגה מכל דבר אחר:',
+                'section2-text': '"האם התינוק שלי אוכל מספיק?"',
+                'section3-text': 'במשך דורות, הורים חיו עם אי הוודאות הזו.<br>התשובות היחידות היו עקיפות - לספור חיתולים רטובים, לשקול את התינוק כל כמה ימים, או להסתמך על ניחושים. השיטות האלה גורמות להורים להיות חרדים, לפקפק בעצמם, ולפעמים לוותר על ההנקה מוקדם יותר ממה שרצו.',
+                'section4-text1': 'ב-MonBe, אנחנו מאמינים שזה לא צריך להיות ככה.<br>אנחנו מאמינים שהורים ראויים לבהירות, לרוגע ולביטחון - מבלי לשבש את הקשר הטבעי של ההנקה.',
+                'section4-text2': 'לכן יצרנו את <strong>MonBe</strong>, מדבקה עדינה וחכמה שמקשיבה לינקה, לבליעה ולנשימה של התינוק שלך, ונותנת לך תובנות בזמן אמת על ההאכלה - <strong>מבלי לשנות איך שאת מניקה.</strong>',
+                'section5-text1': 'עם MonBe, החושך של אי הוודאות הופך לאור.<br>הלחץ של "לא לדעת" מוחלף בשלווה נפשית.',
+                'section5-text2': 'MonBe נולד מהמסע שלנו כהורים - רגעי הספק בשעה 3 בבוקר, הלילות חסרי השינה, השאלות ללא תשובות, והנחישות למצוא דרך טובה יותר. אנחנו רוצים שכל משפחה תרגיש בטוחה, נתמכת ומחוברת.',
+                'section6-text1': 'כי הנקה זה לא רק תזונה.<br>זה עניין של אמון.<br>זה עניין של קרבה.<br>זה עניין של לדעת שאת מספיקה.',
+                'section6-text2': 'כי כל הורה ראוי לדעת.',
+                'section7-text': 'MonBe - ראי את התינוק שלך ניזון.',
+                'cta-button': 'צור קשר'
+            },
+            ar: {
+                'language-prompt': 'اختر لغتك المفضلة:',
+                'scroll-indicator': 'قم بالتمرير للمتابعة',
+                'section1-text': 'أن تصبحي والدة هو أجمل هدية - والأكثر إرهاقاً.<br>تحتضنين طفلك، تستمعين، تراقبين، تحاولين قراءة كل إشارة صغيرة.<br>لكن هناك دائماً سؤال واحد يخلق قلقاً أكثر من أي شيء آخر:',
+                'section2-text': '"هل يأكل طفلي ما يكفي؟"',
+                'section3-text': 'لأجيال، عاش الآباء مع هذا عدم اليقين.<br>كانت الإجابات الوحيدة غير مباشرة - عد الحفاضات المبللة، وزن الطفل كل بضعة أيام، أو الاعتماد على التخمين. هذه الطرق تجعل الآباء قلقين، يشككون في أنفسهم، وأحياناً يتخلون عن الرضاعة الطبيعية في وقت أبكر مما أرادوا.',
+                'section4-text1': 'في MonBe، نؤمن أنه لا ينبغي أن يكون الأمر كذلك.<br>نؤمن أن الآباء يستحقون الوضوح والهدوء والثقة - دون تعطيل الرابطة الطبيعية للرضاعة الطبيعية.',
+                'section4-text2': 'لهذا السبب أنشأنا <strong>MonBe</strong>، ملصق لطيف وذكي يستمع إلى امتصاص طفلك وبلعه وتنفسه، ويمنحك رؤى فورية حول التغذية - <strong>دون تغيير طريقة إرضاعك.</strong>',
+                'section5-text1': 'مع MonBe، يصبح ظلام عدم اليقين نوراً.<br>يستبدل التوتر من "عدم المعرفة" براحة البال.',
+                'section5-text2': 'ولدت MonBe من رحلتنا الخاصة كآباء - لحظات الشك في الساعة 3 صباحاً، الليالي بلا نوم، الأسئلة بلا إجابات، والإصرار على إيجاد طريقة أفضل. نريد أن تشعر كل عائلة بالأمان والدعم والتواصل.',
+                'section6-text1': 'لأن الرضاعة الطبيعية ليست فقط عن التغذية.<br>إنها عن الثقة.<br>إنها عن القرب.<br>إنها عن معرفة أنك كافية.',
+                'section6-text2': 'لأن كل والد يستحق أن يعرف.',
+                'section7-text': 'MonBe - شاهدي طفلك يتغذى.',
+                'cta-button': 'اتصل بنا'
+            },
+            es: {
+                'language-prompt': 'Selecciona tu idioma preferido:',
+                'scroll-indicator': 'Desplázate para continuar',
+                'section1-text': 'Ser padre es el regalo más hermoso - y el más abrumador.<br>Sostienes a tu bebé cerca, escuchas, observas, intentas leer cada pequeña señal.<br>Pero siempre hay una pregunta que crea más preocupación que cualquier otra cosa:',
+                'section2-text': '"¿Mi bebé está comiendo suficiente?"',
+                'section3-text': 'Durante generaciones, los padres han vivido con esta incertidumbre.<br>Las únicas respuestas eran indirectas: contar pañales mojados, pesar al bebé cada pocos días o confiar en conjeturas. Estos métodos dejan a los padres ansiosos, dudando de sí mismos y, a veces, abandonando la lactancia antes de lo que querían.',
+                'section4-text1': 'En MonBe, creemos que no debería ser así.<br>Creemos que los padres merecen claridad, calma y confianza, sin interrumpir el vínculo natural de la lactancia.',
+                'section4-text2': 'Por eso creamos <strong>MonBe</strong>, una pegatina suave e inteligente que escucha la succión, la deglución y la respiración de tu bebé, y te brinda información en tiempo real sobre la alimentación - <strong>sin cambiar cómo amamantas.</strong>',
+                'section5-text1': 'Con MonBe, la oscuridad de la incertidumbre se convierte en luz.<br>El estrés de "no saber" se reemplaza con tranquilidad.',
+                'section5-text2': 'MonBe nació de nuestro propio viaje como padres: esos momentos de duda a las 3 de la madrugada, las noches sin dormir, las preguntas sin respuestas y la determinación de encontrar una mejor manera. Queremos que cada familia se sienta segura, apoyada y conectada.',
+                'section6-text1': 'Porque la lactancia no se trata solo de nutrición.<br>Se trata de confianza.<br>Se trata de cercanía.<br>Se trata de saber que eres suficiente.',
+                'section6-text2': 'Porque cada padre merece saber.',
+                'section7-text': 'MonBe - ve a tu bebé alimentarse.',
+                'cta-button': 'Contáctanos'
+            }
+        };
+
+        // Translation function
+        function translatePage(lang) {
+            const langData = translations[lang] || translations.en;
+            
+            // Translate all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (langData[key]) {
+                    element.innerHTML = langData[key];
+                }
+            });
+        }
+
+        // Language selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButtons = document.querySelectorAll('.language-btn');
+            let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
+            // Translate page on load
+            translatePage(selectedLanguage);
+
+            // Set initial selected language
+            languageButtons.forEach(btn => {
+                if (btn.dataset.lang === selectedLanguage) {
+                    btn.classList.add('selected');
+                }
+            });
+
+            // Handle language button clicks
+            languageButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove selected class from all buttons
+                    languageButtons.forEach(b => b.classList.remove('selected'));
+                    
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                    
+                    // Store selected language
+                    selectedLanguage = this.dataset.lang;
+                    localStorage.setItem('selectedLanguage', selectedLanguage);
+                    
+                    // Translate page
+                    translatePage(selectedLanguage);
+                });
+            });
+        });
+
         // Full-screen scroll functionality for Our Story page
         let currentSection = 1;
         const totalSections = 7;
