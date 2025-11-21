@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow thank you pages from search engines
+Disallow: /thank-you.html
+Disallow: /contact-thank-you.html
+Disallow: /interview-review.html
+
+# Sitemap location
+Sitemap: https://www.monbecare.com/sitemap.xml
+
