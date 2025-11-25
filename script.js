@@ -169,52 +169,6 @@ function handleInterviewForm() {
             return;
         }
 
-        const numChildrenInput = document.getElementById('numberOfChildren');
-        if (!numChildrenInput) return;
-
-        // Handle "comming soon" as 1 child
-        let numChildren = 0;
-        if (numChildrenInput.value === 'comming soon') {
-            numChildren = 1;
-        } else {
-            numChildren = parseInt(numChildrenInput.value || '0', 10);
-        }
-
-        let missingPS = [];
-        let missingAids = [];
-
-        for (let i = 1; i <= numChildren; i++) {
-            const ps = document.querySelectorAll(
-                'input[name="professionalSupport_child' + i + '"]'
-            );
-            const aids = document.querySelectorAll(
-                'input[name="aidsUsed_child' + i + '"]'
-            );
-
-            if (ps.length > 0 && !Array.from(ps).some(cb => cb.checked)) {
-                missingPS.push('Child ' + i);
-            }
-            if (aids.length > 0 && !Array.from(aids).some(cb => cb.checked)) {
-                missingAids.push('Child ' + i);
-            }
-        }
-
-        if (missingPS.length > 0) {
-            alert(
-                'Select at least one professional support option for: ' +
-                missingPS.join(', ')
-            );
-            return;
-        }
-
-        if (missingAids.length > 0) {
-            alert(
-                'Select at least one aids option for: ' +
-                missingAids.join(', ')
-            );
-            return;
-        }
-
         const selectedLanguage = inMemoryStorage.getItem('selectedLanguage') || 'en';
         const formData = new FormData(this);
         formData.set('selectedLanguage', selectedLanguage);
