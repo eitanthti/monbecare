@@ -420,6 +420,14 @@ body {
     display: block;
 }
 
+.deck-content {
+    display: none;
+}
+
+.deck-content.unlocked {
+    display: block;
+}
+
 .pitch-header {
     text-align: center;
     margin-bottom: 3rem;

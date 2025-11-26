@@ -17,6 +17,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        .deck-content {
+            display: none;
+        }
+        .deck-content.unlocked {
+            display: block;
+        }
         /* Deck-specific styles (self-contained, print-friendly) */
         body { background: #f5f7fb; }
         .deck {
@@ -109,6 +115,23 @@
     </script>
 </head>
 <body>
+    <!-- Password Protection -->
+    <div class="password-container" id="passwordContainer">
+        <h2 class="password-title">MonBe Deck</h2>
+        <p class="password-description">
+            This content is password protected. Please enter the access code to view our company deck.
+        </p>
+        <form class="password-form" onsubmit="checkPassword(event, 'deckAccess', 'deckContent')" id="passwordForm">
+            <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
+            <button type="submit" class="password-submit">ACCESS DECK</button>
+        </form>
+        <div class="password-error" id="passwordError">
+            Incorrect password. Please try again.
+        </div>
+    </div>
+
+    <!-- Deck Content (Hidden until password is correct) -->
+    <div class="deck-content" id="deckContent">
     <div class="deck-nav">
         <a class="brand" href="home.html">MonBe — Company Deck</a>
         <div class="controls">
@@ -266,6 +289,7 @@
             <p>+972-524042798</p>
             <p>www.monbecare.com</p>
         </section>
+    </div>
     </div>
 
     <script src="script.js"></script>

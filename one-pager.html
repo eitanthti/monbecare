@@ -730,8 +730,26 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Password Protection -->
+    <div class="password-container" id="passwordContainer">
+        <h2 class="password-title">MonBe One-Pager</h2>
+        <p class="password-description">
+            This content is password protected. Please enter the access code to view our one-page executive summary.
+        </p>
+        <form class="password-form" onsubmit="checkPassword(event, 'onePagerAccess', 'onePagerContent')" id="passwordForm">
+            <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
+            <button type="submit" class="password-submit">ACCESS ONE-PAGER</button>
+        </form>
+        <div class="password-error" id="passwordError">
+            Incorrect password. Please try again.
+        </div>
+    </div>
+
+    <!-- One-Pager Content (Hidden until password is correct) -->
+    <div class="pitch-content" id="onePagerContent">
     <div class="download-bar">
         <a class="brand" href="home.html">MonBe — One Page Executive Summary</a>
         <div class="controls">
@@ -959,5 +977,7 @@
             </div>
         </div>
     </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

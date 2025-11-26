@@ -57,8 +57,8 @@ async function hashPassword(password) {
     return hashHex;
 }
 
-// Password protection for pitch page
-async function checkPassword(event) {
+// Password protection for protected pages (pitch, one-pager, deck)
+async function checkPassword(event, accessKey, contentId) {
     event.preventDefault();
 
     const passwordInput = document.getElementById('passwordInput');
@@ -76,12 +76,13 @@ async function checkPassword(event) {
         
         if (passwordHash === correctPasswordHash) {
             const passwordContainer = document.getElementById('passwordContainer');
-            const pitchContent = document.getElementById('pitchContent');
+            const content = document.getElementById(contentId);
             
-            if (passwordContainer && pitchContent) {
+            if (passwordContainer && content) {
                 passwordContainer.style.display = 'none';
-                pitchContent.classList.add('unlocked');
-                inMemoryStorage.setItem('pitchAccess', 'granted');
+                content.classList.add('unlocked');
+                content.style.display = 'block';
+                inMemoryStorage.setItem(accessKey, 'granted');
             }
         } else {
             errorElement.classList.add('show');
@@ -97,14 +98,15 @@ async function checkPassword(event) {
     }
 }
 
-// Check if user already has access when navigating to pitch page
-async function checkPitchAccess() {
-    if (inMemoryStorage.getItem('pitchAccess') === 'granted') {
+// Generic function to check access for protected pages
+async function checkPageAccess(accessKey, contentId) {
+    if (inMemoryStorage.getItem(accessKey) === 'granted') {
         const passwordContainer = document.getElementById('passwordContainer');
-        const pitchContent = document.getElementById('pitchContent');
-        if (passwordContainer && pitchContent) {
+        const content = document.getElementById(contentId);
+        if (passwordContainer && content) {
             passwordContainer.style.display = 'none';
-            pitchContent.classList.add('unlocked');
+            content.classList.add('unlocked');
+            content.style.display = 'block';
         }
         return;
     }
@@ -117,12 +119,13 @@ async function checkPitchAccess() {
             const paramHash = await hashPassword(accessParam);
             
             if (paramHash === correctPasswordHash) {
-                inMemoryStorage.setItem('pitchAccess', 'granted');
+                inMemoryStorage.setItem(accessKey, 'granted');
                 const passwordContainer = document.getElementById('passwordContainer');
-                const pitchContent = document.getElementById('pitchContent');
-                if (passwordContainer && pitchContent) {
+                const content = document.getElementById(contentId);
+                if (passwordContainer && content) {
                     passwordContainer.style.display = 'none';
-                    pitchContent.classList.add('unlocked');
+                    content.classList.add('unlocked');
+                    content.style.display = 'block';
                 }
                 if (window.history && window.history.replaceState) {
                     const cleanUrl = window.location.origin + window.location.pathname;
@@ -133,6 +136,21 @@ async function checkPitchAccess() {
             console.error('Password verification error:', error);
         }
     }
+}
+
+// Check if user already has access when navigating to pitch page
+async function checkPitchAccess() {
+    await checkPageAccess('pitchAccess', 'pitchContent');
+}
+
+// Check if user already has access when navigating to one-pager page
+async function checkOnePagerAccess() {
+    await checkPageAccess('onePagerAccess', 'onePagerContent');
+}
+
+// Check if user already has access when navigating to deck page
+async function checkDeckAccess() {
+    await checkPageAccess('deckAccess', 'deckContent');
 }
 
 // Sanitize input to prevent XSS
@@ -490,7 +508,11 @@ function logVersion() {
 document.addEventListener('DOMContentLoaded', function () {
     logVersion();
     
+    // Check access for protected pages
     checkPitchAccess();
+    checkOnePagerAccess();
+    checkDeckAccess();
+    
     handleContactForm();
     handleInterviewForm();
     handleInterviewReviewPage();
