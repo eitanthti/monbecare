@@ -780,7 +780,7 @@
                         <h3 class="cta-title">Exclusive Early Access</h3>
                         <p class="cta-subtitle">Join our VIP waitlist • Limited availability • Priority access & special launch pricing for founding members</p>
                         
-                        <form name="landing-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="waitlistForm">
+                        <form name="landing-waitlist" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="landing-waitlist">
                             <p style="display:none;">
                                 <label>Don't fill this out: <input name="bot-field"></label>
@@ -868,40 +868,6 @@
         // Hide loading screen
         window.addEventListener('load', function() {
             document.getElementById('loading').classList.add('hidden');
-        });
-
-        // Form submission handling
-        const form = document.getElementById('waitlistForm');
-        const signupForm = document.getElementById('signup-form');
-        const thankYou = document.getElementById('thank-you');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            
-            // Ensure form-name is included for Netlify
-            if (!formData.has('form-name')) {
-                formData.append('form-name', 'landing-waitlist');
-            }
-            
-            fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(response => {
-                if (response.ok) {
-                    signupForm.style.display = 'none';
-                    thankYou.classList.add('show');
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Something went wrong. Please try again.');
-            });
         });
 
         // Track scroll depth for analytics (Meta Pixel compatibility)
