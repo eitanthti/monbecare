@@ -62,8 +62,8 @@
 
         /* Animated Background */
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
+            min-height: calc(100vh - 80px);
+            min-height: calc(100dvh - 80px);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -712,12 +712,65 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Top Banner */
+        .top-banner {
+            background: linear-gradient(135deg, var(--deep-navy), var(--warm-taupe));
+            color: white;
+            padding: 1.25rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .top-banner-content strong {
+            font-weight: 800;
+            color: var(--peach);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .top-banner-highlight {
+            background: rgba(254, 204, 198, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-banner {
+                padding: 1rem 1.5rem;
+            }
+
+            .top-banner-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading" id="loading">
         <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="top-banner-content">
+            <strong>MonBe isn't ready yet</strong> — but <span class="top-banner-highlight">reserve yours now</span> and guarantee <strong>exclusive early access</strong> + <strong>special launch pricing</strong>
+        </div>
     </div>
 
     <!-- Hero Section -->

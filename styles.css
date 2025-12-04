@@ -57,6 +57,28 @@ body {
     color: #2d3748;
 }
 
+/* Buy Now Link Styling */
+.nav-links a.buy-now-link {
+    background: linear-gradient(135deg, #F7B5A8, #E8B4A0);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 181, 168, 0.3);
+}
+
+.nav-links a.buy-now-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(247, 181, 168, 0.4);
+    background: linear-gradient(135deg, #E8B4A0, #F7B5A8);
+}
+
+.nav-links a.buy-now-link strong {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
 /* Mobile menu toggle */
 .mobile-menu {
     display: none;
