@@ -145,6 +145,18 @@
             animation: fadeInUp 1s ease-out;
         }
 
+        .product-image {
+            max-width: 100%;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 2rem auto 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(232, 180, 160, 0.3);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -664,6 +676,11 @@
             .orb-1 { width: 200px; height: 200px; }
             .orb-2 { width: 150px; height: 150px; }
             .orb-3 { width: 120px; height: 120px; }
+
+            .product-image {
+                max-width: 90%;
+                margin: 1.5rem auto 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -748,6 +765,13 @@
             margin: 0 0.3rem;
         }
 
+        .top-banner-small {
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+            font-weight: 500;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .top-banner {
                 padding: 1rem 1.5rem;
@@ -783,7 +807,7 @@
     <!-- Top Banner -->
     <div class="top-banner">
         <div class="top-banner-content">
-            <strong>MonBe isn't ready yet</strong> — but <span class="top-banner-highlight">secure your spot today</span> and guarantee <strong>priority access</strong> + <strong>exclusive founding member pricing</strong> for peace of mind from day one
+            <strong>35% off your MonBe pack</strong><br>Sign up to receive your coupon code • <strong>First 5,000 moms only</strong><br><span class="top-banner-small">• Valid when MonBe launches</span>
         </div>
     </div>
 
@@ -803,6 +827,9 @@
             <p class="description">
                 The <strong>revolutionary smart breastfeeding monitor</strong> that gives you <strong>confidence, peace of mind, and total control</strong>. Breastfeed with ease, knowing your baby is getting exactly what they need. <strong>Safe, effortless, and empowering</strong> — backed by clinical science and designed by mothers, for mothers.
             </p>
+
+            <!-- Product Image -->
+            <img src="MonBe-MD-01.png" alt="MonBe Smart Breastfeeding Monitor" class="product-image">
 
             <!-- Visual Features -->
             <div class="features">
@@ -844,8 +871,8 @@
             <div class="cta-section">
                 <div class="cta-box">
                     <div id="signup-form">
-                        <h3 class="cta-title">Exclusive Early Access</h3>
-                        <p class="cta-subtitle">Join our VIP waitlist • Limited availability • Priority access & special launch pricing for founding members</p>
+                        <h3 class="cta-title">Get Your Launch Coupon Code</h3>
+                        <p class="cta-subtitle">Enter your email to receive a <strong>35% off coupon code</strong> for the MonBe pack at launch • <strong>Limited to the first 5,000 moms</strong></p>
                         
                         <form name="landing-waitlist" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="landing-waitlist">
@@ -859,7 +886,7 @@
                             <div class="form-group">
                                 <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
                             </div>
-                            <button type="submit" class="submit-btn">Reserve Your Spot</button>
+                            <button type="submit" class="submit-btn">Get My Coupon Code</button>
                         </form>
                         
                         <p class="privacy-note">Your data is secure and private. Unsubscribe anytime.</p>
@@ -872,8 +899,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h3>Welcome to MonBe</h3>
-                        <p>You're on our exclusive VIP list. We'll notify you with priority access and special founding member pricing when we launch.</p>
+                        <h3>Coupon Code Coming Soon!</h3>
+                        <p>Your email has been registered! You'll receive your <strong>35% off coupon code</strong> for the MonBe pack when we launch. Limited to the first 5,000 moms.</p>
                     </div>
                 </div>
             </div>
