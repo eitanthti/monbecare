@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to MonBe | Thank You</title>
+    <title>Thank You | MonBe - Join the Waiting List</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -301,90 +301,6 @@
             font-style: italic;
         }
 
-        /* Coupon Code Section */
-        .coupon-section {
-            background: linear-gradient(135deg, var(--peach), var(--soft-coral));
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin: 2rem 0;
-            box-shadow: 0 20px 60px rgba(247, 181, 168, 0.3);
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coupon-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(10%, 10%) rotate(5deg); }
-        }
-
-        .coupon-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--deep-navy);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .coupon-code {
-            font-family: 'DM Sans', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--deep-navy);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 1.5rem 2.5rem;
-            border-radius: 12px;
-            display: inline-block;
-            letter-spacing: 4px;
-            margin: 0.5rem 0;
-            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.15);
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .coupon-code:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(44, 62, 80, 0.25);
-        }
-
-        .coupon-code::after {
-            content: 'Click to copy';
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75rem;
-            color: var(--warm-taupe);
-            font-weight: 400;
-            letter-spacing: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .coupon-code:hover::after {
-            opacity: 1;
-        }
-
-        .coupon-description {
-            font-size: 1rem;
-            color: var(--deep-navy);
-            margin-top: 1.5rem;
-            font-weight: 500;
-        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -413,16 +329,6 @@
 
             .orb-1 { width: 200px; height: 200px; }
             .orb-2 { width: 150px; height: 150px; }
-
-            .coupon-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .coupon-code {
-                font-size: 2rem;
-                padding: 1.25rem 2rem;
-                letter-spacing: 3px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -435,11 +341,6 @@
                 font-size: 0.9rem;
             }
 
-            .coupon-code {
-                font-size: 1.75rem;
-                padding: 1rem 1.5rem;
-                letter-spacing: 2px;
-            }
         }
     </style>
     
@@ -455,23 +356,6 @@
       gtag('js', new Date());
 
       gtag('config', 'G-DF1J1SMXBZ');
-    </script>
-    <script>
-        function copyCouponCode() {
-            const couponCode = 'BESTMOM4328';
-            navigator.clipboard.writeText(couponCode).then(function() {
-                const codeElement = document.getElementById('couponCode');
-                const originalText = codeElement.textContent;
-                codeElement.textContent = 'Copied!';
-                codeElement.style.background = 'linear-gradient(135deg, #F7B5A8, #E8B4A0)';
-                setTimeout(function() {
-                    codeElement.textContent = originalText;
-                    codeElement.style.background = 'rgba(255, 255, 255, 0.9)';
-                }, 2000);
-            }).catch(function(err) {
-                console.error('Failed to copy coupon code:', err);
-            });
-        }
     </script>
 </head>
 <body>
@@ -489,17 +373,10 @@
             </div>
 
             <!-- Main Message -->
-            <h1 class="thank-you-title">Welcome to MonBe</h1>
+            <h1 class="thank-you-title">Thank You!</h1>
             <p class="thank-you-message">
-                Your submission has been received successfully! <strong>You're now on our exclusive VIP waitlist.</strong> We're thrilled to have you join us on this journey.
+                Your submission has been received successfully! <strong>You're now on the MonBe waiting list.</strong> Thank you for sharing your ideas and helping us shape MonBe together.
             </p>
-
-            <!-- Coupon Code Section -->
-            <div class="coupon-section">
-                <div class="coupon-label">Your Exclusive Coupon Code</div>
-                <div class="coupon-code" id="couponCode" onclick="copyCouponCode()">BESTMOM4328</div>
-                <p class="coupon-description">Use this code at checkout to get <strong>35% off</strong> your MonBe pack!</p>
-            </div>
 
             <!-- Info Card -->
             <div class="info-card">
@@ -513,9 +390,18 @@
                             </svg>
                         </div>
                         <div style="display: flex; flex-direction: column;">
-                            <span class="benefit-text">Check your inbox for a confirmation email</span>
-                            <span class="benefit-note">It can take up to a day</span>
+                            <span class="benefit-text">We'll email you with MonBe updates and early access opportunities</span>
+                            <span class="benefit-note">We'll only email about MonBe updates and early access</span>
                         </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <span class="benefit-text">Your ideas will help shape MonBe's development</span>
                     </div>
 
                     <div class="benefit-item">
@@ -524,36 +410,18 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <span class="benefit-text">Priority access when we launch</span>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <span class="benefit-text">Exclusive founding member pricing</span>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <span class="benefit-text">Early updates on product development</span>
+                        <span class="benefit-text">Be the first to know when MonBe is ready</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Social Proof -->
+            <!-- Trust Line -->
             <div class="social-proof">
-                <p>You're in great company! Join thousands of mothers revolutionizing breastfeeding monitoring.</p>
+                <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--deep-navy); font-weight: 500;">Because every parent deserves to know.</p>
             </div>
 
             <!-- CTA Button -->
-            <a href="home.html" class="cta-button">Return to Home</a>
+            <a href="landing.html" class="cta-button">Back to MonBe</a>
         </div>
     </div>
 </body>
