@@ -14,9 +14,9 @@ The pitch page (`pitch.html`) is now protected with a hashed password system. In
 
 ### Current Password
 
-The current password is: `monbe2025`
+The current password is: `monbe22`
 
-Its SHA-256 hash is: `73095a13bb5b2e0b829a8057cd5abc0819c8a78ecd5ad797337389fcae96f313`
+Its SHA-256 hash is: `536088e2bd66c002d1daa60632a1baa07035ae27d26a316cf4df4c3d6e341cb2`
 
 ## How to Change the Password
 
@@ -89,9 +89,9 @@ For stronger security, consider:
 
 ## URL Access
 
-Users can also access the pitch page by adding `?access=monbe2025` to the URL:
+Users can also access the pitch page by adding `?access=monbe22` to the URL:
 ```
-https://www.monbecare.com/pitch.html?access=monbe2025
+https://www.monbecare.com/pitch.html?access=monbe22
 ```
 
 This URL parameter is also validated using the same hash comparison method.
@@ -110,5 +110,5 @@ If you need help changing the password or implementing stronger security measure
 
 ---
 
-**Last Updated**: November 19, 2025
+**Last Updated**: December 23, 2025
 

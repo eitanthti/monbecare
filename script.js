@@ -69,7 +69,7 @@ async function checkPassword(event, accessKey, contentId) {
     const password = passwordInput.value.trim();
     // Hashed version of the password - more secure than plain text
     // To generate a new hash: echo -n "your-password" | openssl dgst -sha256
-    const correctPasswordHash = '73095a13bb5b2e0b829a8057cd5abc0819c8a78ecd5ad797337389fcae96f313';
+    const correctPasswordHash = '536088e2bd66c002d1daa60632a1baa07035ae27d26a316cf4df4c3d6e341cb2';
     
     try {
         const passwordHash = await hashPassword(password);
@@ -115,7 +115,7 @@ async function checkPageAccess(accessKey, contentId) {
     const accessParam = urlParams.get('access');
     if (accessParam) {
         try {
-            const correctPasswordHash = '73095a13bb5b2e0b829a8057cd5abc0819c8a78ecd5ad797337389fcae96f313';
+            const correctPasswordHash = '536088e2bd66c002d1daa60632a1baa07035ae27d26a316cf4df4c3d6e341cb2';
             const paramHash = await hashPassword(accessParam);
             
             if (paramHash === correctPasswordHash) {

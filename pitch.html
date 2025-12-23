@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pitch - MonBe Inc.</title>
+    <title>Pitch - MonBe Inc. | The End of Uncertainty</title>
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.monbecare.com/pitch.html">
@@ -30,6 +30,168 @@
 
       gtag('config', 'G-DF1J1SMXBZ');
     </script>
+    <style>
+        /* Specific styles for AI features */
+        .ai-feature-section {
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        .ai-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        /* Chat Interface */
+        .chat-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .chat-history {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+        .chat-message {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        .message-user {
+            background: #e3f2fd;
+            color: #0d47a1;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 2px;
+        }
+        .message-ai {
+            background: #fff;
+            color: #2c3e50;
+            border: 1px solid #eee;
+            align-self: flex-start;
+            margin-right: auto;
+            border-bottom-left-radius: 2px;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        .chat-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .chat-btn:hover {
+            background: #34495e;
+        }
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        /* Insight Generator */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .scenario-box {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .scenario-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .scenario-btn:hover {
+            border-color: #3498db;
+            background: #f1f9fe;
+        }
+        .insight-result {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #eee;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .insight-content {
+            text-align: left;
+            width: 100%;
+        }
+        .insight-metric {
+            display: inline-block;
+            margin-right: 1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -60,7 +222,7 @@
         <div class="password-container" id="passwordContainer">
             <h2 class="password-title">MonBe Pitch</h2>
             <p class="password-description">
-                This content is password protected. Please enter the access code to view our comprehensive pitch materials.
+                Access Restricted: Investor Materials.
             </p>
             <form class="password-form" onsubmit="checkPassword(event, 'pitchAccess', 'pitchContent')" id="passwordForm">
                 <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
@@ -73,382 +235,341 @@
 
         <!-- Pitch Content (Hidden until password is correct) -->
         <div class="pitch-content" id="pitchContent">
-            <div class="pitch-header">
-                <h1 class="pitch-main-title">MonBe</h1>
-                <p class="pitch-tagline">"See your baby feed."</p>
-                <p class="pitch-summary">
-                    A passive smart sticker that turns breastfeeding uncertainty into clarity - naturally and non-invasively.
+            
+            <!-- HERO: The Vision (Chesky/Gebbia style - Design & Emotion) -->
+            <div class="pitch-header" style="text-align: center; margin-bottom: 4rem;">
+                <h1 class="pitch-main-title" style="font-size: 3.5rem; letter-spacing: -1px; margin-bottom: 1rem;">The End of Uncertainty.</h1>
+                <p class="pitch-tagline" style="font-size: 1.5rem; color: #555; max-width: 700px; margin: 0 auto 2rem auto;">"We are solving the feedback loop for the most critical biological process in human life."</p>
+                <p class="pitch-summary" style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6; color: #444;">
+                    We are building the <strong>infrastructure</strong> of infant health, starting with a simple sticker that turns breastfeeding from a black box into a clear signal.
                 </p>
             </div>
 
-            <!-- TL;DR Section -->
-            <div class="pitch-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); margin: 2rem 0; border-left: 4px solid #2c3e50; padding: 3rem;">
-                <h3 class="card-title" style="color: #2c3e50; text-align: center; margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">TL;DR</h3>
-                <p style="margin-bottom: 2.5rem; font-weight: 500; color: #2c3e50; text-align: center; font-size: 1.1rem;">Before we dive into the full story, here's a quick TL;DR answering the five questions investors ask most often:</p>
+            <!-- THE INSIGHT: The Hidden Problem (Dropbox/Houston style - "It's broken") -->
+            <div class="pitch-card" style="background: #fff; border-left: 5px solid #2c3e50; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <h3 class="card-title" style="color: #2c3e50; font-size: 1.8rem; margin-bottom: 1.5rem;">The "Black Box" Problem</h3>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <p style="font-size: 1.1rem; line-height: 1.6; color: #555; margin-bottom: 1rem;">
+                            Imagine if your phone battery had no percentage indicator. You'd plug it in, guess when it's full, and live in constant anxiety that it might die.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">
+                            <strong>That is breastfeeding today.</strong> 
+                            140 million babies are born every year. 90% of mothers start breastfeeding. 
+                            Within 3 months, <strong>40% quit</strong>. Not because they want to, but because they are terrified their baby isn't eating enough.
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-top: 0; color: #2c3e50;">The Cost of Guessing:</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
+                                <strong>$2.31B wasted</strong> on dumb accessories that don't solve the core problem.
+                            </li>
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
+                                <strong>68% of medical records</strong> contain flawed feeding data.
+                            </li>
+                            <li style="padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
+                                <strong>Maternal Anxiety</strong> is the #1 driver of formula supplementation.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GEMINI FEATURE 1: The Virtual Founder -->
+            <div class="ai-feature-section">
+                <div class="ai-header">
+                    <h3 class="ai-title">Due Diligence Assistant</h3>
+                    <span class="ai-badge">Powered by Gemini ✨</span>
+                </div>
+                <p style="margin-bottom: 1.5rem; color: #666;">
+                    Have questions about our unit economics, sensor physics, or go-to-market strategy? Ask our Virtual Founder Agent. It's trained to give you the sober, direct answers you need to build conviction.
+                </p>
+                <div class="chat-interface">
+                    <div id="ddChatHistory" class="chat-history">
+                        <div class="chat-message message-ai">
+                            <strong>Virtual Eitan:</strong> Hello. I'm here to discuss the business of MonBe. I can explain our sensor fusion technology, our path to $600 LTV, or how we plan to capture the "Milk Graph" dataset. What would you like to know?
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="ddInput" class="chat-input" placeholder="E.g., What is your CAC? How does the sensor work?" onkeypress="handleEnter(event, 'ddInput', sendDdMessage)">
+                        <button class="chat-btn" onclick="sendDdMessage()">Ask</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE SOLUTION: Simplicity (Collison/Stripe style - "It just works") -->
+            <div class="pitch-card" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; margin-bottom: 2rem; padding: 3rem; text-align: center;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Complexity, Abstracted.</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9;">We took defense-grade bioimpedance sensors and hid them in a sticker.</p>
                 
-                <div style="display: grid; gap: 1rem;">
-                    <!-- Q1 -->
-                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #667eea; overflow: hidden;">
-                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(1)">
-                            <div style="background: #667eea; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">1</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Why now & what problem are you solving?</h4>
-                            <div class="faq-icon" style="font-size: 1.5rem; color: #667eea; transition: transform 0.3s ease;">+</div>
-                        </div>
-                        <div class="faq-answer" id="faq-1" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
-                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Breastfeeding is optimal for infant health, but 80–90% of mothers can only guess milk intake by baby behavior, leading 35–44% to stop early over "not enough milk" fears.</p>
-                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">MonBe is the first breast-mounted patch providing objective feeding data — solving the #1 reason mothers quit breastfeeding prematurely.</p>
-                                <p style="color: #555; line-height: 1.6; font-weight: 500;">Now is the right time: affordable sensors + AI + parents eager for digital solutions that eliminate feeding uncertainty.</p>
-                            </div>
-                        </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">👇</div>
+                        <h4 style="margin: 0; color: white;">Stick It On</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Passive. No wires. No cameras.</p>
                     </div>
-
-                    <!-- Q2 -->
-                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #764ba2; overflow: hidden;">
-                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(2)">
-                            <div style="background: #764ba2; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">2</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How big is the market?</h4>
-                            <div class="faq-icon" style="font-size: 1.5rem; color: #764ba2; transition: transform 0.3s ease;">+</div>
-                        </div>
-                        <div class="faq-answer" id="faq-2" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
-                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">The breastfeeding accessories market is $2.31B and projected to reach $4.20B by 2033.</p>
-                            </div>
-                        </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤱</div>
+                        <h4 style="margin: 0; color: white;">Feed Normally</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">We track swallowing, not just time.</p>
                     </div>
-
-                    <!-- Q3 -->
-                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #f093fb; overflow: hidden;">
-                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(3)">
-                            <div style="background: #f093fb; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">3</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">What validation & advantage do you have?</h4>
-                            <div class="faq-icon" style="font-size: 1.5rem; color: #f093fb; transition: transform 0.3s ease;">+</div>
-                        </div>
-                        <div class="faq-answer" id="faq-3" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
-                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Competitors rely on single sensors. MonBe fuses five sensors with NFC transfer, backed by a favorable patent landscape.</p>
-                                <p style="color: #555; line-height: 1.6; font-weight: 500;">We've filed a provisional patent and are preparing MVP pilots with clinical advisors.</p>
-                            </div>
-                        </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📱</div>
+                        <h4 style="margin: 0; color: white;">Tap to Sync</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">NFC transfer. Zero radiation near baby.</p>
                     </div>
-
-                    <!-- Q4 -->
-                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #4facfe; overflow: hidden;">
-                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(4)">
-                            <div style="background: #4facfe; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">4</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Who is the team & how do you scale?</h4>
-                            <div class="faq-icon" style="font-size: 1.5rem; color: #4facfe; transition: transform 0.3s ease;">+</div>
-                        </div>
-                        <div class="faq-answer" id="faq-4" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
-                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">Founder-led by Eitan Halfon, who combines deep technical expertise with financial insight. His background spans a BSc in Electrical & Computer Engineering, a Global MSc in Financial Economics, and extensive experience in full-cycle product development across hardware, embedded systems, software, and project management.</p>
-                                <p style="color: #555; line-height: 1.6; font-weight: 500;">We start as a consumer wellness device (fast market entry), then scale to healthcare integration, public health programs, and international expansion in North America and Western Europe.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q5 -->
-                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #43e97b; overflow: hidden;">
-                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(5)">
-                            <div style="background: #43e97b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">5</div>
-                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How do you make money?</h4>
-                            <div class="faq-icon" style="font-size: 1.5rem; color: #43e97b; transition: transform 0.3s ease;">+</div>
-                        </div>
-                        <div class="faq-answer" id="faq-5" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Hardware starter kits</p>
-                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$150–250</p>
-                                    </div>
-                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Recurring patches</p>
-                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$30–50/month</p>
-                                    </div>
-                                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
-                                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">Software subscriptions</p>
-                                        <p style="margin: 0; color: #43e97b; font-size: 1.1rem; font-weight: bold;">$5–15/month</p>
-                                    </div>
-                                </div>
-                                <p style="color: #555; line-height: 1.6; font-weight: 500;">Unit economics: $50–75 CAC, $400–600 LTV, 60–70% gross margins, with a clear path to long-term healthcare reimbursement.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="market-stats">
-                <div class="stat-item">
-                    <span class="stat-number">$2.31B</span>
-                    <span class="stat-label">Global Breastfeeding Accessories Market (2024)</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">$4.20B</span>
-                    <span class="stat-label">Projected Market Size by 2033</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10-15%</span>
-                    <span class="stat-label">CAGR Growth Rate</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">85.7%</span>
-                    <span class="stat-label">US Mothers Start Breastfeeding</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">27.9%</span>
-                    <span class="stat-label">Still Exclusively Breastfeeding at 6 Months</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">68%</span>
-                    <span class="stat-label">Feeding Records Have Missing/Contradictory Data</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">35-44%</span>
-                    <span class="stat-label">Stop Due to "Insufficient Supply" Perception</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">94%</span>
-                    <span class="stat-label">Smartphone Penetration Among Millennial Mothers</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">$23,380</span>
-                    <span class="stat-label">Annual Baby Spending per Family</span>
                 </div>
             </div>
 
-            <div class="pitch-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); margin: 2rem 0;">
-                <h3 class="card-title" style="color: #2c3e50; text-align: center;">Market</h3>
+            <!-- GEMINI FEATURE 2: Product Vision Simulator -->
+            <div class="ai-feature-section" style="border-left: 5px solid #3498db;">
+                <div class="ai-header">
+                    <h3 class="ai-title">The "Milk Graph" Engine Preview</h3>
+                    <span class="ai-badge">Powered by Gemini ✨</span>
+                </div>
+                <p style="margin-bottom: 1.5rem; color: #666;">
+                    Hardware is just the API. The product is the <strong>Insight</strong>. Select a raw sensor scenario below to see how our AI interprets complex biological signals into clear guidance for a parent.
+                </p>
+                <div class="insight-grid">
+                    <div class="scenario-box">
+                        <p style="font-weight: 600; margin-bottom: 1rem; color: #2c3e50;">Select a Scenario:</p>
+                        <button class="scenario-btn" onclick="generateInsight('Baby fed for 4 mins, high suck frequency, low swallow count, baby crying after.')">
+                            📉 Scenario A: 4 mins, Rapid sucking, No swallowing
+                        </button>
+                        <button class="scenario-btn" onclick="generateInsight('Baby fed 15 mins, rhythmic suck/swallow ratio 1:1, deep sleep after.')">
+                            ✅ Scenario B: 15 mins, Rhythmic 1:1 ratio, Asleep
+                        </button>
+                        <button class="scenario-btn" onclick="generateInsight('Baby fed 8 mins right breast, erratic pattern, temperature spike detected.')">
+                            🌡️ Scenario C: 8 mins, Erratic pattern, Temp spike
+                        </button>
+                    </div>
+                    <div id="insightDisplay" class="insight-result">
+                        <div style="color: #999; font-style: italic;">
+                            Select a scenario to see the AI analysis...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE PLATFORM: The Milk Graph (Stripe/Daniel Ek - The Asset) -->
+            <div class="pitch-card" style="margin-bottom: 2rem;">
+                <h3 class="card-title">The "Stripe" of Nutrition Data</h3>
                 <div class="card-content">
-                    <p>Breastfeeding accessories: $2.31B today - projected $4.20B by 2033. 120M births annually worldwide - about 90% of mothers in Western markets initiate breastfeeding.</p>
-                    <p style="margin-top: 1rem;">Expanding into FemTech and BabyTech with the same multi-sensor platform, enabling future extensions into sleep, nutrition, and early development using the same core hardware.</p>
+                    <p style="font-size: 1.1rem; color: #555; margin-bottom: 1.5rem;">
+                        Investors often mistake us for a hardware company. <strong>Hardware is just the API key.</strong>
+                    </p>
+                    <p style="font-size: 1.1rem; color: #555; margin-bottom: 1.5rem;">
+                        By solving the user interface problem (a passive sticker), we unlock the <strong>Milk Graph</strong>—the world's first longitudinal dataset connecting maternal physiology, milk intake, and infant development.
+                    </p>
+                    
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                        <div>
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">$600</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Lifetime Value (LTV)</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">15 mins</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Engagement / Day</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">Zero</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Churn during Nursing</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="pitch-grid" style="grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto auto; gap: 2rem;">
-                <div class="pitch-card">
-                    <h3 class="card-title">Problem</h3>
+            <!-- THE ECONOMICS (WhatsApp/Jan Koum - No BS) -->
+            <div class="pitch-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                <div class="pitch-card" style="margin: 0;">
+                    <h3 class="card-title">Unit Economics</h3>
                     <div class="card-content">
-                        <p style="font-weight: 700; font-size: 1.1rem; color: #2c3e50; margin-bottom: 1rem;">Parents constantly wonder – "Is my baby eating enough?" Existing solutions are often intrusive, inaccurate, or disrupt bonding.</p>
-
-                        <p>The younger generation of parents expects digital, data-driven tools that fit naturally into their tech-enabled lives and provide real, objective insights into their baby's wellbeing.</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                                <span>Hardware Kit (CAC Recovery)</span>
+                                <strong>$150 - $250</strong>
+                            </li>
+                            <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                                <span>Recurring Patches (Margin)</span>
+                                <strong>$30 - $50 / mo</strong>
+                            </li>
+                            <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                                <span>Software Sub (Upsell)</span>
+                                <strong>$5 - $15 / mo</strong>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; color: #27ae60; font-weight: 600;">
+                                <span>Gross Margin Target</span>
+                                <strong>65% +</strong>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="pitch-card">
-                    <h3 class="card-title">Solution</h3>
+                <div class="pitch-card" style="margin: 0;">
+                    <h3 class="card-title">Why Now?</h3>
                     <div class="card-content">
-                        <p style="font-weight: 700; font-size: 1.1rem; color: #2c3e50; margin-bottom: 1rem;">A passive breast-mounted multi-sensor sticker with NFC sync.</p>
-
-                        <p>Detects sucking - swallowing - breathing - suction - temperature and bioimpedance signals from the mother's breast, translating them into clear AI insights. No camera - no wires - no radiation.</p>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Technology</h3>
-                    <div class="card-content">
-                        <p><strong>Sensors:</strong> microphone - vibration - pressure - temperature - bioimpedance.</p>
-
-                        <p>Reusable smart core + disposable patch with smart AI-powered technology that interprets multi-sensor data to deliver real-time feeding insights.</p>
-
-                        <p>Post-session NFC transfer. Provisional patent filed Aug 2025.</p>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Traction</h3>
-                    <div class="card-content">
-                        <p>MonBe Inc. officially incorporated in the U.S. Full concept architecture complete. Provisional IP submitted Aug 2025. Mother validation in progress – interviews and survey underway. Hardware design in progress.</p>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Competition Analysis</h3>
-                    <div class="card-content">
-                        <div style="overflow-x: auto;">
-                            <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
-                                <tr style="background: #f8f9fa;">
-                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Solution</th>
-                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Price</th>
-                                    <th style="padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0;">Limitation</th>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>Infant Thrive</strong></td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$299+</td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Clinical focus only</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>Coro Shield</strong></td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$199</td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Nipple shield rejection</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>Hatch Scale</strong></td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$149</td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Disrupts feeding</td>
-                                </tr>
-                                <tr style="background: #f0f8ff;">
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;"><strong>MonBe</strong></td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">$150-250</td>
-                                    <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">None - best of all</td>
-                                </tr>
-                            </table>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>1. Sensor Commoditization</strong>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Components that cost $10 five years ago now cost cents. Disposable electronics are finally viable.</p>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>2. The "Quantified Baby"</strong>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Millennial parents track everything. The "black box" of breastfeeding is the last blind spot.</p>
+                        </div>
+                        <div>
+                            <strong>3. The Patents Expired</strong>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Foundational IP in this space has lapsed. We filed our provisional patent in Aug 2025 to lock the new method.</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="pitch-card">
-                    <h3 class="card-title">Go-To-Market</h3>
-                    <div class="card-content">
-                        <p><strong>Phase 1</strong> – Consumer wellness DTC, Israel soft launch.</p>
-                        <p><strong>Phase 2</strong> – Global direct-to-consumer rollout (US + EU) through e-commerce, influencers, and retail partnerships.</p>
-                        <p><strong>Phase 3</strong> – Healthcare integration with lactation consultants, pediatric clinics, and hospitals.</p>
-                        <p><strong>Phase 4</strong> – Enterprise & insurance partnerships for reimbursement and large-scale distribution.</p>
-                        <p><strong>Phase 5</strong> – Expansion of the MonBe ecosystem into FemTech and BabyTech verticals (sleep - nutrition - baby development) using the same core hardware, increasing the market size to over $8B.</p>
+            <!-- THE FOUNDER (Builder/Operator) -->
+            <div class="founder-section" style="background: white; color: #2c3e50; border: 1px solid #eee;">
+                <div class="founder-content">
+                    <div class="founder-image">
+                        <img src="eitan_photo.jpeg" alt="Eitan Halfon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; filter: grayscale(20%);">
                     </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Business Model</h3>
-                    <div class="card-content">
-                        <p>Razor and blade with software. Hardware starter kit $150-250. Reusable core $50-100. Recurring daily patches $30-50 per month. App tiers $5-15 per month. Rental option: monthly payment for hardware access. Clinic licensing for MonBe Care. Target 60-70% gross margin. CAC $50-75. LTV $400-600.</p>
-                    </div>
-                </div>
-
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Team</h3>
-                    <div class="card-content">
-                        <div style="margin-bottom: 1.5rem;">
-                            <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">Eitan Halfon – Founder & CEO</h4>
-                            <p>BSc in Electrical & Computer Engineering and MSc in Global Financial Economics. Experienced hardware and software engineer with strong management and product leadership skills. Deep expertise in analog, digital, and embedded systems, with a proven track record in multidisciplinary product development and execution.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Funding Ask</h3>
-                    <div class="card-content">
-                        <p>Raising $600K pre-seed to complete MVP - run pilots with 20-50 mothers - refine AI - prepare DTC launch.</p>
-                        <p style="margin-top: 1rem;">Use of funds: R&D and team 83% - regulatory and IP 17%.</p>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Our Mission Alignment</h3>
-                    <div class="card-content">
-                        <p>Breastfeeding is the most natural and precisely tailored nourishment for infants — a living, adaptive system rich in antibodies, hormones, and proteins that nurture the baby's growth, immunity, and emotional connection with the mother.</p>
-
-                        <p style="margin-top: 1rem;">MonBe is committed to supporting this critical foundation of life by helping more families sustain breastfeeding with confidence. We aim to bring confidence and calm to every parent in the world through the insight and light that MonBe delivers — See your baby feed.</p>
-                    </div>
-                </div>
-
-                <div class="pitch-card">
-                    <h3 class="card-title">Competitive Advantage</h3>
-                    <div class="card-content">
-                        <p><strong>Key differentiators:</strong></p>
-                        <p>• <strong>Only breast-mounted multi-sensor patch</strong> available commercially<br>
-                        • <strong>Post-session analysis</strong> (no RF during feeding for baby safety)<br>
-                        • <strong>Complete ecosystem</strong> (Daily/Nightie/Care/To-Go variants)<br>
-                        • <strong>Patent protection</strong>: Provisional patent filed August 2025<br>
-                        • <strong>Northwestern University bioimpedance validation</strong></p>
+                    <div class="founder-text">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">The Architect.</h3>
+                        <h4 style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; font-weight: 400;">Eitan Halfon | Electrical Engineer & Economist</h4>
                         
-                        <div style="margin: 1rem 0; padding: 1rem; background: #e8f5e8; border-radius: 8px; border-left: 4px solid #28a745;">
-                            <h4 style="color: #155724; margin-bottom: 0.5rem;">IP & Technology Position:</h4>
-                            <p style="color: #155724; font-size: 0.95rem;"><strong>Favorable Patent Landscape:</strong> Critical foundational patents have expired (capacitance-based monitoring, NFC integration, smart garment concepts), creating substantial freedom to operate.</p>
-                            <p style="color: #155724; font-size: 0.95rem;"><strong>Our Protection:</strong> Provisional patent application filed August 2025 covering our multi-sensor fusion approach, modular hardware design, and night classification algorithms.</p>
-                        </div>
+                        <p style="margin-bottom: 1rem; line-height: 1.6;">
+                            "I don't believe in 'hope' as a strategy. I believe in physics and economics."
+                        </p>
+                        <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; color: #555;">
+                            Ex-SolarEdge (NASDAQ: SEDG). I spent my career building complex hardware systems that scale. I'm not here to build a gadget. I'm here to build the standard of care.
+                        </p>
+                        <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; color: #555;">
+                            <strong>The Ask:</strong> $600K Pre-Seed to turn our verified architecture into a pilot with 50 mothers. 
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="key-points">
-                <h3>Why MonBe Will Succeed</h3>
-                <div class="points-grid">
-                    <div class="point-item">
-                        <div class="point-icon">1</div>
-                        <div>
-                            <div class="point-title">Massive Unmet Need</div>
-                            <div class="point-text">68% of feeding records have missing/contradictory data. Healthcare providers waste 5-7 minutes per visit reconstructing history.</div>
-                        </div>
-                    </div>
-                    <div class="point-item">
-                        <div class="point-icon">2</div>
-                        <div>
-                            <div class="point-title">Technology Leadership</div>
-                            <div class="point-text">Multi-sensor fusion approach and clear patent freedom to operate.</div>
-                        </div>
-                    </div>
-                    <div class="point-item">
-                        <div class="point-icon">3</div>
-                        <div>
-                            <div class="point-title">Scalable Business Model</div>
-                            <div class="point-text">Recurring revenue through disposable patches. Target margins of 60-70% with strong unit economics.</div>
-                        </div>
-                    </div>
-                    <div class="point-item">
-                        <div class="point-icon">4</div>
-                        <div>
-                            <div class="point-title">Clear Market Entry</div>
-                            <div class="point-text">Consumer wellness device pathway avoids FDA delays. Premium positioning in underserved market.</div>
-                        </div>
-                    </div>
-                </div>
+            <!-- CTA: High Conviction -->
+            <div class="contact-cta" style="background: #2c3e50; margin-top: 3rem;">
+                <h3 style="color: white; margin-bottom: 1rem;">This is inevitable.</h3>
+                <p style="color: #ccc; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    In 10 years, guessing a baby's intake will seem as archaic as navigating without GPS. We are building the map.
+                </p>
+                <a href="contact.html" class="cta-button" style="background: white; color: #2c3e50; font-weight: 700;">Join the Round</a>
             </div>
 
-                <!-- Founder Section -->
-                <div class="founder-section">
-                    <div class="founder-content">
-                        <div class="founder-image">
-                            <img src="eitan_photo.jpeg" alt="Eitan Halfon, Founder & CEO of MonBe" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                        </div>
-                        <div class="founder-text">
-                            <h3 class="founder-title">Founder & CEO — Eitan Halfon, MonBe</h3>
-                            
-                            <p class="founder-description">
-                                Husband to Mai and proud dad to twin girls, Yam and Lenny, Eitan Halfon combines deep technical expertise with financial insight. His background spans BSc in Electrical & Computer Engineering, a Global MSc in Financial Economics, and extensive experience in full-cycle product development across hardware, embedded systems, software, and project management.
-                            </p>
-                            
-                            <p class="founder-description">
-                                Eitan served as an officer in the military, where he developed leadership skills and resilience that continue to guide his professional and entrepreneurial journey. He has also worked in industry roles, including at SolarEdge, gaining hands-on expertise in system architecture, embedded development, hardware design, and multidisciplinary product development.
-                            </p>
-                            
-                            <p class="founder-description">
-                                At his core, Eitan is driven by curiosity, problem-solving, and a deep commitment to building solutions that make a real difference for people and families.
-                            </p>
-                            
-                            <p class="founder-vision">
-                                <strong>Eitan's vision is simple:</strong><br>
-                                To bring light to the darkness of parental uncertainty, and help families see their baby feed.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-cta">
-                    <h3>Long-Term Vision & Impact</h3>
-                    <div style="text-align: left; margin-bottom: 2rem;">
-                        <h4 style="color: white; margin-bottom: 1rem;">5-10 Year Vision:</h4>
-                        <p style="margin-bottom: 1rem;">Transform MonBe into the universal standard for breastfeeding support, ensuring every parent can confidently provide the best nutrition for their baby. Expand globally to support WHO breastfeeding goals and eliminate the anxiety that drives premature cessation worldwide.</p>
-
-                        <h4 style="color: white; margin-bottom: 1rem;">Why Now?</h4>
-                        <p style="margin-bottom: 1rem;">• Post-COVID emphasis on disposable medical devices<br>
-                        • Accelerating digital health adoption<br>
-                        • Increased focus on maternal health outcomes<br>
-                        • Breakthrough bioimpedance research validation<br>
-                        • Favorable patent landscape with expired foundational IP<br>
-                        • Modern mothers increasingly demand digital solutions that provide detailed feeding insights and data<br>
-                        • Advanced sensor technology and AI capabilities have matured to enable accurate, consumer-ready monitoring solutions</p>
-
-                        <h4 style="color: white; margin-bottom: 1rem;">Global Impact Potential:</h4>
-                        <p style="margin-bottom: 2rem;">Support the 140+ million mothers who give birth globally each year by eliminating the fear and uncertainty that drives premature breastfeeding cessation. Provide objective data that empowers parents to give their babies the best possible start in life, particularly crucial for preterm infants and vulnerable babies where every drop of milk matters.</p>
-                    </div>
-                    <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 2rem;">Join us in transforming breastfeeding through intelligent monitoring technology.</p>
-                    <a href="contact.html" class="cta-button">Contact Us Today</a>
-                </div>
         </div>
     </section>
 
     <script src="script.js"></script>
+    <script>
+        // --- Gemini AI Integration Logic ---
+        
+        const apiKey = ""; // API key injected by environment
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // Feature 1: Due Diligence Assistant (Chat)
+        async function sendDdMessage() {
+            const inputField = document.getElementById('ddInput');
+            const userText = inputField.value.trim();
+            const historyDiv = document.getElementById('ddChatHistory');
+            
+            if (!userText) return;
+
+            // Add user message to UI
+            historyDiv.innerHTML += `<div class="chat-message message-user">${userText}</div>`;
+            inputField.value = '';
+            
+            // Loading state
+            const loadingId = 'loading-' + Date.now();
+            historyDiv.innerHTML += `<div id="${loadingId}" class="chat-message message-ai loading-dots">Thinking</div>`;
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+
+            // Construct Prompt
+            const systemPrompt = `You are Eitan Halfon, Founder & CEO of MonBe. You are pitching to a top-tier investor.
+            Your persona: Sober, grounded, physics-focused, no fluff, no buzzwords. You are an "Operator" who understands the "Valley of Death".
+            
+            Key Facts:
+            - Product: Passive breastfeeding sticker with bioimpedance, acoustic, and vibration sensors.
+            - Problem: 40% of moms quit breastfeeding due to "low milk supply" anxiety (lack of data).
+            - Market: $2.31B accessories market, growing to $4.2B.
+            - Ask: $600K Pre-seed for MVP pilots.
+            - Model: Hardware ($150 kit) + Recurring ($30/mo patches). High LTV ($600).
+            - Tech: Defense-grade sensor fusion. Validated by Northwestern University.
+            - Moat: The "Milk Graph" (proprietary longitudinal data).
+            
+            Task: Answer the investor's question briefly and confidently. Focus on inevitability and execution.`;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userText }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+
+                const data = await response.json();
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, I'm analyzing the data. Could you rephrase?";
+                
+                // Remove loading and add AI response
+                document.getElementById(loadingId).remove();
+                historyDiv.innerHTML += `<div class="chat-message message-ai"><strong>Virtual Eitan:</strong> ${aiText}</div>`;
+                historyDiv.scrollTop = historyDiv.scrollHeight;
+
+            } catch (error) {
+                console.error("Gemini Error:", error);
+                document.getElementById(loadingId).innerText = "Connection error. Please try again.";
+            }
+        }
+
+        // Feature 2: Insight Generator (Product Demo)
+        async function generateInsight(scenario) {
+            const display = document.getElementById('insightDisplay');
+            
+            display.innerHTML = `<div class="loading-dots" style="color:#2c3e50; font-size: 1.2rem;">Analyzing Sensor Data</div>`;
+
+            const systemPrompt = `Act as the MonBe AI Engine. You are analyzing raw sensor data from a breastfeeding session.
+            Your goal: Translate raw inputs into a CLEAR, REASSURING, and ACTIONABLE insight for the mother.
+            Tone: Supportive, scientific but simple.
+            
+            Output format (HTML):
+            <div class="insight-content">
+                <div style="margin-bottom:1rem;"><span class="insight-metric">Status:</span> [One word status, e.g., "Comfort Nursing"]</div>
+                <div style="margin-bottom:1rem;"><span class="insight-metric">Est. Intake:</span> [Estimate based on logic]</div>
+                <div>[2-3 sentences of analysis. Explain WHY. E.g., "We detected high suck frequency but low swallow vibration. This suggests baby is soothing rather than feeding."]</div>
+            </div>`;
+
+            const prompt = `Analyze this scenario: ${scenario}`;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+
+                const data = await response.json();
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Analysis failed.";
+                
+                display.innerHTML = aiText;
+
+            } catch (error) {
+                console.error("Gemini Error:", error);
+                display.innerHTML = "Analysis unavailable.";
+            }
+        }
+
+        // Helper for enter key
+        function handleEnter(e, id, callback) {
+            if (e.key === 'Enter') callback();
+        }
+    </script>
 </body>
 </html>
