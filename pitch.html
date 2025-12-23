@@ -30,168 +30,6 @@
 
       gtag('config', 'G-DF1J1SMXBZ');
     </script>
-    <style>
-        /* Specific styles for AI features */
-        .ai-feature-section {
-            border: 1px solid #e1e4e8;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .ai-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-        .ai-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin: 0;
-        }
-        .ai-badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        
-        /* Chat Interface */
-        .chat-interface {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .chat-history {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 1rem;
-            background: #f8f9fa;
-        }
-        .chat-message {
-            margin-bottom: 1rem;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            max-width: 80%;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-        .message-user {
-            background: #e3f2fd;
-            color: #0d47a1;
-            align-self: flex-end;
-            margin-left: auto;
-            border-bottom-right-radius: 2px;
-        }
-        .message-ai {
-            background: #fff;
-            color: #2c3e50;
-            border: 1px solid #eee;
-            align-self: flex-start;
-            margin-right: auto;
-            border-bottom-left-radius: 2px;
-        }
-        .chat-input-area {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .chat-input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: inherit;
-        }
-        .chat-btn {
-            background: #2c3e50;
-            color: white;
-            border: none;
-            padding: 0 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .chat-btn:hover {
-            background: #34495e;
-        }
-        .loading-dots:after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
-        }
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60% { content: '...'; }
-            80%, 100% { content: ''; }
-        }
-
-        /* Insight Generator */
-        .insight-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-        .scenario-box {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        .scenario-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .scenario-btn:hover {
-            border-color: #3498db;
-            background: #f1f9fe;
-        }
-        .insight-result {
-            padding: 1.5rem;
-            border-radius: 8px;
-            background: #fff;
-            border: 1px solid #eee;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .insight-content {
-            text-align: left;
-            width: 100%;
-        }
-        .insight-metric {
-            display: inline-block;
-            margin-right: 1rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        
-        @media (max-width: 768px) {
-            .insight-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -236,7 +74,7 @@
         <!-- Pitch Content (Hidden until password is correct) -->
         <div class="pitch-content" id="pitchContent">
             
-            <!-- HERO: The Vision (Chesky/Gebbia style - Design & Emotion) -->
+            <!-- HERO: The Vision -->
             <div class="pitch-header" style="text-align: center; margin-bottom: 4rem;">
                 <h1 class="pitch-main-title" style="font-size: 3.5rem; letter-spacing: -1px; margin-bottom: 1rem;">The End of Uncertainty.</h1>
                 <p class="pitch-tagline" style="font-size: 1.5rem; color: #555; max-width: 700px; margin: 0 auto 2rem auto;">"We are solving the feedback loop for the most critical biological process in human life."</p>
@@ -245,7 +83,7 @@
                 </p>
             </div>
 
-            <!-- THE INSIGHT: The Hidden Problem (Dropbox/Houston style - "It's broken") -->
+            <!-- THE INSIGHT: The Hidden Problem -->
             <div class="pitch-card" style="background: #fff; border-left: 5px solid #2c3e50; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
                 <h3 class="card-title" style="color: #2c3e50; font-size: 1.8rem; margin-bottom: 1.5rem;">The "Black Box" Problem</h3>
                 <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
@@ -262,16 +100,13 @@
                     <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
                         <h4 style="margin-top: 0; color: #2c3e50;">The Cost of Guessing:</h4>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
-                                <strong>$2.31B wasted</strong> on dumb accessories that don't solve the core problem.
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; border-left: 3px solid #e74c3c;">
+                                <strong>$2.31B wasted</strong> on accessories that don't solve the core problem.
                             </li>
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; border-left: 3px solid #e74c3c;">
                                 <strong>68% of medical records</strong> contain flawed feeding data.
                             </li>
-                            <li style="padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #e74c3c;">✖</span>
+                            <li style="padding-left: 1.5rem; border-left: 3px solid #e74c3c;">
                                 <strong>Maternal Anxiety</strong> is the #1 driver of formula supplementation.
                             </li>
                         </ul>
@@ -279,83 +114,28 @@
                 </div>
             </div>
 
-            <!-- GEMINI FEATURE 1: The Virtual Founder -->
-            <div class="ai-feature-section">
-                <div class="ai-header">
-                    <h3 class="ai-title">Due Diligence Assistant</h3>
-                    <span class="ai-badge">Powered by Gemini ✨</span>
-                </div>
-                <p style="margin-bottom: 1.5rem; color: #666;">
-                    Have questions about our unit economics, sensor physics, or go-to-market strategy? Ask our Virtual Founder Agent. It's trained to give you the sober, direct answers you need to build conviction.
-                </p>
-                <div class="chat-interface">
-                    <div id="ddChatHistory" class="chat-history">
-                        <div class="chat-message message-ai">
-                            <strong>Virtual Eitan:</strong> Hello. I'm here to discuss the business of MonBe. I can explain our sensor fusion technology, our path to $600 LTV, or how we plan to capture the "Milk Graph" dataset. What would you like to know?
-                        </div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="ddInput" class="chat-input" placeholder="E.g., What is your CAC? How does the sensor work?" onkeypress="handleEnter(event, 'ddInput', sendDdMessage)">
-                        <button class="chat-btn" onclick="sendDdMessage()">Ask</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- THE SOLUTION: Simplicity (Collison/Stripe style - "It just works") -->
-            <div class="pitch-card" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; margin-bottom: 2rem; padding: 3rem; text-align: center;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Complexity, Abstracted.</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9;">We took defense-grade bioimpedance sensors and hid them in a sticker.</p>
+            <!-- THE SOLUTION: Simplicity -->
+            <div class="pitch-card" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; margin-bottom: 2rem; padding: 3rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Complexity, Abstracted.</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; text-align: center;">We took defense-grade bioimpedance sensors and hid them in a sticker.</p>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">👇</div>
-                        <h4 style="margin: 0; color: white;">Stick It On</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Passive. No wires. No cameras.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
+                        <h4 style="margin: 0 0 0.5rem 0; color: white; font-size: 1.3rem;">Step 1: Apply</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.9; margin: 0; line-height: 1.5;">Passive sensor patch. No wires. No cameras. No disruption to bonding.</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤱</div>
-                        <h4 style="margin: 0; color: white;">Feed Normally</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">We track swallowing, not just time.</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
+                        <h4 style="margin: 0 0 0.5rem 0; color: white; font-size: 1.3rem;">Step 2: Feed</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.9; margin: 0; line-height: 1.5;">We track swallowing patterns, not just time. Real physiological data.</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📱</div>
-                        <h4 style="margin: 0; color: white;">Tap to Sync</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">NFC transfer. Zero radiation near baby.</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
+                        <h4 style="margin: 0 0 0.5rem 0; color: white; font-size: 1.3rem;">Step 3: Sync</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.9; margin: 0; line-height: 1.5;">NFC transfer to phone. Zero radiation near baby during feeding.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- GEMINI FEATURE 2: Product Vision Simulator -->
-            <div class="ai-feature-section" style="border-left: 5px solid #3498db;">
-                <div class="ai-header">
-                    <h3 class="ai-title">The "Milk Graph" Engine Preview</h3>
-                    <span class="ai-badge">Powered by Gemini ✨</span>
-                </div>
-                <p style="margin-bottom: 1.5rem; color: #666;">
-                    Hardware is just the API. The product is the <strong>Insight</strong>. Select a raw sensor scenario below to see how our AI interprets complex biological signals into clear guidance for a parent.
-                </p>
-                <div class="insight-grid">
-                    <div class="scenario-box">
-                        <p style="font-weight: 600; margin-bottom: 1rem; color: #2c3e50;">Select a Scenario:</p>
-                        <button class="scenario-btn" onclick="generateInsight('Baby fed for 4 mins, high suck frequency, low swallow count, baby crying after.')">
-                            📉 Scenario A: 4 mins, Rapid sucking, No swallowing
-                        </button>
-                        <button class="scenario-btn" onclick="generateInsight('Baby fed 15 mins, rhythmic suck/swallow ratio 1:1, deep sleep after.')">
-                            ✅ Scenario B: 15 mins, Rhythmic 1:1 ratio, Asleep
-                        </button>
-                        <button class="scenario-btn" onclick="generateInsight('Baby fed 8 mins right breast, erratic pattern, temperature spike detected.')">
-                            🌡️ Scenario C: 8 mins, Erratic pattern, Temp spike
-                        </button>
-                    </div>
-                    <div id="insightDisplay" class="insight-result">
-                        <div style="color: #999; font-style: italic;">
-                            Select a scenario to see the AI analysis...
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- THE PLATFORM: The Milk Graph (Stripe/Daniel Ek - The Asset) -->
+            <!-- THE PLATFORM: The Milk Graph -->
             <div class="pitch-card" style="margin-bottom: 2rem;">
                 <h3 class="card-title">The "Stripe" of Nutrition Data</h3>
                 <div class="card-content">
@@ -366,44 +146,48 @@
                         By solving the user interface problem (a passive sticker), we unlock the <strong>Milk Graph</strong>—the world's first longitudinal dataset connecting maternal physiology, milk intake, and infant development.
                     </p>
                     
-                    <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                        <div>
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div style="text-align: center; padding: 1rem;">
                             <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">$600</span>
                             <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Lifetime Value (LTV)</span>
                         </div>
-                        <div>
+                        <div style="text-align: center; padding: 1rem;">
                             <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">15 mins</span>
-                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Engagement / Day</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Daily Engagement</span>
                         </div>
-                        <div>
-                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">Zero</span>
-                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Churn during Nursing</span>
+                        <div style="text-align: center; padding: 1rem;">
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">~0%</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Churn During Nursing</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- THE ECONOMICS (WhatsApp/Jan Koum - No BS) -->
-            <div class="pitch-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <!-- THE ECONOMICS -->
+            <div class="pitch-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
                 <div class="pitch-card" style="margin: 0;">
                     <h3 class="card-title">Unit Economics</h3>
                     <div class="card-content">
                         <ul style="list-style: none; padding: 0;">
                             <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
-                                <span>Hardware Kit (CAC Recovery)</span>
+                                <span>Hardware Kit</span>
                                 <strong>$150 - $250</strong>
                             </li>
                             <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
-                                <span>Recurring Patches (Margin)</span>
+                                <span>Recurring Patches</span>
                                 <strong>$30 - $50 / mo</strong>
                             </li>
                             <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
-                                <span>Software Sub (Upsell)</span>
+                                <span>Software Subscription</span>
                                 <strong>$5 - $15 / mo</strong>
                             </li>
-                            <li style="display: flex; justify-content: space-between; color: #27ae60; font-weight: 600;">
+                            <li style="margin-bottom: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                                <span>CAC (Customer Acquisition)</span>
+                                <strong>$50 - $75</strong>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; color: #27ae60; font-weight: 600; font-size: 1.1rem;">
                                 <span>Gross Margin Target</span>
-                                <strong>65% +</strong>
+                                <strong>65%+</strong>
                             </li>
                         </ul>
                     </div>
@@ -412,24 +196,52 @@
                 <div class="pitch-card" style="margin: 0;">
                     <h3 class="card-title">Why Now?</h3>
                     <div class="card-content">
-                        <div style="margin-bottom: 1rem;">
-                            <strong>1. Sensor Commoditization</strong>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Components that cost $10 five years ago now cost cents. Disposable electronics are finally viable.</p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="font-size: 1.1rem; color: #2c3e50;">1. Sensor Commoditization</strong>
+                            <p style="font-size: 0.95rem; color: #666; margin-top: 0.5rem; line-height: 1.5;">Components that cost $10 five years ago now cost cents. Disposable electronics are finally viable.</p>
                         </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>2. The "Quantified Baby"</strong>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Millennial parents track everything. The "black box" of breastfeeding is the last blind spot.</p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="font-size: 1.1rem; color: #2c3e50;">2. The "Quantified Baby"</strong>
+                            <p style="font-size: 0.95rem; color: #666; margin-top: 0.5rem; line-height: 1.5;">Millennial parents track everything. The "black box" of breastfeeding is the last blind spot.</p>
                         </div>
                         <div>
-                            <strong>3. The Patents Expired</strong>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">Foundational IP in this space has lapsed. We filed our provisional patent in Aug 2025 to lock the new method.</p>
+                            <strong style="font-size: 1.1rem; color: #2c3e50;">3. The Patents Expired</strong>
+                            <p style="font-size: 0.95rem; color: #666; margin-top: 0.5rem; line-height: 1.5;">Foundational IP in this space has lapsed. We filed our provisional patent in Aug 2025 to lock the new method.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- THE FOUNDER (Builder/Operator) -->
-            <div class="founder-section" style="background: white; color: #2c3e50; border: 1px solid #eee;">
+            <!-- MARKET SIZE & TRACTION -->
+            <div class="pitch-card" style="background: #f8f9fa; margin-bottom: 2rem;">
+                <h3 class="card-title" style="color: #2c3e50;">Market Opportunity</h3>
+                <div class="card-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$2.31B</div>
+                            <div style="font-size: 0.9rem; color: #666;">Current Market (2024)</div>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$4.20B</div>
+                            <div style="font-size: 0.9rem; color: #666;">Projected by 2033</div>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">140M</div>
+                            <div style="font-size: 0.9rem; color: #666;">Annual Births Worldwide</div>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">40%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Quit by 3 Months</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+                        The breastfeeding accessories market is growing at 10-15% CAGR, but existing products fail to address the core anxiety: <strong>"Is my baby eating enough?"</strong> MonBe solves this with objective, real-time data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- THE FOUNDER -->
+            <div class="founder-section" style="background: white; color: #2c3e50; border: 1px solid #e0e0e0; border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem;">
                 <div class="founder-content">
                     <div class="founder-image">
                         <img src="eitan_photo.jpeg" alt="Eitan Halfon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; filter: grayscale(20%);">
@@ -438,138 +250,63 @@
                         <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">The Architect.</h3>
                         <h4 style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; font-weight: 400;">Eitan Halfon | Electrical Engineer & Economist</h4>
                         
-                        <p style="margin-bottom: 1rem; line-height: 1.6;">
+                        <p style="margin-bottom: 1rem; line-height: 1.6; font-style: italic; color: #2c3e50;">
                             "I don't believe in 'hope' as a strategy. I believe in physics and economics."
                         </p>
                         <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; color: #555;">
                             Ex-SolarEdge (NASDAQ: SEDG). I spent my career building complex hardware systems that scale. I'm not here to build a gadget. I'm here to build the standard of care.
                         </p>
                         <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; color: #555;">
-                            <strong>The Ask:</strong> $600K Pre-Seed to turn our verified architecture into a pilot with 50 mothers. 
+                            <strong>Background:</strong> BSc in Electrical & Computer Engineering, MSc in Global Financial Economics. Deep expertise in analog/digital systems, embedded development, and multidisciplinary product development.
                         </p>
+                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #2c3e50;">
+                            <p style="margin: 0; line-height: 1.6; font-size: 1rem; color: #2c3e50;">
+                                <strong>The Ask:</strong> $600K Pre-Seed to turn our verified architecture into a pilot with 50 mothers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USE OF FUNDS -->
+            <div class="pitch-card" style="margin-bottom: 2rem;">
+                <h3 class="card-title">Use of Funds</h3>
+                <div class="card-content">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">R&D & Team (83%)</h4>
+                            <ul style="padding-left: 1.5rem; color: #555; line-height: 1.8;">
+                                <li>Complete MVP hardware development</li>
+                                <li>AI algorithm refinement</li>
+                                <li>Pilot study with 50 mothers</li>
+                                <li>Core engineering team</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Regulatory & IP (17%)</h4>
+                            <ul style="padding-left: 1.5rem; color: #555; line-height: 1.8;">
+                                <li>Patent prosecution</li>
+                                <li>Regulatory compliance preparation</li>
+                                <li>Clinical validation studies</li>
+                                <li>Quality management systems</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- CTA: High Conviction -->
-            <div class="contact-cta" style="background: #2c3e50; margin-top: 3rem;">
-                <h3 style="color: white; margin-bottom: 1rem;">This is inevitable.</h3>
-                <p style="color: #ccc; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <div class="contact-cta" style="background: #2c3e50; margin-top: 3rem; border-radius: 12px;">
+                <h3 style="color: white; margin-bottom: 1rem; font-size: 2rem;">This is inevitable.</h3>
+                <p style="color: #ccc; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.1rem; line-height: 1.6;">
                     In 10 years, guessing a baby's intake will seem as archaic as navigating without GPS. We are building the map.
                 </p>
-                <a href="contact.html" class="cta-button" style="background: white; color: #2c3e50; font-weight: 700;">Join the Round</a>
+                <a href="contact.html" class="cta-button" style="background: white; color: #2c3e50; font-weight: 700; padding: 1rem 2.5rem; font-size: 1.1rem;">Join the Round</a>
             </div>
 
         </div>
     </section>
 
     <script src="script.js"></script>
-    <script>
-        // --- Gemini AI Integration Logic ---
-        
-        const apiKey = ""; // API key injected by environment
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-        // Feature 1: Due Diligence Assistant (Chat)
-        async function sendDdMessage() {
-            const inputField = document.getElementById('ddInput');
-            const userText = inputField.value.trim();
-            const historyDiv = document.getElementById('ddChatHistory');
-            
-            if (!userText) return;
-
-            // Add user message to UI
-            historyDiv.innerHTML += `<div class="chat-message message-user">${userText}</div>`;
-            inputField.value = '';
-            
-            // Loading state
-            const loadingId = 'loading-' + Date.now();
-            historyDiv.innerHTML += `<div id="${loadingId}" class="chat-message message-ai loading-dots">Thinking</div>`;
-            historyDiv.scrollTop = historyDiv.scrollHeight;
-
-            // Construct Prompt
-            const systemPrompt = `You are Eitan Halfon, Founder & CEO of MonBe. You are pitching to a top-tier investor.
-            Your persona: Sober, grounded, physics-focused, no fluff, no buzzwords. You are an "Operator" who understands the "Valley of Death".
-            
-            Key Facts:
-            - Product: Passive breastfeeding sticker with bioimpedance, acoustic, and vibration sensors.
-            - Problem: 40% of moms quit breastfeeding due to "low milk supply" anxiety (lack of data).
-            - Market: $2.31B accessories market, growing to $4.2B.
-            - Ask: $600K Pre-seed for MVP pilots.
-            - Model: Hardware ($150 kit) + Recurring ($30/mo patches). High LTV ($600).
-            - Tech: Defense-grade sensor fusion. Validated by Northwestern University.
-            - Moat: The "Milk Graph" (proprietary longitudinal data).
-            
-            Task: Answer the investor's question briefly and confidently. Focus on inevitability and execution.`;
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userText }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
-
-                const data = await response.json();
-                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, I'm analyzing the data. Could you rephrase?";
-                
-                // Remove loading and add AI response
-                document.getElementById(loadingId).remove();
-                historyDiv.innerHTML += `<div class="chat-message message-ai"><strong>Virtual Eitan:</strong> ${aiText}</div>`;
-                historyDiv.scrollTop = historyDiv.scrollHeight;
-
-            } catch (error) {
-                console.error("Gemini Error:", error);
-                document.getElementById(loadingId).innerText = "Connection error. Please try again.";
-            }
-        }
-
-        // Feature 2: Insight Generator (Product Demo)
-        async function generateInsight(scenario) {
-            const display = document.getElementById('insightDisplay');
-            
-            display.innerHTML = `<div class="loading-dots" style="color:#2c3e50; font-size: 1.2rem;">Analyzing Sensor Data</div>`;
-
-            const systemPrompt = `Act as the MonBe AI Engine. You are analyzing raw sensor data from a breastfeeding session.
-            Your goal: Translate raw inputs into a CLEAR, REASSURING, and ACTIONABLE insight for the mother.
-            Tone: Supportive, scientific but simple.
-            
-            Output format (HTML):
-            <div class="insight-content">
-                <div style="margin-bottom:1rem;"><span class="insight-metric">Status:</span> [One word status, e.g., "Comfort Nursing"]</div>
-                <div style="margin-bottom:1rem;"><span class="insight-metric">Est. Intake:</span> [Estimate based on logic]</div>
-                <div>[2-3 sentences of analysis. Explain WHY. E.g., "We detected high suck frequency but low swallow vibration. This suggests baby is soothing rather than feeding."]</div>
-            </div>`;
-
-            const prompt = `Analyze this scenario: ${scenario}`;
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
-
-                const data = await response.json();
-                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Analysis failed.";
-                
-                display.innerHTML = aiText;
-
-            } catch (error) {
-                console.error("Gemini Error:", error);
-                display.innerHTML = "Analysis unavailable.";
-            }
-        }
-
-        // Helper for enter key
-        function handleEnter(e, id, callback) {
-            if (e.key === 'Enter') callback();
-        }
-    </script>
 </body>
 </html>
