@@ -83,18 +83,142 @@
                 </p>
             </div>
 
+            <!-- TL;DR Section -->
+            <div class="pitch-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); margin: 2rem 0; border-left: 4px solid #2c3e50; padding: 3rem;">
+                <h3 class="card-title" style="color: #2c3e50; text-align: center; margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">TL;DR</h3>
+                <p style="margin-bottom: 2.5rem; font-weight: 500; color: #2c3e50; text-align: center; font-size: 1.1rem;">Before we dive into the full story, here's a quick TL;DR answering the five questions investors ask most often:</p>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <!-- Q1 -->
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #667eea; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(1)">
+                            <div style="background: #667eea; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">1</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Why now & what problem are you solving?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #667eea; transition: transform 0.3s ease;">+</div>
+                        </div>
+                        <div class="faq-answer" id="faq-1" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;">The $32.7B lactation/breastfeeding market is fragmented with no clear leader (largest player <15% share). Most of the market relies on manual processes with minimal technology integration.</p>
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>The Problem:</strong> 40% of mothers quit breastfeeding within 3 months due to "insufficient supply" anxiety—they have no objective data about milk intake.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;"><strong>Why Now:</strong> Post-pandemic telehealth adoption, expanded insurance RPM billing codes, sensor commoditization, and Baby-Friendly Hospital Initiative mandates create perfect market timing (2025-2027 window).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #764ba2; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(2)">
+                            <div style="background: #764ba2; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">2</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How big is the market?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #764ba2; transition: transform 0.3s ease;">+</div>
+                        </div>
+                        <div class="faq-answer" id="faq-2" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>Total Market:</strong> $32.7B/year across developed countries (OECD + high-income nations), growing 6-8% CAGR overall.</p>
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>MonBe's Addressable Market:</strong> $6.6B (after excluding entrenched hardware players, pure labor services, and existing software solutions).</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;"><strong>Realistic Year 5 Revenue Target:</strong> $150M-$200M ARR (2.3-3.0% market capture) with clear path to $1.0B-$1.2B valuation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #f093fb; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(3)">
+                            <div style="background: #f093fb; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">3</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">What is your competitive advantage?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #f093fb; transition: transform 0.3s ease;">+</div>
+                        </div>
+                        <div class="faq-answer" id="faq-3" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>The Only Integrated Ecosystem:</strong> MonBe is the ONLY platform serving consumers (mothers), professionals (consultants), institutions (hospitals), and payers (insurance) simultaneously.</p>
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>Network Effects Moat:</strong> Consumer data → Professional insights → Hospital adoption creates a virtuous cycle competitors can't replicate without entering all three markets at once.</p>
+                                <p style="color: #555; line-height: 1.6; font-weight: 500;"><strong>Technical Edge:</strong> Multi-sensor fusion (5 sensors vs. competitors' single sensor), NFC transfer, provisional patent filed Aug 2025, and favorable patent landscape.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #4facfe; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(4)">
+                            <div style="background: #4facfe; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">4</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">Who is the team & how do you scale?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #4facfe; transition: transform 0.3s ease;">+</div>
+                        </div>
+                        <div class="faq-answer" id="faq-4" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 0.8rem; color: #555; line-height: 1.6;"><strong>Founder:</strong> Eitan Halfon, Ex-SolarEdge (NASDAQ: SEDG). BSc Electrical & Computer Engineering, MSc Global Financial Economics. Deep expertise in hardware systems that scale.</p>
+                                <p style="margin-bottom: 1rem; color: #555; line-height: 1.6; font-weight: 500;"><strong>Go-to-Market Strategy:</strong></p>
+                                <ul style="margin: 0; padding-left: 1.5rem; color: #555; line-height: 1.8;">
+                                    <li><strong>Phase 1:</strong> Consumer Launch – Direct-to-consumer (parents) in USA market. Build brand, validate product-market fit, gather clinical data.</li>
+                                    <li><strong>Phase 2:</strong> FDA Clearance + Hospital Sales – Secure FDA 510(k) approval, launch B2B hospital sales in USA with RPM billing integration.</li>
+                                    <li><strong>Phase 3:</strong> Nordic + Germany Expansion – Enter Nordic countries (Sweden, Norway, Denmark, Finland) and Germany with both consumer and hospital channels.</li>
+                                    <li><strong>Phase 4:</strong> EU Expansion – Scale to remaining European Union markets leveraging established distribution and regulatory approvals.</li>
+                                    <li><strong>Exit:</strong> Strategic acquisition by Hologic, Philips Healthcare, Medtronic, or IPO. Target valuation: $1.0B-$1.2B.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="faq-item" style="background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #43e97b; overflow: hidden;">
+                        <div class="faq-question" style="display: flex; align-items: center; padding: 1.5rem; cursor: pointer; transition: background-color 0.3s ease;" onclick="toggleFAQ(5)">
+                            <div style="background: #43e97b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; flex-shrink: 0;">5</div>
+                            <h4 style="color: #2c3e50; margin: 0; font-size: 1.3rem; font-weight: 600; flex: 1;">How do you make money?</h4>
+                            <div class="faq-icon" style="font-size: 1.5rem; color: #43e97b; transition: transform 0.3s ease;">+</div>
+                        </div>
+                        <div class="faq-answer" id="faq-5" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div style="padding: 0 1.5rem 1.5rem 5.5rem;">
+                                <p style="margin-bottom: 1rem; color: #555; line-height: 1.6; font-weight: 600;">Dual Revenue Streams: Consumer (B2C) + Professional (B2B)</p>
+                                
+                                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <p style="margin: 0 0 0.8rem 0; font-weight: 600; color: #2c3e50;">Consumer (B2C) – MonBe Core + Patches + App</p>
+                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 0.8rem;">
+                                        <div style="background: white; padding: 0.8rem; border-radius: 6px; text-align: center;">
+                                            <p style="margin: 0; font-size: 0.85rem; color: #666;">Core Device</p>
+                                            <p style="margin: 0.3rem 0 0 0; font-weight: bold; color: #2c3e50; font-size: 1.05rem;">$100-200</p>
+                                            <p style="margin: 0.2rem 0 0 0; font-size: 0.75rem; color: #999;">One-time</p>
+                                        </div>
+                                        <div style="background: white; padding: 0.8rem; border-radius: 6px; text-align: center;">
+                                            <p style="margin: 0; font-size: 0.85rem; color: #666;">Patches</p>
+                                            <p style="margin: 0.3rem 0 0 0; font-weight: bold; color: #2c3e50; font-size: 1.05rem;">$180-450</p>
+                                            <p style="margin: 0.2rem 0 0 0; font-size: 0.75rem; color: #999;">$20-50/mo × 9mo</p>
+                                        </div>
+                                        <div style="background: white; padding: 0.8rem; border-radius: 6px; text-align: center;">
+                                            <p style="margin: 0; font-size: 0.85rem; color: #666;">App Premium</p>
+                                            <p style="margin: 0.3rem 0 0 0; font-weight: bold; color: #2c3e50; font-size: 1.05rem;">$45-135</p>
+                                            <p style="margin: 0.2rem 0 0 0; font-size: 0.75rem; color: #999;">$5-15/mo × 9mo</p>
+                                        </div>
+                                    </div>
+                                    <p style="margin: 0.8rem 0 0.3rem 0; color: #2c3e50; font-weight: 600; font-size: 1.05rem;">Customer LTV: ~$600 (avg 9 months per baby)</p>
+                                    <p style="margin: 0.3rem 0 0 0; color: #555; font-size: 0.9rem;">Target customers: 35K-80K (10-25% of tech-forward mothers)</p>
+                                    <p style="margin: 0.5rem 0 0 0; color: #43e97b; font-weight: bold;">Target: $20M-$50M/year (15-25% of revenue)</p>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2c3e50;">Professional (B2B) – MonBe Clinic Software</p>
+                                    <p style="margin: 0 0 0.5rem 0; color: #555; font-size: 0.95rem;">Solo Consultants: $3.5K-5K/year | Small Hospitals: $25K-40K/year | Large Hospitals: $150K-250K/year</p>
+                                    <p style="margin: 0 0 0.3rem 0; color: #555; font-size: 0.9rem;">Target customers: 500-1,000 hospitals + 2,000-5,000 consultants</p>
+                                    <p style="margin: 0.5rem 0 0 0; color: #43e97b; font-weight: bold;">Target: $130M-$150M/year (75-85% of revenue)</p>
+                                </div>
+                                
+                                <p style="margin: 1rem 0 0 0; color: #2c3e50; font-weight: 600; font-size: 1.05rem;">Year 5 Target: $150M-$200M ARR | LTV:CAC >8:1 | 70%+ Gross Margins (B2B SaaS-heavy)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <!-- THE INSIGHT: The Hidden Problem -->
             <div class="pitch-card" style="background: #fff; border-left: 5px solid #2c3e50; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
                 <h3 class="card-title" style="color: #2c3e50; font-size: 1.8rem; margin-bottom: 1.5rem;">The "Black Box" Problem</h3>
                 <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 300px;">
                         <p style="font-size: 1.1rem; line-height: 1.6; color: #555; margin-bottom: 1rem;">
-                            Imagine if your phone battery had no percentage indicator. You'd plug it in, guess when it's full, and live in constant anxiety that it might die.
+                            Every year, 140 million babies are born. 90% of mothers start breastfeeding. Within 3 months, <strong>40% quit</strong>—not because they want to, but because they have no objective data.
                         </p>
                         <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">
-                            <strong>That is breastfeeding today.</strong> 
-                            140 million babies are born every year. 90% of mothers start breastfeeding. 
-                            Within 3 months, <strong>40% quit</strong>. Not because they want to, but because they are terrified their baby isn't eating enough.
+                            <strong>The question "Is my baby eating enough?" has no answer.</strong> Mothers are told to trust their instincts, count diapers, and watch the clock. Meanwhile, hospitals discharge newborns without any baseline feeding data. The entire system runs on guesswork.
                         </p>
                     </div>
                     <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
@@ -149,15 +273,15 @@
                     <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
                         <div style="text-align: center; padding: 1rem;">
                             <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">$600</span>
-                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Lifetime Value (LTV)</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Consumer LTV (9 months)</span>
                         </div>
                         <div style="text-align: center; padding: 1rem;">
-                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">15 mins</span>
-                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Daily Engagement</span>
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">$500K+</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Hospital LTV (6+ years)</span>
                         </div>
                         <div style="text-align: center; padding: 1rem;">
-                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">~0%</span>
-                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Churn During Nursing</span>
+                            <span style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; display: block; margin-bottom: 0.5rem;">8:1</span>
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">LTV:CAC Ratio</span>
                         </div>
                     </div>
                 </div>
@@ -212,30 +336,56 @@
                 </div>
             </div>
 
-            <!-- MARKET SIZE & TRACTION -->
+            <!-- MARKET OPPORTUNITY -->
             <div class="pitch-card" style="background: #f8f9fa; margin-bottom: 2rem;">
                 <h3 class="card-title" style="color: #2c3e50;">Market Opportunity</h3>
                 <div class="card-content">
+                    <!-- Top Level Numbers -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
                         <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$2.31B</div>
-                            <div style="font-size: 0.9rem; color: #666;">Current Market (2024)</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$32.7B</div>
+                            <div style="font-size: 0.9rem; color: #666;">Total Market (Lactation Services)</div>
                         </div>
                         <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$4.20B</div>
-                            <div style="font-size: 0.9rem; color: #666;">Projected by 2033</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$6.6B</div>
+                            <div style="font-size: 0.9rem; color: #666;">Addressable Market (Tech-Enabled)</div>
                         </div>
                         <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">140M</div>
-                            <div style="font-size: 0.9rem; color: #666;">Annual Births Worldwide</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">$150-200M</div>
+                            <div style="font-size: 0.9rem; color: #666;">Year 5 Revenue Target</div>
                         </div>
                         <div style="background: white; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">40%</div>
-                            <div style="font-size: 0.9rem; color: #666;">Quit by 3 Months</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">2.3-3.0%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Market Capture (Year 5)</div>
                         </div>
                     </div>
-                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
-                        The breastfeeding accessories market is growing at 10-15% CAGR, but existing products fail to address the core anxiety: <strong>"Is my baby eating enough?"</strong> MonBe solves this with objective, real-time data.
+
+                    <!-- Market Breakdown -->
+                    <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid #e0e0e0;">
+                        <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem;">Market Breakdown by Segment</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div>
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2c3e50;">Hospital Services</p>
+                                <p style="margin: 0; color: #555; font-size: 0.9rem;">$11.8B (36%) — 10,700 hospitals in USA</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2c3e50;">Primary Care Clinics</p>
+                                <p style="margin: 0; color: #555; font-size: 0.9rem;">$10.3B (31%) — 70,000+ clinics</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2c3e50;">Private Consultants</p>
+                                <p style="margin: 0; color: #555; font-size: 0.9rem;">$4.95B (15%) — 54,500 IBCLCs</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2c3e50;">Hardware & Consumer</p>
+                                <p style="margin: 0; color: #555; font-size: 0.9rem;">$3.0B (9%) — Consumer products</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Insight -->
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6; background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c3e50;">
+                        <strong>Key Insight:</strong> The lactation market is fragmented (no player >15% share) and growing 6-8% CAGR. MonBe's integrated platform (consumer + professional + hospital) captures value across the entire ecosystem. <strong>B2B hospital sales drive 75-85% of revenue</strong> with high margins and multi-year contracts.
                     </p>
                 </div>
             </div>
@@ -260,8 +410,11 @@
                             <strong>Background:</strong> BSc in Electrical & Computer Engineering, MSc in Global Financial Economics. Deep expertise in analog/digital systems, embedded development, and multidisciplinary product development.
                         </p>
                         <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #2c3e50;">
-                            <p style="margin: 0; line-height: 1.6; font-size: 1rem; color: #2c3e50;">
-                                <strong>The Ask:</strong> $600K Pre-Seed to turn our verified architecture into a pilot with 50 mothers.
+                            <p style="margin: 0 0 0.8rem 0; line-height: 1.6; font-size: 1.05rem; color: #2c3e50; font-weight: 600;">
+                                <strong>The Ask:</strong> $600K Pre-Seed
+                            </p>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem; color: #555;">
+                                Turn our verified architecture into a dual-market pilot: 5K-10K consumer users + 10-15 hospital partners. Target: $2M-3M ARR in 9 months.
                             </p>
                         </div>
                     </div>
@@ -270,25 +423,27 @@
 
             <!-- USE OF FUNDS -->
             <div class="pitch-card" style="margin-bottom: 2rem;">
-                <h3 class="card-title">Use of Funds</h3>
+                <h3 class="card-title">Use of Funds ($600K Pre-Seed)</h3>
                 <div class="card-content">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                         <div>
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">R&D & Team (83%)</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Product & Validation (70%)</h4>
                             <ul style="padding-left: 1.5rem; color: #555; line-height: 1.8;">
                                 <li>Complete MVP hardware development</li>
                                 <li>AI algorithm refinement</li>
-                                <li>Pilot study with 50 mothers</li>
+                                <li>Consumer pilot: 5K-10K parents</li>
+                                <li>Hospital pilot: 10-15 partners</li>
                                 <li>Core engineering team</li>
                             </ul>
                         </div>
                         <div>
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Regulatory & IP (17%)</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Regulatory & Go-to-Market (30%)</h4>
                             <ul style="padding-left: 1.5rem; color: #555; line-height: 1.8;">
-                                <li>Patent prosecution</li>
-                                <li>Regulatory compliance preparation</li>
+                                <li>FDA 510(k) preparation</li>
                                 <li>Clinical validation studies</li>
-                                <li>Quality management systems</li>
+                                <li>Patent prosecution</li>
+                                <li>Hospital sales & partnerships</li>
+                                <li>B2B SaaS platform development</li>
                             </ul>
                         </div>
                     </div>
@@ -298,8 +453,12 @@
             <!-- CTA: High Conviction -->
             <div class="contact-cta" style="background: #2c3e50; margin-top: 3rem; border-radius: 12px;">
                 <h3 style="color: white; margin-bottom: 1rem; font-size: 2rem;">This is inevitable.</h3>
-                <p style="color: #ccc; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.1rem; line-height: 1.6;">
+                <p style="color: #ccc; margin-bottom: 1.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 1.1rem; line-height: 1.6;">
                     In 10 years, guessing a baby's intake will seem as archaic as navigating without GPS. We are building the map.
+                </p>
+                <p style="color: #e0e0e0; margin-bottom: 2rem; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 1rem; line-height: 1.5;">
+                    <strong>$32.7B market. $6.6B addressable. Clear path to $150M-$200M ARR.</strong><br>
+                    Join us in building the infrastructure of infant health.
                 </p>
                 <a href="contact.html" class="cta-button" style="background: white; color: #2c3e50; font-weight: 700; padding: 1rem 2.5rem; font-size: 1.1rem;">Join the Round</a>
             </div>
@@ -308,5 +467,20 @@
     </section>
 
     <script src="script.js"></script>
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(id) {
+            const answer = document.getElementById('faq-' + id);
+            const icon = answer.previousElementSibling.querySelector('.faq-icon');
+            
+            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                answer.style.maxHeight = '0px';
+                icon.textContent = '+';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+    </script>
 </body>
 </html>
