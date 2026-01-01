@@ -127,31 +127,42 @@
 
     <!-- Problem Section -->
     <section id="problem" class="py-24 bg-white border-y border-rose-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">The Crisis of Confidence</h2>
-            <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">The Crisis of Confidence</h2>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-16 text-center">
                 Breastfeeding is currently the only vital sign managed by intuition, causing a $32.7B global crisis of anxiety.
             </p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8">
-                    <div class="glass-panel p-8 rounded-3xl">
-                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">The Anxiety Loop (40%)</h3>
-                        <div class="chart-container h-56"><canvas id="anxietyChart"></canvas></div>
-                    </div>
-                    <div class="glass-panel p-8 rounded-3xl">
-                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">The Formula Trap (60%)</h3>
-                        <div class="chart-container h-56"><canvas id="formulaChart"></canvas></div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- The Anxiety Loop -->
+                <div class="bg-purple-50 p-8 rounded-3xl border border-purple-100">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">The Anxiety Loop</h3>
+                    <p class="text-slate-700 text-base leading-relaxed">
+                        40% of mothers discontinue breastfeeding earlier than planned due to anxiety and self-doubt regarding their milk supply.
+                    </p>
                 </div>
-                <div class="text-left space-y-8">
-                    <div class="p-8 bg-rose-50/50 rounded-3xl border-l-8 border-rose-300">
-                        <h4 class="text-xl font-bold text-rose-600 mb-4">The Impact of Guessing</h4>
-                        <ul class="space-y-4 text-slate-600 text-sm">
-                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Preventable clinical issues like Failure to Thrive (FTT).</li>
-                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Increased infant readmissions due to dehydration.</li>
-                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Significant trigger for Postpartum Depression (PPD).</li>
-                        </ul>
-                    </div>
+                
+                <!-- The Formula Trap -->
+                <div class="bg-purple-50 p-8 rounded-3xl border border-purple-100">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">The Formula Trap</h3>
+                    <p class="text-slate-700 text-base leading-relaxed">
+                        60% of mothers introduce formula milk due to perceived low supply, often without objective data to confirm the issue.
+                    </p>
+                </div>
+                
+                <!-- Clinical Fallouts -->
+                <div class="bg-purple-50 p-8 rounded-3xl border border-purple-100">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Clinical Fallouts</h3>
+                    <p class="text-slate-700 text-base leading-relaxed">
+                        Lack of objective feeding data contributes to preventable clinical issues such as Failure to Thrive (FTT) and increased infant readmissions.
+                    </p>
+                </div>
+                
+                <!-- Mental Health Impact -->
+                <div class="bg-purple-50 p-8 rounded-3xl border border-purple-100">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Mental Health Impact</h3>
+                    <p class="text-slate-700 text-base leading-relaxed">
+                        Breastfeeding difficulties are a significant trigger for Postpartum Depression (PPD), severely impacting maternal well-being.
+                    </p>
                 </div>
             </div>
         </div>
@@ -162,7 +173,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl md:text-5xl font-black mb-6">Introducing <span class="text-rose-400 uppercase">The Milk Graph™</span></h2>
             <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-16">
-                The world's first proprietary dataset on **real-time infant intake and latch efficiency**. Our primary clinical moat.
+                The world's first proprietary dataset on <strong>real-time infant intake and latch efficiency</strong>. Our primary clinical moat.
             </p>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="p-8 bg-white/5 border border-white/10 rounded-[2rem]">
@@ -232,7 +243,7 @@
                     <div id="tech-detail-display" class="p-6 bg-white border border-rose-100 rounded-3xl mt-4 shadow-inner min-h-[140px]">
                         <div id="tech-content" class="animate-fade-in">
                             <h4 class="text-sm font-bold text-rose-500 uppercase tracking-widest mb-2">Ultrasound (MHz Piezo)</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed">Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for **The Milk Graph™**.</p>
+                            <p class="text-slate-600 text-sm leading-relaxed">Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for <strong>The Milk Graph™</strong>.</p>
                         </div>
                     </div>
                 </div>
@@ -343,7 +354,7 @@
         }
 
         const techSpecs = {
-            'ultrasound': { title: "Ultrasound (MHz Piezo)", desc: "Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for **The Milk Graph™**." },
+            'ultrasound': { title: "Ultrasound (MHz Piezo)", desc: "Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for <strong>The Milk Graph™</strong>." },
             'bioimpedance': { title: "Bioimpedance (4-Electrode)", desc: "Measures tissue density and milk composition changes using 4-wire Kelvin spectroscopy to anchor absolute volume estimates." },
             'acoustic': { title: "Acoustic Monitoring", desc: "Dual MEMS sensors capture high-fidelity swallow signatures, providing significant accuracy gains in flow windows via swallow density calculation." },
             'pneumatic': { title: "Pneumatic Sensing (MP3V5010DP)", desc: "Dual differential sensors monitor negative pressure pulses (-5 to -10 kPa). Estimates 'suck-work' integration to refine volume based on extraction efficiency." },
@@ -364,13 +375,6 @@
 
         Chart.defaults.font.family = "'Inter', sans-serif";
         Chart.defaults.color = '#94a3b8';
-
-        new Chart(document.getElementById('anxietyChart').getContext('2d'), {
-            type: 'doughnut', data: { datasets: [{ data: [40, 60], backgroundColor: ['#fb7185', '#f1f5f9'], borderWidth: 0 }] }, options: { cutout: '85%', plugins: { legend: { display: false } } }
-        });
-        new Chart(document.getElementById('formulaChart').getContext('2d'), {
-            type: 'doughnut', data: { datasets: [{ data: [60, 40], backgroundColor: ['#fda4af', '#f1f5f9'], borderWidth: 0 }] }, options: { cutout: '85%', plugins: { legend: { display: false } } }
-        });
         new Chart(document.getElementById('marketFunnelChart').getContext('2d'), {
             type: 'bar', data: { labels: ['TAM', 'SAM', 'SOM'], datasets: [{ data: [32.7, 6.6, 0.37], backgroundColor: ['#1e293b', '#fb7185', '#fda4af'] }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } } }
         });
