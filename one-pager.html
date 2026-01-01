@@ -194,44 +194,38 @@
                     <div class="divide-y divide-rose-100 bg-white rounded-3xl border border-rose-100 overflow-hidden shadow-sm">
                         <!-- Sensor 1: Ultrasound -->
                         <div class="spec-item p-4 cursor-pointer active" onclick="updateSpecDetail('ultrasound', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">Ultrasound (MHz Piezo)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Flow Segmentation</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">+20% Acc. Gain</div>
                             </div>
                         </div>
                         <!-- Sensor 2: Bioimpedance -->
                         <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('bioimpedance', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">Bioimpedance (4-Electrode)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Liquid Displacement</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">+10% Acc. Gain</div>
                             </div>
                         </div>
                         <!-- Sensor 3: Acoustic -->
                         <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('acoustic', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">Acoustic Monitoring</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Swallow Density</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">+15% Acc. Gain</div>
                             </div>
                         </div>
                         <!-- Sensor 4: Pneumatic -->
                         <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('pneumatic', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">Pneumatic Sensing (MP3V5010DP)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Vacuum & Latch</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">+8% Acc. Gain</div>
                             </div>
                         </div>
                         <!-- Sensor 5: IMU -->
                         <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('imu', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">IMU Engine (Bosch BMI270)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">6-Axis Motion</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">95% Side Det.</div>
                             </div>
                         </div>
                         <!-- Sensor 6: Temp -->
                         <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('temp', this)">
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center">
                                 <div><div class="text-sm font-bold text-slate-900">Thermal Precise (TMP117)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">±0.1°C Monitoring</div></div>
-                                <div class="text-[10px] font-bold text-rose-400">Calibration</div>
                             </div>
                         </div>
                     </div>
@@ -285,7 +279,7 @@
                             <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-50">
                                 <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Disposable Patch (Blade)</div>
                                 <div class="text-xl font-bold text-slate-900">Medical-Grade Smart Patch</div>
-                                <div class="text-rose-500 font-bold mt-2">BOM Cost: $2.50</div>
+                                <div class="text-rose-500 font-bold mt-2">Target Cost: <$1</div>
                             </div>
                         </div>
                     </div>
@@ -378,7 +372,70 @@
             type: 'doughnut', data: { datasets: [{ data: [60, 40], backgroundColor: ['#fda4af', '#f1f5f9'], borderWidth: 0 }] }, options: { cutout: '85%', plugins: { legend: { display: false } } }
         });
         new Chart(document.getElementById('competitorChart').getContext('2d'), {
-            type: 'radar', data: { labels: ['Intake', 'Access', 'Compat', 'Privacy', 'Quality', 'Comfort', 'Clinical'], datasets: [{ label: 'MonBe', data: [5,5,5,5,5,5,5], borderColor: '#fb7185', backgroundColor: 'rgba(251,113,133,0.1)' }, { label: 'Others', data: [2,4,3,3,1,3,2], borderColor: '#cbd5e1', borderDash: [5,5] }] }, options: { scales: { r: { ticks: { display: false } } }, plugins: { legend: { display: false } } }
+            type: 'radar',
+            data: {
+                labels: [
+                    'Intake/volume\nestimate',
+                    'Nursing\ncompatibility',
+                    'Beyond-volume\nquality signals',
+                    'Longitudinal\ninsights',
+                    'Clinical\nutility',
+                    'Comfort/\ndiscretion',
+                    'RF + privacy\ncomfort',
+                    'Accessibility\n(cost + availability)'
+                ],
+                datasets: [
+                    { label: 'MonBe', data: [5, 5, 5, 5, 5, 5, 5, 5], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.15)', borderWidth: 3, pointRadius: 4 },
+                    { label: 'CoroFlo (Coro)', data: [3, 3, 3, 4, 4, 4, 1, 2], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.05)', borderWidth: 2, pointRadius: 3 },
+                    { label: 'Infant Thrive Breast', data: [4, 4, 3, 4, 3, 4, 3, 3], borderColor: '#22c55e', backgroundColor: 'rgba(34, 197, 94, 0.05)', borderWidth: 2, pointRadius: 3 },
+                    { label: 'Munchkin Flow Shield+', data: [3, 5, 1, 0, 0, 3, 5, 4], borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', borderWidth: 2, pointRadius: 3 },
+                    { label: 'Test-weighing scale', data: [4, 2, 0, 1, 3, 2, 5, 3], borderColor: '#a855f7', backgroundColor: 'rgba(168, 85, 247, 0.05)', borderWidth: 2, pointRadius: 3 },
+                    { label: 'Apps/logs', data: [0, 5, 0, 2, 1, 5, 5, 5], borderColor: '#78716c', backgroundColor: 'rgba(120, 113, 108, 0.05)', borderWidth: 2, pointRadius: 3 },
+                    { label: 'Wearable pumps', data: [4, 0, 1, 2, 0, 3, 3, 2], borderColor: '#ec4899', backgroundColor: 'rgba(236, 72, 153, 0.05)', borderWidth: 2, pointRadius: 3 }
+                ]
+            },
+            options: {
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 5,
+                        ticks: {
+                            stepSize: 1,
+                            display: true,
+                            backdropColor: 'transparent',
+                            color: '#94a3b8',
+                            font: { size: 10 }
+                        },
+                        grid: { color: '#e2e8f0' },
+                        angleLines: { color: '#e2e8f0' },
+                        pointLabels: {
+                            font: { size: 11, weight: '500' },
+                            color: '#475569'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 10,
+                            font: { size: 11 },
+                            color: '#475569',
+                            usePointStyle: true
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'MonBe vs Competitors - Spider Graph\n0-5 score per axis (higher is better) • Emphasis: MonBe',
+                        font: { size: 14, weight: 'bold' },
+                        color: '#1e293b',
+                        padding: { bottom: 20 }
+                    }
+                },
+                maintainAspectRatio: true
+            }
         });
         new Chart(document.getElementById('marketFunnelChart').getContext('2d'), {
             type: 'bar', data: { labels: ['TAM', 'SAM', 'SOM'], datasets: [{ data: [32.7, 6.6, 0.37], backgroundColor: ['#1e293b', '#fb7185', '#fda4af'] }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } } }
