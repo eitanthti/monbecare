@@ -379,7 +379,35 @@
             type: 'bar', data: { labels: ['TAM', 'SAM', 'SOM'], datasets: [{ data: [32.7, 6.6, 0.37], backgroundColor: ['#1e293b', '#fb7185', '#fda4af'] }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } } }
         });
         new Chart(document.getElementById('askChart').getContext('2d'), {
-            type: 'pie', data: { labels: ['Team', 'Mfg', 'Buffer', 'Ops'], datasets: [{ data: [66, 15, 13, 5], backgroundColor: ['#fb7185', '#fda4af', '#f43f5e', '#fecdd3'] }] }, options: { plugins: { legend: { display: false } } }
+            type: 'pie', 
+            data: { 
+                labels: ['Team (66%)', 'Manufacturing (15%)', 'Buffer (13%)', 'Operations (5%)'], 
+                datasets: [{ 
+                    data: [66, 15, 13, 5], 
+                    backgroundColor: ['#fb7185', '#fda4af', '#f43f5e', '#fecdd3'] 
+                }] 
+            }, 
+            options: { 
+                plugins: { 
+                    legend: { 
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15,
+                            font: { size: 12 },
+                            color: '#fff'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': $' + (context.parsed * 2.5 / 100).toFixed(2) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
