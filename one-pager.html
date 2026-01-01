@@ -3,991 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonBe — One Page Executive Summary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MonBe Inc. | Digitizing the Breastfeeding 'Black Box'</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: "Soft Nurture & Modern Clinical" -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f6fa;
-            color: #1a1f2e;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .page-wrapper {
-            max-width: 1400px;
-            margin: 40px auto;
-            background: #ffffff;
-            box-shadow: 0 20px 80px rgba(0,0,0,0.12);
-            border-radius: 8px;
-            overflow: hidden;
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
             position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
         }
-        .download-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e8ecf0;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .download-bar .brand {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1a1f2e;
-            text-decoration: none;
-        }
-        .download-bar .controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .download-btn {
-            padding: 8px 16px;
-            border: 1px solid #d8dde5;
-            background: white;
-            color: #1a1f2e;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .download-btn:hover {
-            background: #f8f9fa;
-            border-color: #b8a7e8;
-            color: #b8a7e8;
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
         }
         
-        /* Header Section */
-        .header {
-            background: linear-gradient(135deg, #f8b4d9 0%, #d8a7e8 30%, #b8a7e8 60%, #a8b4e8 100%);
-            color: #ffffff;
-            padding: 70px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -300px;
-            right: -300px;
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 65%);
-            border-radius: 50%;
-        }
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -200px;
-            left: -200px;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 65%);
-            border-radius: 50%;
-        }
-        .header-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        .logo-container {
-            flex-shrink: 0;
-        }
-        .logo-img {
-            height: 100px;
-            width: auto;
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
-        }
-        .header-text {
-            flex: 1;
-        }
-        .header-subtitle {
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.95;
-            margin-bottom: 20px;
-        }
-        .header-tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 400;
-            line-height: 1.3;
-            letter-spacing: -0.5px;
-            margin-bottom: 30px;
-        }
-        .header-badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.22);
+        /* Custom Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
-            border-radius: 25px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.35);
+            border: 1px solid rgba(251, 227, 227, 0.8);
+            box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.05);
         }
-        
-        /* Main Content */
-        .content {
-            padding: 60px 80px;
+        .nav-item.active {
+            color: #e11d48;
+            border-bottom: 2px solid #e11d48;
         }
-        
-        /* Top Section - Problem & Solution Full Width */
-        .top-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
+        .bg-baby-pink { background-color: #fffafa; }
+        .accent-gradient {
+            background: linear-gradient(135deg, #fb7185 0%, #fda4af 100%);
         }
-        
-        /* Middle Section - Market Stats Full Width */
-        .market-hero {
-            background: linear-gradient(135deg, #fef7ff 0%, #f8f9ff 100%);
-            border-radius: 24px;
-            padding: 50px;
-            margin-bottom: 40px;
-            border: 2px solid #f0e4f8;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+        .spec-item:hover {
+            background-color: #fff1f2;
         }
-        .market-text h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #1a1f2e;
-            margin-bottom: 20px;
-            letter-spacing: -0.3px;
+        .spec-item.active {
+            background-color: #ffe4e6;
+            border-left: 4px solid #fb7185;
         }
-        .market-text p {
-            color: #4a5568;
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
+        .milk-graph-border {
+            border: 2px solid #fb7185;
+            box-shadow: 0 0 20px rgba(251, 113, 133, 0.2);
         }
-        .market-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .market-stat {
-            text-align: center;
-            padding: 25px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(216, 167, 232, 0.15);
-        }
-        .market-stat-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #d8a7e8 0%, #b8a7e8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            line-height: 1.2;
-        }
-        .market-stat-label {
-            font-size: 0.85rem;
-            color: #6b7280;
-            font-weight: 500;
-        }
-        
-        /* Two Column Grid */
-        .two-col-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        /* Card Styles */
-        .card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 35px;
-            border: 1px solid #e8ecf0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .hero-image-container {
             position: relative;
+            border-radius: 3rem;
             overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #f8b4d9 0%, #d8a7e8 50%, #b8a7e8 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            border-color: #d8dde5;
-        }
-        .card:hover::before {
-            opacity: 1;
-        }
-        .card-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        .card-icon {
-            width: auto;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            flex-shrink: 0;
-            background: transparent;
-            box-shadow: none;
-        }
-        .card-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: #1a1f2e;
-            margin: 0;
-            line-height: 1.2;
-            letter-spacing: -0.3px;
-        }
-        .card-body {
-            color: #4a5568;
-            line-height: 1.75;
-            font-size: 0.95rem;
-        }
-        .card-body p {
-            margin-bottom: 14px;
-        }
-        .card-body p:last-child {
-            margin-bottom: 0;
-        }
-        .card-body strong {
-            color: #1a1f2e;
-            font-weight: 600;
-        }
-        
-        /* Full Width Card */
-        .card-full {
-            grid-column: 1 / -1;
-        }
-        
-        /* Phase List */
-        .phase-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .phase-item {
-            display: grid;
-            grid-template-columns: 44px 1fr;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e8ecf0;
-            align-items: start;
-        }
-        .phase-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .phase-number {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f8b4d9 0%, #d8a7e8 50%, #b8a7e8 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(248, 180, 217, 0.3);
-        }
-        .phase-content {
-            padding-top: 3px;
-        }
-        .phase-title {
-            font-weight: 600;
-            color: #1a1f2e;
-            margin-bottom: 5px;
-            font-size: 0.94rem;
-            line-height: 1.4;
-        }
-        .phase-desc {
-            font-size: 0.84rem;
-            color: #6b7280;
-            line-height: 1.5;
-        }
-        
-        /* Team Section */
-        .team-member {
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e8ecf0;
-        }
-        .team-member:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .team-name {
-            font-weight: 600;
-            color: #1a1f2e;
-            margin-bottom: 5px;
-            font-size: 1.05rem;
-        }
-        .team-role {
-            font-size: 0.84rem;
-            color: #b8a7e8;
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-        .team-bio {
-            font-size: 0.9rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-        
-        /* Funding Section */
-        .funding-section {
-            background: linear-gradient(135deg, #fef7ff 0%, #f8f9ff 100%);
-            border-radius: 24px;
-            padding: 45px;
-            margin-bottom: 40px;
-            border: 2px solid #f0e4f8;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .funding-text h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1a1f2e;
-            margin-bottom: 18px;
-            letter-spacing: -0.3px;
-        }
-        .funding-text p {
-            color: #4a5568;
-            font-size: 0.98rem;
-            line-height: 1.75;
-            margin-bottom: 12px;
-        }
-        .funding-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        .funding-stat {
-            text-align: center;
-            padding: 22px;
-            background: white;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(216, 167, 232, 0.15);
-        }
-        .funding-stat-value {
-            font-size: 1.9rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #d8a7e8 0%, #b8a7e8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 6px;
-            line-height: 1.2;
-        }
-        .funding-stat-label {
-            font-size: 0.82rem;
-            color: #6b7280;
-            font-weight: 500;
-        }
-        
-        /* Mission Section */
-        .mission-section {
-            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-            border-radius: 24px;
-            padding: 45px;
-            margin-bottom: 40px;
-            border: 1px solid #e8ecf0;
-        }
-        .mission-section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1a1f2e;
-            margin-bottom: 20px;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .mission-section h2::before {
-            content: '💚';
-            font-size: 1.8rem;
-        }
-        .mission-section p {
-            color: #4a5568;
-            font-size: 0.98rem;
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-        .mission-section p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #1a1f2e 0%, #2d3447 100%);
-            color: white;
-            padding: 50px 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        .footer-cta {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 500;
-            line-height: 1.4;
-        }
-        .footer-contact {
-            text-align: right;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .footer-contact p:first-child {
-            font-weight: 600;
-            font-size: 1.08rem;
-            margin-bottom: 12px;
-        }
-        .footer-contact p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .content {
-                padding: 50px 60px;
-            }
-            .header {
-                padding: 60px 60px;
-            }
-            .footer {
-                padding: 40px 60px;
-            }
-        }
-        @media (max-width: 968px) {
-            .download-bar {
-                padding: 10px 15px;
-            }
-            .download-bar .brand {
-                font-size: 0.95rem;
-            }
-            .download-btn {
-                padding: 6px 12px;
-                font-size: 0.85rem;
-            }
-            .page-wrapper {
-                margin: 20px;
-                border-radius: 0;
-            }
-            .content {
-                padding: 40px 30px;
-            }
-            .header {
-                padding: 50px 40px;
-            }
-            .header-content {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-            .header-tagline {
-                font-size: 2rem;
-            }
-            .logo-img {
-                height: 80px;
-            }
-            .top-section,
-            .two-col-grid,
-            .market-hero,
-            .funding-section {
-                grid-template-columns: 1fr;
-            }
-            .footer {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 40px 30px;
-            }
-            .footer-contact {
-                text-align: center;
-            }
-            .card {
-                padding: 30px;
-            }
-        }
-        
-        /* --- Force one-page PDF (A5) by scaling the whole layout --- */
-        @media print {
-            /* A5 page size - smaller format */
-            @page {
-                size: A5 portrait;
-                margin: 0;
-            }
-
-            :root { --print-scale: 0.45; }
-
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-
-            html, body {
-                width: 148mm;
-                height: 210mm;
-                background: white !important;
-                overflow: hidden !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .download-bar { display: none !important; }
-
-            .page-wrapper {
-                width: calc(148mm / var(--print-scale));
-                min-height: calc(210mm / var(--print-scale));
-                margin: 0 !important;
-                margin-top: 0 !important;
-                border-radius: 0 !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-                transform-origin: top left;
-                transform: scale(var(--print-scale));
-                page-break-inside: avoid !important;
-                page-break-before: avoid !important;
-                page-break-after: avoid !important;
-            }
-
-            .card, .market-hero, .funding-section, .mission-section, .header, .footer,
-            .top-section, .two-col-grid, .content {
-                box-shadow: none !important;
-                page-break-inside: avoid !important;
-                page-break-before: avoid !important;
-                page-break-after: avoid !important;
-            }
-
-            .header {
-                padding: 18px 36px 20px !important;
-            }
-            .header-tagline {
-                font-size: 1.2rem !important;
-                margin-bottom: 10px !important;
-            }
-            .header-subtitle {
-                font-size: 0.6rem !important;
-                margin-bottom: 8px !important;
-            }
-            .badge {
-                padding: 3px 8px !important;
-                font-size: 0.6rem !important;
-            }
-            .logo-img {
-                height: 44px !important;
-            }
-            .content {
-                padding: 18px 34px !important;
-            }
-            .top-section, .two-col-grid {
-                gap: 8px !important;
-                margin-bottom: 10px !important;
-            }
-            .card {
-                padding: 12px !important;
-                margin-bottom: 6px !important;
-            }
-            .card-title {
-                font-size: 1.1rem !important;
-            }
-            .card-body {
-                font-size: 0.7rem !important;
-                line-height: 1.35 !important;
-            }
-            .card-body p {
-                margin-bottom: 5px !important;
-            }
-            .card-icon {
-                width: auto !important;
-                height: auto !important;
-                font-size: 0.8rem !important;
-                background: transparent !important;
-                box-shadow: none !important;
-            }
-            .market-hero, .funding-section, .mission-section {
-                padding: 14px 22px !important;
-                margin-bottom: 10px !important;
-            }
-            .market-text h2, .funding-text h2, .mission-section h2 {
-                font-size: 1.1rem !important;
-            }
-            .market-text p, .funding-text p, .mission-section p {
-                font-size: 0.7rem !important;
-                margin-bottom: 6px !important;
-            }
-            .market-stats, .funding-stats {
-                gap: 6px !important;
-            }
-            .market-stat, .funding-stat {
-                padding: 10px !important;
-            }
-            .market-stat-value, .funding-stat-value {
-                font-size: 1rem !important;
-            }
-            .market-stat-label, .funding-stat-label {
-                font-size: 0.6rem !important;
-            }
-            .phase-item {
-                margin-bottom: 6px !important;
-                padding-bottom: 6px !important;
-                gap: 8px !important;
-            }
-            .phase-number {
-                width: 26px !important;
-                height: 26px !important;
-                font-size: 0.75rem !important;
-            }
-            .phase-title {
-                font-size: 0.7rem !important;
-            }
-            .phase-desc {
-                font-size: 0.6rem !important;
-            }
-            .team-member {
-                margin-bottom: 10px !important;
-                padding-bottom: 10px !important;
-            }
-            .team-name {
-                font-size: 0.8rem !important;
-            }
-            .team-role {
-                font-size: 0.65rem !important;
-            }
-            .team-bio {
-                font-size: 0.65rem !important;
-            }
-            .footer {
-                padding: 16px 34px !important;
-            }
-            .footer-cta {
-                font-size: 0.95rem !important;
-            }
-            .footer-contact p {
-                font-size: 0.7rem !important;
-                margin-bottom: 3px !important;
-            }
-            .footer-contact p:first-child {
-                font-size: 0.75rem !important;
-            }
-            .card-full {
-                margin-bottom: 8px !important;
-            }
+            box-shadow: 0 25px 50px -12px rgba(244, 63, 94, 0.15);
         }
     </style>
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Facebook Pixel Code -->
-    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1545782786646439'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=1545782786646439&ev=PageView&noscript=1"/></noscript><!-- End Facebook Pixel Code -->
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DF1J1SMXBZ">
-    </script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-DF1J1SMXBZ');
-    </script>
 </head>
-<body>
-    <!-- Password Protection -->
-    <div class="password-container" id="passwordContainer">
-        <h2 class="password-title">MonBe One-Pager</h2>
-        <p class="password-description">
-            This content is password protected. Please enter the access code to view our one-page executive summary.
-        </p>
-        <form class="password-form" onsubmit="checkPassword(event, 'onePagerAccess', 'onePagerContent')" id="passwordForm">
-            <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" autocomplete="off">
-            <button type="submit" class="password-submit">ACCESS ONE-PAGER</button>
-        </form>
-        <div class="password-error" id="passwordError">
-            Incorrect password. Please try again.
-        </div>
-    </div>
+<body class="bg-baby-pink text-slate-800 font-sans leading-relaxed selection:bg-rose-100">
 
-    <!-- One-Pager Content (Hidden until password is correct) -->
-    <div class="pitch-content" id="onePagerContent">
-    <div class="download-bar">
-        <a class="brand" href="home.html">MonBe — One Page Executive Summary</a>
-        <div class="controls">
-            <button class="download-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
-        </div>
-    </div>
-    <div class="page-wrapper" style="margin-top: 60px;">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-content">
-                <div class="logo-container">
-                    <img src="MonBe_logo.png" alt="MonBe Logo" class="logo-img">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-rose-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold tracking-tight text-rose-500">MonBe<span class="text-rose-200 font-light">.Inc</span></span>
                 </div>
-                <div class="header-text">
-                    <div class="header-subtitle">One Page Executive Summary</div>
-                    <div class="header-tagline">A passive smart sticker that turns breastfeeding uncertainty into clarity - naturally and non-invasively.</div>
-                    <div class="header-badges">
-                        <span class="badge">Multi-Sensor Technology</span>
-                        <span class="badge">AI-Powered Insights</span>
-                        <span class="badge">Non-Invasive Monitoring</span>
-                    </div>
+                <div class="hidden md:flex space-x-8 items-center" id="nav-links">
+                    <button onclick="scrollToSection('hero')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Vision</button>
+                    <button onclick="scrollToSection('problem')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Problem</button>
+                    <button onclick="scrollToSection('milk-graph')" class="nav-item px-3 py-2 text-sm font-bold text-rose-600 border-b-2 border-rose-600 transition-colors">The Milk Graph™</button>
+                    <button onclick="scrollToSection('market')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Market & Biz</button>
+                    <button onclick="scrollToSection('ask')" class="nav-item px-3 py-2 text-sm font-bold text-white accent-gradient rounded-full hover:opacity-90 transition-all shadow-md">The Ask</button>
                 </div>
             </div>
         </div>
+    </nav>
 
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Top Section: Problem & Solution -->
-            <div class="top-section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">❓</div>
-                        <h2 class="card-title">Problem</h2>
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-600 uppercase bg-rose-100 rounded-full">
+                    Pre-Seed Opportunity | $2.5M Capital Raise
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
+                    Digitizing the <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Breastfeeding 'Black Box'</span>
+                </h1>
+                <p class="text-xl text-slate-500 mb-10 max-w-xl leading-relaxed italic">
+                    Replacing 19th-century intuition with 21st-century data through <strong>The Milk Graph™</strong>.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="scrollToSection('milk-graph')" class="px-8 py-4 text-lg font-bold text-white accent-gradient rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        Explore The Data Moat
+                    </button>
+                    <button onclick="scrollToSection('solution')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white border-2 border-rose-100 rounded-xl hover:bg-rose-50 transition-all">
+                        Technical Specs
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="monbe on mom.png" alt="Woman with MonBe Device" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'bg-rose-100 h-96 flex items-center justify-center text-rose-400 font-bold uppercase tracking-widest\'>Product Visualization</div>'">
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
+            <div class="glass-panel p-8 rounded-2xl text-center">
+                <div class="text-4xl font-bold text-rose-500 mb-2">$32.7B</div>
+                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Market Opportunity</div>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl text-center milk-graph-border">
+                <div class="text-2xl font-black text-rose-600 mb-2 uppercase tracking-tighter">The Milk Graph™</div>
+                <div class="text-xs text-rose-500 uppercase tracking-widest font-bold">Proprietary Dataset</div>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl text-center">
+                <div class="text-4xl font-bold text-rose-300 mb-2">FDA</div>
+                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Class II Pathway</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-24 bg-white border-y border-rose-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">The Crisis of Confidence</h2>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-16">
+                Breastfeeding is currently the only vital sign managed by intuition, causing a $32.7B global crisis of anxiety.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">The Anxiety Loop (40%)</h3>
+                        <div class="chart-container h-56"><canvas id="anxietyChart"></canvas></div>
                     </div>
-                    <div class="card-body">
-                        <p>Parents constantly wonder – "Is my baby eating enough?" Existing solutions are often intrusive, inaccurate, or disrupt bonding.</p>
-                        <p>The younger generation of parents expects digital, data-driven tools that fit naturally into their tech-enabled lives and provide real, objective insights into their baby's wellbeing.</p>
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">The Formula Trap (60%)</h3>
+                        <div class="chart-container h-56"><canvas id="formulaChart"></canvas></div>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">💡</div>
-                        <h2 class="card-title">Solution</h2>
+                <div class="text-left space-y-8">
+                    <div class="p-8 bg-rose-50/50 rounded-3xl border-l-8 border-rose-300">
+                        <h4 class="text-xl font-bold text-rose-600 mb-4">The Impact of Guessing</h4>
+                        <ul class="space-y-4 text-slate-600 text-sm">
+                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Preventable clinical issues like Failure to Thrive (FTT).</li>
+                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Increased infant readmissions due to dehydration.</li>
+                            <li class="flex items-start"><span class="text-rose-400 mr-3 font-bold">•</span>Significant trigger for Postpartum Depression (PPD).</li>
+                        </ul>
                     </div>
-                    <div class="card-body">
-                        <p>A passive breast-mounted multi-sensor sticker with NFC sync. Detects sucking - swallowing - breathing - suction - temperature and bioimpedance signals from the mother's breast, translating them into clear AI insights. No camera - no wires - no radiation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE MILK GRAPH™ CORE SECTION -->
+    <section id="milk-graph" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-6">Introducing <span class="text-rose-400 uppercase">The Milk Graph™</span></h2>
+            <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-16">
+                The world's first proprietary dataset on **real-time infant intake and latch efficiency**. Our primary clinical moat.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="p-8 bg-white/5 border border-white/10 rounded-[2rem]">
+                    <div class="text-rose-400 text-sm font-bold uppercase tracking-widest mb-4">Pillar 01</div>
+                    <h3 class="text-2xl font-bold mb-4">Objective Intake</h3>
+                    <p class="text-slate-400 text-sm">Transforms breastfeeding into a quantifiable vital sign using multi-modal sensor fusion.</p>
+                </div>
+                <div class="p-8 bg-rose-500/10 border border-rose-500/20 rounded-[2rem]">
+                    <div class="text-rose-400 text-sm font-bold uppercase tracking-widest mb-4">Pillar 02</div>
+                    <h3 class="text-2xl font-bold mb-4">Latch Efficiency</h3>
+                    <p class="text-slate-300 text-sm">Grades latch quality in real-time to predict and prevent supply drop-off.</p>
+                </div>
+                <div class="p-8 bg-white/5 border border-white/10 rounded-[2rem]">
+                    <div class="text-rose-400 text-sm font-bold uppercase tracking-widest mb-4">Pillar 03</div>
+                    <h3 class="text-2xl font-bold mb-4">Data Moat</h3>
+                    <p class="text-slate-400 text-sm">A longitudinal dataset software-only competitors cannot replicate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sensor Fusion Section -->
+    <section id="solution" class="py-24 bg-rose-50/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-900 mb-12">Sensor Fusion</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="space-y-4">
+                    <h3 class="text-xs font-black text-rose-500 uppercase tracking-widest mb-4">MD-001 Clinical Specifications</h3>
+                    <div class="divide-y divide-rose-100 bg-white rounded-3xl border border-rose-100 overflow-hidden shadow-sm">
+                        <!-- Sensor 1: Ultrasound -->
+                        <div class="spec-item p-4 cursor-pointer active" onclick="updateSpecDetail('ultrasound', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">Ultrasound (MHz Piezo)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Flow Segmentation</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">+20% Acc. Gain</div>
+                            </div>
+                        </div>
+                        <!-- Sensor 2: Bioimpedance -->
+                        <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('bioimpedance', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">Bioimpedance (4-Electrode)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Liquid Displacement</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">+10% Acc. Gain</div>
+                            </div>
+                        </div>
+                        <!-- Sensor 3: Acoustic -->
+                        <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('acoustic', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">Acoustic Monitoring</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Swallow Density</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">+15% Acc. Gain</div>
+                            </div>
+                        </div>
+                        <!-- Sensor 4: Pneumatic -->
+                        <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('pneumatic', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">Pneumatic Sensing (MP3V5010DP)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Vacuum & Latch</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">+8% Acc. Gain</div>
+                            </div>
+                        </div>
+                        <!-- Sensor 5: IMU -->
+                        <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('imu', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">IMU Engine (Bosch BMI270)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">6-Axis Motion</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">95% Side Det.</div>
+                            </div>
+                        </div>
+                        <!-- Sensor 6: Temp -->
+                        <div class="spec-item p-4 cursor-pointer" onclick="updateSpecDetail('temp', this)">
+                            <div class="flex justify-between items-center">
+                                <div><div class="text-sm font-bold text-slate-900">Thermal Precise (TMP117)</div><div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">±0.1°C Monitoring</div></div>
+                                <div class="text-[10px] font-bold text-rose-400">Calibration</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tech-detail-display" class="p-6 bg-white border border-rose-100 rounded-3xl mt-4 shadow-inner min-h-[140px]">
+                        <div id="tech-content" class="animate-fade-in">
+                            <h4 class="text-sm font-bold text-rose-500 uppercase tracking-widest mb-2">Ultrasound (MHz Piezo)</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for **The Milk Graph™**.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-8 rounded-[3rem] flex items-center justify-center">
+                    <div class="chart-container"><canvas id="competitorChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market & Biz (UPDATED UNIT ECONOMICS) -->
+    <section id="market" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">$32.7B Market Opportunity</h2>
+                <div class="flex justify-center mt-8">
+                    <div class="inline-flex bg-rose-50 rounded-2xl p-1.5 shadow-sm border border-rose-100">
+                        <button onclick="switchMarketView('funnel')" id="btn-funnel" class="px-8 py-3 rounded-xl text-sm font-bold bg-white text-rose-600 shadow-sm transition-all">Market Size</button>
+                        <button onclick="switchMarketView('model')" id="btn-model" class="px-8 py-3 rounded-xl text-sm font-bold text-rose-300 hover:text-rose-600 transition-all">Unit Economics</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Market Hero Section -->
-            <div class="market-hero">
-                <div class="market-text">
-                    <h2>Market</h2>
-                    <p>Breastfeeding accessories: $2.31B today - projected $4.20B by 2033. 120M births annually worldwide - about 90% of mothers in Western markets initiate breastfeeding.</p>
-                    <p>Expanding into FemTech and BabyTech with the same multi-sensor platform, enabling future extensions into sleep, nutrition, and early development using the same core hardware.</p>
-                </div>
-                <div class="market-stats">
-                    <div class="market-stat">
-                        <div class="market-stat-value">$2.31B</div>
-                        <div class="market-stat-label">Market Today</div>
-                    </div>
-                    <div class="market-stat">
-                        <div class="market-stat-value">$4.20B</div>
-                        <div class="market-stat-label">2033 Projection</div>
-                    </div>
-                    <div class="market-stat">
-                        <div class="market-stat-value">120M</div>
-                        <div class="market-stat-label">Annual Births</div>
-                    </div>
-                    <div class="market-stat">
-                        <div class="market-stat-value">90%</div>
-                        <div class="market-stat-label">Western Initiation</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Two Column Grid -->
-            <div class="two-col-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">🔬</div>
-                        <h2 class="card-title">Technology</h2>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Sensors:</strong> microphone - vibration - pressure - temperature - bioimpedance.</p>
-                        <p>Reusable smart core + disposable patch with smart AI-powered technology that interprets multi-sensor data to deliver real-time feeding insights.</p>
-                        <p>Post-session NFC transfer. Provisional patent filed Aug 2025.</p>
+            <div id="market-content" class="min-h-[450px]">
+                <div id="view-funnel" class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="chart-container"><canvas id="marketFunnelChart"></canvas></div>
+                    <div class="space-y-6">
+                        <div class="p-6 bg-slate-50 rounded-2xl"><div class="text-xs font-bold text-slate-400 uppercase mb-1">TAM</div><div class="text-3xl font-black">$32.7B</div></div>
+                        <div class="p-6 bg-rose-50 rounded-2xl"><div class="text-xs font-bold text-rose-400 uppercase mb-1">SAM</div><div class="text-3xl font-black">$6.6B</div></div>
+                        <div class="p-6 bg-pink-100 rounded-2xl"><div class="text-xs font-bold text-pink-500 uppercase mb-1">SOM (5YR)</div><div class="text-3xl font-black">$178M - $373M</div></div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">🚀</div>
-                        <h2 class="card-title">Traction</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>MonBe Inc. officially incorporated in the U.S. Full concept architecture complete. Provisional IP submitted Aug 2025. Mother validation in progress – interviews and survey underway. Hardware design in progress.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Go-To-Market Full Width -->
-            <div class="card card-full">
-                <div class="card-header">
-                    <div class="card-icon">🎯</div>
-                    <h2 class="card-title">Go-To-Market</h2>
-                </div>
-                <div class="card-body">
-                    <ul class="phase-list">
-                        <li class="phase-item">
-                            <div class="phase-number">1</div>
-                            <div class="phase-content">
-                                <div class="phase-title">Consumer wellness DTC, Israel soft launch</div>
+                <!-- UPDATED UNIT ECONOMICS VIEW -->
+                <div id="view-model" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-rose-50/30 p-10 rounded-3xl border border-rose-100">
+                        <h3 class="text-2xl font-bold text-rose-600 mb-8">The Razor/Blade Advantage</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-50">
+                                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Reusable Core (Razor)</div>
+                                <div class="text-xl font-bold text-slate-900">Advanced AI Processing Unit</div>
+                                <div class="text-rose-500 font-bold mt-2">BOM Cost: $54.30</div>
                             </div>
-                        </li>
-                        <li class="phase-item">
-                            <div class="phase-number">2</div>
-                            <div class="phase-content">
-                                <div class="phase-title">Global direct-to-consumer rollout (US + EU)</div>
-                                <div class="phase-desc">Through e-commerce, influencers, and retail partnerships</div>
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-50">
+                                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Disposable Patch (Blade)</div>
+                                <div class="text-xl font-bold text-slate-900">Medical-Grade Smart Patch</div>
+                                <div class="text-rose-500 font-bold mt-2">BOM Cost: $2.50</div>
                             </div>
-                        </li>
-                        <li class="phase-item">
-                            <div class="phase-number">3</div>
-                            <div class="phase-content">
-                                <div class="phase-title">Healthcare integration</div>
-                                <div class="phase-desc">With lactation consultants, pediatric clinics, and hospitals</div>
-                            </div>
-                        </li>
-                        <li class="phase-item">
-                            <div class="phase-number">4</div>
-                            <div class="phase-content">
-                                <div class="phase-title">Enterprise & insurance partnerships</div>
-                                <div class="phase-desc">For reimbursement and large-scale distribution</div>
-                            </div>
-                        </li>
-                        <li class="phase-item">
-                            <div class="phase-number">5</div>
-                            <div class="phase-content">
-                                <div class="phase-title">FemTech and BabyTech expansion</div>
-                                <div class="phase-desc">Sleep - nutrition - baby development using the same core hardware, increasing the market size to over $8B</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Business Model & Team -->
-            <div class="two-col-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">💰</div>
-                        <h2 class="card-title">Business Model</h2>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p>Razor and blade with software. Hardware starter kit $150-250. Reusable core $50-100. Recurring daily patches $30-50 per month. App tiers $5-15 per month. Rental option: monthly payment for hardware access. Clinic licensing for MonBe Care. Target 60-70% gross margin. CAC $50-75. LTV $400-600.</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">👥</div>
-                        <h2 class="card-title">Team</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="team-member">
-                            <div class="team-name">Eitan Halfon</div>
-                            <div class="team-role">Founder & CEO</div>
-                            <div class="team-bio">BSc in Electrical & Computer Engineering and MSc in Global Financial Economics. Experienced hardware and software engineer with strong management and product leadership skills. Deep expertise in analog, digital, and embedded systems, with a proven track record in multidisciplinary product development and execution.</div>
+                    <div class="bg-slate-50 p-10 rounded-3xl border border-slate-100">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-8">Revenue Logic</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">Starter Kit Price</span><span class="font-bold">$249</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">Patch Sub. (Monthly)</span><span class="font-bold">$45 - $65</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">Gross Margin (Patch)</span><span class="font-bold text-emerald-600">~50%</span></div>
+                            <div class="mt-10 p-6 bg-white rounded-2xl text-center">
+                                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Annual ARPU</div>
+                                <div class="text-4xl font-black text-rose-500">$560+</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Mission Section -->
-            <div class="mission-section">
-                <h2>Our Mission Alignment</h2>
-                <p>Breastfeeding is the most natural and precisely tailored nourishment for infants — a living, adaptive system rich in antibodies, hormones, and proteins that nurture the baby's growth, immunity, and emotional connection with the mother.</p>
-                <p>MonBe is committed to supporting this critical foundation of life by helping more families sustain breastfeeding with confidence. We aim to bring confidence and calm to every parent in the world through the insight and light that MonBe delivers — See your baby feed.</p>
-            </div>
-
-            <!-- Funding Section -->
-            <div class="funding-section">
-                <div class="funding-text">
-                    <h2>Funding Ask</h2>
-                    <p>Raising $600K pre-seed to complete MVP - run pilots with 20-50 mothers - refine AI - prepare DTC launch.</p>
-                    <p>Use of funds: R&D and team 83% - regulatory and IP 17%.</p>
-                </div>
-                <div class="funding-stats">
-                    <div class="funding-stat">
-                        <div class="funding-stat-value">$600K</div>
-                        <div class="funding-stat-label">Pre-Seed Round</div>
-                    </div>
-                    <div class="funding-stat">
-                        <div class="funding-stat-value">83%</div>
-                        <div class="funding-stat-label">R&D + Team</div>
-                    </div>
-                    <div class="funding-stat">
-                        <div class="funding-stat-value">17%</div>
-                        <div class="funding-stat-label">Regulatory & IP</div>
-                    </div>
-                    <div class="funding-stat">
-                        <div class="funding-stat-value">20-50</div>
-                        <div class="funding-stat-label">Pilot Mothers</div>
+    <!-- Ask Section -->
+    <section id="ask" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-4xl font-black mb-12">Execution <span class="text-rose-400">Roadmap</span></h2>
+                    <div class="space-y-12 ml-6 border-l-2 border-slate-800">
+                        <div class="relative pl-10"><div class="absolute -left-3 top-0 w-6 h-6 rounded-full accent-gradient border-4 border-slate-900"></div><h4 class="text-xl font-bold">Phase 1: Wellness Bridge</h4><p class="text-slate-400 mt-2">D2C Launch addressing breastfeeding anxiety.</p></div>
+                        <div class="relative pl-10"><div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-slate-700 border-4 border-slate-900"></div><h4 class="text-xl font-bold">Phase 2: Building The Milk Graph™</h4><p class="text-slate-400 mt-2">Capturing longitudinal dataset.</p></div>
+                        <div class="relative pl-10"><div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-slate-700 border-4 border-slate-900"></div><h4 class="text-xl font-bold text-rose-400">Phase 3: FDA Clinical Standard</h4><p class="text-slate-400 mt-2">Class II 510(k) pathway.</p></div>
                     </div>
                 </div>
+                <div class="bg-white/5 p-10 rounded-[3rem] border border-white/10">
+                    <h2 class="text-3xl font-bold mb-8">The Ask: <span class="text-rose-400">$2.5M</span></h2>
+                    <div class="chart-container h-80"><canvas id="askChart"></canvas></div>
+                </div>
+            </div>
+            <div class="mt-24 pt-12 border-t border-slate-800 text-center">
+                <div class="text-2xl font-black text-white">Eitan Halfon, <span class="text-rose-400">Founder & CEO</span></div>
+                <div class="text-slate-500 font-medium mt-2">eitan.h@monbecare.com | www.monbecare.com</div>
             </div>
         </div>
+    </section>
 
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-cta">We invite you to partner with us.</div>
-            <div class="footer-contact">
-                <p>Eitan Halfon - Founder and CEO</p>
-                <p>eitan.h@monbecare.com</p>
-                <p>+972-524042798</p>
-                <p>www.monbecare.com</p>
-            </div>
-        </div>
-    </div>
-    </div>
+    <script>
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+        function switchMarketView(view) {
+            const vF = document.getElementById('view-funnel');
+            const vM = document.getElementById('view-model');
+            const bF = document.getElementById('btn-funnel');
+            const bM = document.getElementById('btn-model');
+            if (view === 'funnel') {
+                vF.classList.remove('hidden'); vM.classList.add('hidden');
+                bF.className = 'px-8 py-3 rounded-xl text-sm font-bold bg-white text-rose-600 shadow-sm transition-all';
+                bM.className = 'px-8 py-3 rounded-xl text-sm font-bold text-rose-300 hover:text-rose-600 transition-all';
+            } else {
+                vM.classList.remove('hidden'); vF.classList.add('hidden');
+                bM.className = 'px-8 py-3 rounded-xl text-sm font-bold bg-white text-rose-600 shadow-sm transition-all';
+                bF.className = 'px-8 py-3 rounded-xl text-sm font-bold text-rose-300 hover:text-rose-600 transition-all';
+            }
+        }
 
-    <script src="script.js"></script>
+        const techSpecs = {
+            'ultrasound': { title: "Ultrasound (MHz Piezo)", desc: "Tracks swallow volume dynamics in real-time. This provides the ground-truth intake data for **The Milk Graph™**." },
+            'bioimpedance': { title: "Bioimpedance (4-Electrode)", desc: "Measures tissue density and milk composition changes using 4-wire Kelvin spectroscopy to anchor absolute volume estimates." },
+            'acoustic': { title: "Acoustic Monitoring", desc: "Dual MEMS sensors capture high-fidelity swallow signatures, providing significant accuracy gains in flow windows via swallow density calculation." },
+            'pneumatic': { title: "Pneumatic Sensing (MP3V5010DP)", desc: "Dual differential sensors monitor negative pressure pulses (-5 to -10 kPa). Estimates 'suck-work' integration to refine volume based on extraction efficiency." },
+            'imu': { title: "IMU Engine (Bosch BMI270)", desc: "Tracks 6-axis motion and orientation. Enables 95% accurate automatic breast side detection and stabilizes estimations via motion rejection." },
+            'temp': { title: "Thermal Precise (TMP117)", desc: "High-precision sensing (±0.1°C) at the patch-skin interface. Used for speed-of-sound correction and clinical thermal safety monitoring." }
+        };
+
+        function updateSpecDetail(key, el) {
+            document.querySelectorAll('.spec-item').forEach(x => x.classList.remove('active'));
+            el.classList.add('active');
+            const content = document.getElementById('tech-content');
+            content.style.opacity = '0';
+            setTimeout(() => {
+                content.innerHTML = `<h4 class="text-sm font-bold text-rose-500 uppercase tracking-widest mb-2">${techSpecs[key].title}</h4><p class="text-slate-600 text-sm leading-relaxed">${techSpecs[key].desc}</p>`;
+                content.style.opacity = '1';
+            }, 200);
+        }
+
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#94a3b8';
+
+        new Chart(document.getElementById('anxietyChart').getContext('2d'), {
+            type: 'doughnut', data: { datasets: [{ data: [40, 60], backgroundColor: ['#fb7185', '#f1f5f9'], borderWidth: 0 }] }, options: { cutout: '85%', plugins: { legend: { display: false } } }
+        });
+        new Chart(document.getElementById('formulaChart').getContext('2d'), {
+            type: 'doughnut', data: { datasets: [{ data: [60, 40], backgroundColor: ['#fda4af', '#f1f5f9'], borderWidth: 0 }] }, options: { cutout: '85%', plugins: { legend: { display: false } } }
+        });
+        new Chart(document.getElementById('competitorChart').getContext('2d'), {
+            type: 'radar', data: { labels: ['Intake', 'Access', 'Compat', 'Privacy', 'Quality', 'Comfort', 'Clinical'], datasets: [{ label: 'MonBe', data: [5,5,5,5,5,5,5], borderColor: '#fb7185', backgroundColor: 'rgba(251,113,133,0.1)' }, { label: 'Others', data: [2,4,3,3,1,3,2], borderColor: '#cbd5e1', borderDash: [5,5] }] }, options: { scales: { r: { ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+        new Chart(document.getElementById('marketFunnelChart').getContext('2d'), {
+            type: 'bar', data: { labels: ['TAM', 'SAM', 'SOM'], datasets: [{ data: [32.7, 6.6, 0.37], backgroundColor: ['#1e293b', '#fb7185', '#fda4af'] }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } } }
+        });
+        new Chart(document.getElementById('askChart').getContext('2d'), {
+            type: 'pie', data: { labels: ['Team', 'Mfg', 'Buffer', 'Ops'], datasets: [{ data: [66, 15, 13, 5], backgroundColor: ['#fb7185', '#fda4af', '#f43f5e', '#fecdd3'] }] }, options: { plugins: { legend: { display: false } } }
+        });
+    </script>
 </body>
 </html>
