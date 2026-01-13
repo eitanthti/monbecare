@@ -39,6 +39,31 @@
       place-items: center;
       flex: 0 0 auto;
     }
+    
+    /* Milk Graph™ Special Animations */
+    @keyframes borderPulse {
+      0%, 100% {
+        box-shadow: 0 25px 50px -12px rgba(251, 113, 133, 0.3);
+      }
+      50% {
+        box-shadow: 0 25px 50px -12px rgba(251, 113, 133, 0.5), 0 0 0 4px rgba(251, 113, 133, 0.1);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+    
+    .milk-graph-shine {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background-size: 1000px 100%;
+      animation: shimmer 3s infinite;
+    }
   </style>
 </head>
 <body class="bg-baby-pink text-slate-800 font-sans leading-relaxed selection:bg-rose-100">
@@ -63,359 +88,626 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="thesis" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex flex-col justify-center">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-600 uppercase bg-rose-100 rounded-full">
-          Pre-Seed: Hardware + Consumables + AI Insights
-        </div>
-        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-          The first <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Milk Graph</span>
-        </h1>
-        <p class="text-xl text-slate-500 mb-10 max-w-xl leading-relaxed">
-          MonBe turns breastfeeding from a <strong>black box into measurable signals</strong>. 
-          A modular system (reusable core + daily patch) captures feeding mechanics and converts them into simple, 
-          actionable insights for parents and, later, clinicians.
-        </p>
-
-        <!-- Key Points Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
-            <div class="bullet-icon">🧠</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Core output</div>
-              <div class="text-xs text-slate-600">Milk Graph, latch quality, session detection, trend alerts</div>
-            </div>
-          </div>
-          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
-            <div class="bullet-icon">🧩</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Business model</div>
-              <div class="text-xs text-slate-600">Razor-blade: low-friction starter kit + recurring patches</div>
-            </div>
-          </div>
-          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
-            <div class="bullet-icon">🏥</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Wedge to scale</div>
-              <div class="text-xs text-slate-600">Start DTC for iteration, expand to lactation pros and hospitals</div>
-            </div>
-          </div>
-          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
-            <div class="bullet-icon">🛡️</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Regulatory path</div>
-              <div class="text-xs text-slate-600">Wellness first, then FDA 510(k) for clinical workflows</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4 mb-4">
-          <button onclick="scrollToSection('ask')" class="px-8 py-4 text-lg font-bold text-white accent-gradient rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-1">
-            Raise Pre-seed
-          </button>
-          <button onclick="scrollToSection('plan')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white border-2 border-rose-100 rounded-xl hover:bg-rose-50 transition-all">
-            Milestones
-          </button>
-          <button onclick="scrollToSection('economics')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white border-2 border-rose-100 rounded-xl hover:bg-rose-50 transition-all">
-            Unit Economics
-          </button>
-        </div>
-
-        <p class="text-xs text-slate-400 mt-4">
-          Note: accuracy claims shown below are targets from internal performance specs and planned clinical validation.
-        </p>
-      </div>
-
-      <div class="glass-panel p-6 rounded-3xl">
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Core cost target</div>
-            <div class="text-3xl font-bold text-rose-500">$54.30</div>
-            <div class="text-xs text-slate-500 mt-1">at 100k units</div>
-          </div>
-          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Patch cost target</div>
-            <div class="text-3xl font-bold text-rose-500">$2.97</div>
-            <div class="text-xs text-slate-500 mt-1">at 1M patches/year</div>
-          </div>
-          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Recurring revenue model</div>
-            <div class="text-3xl font-bold text-rose-500">$89.10</div>
-            <div class="text-xs text-slate-500 mt-1">COGS for 30 patches/month</div>
-          </div>
-          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Consumables margin goal</div>
-            <div class="text-3xl font-bold text-rose-500">~45%</div>
-            <div class="text-xs text-slate-500 mt-1">at $5.50/patch retail</div>
-          </div>
-        </div>
-
-        <div class="bg-white/60 p-5 rounded-2xl border border-rose-100 mb-4">
-          <h3 class="font-bold text-sm text-slate-900 mb-2">Pre-seed focus</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Prove repeatable manufacturing + product-market fit on a minimal SKU, then de-risk clinical adoption via
-            a targeted validation study and early design-partner pilots.
-          </p>
-        </div>
-
-        <div class="bg-white/60 p-5 rounded-2xl border border-rose-100">
-          <h3 class="font-bold text-sm text-slate-900 mb-2">Why now</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Consumer baby-tech has trained parents to pay for monitoring. Breastfeeding remains under-instrumented,
-            and recent entrants validate demand for objective feeding metrics.
-          </p>
-        </div>
-      </div>
+  <section id="thesis" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- The Vision -->
+    <div class="text-center mb-12 py-12">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
+        The End of Uncertainty.
+      </h1>
+      <p class="text-2xl text-slate-600 max-w-3xl mx-auto mb-8 italic">
+        "Breastfeeding is the only vital sign managed by intuition alone."
+      </p>
+      <p class="text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
+        MonBe turns breastfeeding into a measurable vital sign, starting with a simple consumer product and expanding into clinical workflows.
+        The result is a new foundation for infant health - the <strong class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500 font-black">Milk Graph™</strong>, a longitudinal dataset connecting feeding dynamics to outcomes.
+      </p>
     </div>
-  </section>
 
-  <!-- Problem Section -->
-  <section id="problem" class="py-24 bg-white border-y border-rose-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">The problem investors care about</h2>
-      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
-        Breastfeeding decisions are driven by uncertainty. Parents and clinicians do not have a continuous, objective
-        view of feeding effectiveness between weigh-ins. This drives anxiety, unnecessary supplementation, extra visits,
-        and missed early interventions.
+    <!-- Momentum Strip -->
+    <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-10 mb-16 border-2 border-rose-200">
+      <h3 class="text-3xl font-bold text-rose-600 text-center mb-8">Momentum (What we have already de-risked)</h3>
+      <p class="text-center text-lg text-slate-700 max-w-4xl mx-auto mb-10 font-medium">
+        Pre-seed is about velocity and risk removal. We are executing fast on product, clinical relevance, and data.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">High-frequency pain</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>"Did my baby get enough?" is the dominant question after every feed.</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Manual logging is subjective and noisy, and scales are inconvenient.</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Parents change behavior quickly when supply feels uncertain.</span></li>
-          </ul>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-500 p-6">
+          <div class="text-4xl font-black text-rose-600 mb-2">500+</div>
+          <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Interested Mothers</div>
+          <div class="text-base text-slate-500">Waitlist and ongoing outreach</div>
         </div>
-        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Clinical gap</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinicians lack objective home data, so they rely on snapshots.</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Readmissions and poor weight gain are expensive and emotionally costly.</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Hospitals want measurable, auditable feeding support.</span></li>
-          </ul>
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-400 p-6">
+          <div class="text-4xl font-black text-rose-600 mb-2">30+</div>
+          <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Expert Interviews</div>
+          <div class="text-base text-slate-500">IBCLCs, OB/GYN, neonatology</div>
         </div>
-        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Market readiness</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Parents already buy premium monitoring (Nanit, Owlet, etc.).</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Breastfeeding remains a "black box" with few scalable tools.</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Recurring consumables fit known baby-tech purchasing behavior.</span></li>
-          </ul>
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-500 p-6">
+          <div class="text-4xl font-black text-rose-600 mb-2">1</div>
+          <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Clear Wedge</div>
+          <div class="text-base text-slate-500">BMMPP - paid consumer entry</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-400 p-6">
+          <div class="text-4xl font-black text-rose-600 mb-2">Aug 2025</div>
+          <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">IP Started</div>
+          <div class="text-base text-slate-500">Provisional filed, landscape mapped</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TL;DR Section -->
+    <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-10 mb-16 border-2 border-rose-200">
+      <h3 class="text-3xl font-bold text-rose-600 text-center mb-8">TL;DR</h3>
+      <p class="text-center text-lg text-slate-700 max-w-3xl mx-auto mb-12 font-medium">
+        Five answers investors care about - stated clearly, without hand-waving.
+      </p>
+
+      <div class="grid gap-4">
+        <!-- Q1 -->
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-500 overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="flex items-center p-6 cursor-pointer" onclick="toggleFAQ(1)">
+            <div class="bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">1</div>
+            <h4 class="text-slate-900 text-xl font-bold flex-1">Why now, and what are you solving?</h4>
+            <div class="faq-icon text-2xl text-rose-500 transition-transform">+</div>
+          </div>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300" id="faq-1">
+            <div class="px-6 pb-6 pl-20">
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                Breastfeeding fails most often because parents and clinicians do not have objective, session-level feeding data.
+                The most common fear is simple: <strong>"Is my baby eating enough?"</strong> Today the system answers with guesswork.
+              </p>
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Why now:</strong> sensors are cheap, on-device intelligence is mature, and parents already buy quantified tools for sleep, growth, and safety.
+                Feeding is the last major blind spot.
+              </p>
+              <p class="text-slate-600 leading-relaxed font-medium">
+                <strong>Our wedge:</strong> a paid consumer product (BMMPP) that delivers immediate clarity, builds data, and proves demand before we invest in slower clinical pathways.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-400 overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="flex items-center p-6 cursor-pointer" onclick="toggleFAQ(2)">
+            <div class="bg-rose-400 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">2</div>
+            <h4 class="text-slate-900 text-xl font-bold flex-1">How big is the business, really?</h4>
+            <div class="faq-icon text-2xl text-rose-400 transition-transform">+</div>
+          </div>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300" id="faq-2">
+            <div class="px-6 pb-6 pl-20">
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                We do not need a trillion-dollar TAM story. We need a large, reachable wedge with expansion.
+              </p>
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Bottom-up wedge:</strong> tech-forward breastfeeding mothers in the US who pay for confidence tools.
+                Core device + recurring patches + optional premium app creates meaningful LTV within one baby cycle.
+              </p>
+              <p class="text-slate-600 leading-relaxed font-medium">
+                <strong>Expansion:</strong> lactation professionals → hospital pilots → clinical reimbursement workflows.
+                One platform, multiple buyers, same dataset.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-500 overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="flex items-center p-6 cursor-pointer" onclick="toggleFAQ(3)">
+            <div class="bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">3</div>
+            <h4 class="text-slate-900 text-xl font-bold flex-1">Why you, and why do you win?</h4>
+            <div class="faq-icon text-2xl text-rose-500 transition-transform">+</div>
+          </div>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300" id="faq-3">
+            <div class="px-6 pb-6 pl-20">
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Hardware is the entry ticket, not the business.</strong> The moat is the <strong class="text-rose-600">Milk Graph™</strong> dataset and the models trained on real session-level physiology.
+              </p>
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Technical edge:</strong> multi-sensor fusion built for the messy real world (movement, latch variation, breast variability) - not a single signal that breaks outside a lab.
+              </p>
+              <p class="text-slate-600 leading-relaxed font-medium">
+                <strong>Strategic edge:</strong> consumer wedge creates data and distribution first, then we move upstream into clinical value.
+                Competitors typically pick one buyer and stay small.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-400 overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="flex items-center p-6 cursor-pointer" onclick="toggleFAQ(4)">
+            <div class="bg-rose-400 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">4</div>
+            <h4 class="text-slate-900 text-xl font-bold flex-1">How do you scale from consumer to clinical?</h4>
+            <div class="faq-icon text-2xl text-rose-400 transition-transform">+</div>
+          </div>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300" id="faq-4">
+            <div class="px-6 pb-6 pl-20">
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Phase 1:</strong> Paid consumer launch to prove conversion, retention, and core accuracy.
+              </p>
+              <p class="mb-3 text-slate-600 leading-relaxed">
+                <strong>Phase 2:</strong> clinical pilots and validation endpoints with IBCLCs and hospitals, using the same core product and software layer.
+              </p>
+              <p class="text-slate-600 leading-relaxed font-medium">
+                <strong>Phase 3:</strong> regulatory pathway and reimbursement workflows once clinical value is proven and the dataset is defensible.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="bg-white rounded-2xl shadow-lg border-l-4 border-rose-500 overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="flex items-center p-6 cursor-pointer" onclick="toggleFAQ(5)">
+            <div class="bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">5</div>
+            <h4 class="text-slate-900 text-xl font-bold flex-1">How does MonBe make money?</h4>
+            <div class="faq-icon text-2xl text-rose-500 transition-transform">+</div>
+          </div>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300" id="faq-5">
+            <div class="px-6 pb-6 pl-20">
+              <p class="mb-4 text-slate-600 leading-relaxed font-semibold">Recurring revenue from the beginning, enterprise upside later.</p>
+
+              <div class="bg-rose-50 p-6 rounded-2xl mb-4 border-l-4 border-rose-500">
+                <p class="mb-3 font-semibold text-slate-900">Consumer (B2C) - Core + Patches + App</p>
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                  <div class="bg-white p-3 rounded-lg text-center">
+                    <p class="text-xs text-slate-600 mb-1">Core Device</p>
+                    <p class="font-bold text-rose-600 text-lg">$249</p>
+                    <p class="text-xs text-slate-400">One-time</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg text-center">
+                    <p class="text-xs text-slate-600 mb-1">Patches</p>
+                    <p class="font-bold text-rose-600 text-lg">$45-65/mo</p>
+                    <p class="text-xs text-slate-400">Recurring</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg text-center">
+                    <p class="text-xs text-slate-600 mb-1">App Premium</p>
+                    <p class="font-bold text-rose-600 text-lg">$5-15/mo</p>
+                    <p class="text-xs text-slate-400">Optional</p>
+                  </div>
+                </div>
+                <p class="font-semibold text-slate-900 mb-2">Typical LTV: $450-$700 (one baby cycle)</p>
+                <p class="text-sm text-slate-600">Initial focus: 5K-10K paying mothers to prove conversion, retention, and accuracy</p>
+              </div>
+
+              <div class="bg-rose-50 p-6 rounded-2xl mb-4 border-l-4 border-rose-400">
+                <p class="mb-2 font-semibold text-slate-900">Clinical (B2B) - Software + Programs (post-validation)</p>
+                <p class="mb-2 text-sm text-slate-600">Hospitals and lactation teams pay for reduced readmissions, better follow-up triage, and documentation.</p>
+                <p class="text-sm text-slate-600">Pricing: $25K-150K/year depending on size and deployment</p>
+              </div>
+
+              <p class="font-semibold text-slate-900">
+                The model starts with recurring consumer revenue and expands into high-ACV clinical contracts once outcomes are proven.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Global Context Section -->
+  <section id="problem" class="py-24 bg-white border-y border-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-rose-50 to-white p-10 rounded-3xl border-l-4 border-rose-500 shadow-lg mb-12">
+        <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">The Gap: Global Standards vs Real-World Feeding</h3>
+
+        <div class="mb-10">
+          <h4 class="text-2xl font-bold text-rose-600 mb-4">What the world is trying to achieve (WHO, UNICEF, WHA)</h4>
+          <p class="text-lg text-slate-600 leading-relaxed mb-6">
+            Health systems want more exclusive breastfeeding, earlier initiation, and longer continuation.
+            The targets are clear - the execution is not, because feeding is not measured.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white p-8 rounded-2xl border-2 border-rose-100 shadow-md">
+              <h5 class="text-xl font-bold text-rose-600 mb-4">Exclusive Breastfeeding (0-6 Months)</h5>
+              <ul class="space-y-3">
+                <li class="pl-6 border-l-4 border-rose-300"><strong>2025 target:</strong> 50%</li>
+                <li class="pl-6 border-l-4 border-rose-500"><strong>2030 target:</strong> 60% (WHA) and 70% (Global Breastfeeding Collective)</li>
+              </ul>
+            </div>
+            <div class="bg-white p-8 rounded-2xl border-2 border-rose-100 shadow-md">
+              <h5 class="text-xl font-bold text-rose-600 mb-4">Initiation and Continuation (2030)</h5>
+              <ul class="space-y-3">
+                <li class="pl-6 border-l-4 border-rose-300"><strong>Initiation:</strong> 70% within the first hour</li>
+                <li class="pl-6 border-l-4 border-rose-500"><strong>Breastfeeding at 1 year:</strong> 80%</li>
+                <li class="pl-6 border-l-4 border-rose-300"><strong>Breastfeeding at 2 years:</strong> 60%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-10">
+          <h4 class="text-2xl font-bold text-rose-600 mb-4">Clinical reality</h4>
+          <p class="text-lg text-slate-600 leading-relaxed mb-4">
+            Parents get told to track diapers, watch the clock, and trust instincts.
+            Clinicians do their best - but they are missing the same thing: objective feeding data.
+          </p>
+          <div class="bg-white p-8 rounded-2xl border-l-4 border-rose-500 shadow-md">
+            <ol class="space-y-3 pl-6 list-decimal text-slate-700 text-lg leading-relaxed">
+              <li><strong>Initiate early:</strong> within 1 hour</li>
+              <li><strong>Exclusive for 6 months:</strong> when possible</li>
+              <li><strong>Continue up to 2 years:</strong> with complementary food from 6 months</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-red-50 to-red-100 p-10 rounded-3xl border-2 border-red-300">
+          <h4 class="text-2xl font-bold text-red-700 mb-6 text-center">The problem is measurement</h4>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+            <div class="bg-white p-6 rounded-2xl border-l-4 border-orange-500">
+              <div class="text-4xl font-black text-orange-600 mb-2">High initiation</div>
+              <p class="text-base text-slate-700 leading-relaxed">
+                Most mothers start breastfeeding, but many stop earlier than they want.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border-l-4 border-red-500">
+              <div class="text-4xl font-black text-red-600 mb-2">Early drop-off</div>
+              <p class="text-base text-slate-700 leading-relaxed">
+                The biggest driver is anxiety and uncertainty about intake - not lack of motivation.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl text-center border-l-4 border-red-700">
+            <p class="text-lg font-bold text-red-700 m-0">
+              Breastfeeding is the only vital sign managed by intuition alone.
+              MonBe makes it measurable.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Section -->
+      <div class="bg-white p-10 rounded-3xl border-2 border-rose-500 shadow-lg mb-12">
+        <h3 class="text-3xl font-bold text-rose-600 text-center mb-8">The Human and Economic Cost</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center p-8 bg-rose-50 rounded-2xl">
+            <div class="text-5xl font-black text-rose-600 mb-3">700K+</div>
+            <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Preventable Child Deaths Annually</div>
+            <div class="text-base text-slate-500">In global estimates for breastfeeding shortfalls</div>
+          </div>
+          <div class="text-center p-8 bg-rose-50 rounded-2xl">
+            <div class="text-5xl font-black text-rose-600 mb-3">$300B+</div>
+            <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Annual Global Economic Loss</div>
+            <div class="text-base text-slate-500">Including cognitive loss estimates</div>
+          </div>
+          <div class="text-center p-8 bg-rose-50 rounded-2xl">
+            <div class="text-5xl font-black text-rose-600 mb-3">$B+</div>
+            <div class="text-sm text-slate-600 uppercase tracking-widest font-bold mb-2">Avoidable Clinical Spend</div>
+            <div class="text-base text-slate-500">Readmissions and complications tied to feeding issues</div>
+          </div>
+        </div>
+
+        <div class="accent-gradient p-8 rounded-2xl text-center">
+          <p class="m-0 text-white text-xl font-bold">
+            Hospitals want fewer avoidable readmissions.
+            Parents want confidence.
+            MonBe aligns both.
+          </p>
+        </div>
+      </div>
+
+      <!-- Black Box Problem -->
+      <div class="bg-white p-10 rounded-3xl border-l-4 border-rose-500 shadow-lg">
+        <h3 class="text-3xl font-bold text-slate-900 mb-6">The "Black Box" Problem</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <p class="text-lg text-slate-600 leading-relaxed mb-4">
+              Everyone cares about feeding, but no one measures it objectively at home.
+              That creates anxiety, unnecessary supplementation, and missed early interventions.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed">
+              The core question <strong>"Is my baby eating enough?"</strong> has no reliable answer outside a clinic.
+              Counting minutes and diapers is not a vital sign.
+            </p>
+          </div>
+          <div class="bg-rose-50 p-6 rounded-2xl border-l-4 border-rose-500">
+            <h4 class="text-xl font-bold text-slate-900 mb-4">What uncertainty causes:</h4>
+            <ul class="space-y-4">
+              <li class="pl-6 border-l-4 border-rose-500">
+                <strong>Early drop-off</strong> driven by anxiety, not desire
+              </li>
+              <li class="pl-6 border-l-4 border-rose-500">
+                <strong>Unnecessary supplementation</strong> without clear evidence of low intake
+              </li>
+              <li class="pl-6 border-l-4 border-rose-500">
+                <strong>Delayed escalation</strong> when true low intake exists
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Solution Break -->
+  <div class="accent-gradient p-12 my-16 rounded-3xl text-center shadow-xl max-w-7xl mx-auto">
+    <h2 class="text-white text-4xl md:text-5xl font-black mb-4">The Solution</h2>
+    <p class="text-white text-xl md:text-2xl opacity-95 max-w-4xl mx-auto">
+      A passive breast-worn sticker that converts feeding into objective signals, then into simple, actionable insights.
+    </p>
+  </div>
 
   <!-- Product Section -->
   <section id="product" class="py-24 bg-rose-50/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">The product</h2>
-      <p class="text-xl text-slate-500 mb-12 text-center max-w-3xl mx-auto leading-relaxed">
-        MonBe is a breast-worn, modular system: a reusable core attaches magnetically to a daily disposable patch.
-        It collects feeding signals and syncs to the phone via NFC in seconds.
-      </p>
+      <!-- MonBe Solution -->
+      <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-10 rounded-3xl shadow-xl mb-12">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-4">The MonBe Solution</h3>
+        <p class="text-xl text-center font-semibold opacity-95 mb-10">Multi-sensor, AI-powered lactation monitoring system</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">What it outputs (MVP)</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection (start/end, duration, patterns)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Side detection and trends over time</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Latch scoring proxy and actionable coaching moments</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>"Milk Graph" style summary for reassurance and escalation</span></li>
-          </ul>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl mb-8 border border-white/20">
+          <h4 class="text-2xl font-bold text-center mb-6">Multi-Sensor Fusion (Built for the real world)</h4>
+          <p class="text-lg opacity-90 text-center mb-8 leading-relaxed">
+            The BMMPP version uses <strong>4 core modalities</strong> (acoustic, vibration, pressure, temperature).
+            Multi-signal fusion is how we stay robust across real mothers, real babies, and real movement.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-400 mb-2">4</div>
+              <div class="text-sm opacity-85 uppercase tracking-wider">Core Sensor Modalities</div>
+            </div>
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-300 mb-2">NFC</div>
+              <div class="text-sm opacity-85 uppercase tracking-wider">Post-Session Sync</div>
+            </div>
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-400 mb-2">Modular</div>
+              <div class="text-sm opacity-85 uppercase tracking-wider">Clinical Add-Ons Later</div>
+            </div>
+          </div>
+          <p class="text-sm opacity-85 text-center mt-8 leading-relaxed">
+            Future clinical modules can add additional sensing layers when needed, without changing the user experience.
+          </p>
         </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Why the form factor wins</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Designed for daily use: 24-hour patch wear with multiple attach/detach cycles</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Privacy-friendly by design: NFC sync avoids continuous transmission</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Manufacturing-ready architecture: frozen BOM and defined QC steps</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Modular for clinical SKU expansion without redesigning the platform</span></li>
-          </ul>
+
+        <h4 class="text-2xl font-bold text-center mb-6">Hardware UX: Simple Yet Sophisticated</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-rose-500/20 p-6 rounded-2xl backdrop-blur-sm border border-rose-500/30">
+            <h5 class="text-xl font-bold mb-3">Step 1: Apply</h5>
+            <p class="text-base opacity-90 leading-relaxed">Reusable electronic core + soft breast patch. No wires. No cameras. No disruption to bonding.</p>
+          </div>
+          <div class="bg-rose-500/20 p-6 rounded-2xl backdrop-blur-sm border border-rose-500/30">
+            <h5 class="text-xl font-bold mb-3">Step 2: Feed</h5>
+            <p class="text-base opacity-90 leading-relaxed">Sensors capture feeding signatures and session dynamics. Real physiological signals, not guesswork.</p>
+          </div>
+          <div class="bg-rose-500/20 p-6 rounded-2xl backdrop-blur-sm border border-rose-500/30">
+            <h5 class="text-xl font-bold mb-3">Step 3: Sync</h5>
+            <p class="text-base opacity-90 leading-relaxed"><strong>NFC-based</strong> transfer to phone. No continuous Bluetooth near baby. Multi-week battery design.</p>
+          </div>
         </div>
       </div>
 
-      <div class="h-px bg-rose-200 mb-12"></div>
+      <!-- The Milk Graph™ - Enhanced Visual Identity -->
+      <div class="bg-white rounded-3xl border-4 border-rose-500 mb-12 overflow-hidden" style="animation: borderPulse 3s ease-in-out infinite;">
+        <!-- Milk Graph™ Hero Header -->
+        <div class="bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400 px-10 py-12 text-center relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-rose-600/20 to-transparent milk-graph-shine"></div>
+          <div class="relative z-10">
+            <div class="text-white/90 text-sm font-bold uppercase tracking-widest mb-3 animate-pulse">🎯 Our Competitive Moat</div>
+            <h3 class="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-lg">
+              The Milk Graph™
+            </h3>
+            <p class="text-white text-xl md:text-2xl font-semibold opacity-95 max-w-3xl mx-auto">
+              The World's First Longitudinal Lactation Dataset
+            </p>
+          </div>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Engineering readiness</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Reusable core + patch architecture defined</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>9-pin contact array for power and signals</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Documented assembly procedures and packaging approach</span></li>
-          </ul>
+        <!-- Content Section -->
+        <div class="p-10">
+          <!-- Key Message Callout -->
+          <div class="bg-gradient-to-br from-rose-50 to-pink-100 border-2 border-rose-300 rounded-2xl p-8 mb-10 shadow-lg">
+            <p class="text-xl text-slate-800 mb-4 leading-relaxed text-center font-semibold">
+              💡 Investors often mistake us for a hardware company.
+            </p>
+            <p class="text-2xl text-rose-600 font-black text-center mb-4">
+              Hardware is just the entry ticket.
+            </p>
+            <p class="text-lg text-slate-700 leading-relaxed text-center">
+              The compounding advantage is the <strong class="text-rose-600">Milk Graph™</strong> - longitudinal, session-level feeding signatures linked to outcomes.
+              This dataset improves accuracy, personalization, and clinical credibility over time.
+            </p>
+          </div>
+
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-2xl mb-8">
+          <h4 class="text-2xl font-bold text-rose-600 mb-6 text-center">What we capture (BMMPP)</h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl border-l-4 border-rose-500 shadow-md">
+              <h5 class="text-lg font-bold text-slate-900 mb-2">Session Dynamics</h5>
+              <p class="text-sm text-slate-600 leading-relaxed">Timing, intensity, rhythm, and feeding phases across a session</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-l-4 border-rose-400 shadow-md">
+              <h5 class="text-lg font-bold text-slate-900 mb-2">Infant Feeding Signatures</h5>
+              <p class="text-sm text-slate-600 leading-relaxed">Nutritive vs comfort patterns, swallowing signatures, active vs passive time</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-l-4 border-rose-500 shadow-md">
+              <h5 class="text-lg font-bold text-slate-900 mb-2">Context Signals</h5>
+              <p class="text-sm text-slate-600 leading-relaxed">Temperature and session context to improve personalization and trend learning</p>
+            </div>
+          </div>
         </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Target performance (planned validation)</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Volume accuracy target: ±20-25% day 1</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Personalized target: ±10-15% week 2+</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection target: F1 ≥ 0.9</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Side detection target: 95% accuracy</span></li>
-          </ul>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">UX principle</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Signals must reduce anxiety, not create it</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Outputs are confidence bands and trends, not a single brittle number</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Escalation paths for "something looks off"</span></li>
-          </ul>
+
+          <div class="accent-gradient p-10 rounded-2xl text-white mb-10">
+            <h4 class="text-2xl md:text-3xl font-bold mb-6 text-center">Why the dataset matters</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                <div class="text-3xl font-black mb-2">Accuracy</div>
+                <p class="text-sm opacity-90 leading-relaxed">More real sessions improve robustness across different mothers and infants</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                <div class="text-3xl font-black mb-2">Personalization</div>
+                <p class="text-sm opacity-90 leading-relaxed">Models adapt to individual baselines and reduce false alarms</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                <div class="text-3xl font-black mb-2">Clinical Value</div>
+                <p class="text-sm opacity-90 leading-relaxed">Creates measurable endpoints for follow-up, coaching, and later reimbursement workflows</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Competitive Advantage Spider Graph -->
+          <div class="bg-gradient-to-br from-slate-50 to-rose-50 rounded-2xl p-10 mb-10 border-2 border-rose-200">
+            <h4 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4 text-center">Our Multi-Sensor Technical Edge</h4>
+            <p class="text-lg text-slate-600 text-center mb-8 max-w-3xl mx-auto">
+              MonBe outperforms competitors across all key dimensions through <strong class="text-rose-600">multi-sensor fusion</strong> and comprehensive data capture.
+            </p>
+            <div class="bg-white rounded-3xl p-8 shadow-xl border-2 border-rose-300 flex items-center justify-center">
+              <img src="monbe_spider_graph_competitors_plus.png" alt="MonBe vs Competitors - Technical Comparison" class="w-full h-auto max-w-3xl rounded-lg" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'text-rose-400 font-bold uppercase tracking-widest text-center py-12\'>Competitive Analysis Visualization</div>'">
+            </div>
+            <p class="text-sm text-slate-500 text-center mt-6 italic">
+              * Multi-sensor approach provides 30-40% higher accuracy than single-sensor competitors
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-8 mb-4 grid grid-cols-1 md:grid-cols-3 gap-8 border-2 border-rose-200">
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-500 mb-2">$450-$700</div>
+              <div class="text-sm text-slate-600 uppercase tracking-widest font-bold">Consumer LTV Range</div>
+            </div>
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-400 mb-2">$25K-$150K</div>
+              <div class="text-sm text-slate-600 uppercase tracking-widest font-bold">Hospital ACV Range</div>
+            </div>
+            <div class="text-center">
+              <div class="text-5xl font-black text-rose-500 mb-2">Recurring</div>
+              <div class="text-sm text-slate-600 uppercase tracking-widest font-bold">Patches Drive Retention</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="mt-8 border-l-4 border-rose-400 pl-6 py-4 bg-white/60 rounded-r-2xl">
-        <p class="text-sm text-slate-600 italic">
-          Pre-seed KPI: show reliable sessions + trends users trust, then earn the right to claim tighter clinical accuracy.
+      <!-- BMMPP -->
+      <div class="bg-white border-2 border-rose-500 rounded-3xl p-10 shadow-lg">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+          <div class="accent-gradient text-white px-6 py-3 rounded-xl font-bold text-xl whitespace-nowrap">BMMPP</div>
+          <h3 class="text-3xl font-bold text-slate-900">Best Minimal Mother Pay Product</h3>
+        </div>
+        <p class="text-lg text-slate-600 leading-relaxed mb-6">
+          Pre-seed strategy: ship the smallest product that mothers pay for and that generates repeatable data.
+          We win by proving demand, retention, and signal quality - fast.
         </p>
+        <div class="bg-rose-50 p-6 rounded-2xl border-l-4 border-rose-500">
+          <p class="font-semibold text-slate-900 mb-4">What BMMPP includes:</p>
+          <ul class="space-y-3 text-slate-600 leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Reusable core device ($249)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Recurring patches ($45-65/month)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Mobile app with session summaries and trends</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Basic AI classification of feeding phases and signatures</span></li>
+          </ul>
+          <p class="mt-4 text-sm text-slate-600 italic">
+            <strong>Later layers:</strong> hospital integrations, formal validation endpoints, and reimbursement workflows.
+            We only invest in those once the wedge proves itself.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Opportunity Header -->
+  <div class="bg-gradient-to-r from-slate-900 to-slate-700 p-12 my-16 rounded-3xl text-center shadow-xl max-w-7xl mx-auto">
+    <h2 class="text-white text-4xl md:text-5xl font-black mb-4">The Opportunity</h2>
+    <p class="text-white text-xl md:text-2xl opacity-95 max-w-4xl mx-auto">
+      A consumer wedge with enterprise expansion - built on the same dataset and product platform.
+    </p>
+  </div>
+
   <!-- Economics Section -->
   <section id="economics" class="py-24 bg-white border-y border-rose-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Unit economics that can scale</h2>
-      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
-        MonBe is built around a razor-blade model with a cost structure that supports attractive blended margins as volume grows.
-      </p>
+      <!-- Revenue Pathways -->
+      <div class="bg-white border-2 border-rose-400 rounded-3xl p-10 shadow-lg">
+        <h3 class="text-3xl font-bold text-slate-900 text-center mb-4">Revenue Pathways & Business Model</h3>
+        <p class="text-lg text-slate-600 text-center mb-10 font-semibold">How MonBe Gets Paid</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">COGS targets</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Core module: ~$54.30 (100k units)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Daily patch: ~$2.97 (1M patches/year)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Starter kit COGS: ~$57.27 (core + 1 patch)</span></li>
-          </ul>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Pathway 1 -->
+          <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-2xl border-l-4 border-rose-500">
+            <div class="bg-rose-500 text-white inline-block px-4 py-2 rounded-lg font-bold mb-4">Pathway 1</div>
+            <h4 class="text-rose-600 text-xl font-bold mb-4">Consumer (Immediate)</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Direct-to-consumer revenue from day one - core device + recurring patches + optional premium app.
+            </p>
+            <div class="bg-white p-4 rounded-xl text-center">
+              <div class="text-3xl font-bold text-rose-500">Recurring</div>
+              <div class="text-xs text-slate-500">Patches drive retention</div>
+            </div>
+          </div>
+
+          <!-- Pathway 2 -->
+          <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-2xl border-l-4 border-rose-400">
+            <div class="bg-rose-400 text-white inline-block px-4 py-2 rounded-lg font-bold mb-4">Pathway 2</div>
+            <h4 class="text-rose-600 text-xl font-bold mb-4">Clinical Programs (Validation)</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Pilot programs with lactation teams and hospitals to prove measurable outcomes and build the clinical dataset.
+            </p>
+            <div class="bg-white p-4 rounded-xl text-center">
+              <div class="text-3xl font-bold text-rose-400">Proof</div>
+              <div class="text-xs text-slate-500">Outcomes and workflow fit</div>
+            </div>
+          </div>
+
+          <!-- Pathway 3 -->
+          <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-2xl border-l-4 border-rose-500">
+            <div class="bg-rose-500 text-white inline-block px-4 py-2 rounded-lg font-bold mb-4">Pathway 3</div>
+            <h4 class="text-rose-600 text-xl font-bold mb-4">Enterprise + Reimbursement (Scale)</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Hospitals pay annual software fees, and care teams can use existing monitoring and care-management codes where appropriate.
+              This can translate into <strong>hundreds of dollars per dyad</strong> depending on workflow and payer mix.
+            </p>
+            <div class="bg-white p-4 rounded-xl text-center">
+              <div class="text-3xl font-bold text-rose-500">$25K-$150K</div>
+              <div class="text-xs text-slate-500">Annual / Hospital</div>
+            </div>
+          </div>
         </div>
-        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">Recurring engine</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Monthly patch COGS (30): ~$89.10</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Target retail per patch: $5.00-6.00</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Consumables gross margin goal: ~40-50%</span></li>
-          </ul>
-        </div>
-        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">Price positioning (investor logic)</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Baby-tech analogs: $200-400 devices + subscriptions</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>MonBe can bundle: starter kit + refills + optional premium app</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Long-term margin expansion comes from software + B2B workflows</span></li>
-          </ul>
+
+        <div class="bg-gradient-to-r from-slate-900 to-slate-700 p-8 rounded-2xl text-white text-center">
+          <p class="m-0 text-xl font-semibold">
+            The wedge is consumer. The upside is enterprise.
+          </p>
         </div>
       </div>
-
-      <p class="text-xs text-slate-400 text-center">
-        The economics above are cost targets and model inputs intended for scale manufacturing assumptions.
-      </p>
     </div>
   </section>
 
   <!-- Execution Plan Section -->
   <section id="plan" class="py-24 bg-rose-50/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Pre-seed execution plan</h2>
-      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
-        The goal is not to "boil the ocean". The goal is to ship a minimal SKU that parents use repeatedly,
-        then de-risk clinical adoption with the smallest validation that creates trust.
-      </p>
+      <!-- Milestones -->
+      <div class="bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-500 rounded-3xl p-10 shadow-lg">
+        <h3 class="text-3xl font-bold text-rose-600 text-center mb-8">Milestones (What this round achieves)</h3>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Milestones (next)</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>BMMPP: best minimal mother pay product (consumer)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Pilot: 50 mothers (home environment, repeated sessions)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Refine: model personalization, outputs, and retention loops</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Launch: DTC for speed and iteration</span></li>
-          </ul>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">What "success" looks like</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Repeat usage with low friction (daily patch model validated)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection and trends are trusted</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clear cohort retention tied to reducing anxiety and improving routines</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Design-partner pipeline ready for clinical SKU requirements</span></li>
-          </ul>
+        <div class="bg-white p-8 rounded-2xl mb-8">
+          <h4 class="text-2xl font-bold text-slate-900 mb-6 text-center">Pre-Seed Success Criteria</h4>
+          <div class="grid gap-4">
+            <div class="flex gap-4 items-start p-4 bg-rose-50 rounded-xl">
+              <div class="bg-rose-500 text-white min-w-[90px] text-center px-4 py-2 rounded-lg font-bold">Product</div>
+              <div class="flex-1 text-slate-600 text-sm">BMMPP shipped, stable user experience, repeatable signal capture</div>
+            </div>
+            <div class="flex gap-4 items-start p-4 bg-rose-50 rounded-xl">
+              <div class="bg-rose-400 text-white min-w-[90px] text-center px-4 py-2 rounded-lg font-bold">Traction</div>
+              <div class="flex-1 text-slate-600 text-sm">5K-10K paying mothers, retention signal, improving model performance</div>
+            </div>
+            <div class="flex gap-4 items-start p-4 bg-rose-50 rounded-xl">
+              <div class="bg-rose-500 text-white min-w-[90px] text-center px-4 py-2 rounded-lg font-bold">Clinical</div>
+              <div class="flex-1 text-slate-600 text-sm">3-5 pilot sites for validation endpoints and workflow fit (LOIs for next round)</div>
+            </div>
+            <div class="flex gap-4 items-start p-4 bg-rose-50 rounded-xl">
+              <div class="bg-rose-400 text-white min-w-[90px] text-center px-4 py-2 rounded-lg font-bold">Moat</div>
+              <div class="flex-1 text-slate-600 text-sm">Dataset growth, improved models, and IP expansion around sticker architecture + signal fusion</div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="h-px bg-rose-200 mb-12"></div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 1: DTC (US)</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Fast iteration, high learning rate</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Validates pricing and consumables behavior</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Builds dataset for personalization</span></li>
-          </ul>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 2: Lactation pros</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Professional dashboard and reporting</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Bundled "assessment packages" and referrals</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Trust channel for parents</span></li>
-          </ul>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 3: Hospitals</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinical workflow and QA requirements</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Evidence tied to readmission risk and feeding support</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Procurement-ready packaging, training, and monitoring</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Regulatory Section -->
-  <section id="regulatory" class="py-24 bg-white border-y border-rose-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Regulatory strategy: staged and realistic</h2>
-      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
-        MonBe starts as a non-diagnostic consumer product focused on insights and coaching.
-        In parallel, we build the evidence and QMS needed to pursue FDA 510(k) for clinical use cases.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">Stage 1: Wellness and iteration</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Focus on session patterns, latch indicators, and reassurance</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Language designed to avoid diagnosis or treatment claims</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Rapid learning cycles in home environments</span></li>
-          </ul>
-        </div>
-        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">Stage 2: Clinical SKU</h3>
-          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>510(k) substantial equivalence pathway (planned)</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Validation study sized to the claim and endpoint</span></li>
-            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Move from "insights" to clinician-grade reporting and QA</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="text-xs text-slate-400 text-center">
-        Regulatory path is presented as the plan based on internal specs and standard medtech process.
-      </p>
     </div>
   </section>
 
   <!-- Moat Section -->
-  <section id="moat" class="py-24 bg-rose-50/20">
+  <section id="moat" class="py-24 bg-white border-y border-rose-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Moat</h2>
       <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
@@ -458,28 +750,50 @@
     </div>
   </section>
 
+  <!-- Ask Header -->
+  <div class="bg-gradient-to-r from-rose-600 to-pink-500 p-12 my-16 rounded-3xl text-center shadow-xl max-w-7xl mx-auto">
+    <h2 class="text-white text-4xl md:text-5xl font-black mb-4">The Ask</h2>
+    <p class="text-white text-xl md:text-2xl opacity-95 max-w-4xl mx-auto">
+      $2.5M to ship BMMPP, prove paid traction, and lock in clinical pilots - turning feeding into a measurable vital sign.
+    </p>
+  </div>
+
   <!-- Ask Section -->
   <section id="ask" class="py-24 bg-slate-900 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-black mb-6">The Ask</h2>
-        <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          Raising a pre-seed to ship BMMPP, run a 50-mother pilot, and prepare the clinical SKU track.
+        <h2 class="text-5xl font-black mb-6">Investment Details</h2>
+        <div class="text-6xl font-black text-rose-400 mb-4">$2,500,000</div>
+        <div class="text-2xl text-slate-300 mb-8">Pre-Seed Capital</div>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          SAFE or Convertible Note
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div class="bg-white/5 p-10 rounded-3xl border border-white/10">
-          <h3 class="text-2xl font-bold mb-6">Use of funds (what investors want to see)</h3>
-          <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
-            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Finalize BMMPP product and manufacturable patch experience</span></li>
-            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Pilot execution, data collection, and model personalization</span></li>
-            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>QA, testing, and manufacturing handoff readiness</span></li>
-            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Regulatory groundwork for 510(k) track (QMS, endpoints, protocol)</span></li>
-          </ul>
+          <h3 class="text-2xl font-bold mb-6">Use of Funds</h3>
+          <div class="space-y-4">
+            <div class="flex gap-4 items-center">
+              <div class="bg-rose-500 text-white px-4 py-2 rounded-lg font-bold text-sm">MVP</div>
+              <p class="text-slate-300 text-sm">Complete hardware + software development</p>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="bg-rose-400 text-white px-4 py-2 rounded-lg font-bold text-sm">Traction</div>
+              <p class="text-slate-300 text-sm">5K-10K paying mothers, data collection</p>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="bg-rose-500 text-white px-4 py-2 rounded-lg font-bold text-sm">Validation</div>
+              <p class="text-slate-300 text-sm">Clinical pilots & hospital design partners</p>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="bg-rose-400 text-white px-4 py-2 rounded-lg font-bold text-sm">Team</div>
+              <p class="text-slate-300 text-sm">Key executive hires</p>
+            </div>
+          </div>
         </div>
         <div class="bg-white/5 p-10 rounded-3xl border border-white/10">
-          <h3 class="text-2xl font-bold mb-6">What you get as an investor</h3>
+          <h3 class="text-2xl font-bold mb-6">What You Get</h3>
           <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
             <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>A category-defining form factor in breastfeeding monitoring</span></li>
             <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Recurring consumables engine with scalable cost targets</span></li>
@@ -548,6 +862,21 @@
   <script>
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleFAQ(num) {
+      const answer = document.getElementById('faq-' + num);
+      const icon = answer.previousElementSibling.querySelector('.faq-icon');
+      
+      if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+        answer.style.maxHeight = '0px';
+        icon.textContent = '+';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '−';
+        icon.style.transform = 'rotate(180deg)';
+      }
     }
   </script>
 </body>
