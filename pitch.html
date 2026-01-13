@@ -4,831 +4,551 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MonBe - Investor Pitch</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
-    :root{
-      --peach: #f5b7a6;
-      --peach-dark: #e59a86;
-      --cream: #fff9f5;
-      --ink: #2a1f1f;
-      --muted: rgba(42,31,31,.72);
-      --card: rgba(255,255,255,.78);
-      --glass: rgba(255,255,255,.62);
-      --shadow: 0 10px 30px rgba(42,31,31,.12);
-      --radius: 18px;
-      --radius-lg: 24px;
-      --max: 980px;
-      --border: rgba(229,154,134,.25);
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 20% 0%, rgba(245,183,166,.45), transparent 60%),
-                  radial-gradient(900px 700px at 100% 20%, rgba(245,183,166,.35), transparent 55%),
-                  linear-gradient(180deg, #fff, var(--cream));
-      color: var(--ink);
-      line-height:1.5;
-      overflow-x:hidden;
-    }
-
-    .container{
-      width: min(var(--max), 92vw);
-      margin: 0 auto;
-      padding: 28px 0 80px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding: 12px 14px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(229,154,134,.22);
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 6px 18px rgba(42,31,31,.08);
-      position: sticky;
-      top: 14px;
-      z-index: 50;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .logo{
-      width:34px;height:34px;border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.3) 55%),
-                  linear-gradient(135deg, var(--peach), var(--peach-dark));
-      display:grid;place-items:center;
-      box-shadow: 0 10px 18px rgba(229,154,134,.35);
-      border: 1px solid rgba(255,255,255,.55);
-    }
-    .logo svg{opacity:.95}
-    .brand h1{
-      font-size: 15px;
-      margin:0;
-      letter-spacing:.2px;
-    }
-    .brand p{
-      margin:0;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .nav{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .nav a{
-      text-decoration:none;
-      font-size: 12px;
-      color: var(--ink);
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: .2s ease;
-      opacity:.9;
-    }
-    .nav a:hover{
-      border-color: rgba(229,154,134,.35);
-      background: rgba(255,255,255,.45);
-      opacity:1;
-    }
-    .cta{
-      margin-left:4px;
-      background: linear-gradient(135deg, var(--peach), var(--peach-dark));
-      color: white !important;
-      border: none !important;
-      box-shadow: 0 12px 22px rgba(229,154,134,.35);
-      font-weight:600;
-    }
-    .cta:hover{filter: brightness(1.02); transform: translateY(-1px);}
-
-    .hero{
-      margin-top: 22px;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .hero{grid-template-columns: 1fr; }
-    }
-
-    .panel{
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.60);
-      border: 1px solid rgba(229,154,134,.22);
-      box-shadow: var(--shadow);
+    /* Custom Utilities */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(12px);
-      overflow:hidden;
-      position:relative;
+      border: 1px solid rgba(251, 227, 227, 0.8);
+      box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.05);
     }
-    .panel::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(circle at 20% 0%, rgba(245,183,166,.35), transparent 55%),
-                  radial-gradient(circle at 90% 30%, rgba(245,183,166,.25), transparent 50%);
-      pointer-events:none;
-      z-index:0;
+    .nav-item.active {
+      color: #e11d48;
+      border-bottom: 2px solid #e11d48;
     }
-    .panel > *{position:relative; z-index:1;}
-
-    .hero-left{
-      padding: 28px 26px 24px;
+    .bg-baby-pink { 
+      background-color: #fffafa; 
     }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(245,183,166,.18);
-      border: 1px solid rgba(229,154,134,.25);
-      color: rgba(42,31,31,.88);
-      font-size: 12px;
-      font-weight:600;
-      letter-spacing:.15px;
-    }
-    .tag span.dot{
-      width:8px;height:8px;border-radius:99px;
-      background: linear-gradient(135deg, var(--peach), var(--peach-dark));
-      box-shadow: 0 6px 10px rgba(229,154,134,.35);
+    .accent-gradient {
+      background: linear-gradient(135deg, #fb7185 0%, #fda4af 100%);
     }
 
-    .hero h2{
-      margin: 14px 0 8px;
-      font-size: 38px;
-      line-height: 1.1;
-      letter-spacing:-.5px;
+    .card-hover:hover {
+      background-color: #fff1f2;
     }
-    .hero h2 .accent{
-      background: linear-gradient(135deg, var(--peach-dark), var(--peach));
-      -webkit-background-clip: text;
-      background-clip:text;
-      color: transparent;
-    }
-    .hero .sub{
-      margin: 0 0 16px;
-      font-size: 15.5px;
-      color: var(--muted);
-      max-width: 52ch;
-    }
-
-    .bullets{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    @media (max-width: 520px){
-      .bullets{grid-template-columns:1fr;}
-      .hero h2{font-size: 32px;}
-    }
-    .bullet{
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(229,154,134,.18);
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .icon{
-      width: 28px;height:28px;border-radius: 10px;
-      background: rgba(245,183,166,.22);
-      border: 1px solid rgba(229,154,134,.25);
-      display:grid;place-items:center;
+    .bullet-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: rgba(251, 113, 133, 0.15);
+      border: 1px solid rgba(251, 113, 133, 0.25);
+      display: grid;
+      place-items: center;
       flex: 0 0 auto;
-    }
-    .bullet b{display:block; font-size: 12.5px; margin-bottom:2px;}
-    .bullet span{font-size: 12px; color: var(--muted);}
-
-    .hero-actions{
-      display:flex;
-      gap:10px;
-      margin-top: 18px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      text-decoration:none;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(229,154,134,.25);
-      background: rgba(255,255,255,.55);
-      color: var(--ink);
-      font-size: 13px;
-      font-weight:600;
-      transition:.2s ease;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 10px 18px rgba(42,31,31,.08);}
-    .btn.primary{
-      background: linear-gradient(135deg, var(--peach), var(--peach-dark));
-      color:white;
-      border:none;
-      box-shadow: 0 12px 22px rgba(229,154,134,.35);
-    }
-
-    .hero-right{
-      padding: 20px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-    }
-    .statgrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .stat{
-      padding: 14px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(229,154,134,.18);
-    }
-    .stat .k{
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .stat .v{
-      font-size: 18px;
-      font-weight:800;
-      letter-spacing:-.2px;
-    }
-    .stat .n{
-      font-size: 11px;
-      color: rgba(42,31,31,.68);
-      margin-top: 4px;
-    }
-
-    .mini{
-      padding: 14px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(229,154,134,.18);
-    }
-    .mini h3{
-      margin:0 0 6px;
-      font-size: 13px;
-      letter-spacing:.1px;
-    }
-    .mini p{
-      margin:0;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    section{
-      margin-top: 18px;
-      padding: 22px 22px;
-    }
-    section h3{
-      margin:0 0 8px;
-      font-size: 18px;
-      letter-spacing:-.2px;
-    }
-    section p{margin:0; color: var(--muted); font-size: 14px;}
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 14px;
-    }
-    @media (max-width: 900px){
-      .grid3{grid-template-columns:1fr;}
-    }
-    .card{
-      padding: 16px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.58);
-      border: 1px solid rgba(229,154,134,.18);
-    }
-    .card h4{
-      margin:0 0 6px;
-      font-size: 13px;
-    }
-    .card ul{
-      margin: 8px 0 0;
-      padding-left: 16px;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-    .card li{margin: 6px 0;}
-    .divider{
-      height:1px;
-      background: rgba(229,154,134,.18);
-      margin: 16px 0;
-    }
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    @media (max-width: 900px){
-      .two{grid-template-columns:1fr;}
-    }
-    .quote{
-      border-left: 3px solid rgba(229,154,134,.55);
-      padding-left: 12px;
-      color: rgba(42,31,31,.72);
-      font-size: 13px;
-      margin-top: 10px;
-    }
-    .footer{
-      margin-top: 24px;
-      text-align:center;
-      color: rgba(42,31,31,.55);
-      font-size: 12px;
-    }
-    .pill{
-      display:inline-flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .pill span{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(245,183,166,.18);
-      border: 1px solid rgba(229,154,134,.22);
-      color: rgba(42,31,31,.78);
-    }
-    .fineprint{
-      font-size: 11px;
-      color: rgba(42,31,31,.55);
-      margin-top: 10px;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="topbar">
-      <div class="brand">
-        <div class="logo" aria-label="MonBe logo">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M12 21s-7-4.4-9.5-8.8C.8 8.7 2.5 6 5.6 6c1.8 0 3 .9 3.8 2 0 0 1.2-2 3.8-2 3.1 0 4.8 2.7 3.1 6.2C19 16.6 12 21 12 21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+<body class="bg-baby-pink text-slate-800 font-sans leading-relaxed selection:bg-rose-100">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-rose-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <span class="text-2xl font-bold tracking-tight text-rose-500">MonBe<span class="text-rose-200 font-light">.Inc</span></span>
         </div>
-        <div>
-          <h1>MonBe</h1>
-          <p>Breastfeeding monitoring, redesigned for scale</p>
+        <div class="hidden md:flex space-x-8 items-center" id="nav-links">
+          <button onclick="scrollToSection('thesis')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Thesis</button>
+          <button onclick="scrollToSection('product')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Product</button>
+          <button onclick="scrollToSection('economics')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Economics</button>
+          <button onclick="scrollToSection('plan')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Plan</button>
+          <button onclick="scrollToSection('moat')" class="nav-item px-3 py-2 text-sm font-medium hover:text-rose-400 transition-colors">Moat</button>
+          <button onclick="scrollToSection('ask')" class="nav-item px-3 py-2 text-sm font-bold text-white accent-gradient rounded-full hover:opacity-90 transition-all shadow-md">The Ask</button>
         </div>
-      </div>
-      <div class="nav">
-        <a href="#thesis">Thesis</a>
-        <a href="#product">Product</a>
-        <a href="#economics">Economics</a>
-        <a href="#plan">Plan</a>
-        <a href="#regulatory">Regulatory</a>
-        <a href="#moat">Moat</a>
-        <a class="cta" href="#ask">The Ask</a>
       </div>
     </div>
+  </nav>
 
-    <div class="hero" id="thesis">
-      <div class="panel hero-left">
-        <div class="tag"><span class="dot"></span> Pre-seed: hardware + consumables + AI insights</div>
-        <h2>The first <span class="accent">Milk Graph</span> for breastfeeding</h2>
-        <p class="sub">
-          MonBe turns breastfeeding from a black box into measurable signals.
-          A modular system (reusable core + daily patch) captures feeding mechanics and converts them into simple,
+  <!-- Hero Section -->
+  <section id="thesis" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex flex-col justify-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-600 uppercase bg-rose-100 rounded-full">
+          Pre-Seed: Hardware + Consumables + AI Insights
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
+          The first <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Milk Graph</span>
+        </h1>
+        <p class="text-xl text-slate-500 mb-10 max-w-xl leading-relaxed">
+          MonBe turns breastfeeding from a <strong>black box into measurable signals</strong>. 
+          A modular system (reusable core + daily patch) captures feeding mechanics and converts them into simple, 
           actionable insights for parents and, later, clinicians.
         </p>
 
-        <div class="bullets">
-          <div class="bullet">
-            <div class="icon">🧠</div>
+        <!-- Key Points Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
+            <div class="bullet-icon">🧠</div>
             <div>
-              <b>Core output</b>
-              <span>Milk Graph, latch quality, session detection, trend alerts</span>
+              <div class="font-bold text-sm text-slate-900">Core output</div>
+              <div class="text-xs text-slate-600">Milk Graph, latch quality, session detection, trend alerts</div>
             </div>
           </div>
-          <div class="bullet">
-            <div class="icon">🧩</div>
+          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
+            <div class="bullet-icon">🧩</div>
             <div>
-              <b>Business model</b>
-              <span>Razor-blade: low-friction starter kit + recurring patches</span>
+              <div class="font-bold text-sm text-slate-900">Business model</div>
+              <div class="text-xs text-slate-600">Razor-blade: low-friction starter kit + recurring patches</div>
             </div>
           </div>
-          <div class="bullet">
-            <div class="icon">🏥</div>
+          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
+            <div class="bullet-icon">🏥</div>
             <div>
-              <b>Wedge to scale</b>
-              <span>Start DTC for iteration, expand to lactation pros and hospitals</span>
+              <div class="font-bold text-sm text-slate-900">Wedge to scale</div>
+              <div class="text-xs text-slate-600">Start DTC for iteration, expand to lactation pros and hospitals</div>
             </div>
           </div>
-          <div class="bullet">
-            <div class="icon">🛡️</div>
+          <div class="flex gap-3 p-3 bg-white/60 rounded-2xl border border-rose-100">
+            <div class="bullet-icon">🛡️</div>
             <div>
-              <b>Regulatory path</b>
-              <span>Wellness first, then FDA 510(k) for clinical workflows</span>
+              <div class="font-bold text-sm text-slate-900">Regulatory path</div>
+              <div class="text-xs text-slate-600">Wellness first, then FDA 510(k) for clinical workflows</div>
             </div>
           </div>
         </div>
 
-        <div class="hero-actions">
-          <a class="btn primary" href="#ask">Raise Pre-seed</a>
-          <a class="btn" href="#plan">Milestones</a>
-          <a class="btn" href="#economics">Unit economics</a>
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <button onclick="scrollToSection('ask')" class="px-8 py-4 text-lg font-bold text-white accent-gradient rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-1">
+            Raise Pre-seed
+          </button>
+          <button onclick="scrollToSection('plan')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white border-2 border-rose-100 rounded-xl hover:bg-rose-50 transition-all">
+            Milestones
+          </button>
+          <button onclick="scrollToSection('economics')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white border-2 border-rose-100 rounded-xl hover:bg-rose-50 transition-all">
+            Unit Economics
+          </button>
         </div>
 
-        <div class="fineprint">
+        <p class="text-xs text-slate-400 mt-4">
           Note: accuracy claims shown below are targets from internal performance specs and planned clinical validation.
-        </div>
+        </p>
       </div>
 
-      <div class="panel hero-right">
-        <div class="statgrid">
-          <div class="stat">
-            <div class="k">Core cost target</div>
-            <div class="v">$54.30</div>
-            <div class="n">at 100k units</div>
+      <div class="glass-panel p-6 rounded-3xl">
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Core cost target</div>
+            <div class="text-3xl font-bold text-rose-500">$54.30</div>
+            <div class="text-xs text-slate-500 mt-1">at 100k units</div>
           </div>
-          <div class="stat">
-            <div class="k">Patch cost target</div>
-            <div class="v">$2.97</div>
-            <div class="n">at 1M patches/year</div>
+          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Patch cost target</div>
+            <div class="text-3xl font-bold text-rose-500">$2.97</div>
+            <div class="text-xs text-slate-500 mt-1">at 1M patches/year</div>
           </div>
-          <div class="stat">
-            <div class="k">Recurring revenue model</div>
-            <div class="v">$89.10</div>
-            <div class="n">COGS for 30 patches/month</div>
+          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Recurring revenue model</div>
+            <div class="text-3xl font-bold text-rose-500">$89.10</div>
+            <div class="text-xs text-slate-500 mt-1">COGS for 30 patches/month</div>
           </div>
-          <div class="stat">
-            <div class="k">Consumables margin goal</div>
-            <div class="v">~45%</div>
-            <div class="n">at $5.50/patch retail</div>
+          <div class="bg-white/60 p-4 rounded-2xl border border-rose-100 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Consumables margin goal</div>
+            <div class="text-3xl font-bold text-rose-500">~45%</div>
+            <div class="text-xs text-slate-500 mt-1">at $5.50/patch retail</div>
           </div>
         </div>
 
-        <div class="mini">
-          <h3>Pre-seed focus</h3>
-          <p>
+        <div class="bg-white/60 p-5 rounded-2xl border border-rose-100 mb-4">
+          <h3 class="font-bold text-sm text-slate-900 mb-2">Pre-seed focus</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
             Prove repeatable manufacturing + product-market fit on a minimal SKU, then de-risk clinical adoption via
             a targeted validation study and early design-partner pilots.
           </p>
         </div>
 
-        <div class="mini">
-          <h3>Why now</h3>
-          <p>
+        <div class="bg-white/60 p-5 rounded-2xl border border-rose-100">
+          <h3 class="font-bold text-sm text-slate-900 mb-2">Why now</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
             Consumer baby-tech has trained parents to pay for monitoring. Breastfeeding remains under-instrumented,
             and recent entrants validate demand for objective feeding metrics.
           </p>
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="panel" id="problem">
-      <h3>The problem investors care about</h3>
-      <p>
+  <!-- Problem Section -->
+  <section id="problem" class="py-24 bg-white border-y border-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">The problem investors care about</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         Breastfeeding decisions are driven by uncertainty. Parents and clinicians do not have a continuous, objective
         view of feeding effectiveness between weigh-ins. This drives anxiety, unnecessary supplementation, extra visits,
         and missed early interventions.
       </p>
 
-      <div class="grid3">
-        <div class="card">
-          <h4>High-frequency pain</h4>
-          <ul>
-            <li>"Did my baby get enough?" is the dominant question after every feed.</li>
-            <li>Manual logging is subjective and noisy, and scales are inconvenient.</li>
-            <li>Parents change behavior quickly when supply feels uncertain.</li>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">High-frequency pain</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>"Did my baby get enough?" is the dominant question after every feed.</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Manual logging is subjective and noisy, and scales are inconvenient.</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Parents change behavior quickly when supply feels uncertain.</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Clinical gap</h4>
-          <ul>
-            <li>Clinicians lack objective home data, so they rely on snapshots.</li>
-            <li>Readmissions and poor weight gain are expensive and emotionally costly.</li>
-            <li>Hospitals want measurable, auditable feeding support.</li>
+        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Clinical gap</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinicians lack objective home data, so they rely on snapshots.</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Readmissions and poor weight gain are expensive and emotionally costly.</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Hospitals want measurable, auditable feeding support.</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Market readiness</h4>
-          <ul>
-            <li>Parents already buy premium monitoring (Nanit, Owlet, etc.).</li>
-            <li>Breastfeeding remains a "black box" with few scalable tools.</li>
-            <li>Recurring consumables fit known baby-tech purchasing behavior.</li>
+        <div class="glass-panel p-8 rounded-3xl card-hover transition-colors">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Market readiness</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Parents already buy premium monitoring (Nanit, Owlet, etc.).</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Breastfeeding remains a "black box" with few scalable tools.</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Recurring consumables fit known baby-tech purchasing behavior.</span></li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="panel" id="product">
-      <h3>The product</h3>
-      <p>
+  <!-- Product Section -->
+  <section id="product" class="py-24 bg-rose-50/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">The product</h2>
+      <p class="text-xl text-slate-500 mb-12 text-center max-w-3xl mx-auto leading-relaxed">
         MonBe is a breast-worn, modular system: a reusable core attaches magnetically to a daily disposable patch.
         It collects feeding signals and syncs to the phone via NFC in seconds.
       </p>
 
-      <div class="two">
-        <div class="card">
-          <h4>What it outputs (MVP)</h4>
-          <ul>
-            <li>Session detection (start/end, duration, patterns)</li>
-            <li>Side detection and trends over time</li>
-            <li>Latch scoring proxy and actionable coaching moments</li>
-            <li>"Milk Graph" style summary for reassurance and escalation</li>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">What it outputs (MVP)</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection (start/end, duration, patterns)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Side detection and trends over time</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Latch scoring proxy and actionable coaching moments</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>"Milk Graph" style summary for reassurance and escalation</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Why the form factor wins</h4>
-          <ul>
-            <li>Designed for daily use: 24-hour patch wear with multiple attach/detach cycles</li>
-            <li>Privacy-friendly by design: NFC sync avoids continuous transmission</li>
-            <li>Manufacturing-ready architecture: frozen BOM and defined QC steps</li>
-            <li>Modular for clinical SKU expansion without redesigning the platform</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="grid3">
-        <div class="card">
-          <h4>Engineering readiness</h4>
-          <ul>
-            <li>Reusable core + patch architecture defined</li>
-            <li>9-pin contact array for power and signals</li>
-            <li>Documented assembly procedures and packaging approach</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Target performance (planned validation)</h4>
-          <ul>
-            <li>Volume accuracy target: ±20-25% day 1</li>
-            <li>Personalized target: ±10-15% week 2+</li>
-            <li>Session detection target: F1 ≥ 0.9</li>
-            <li>Side detection target: 95% accuracy</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>UX principle</h4>
-          <ul>
-            <li>Signals must reduce anxiety, not create it</li>
-            <li>Outputs are confidence bands and trends, not a single brittle number</li>
-            <li>Escalation paths for "something looks off"</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Why the form factor wins</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Designed for daily use: 24-hour patch wear with multiple attach/detach cycles</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Privacy-friendly by design: NFC sync avoids continuous transmission</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Manufacturing-ready architecture: frozen BOM and defined QC steps</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Modular for clinical SKU expansion without redesigning the platform</span></li>
           </ul>
         </div>
       </div>
 
-      <div class="quote">
-        Pre-seed KPI: show reliable sessions + trends users trust, then earn the right to claim tighter clinical accuracy.
-      </div>
-    </section>
+      <div class="h-px bg-rose-200 mb-12"></div>
 
-    <section class="panel" id="economics">
-      <h3>Unit economics that can scale</h3>
-      <p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Engineering readiness</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Reusable core + patch architecture defined</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>9-pin contact array for power and signals</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Documented assembly procedures and packaging approach</span></li>
+          </ul>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Target performance (planned validation)</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Volume accuracy target: ±20-25% day 1</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Personalized target: ±10-15% week 2+</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection target: F1 ≥ 0.9</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Side detection target: 95% accuracy</span></li>
+          </ul>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">UX principle</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Signals must reduce anxiety, not create it</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Outputs are confidence bands and trends, not a single brittle number</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Escalation paths for "something looks off"</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 border-l-4 border-rose-400 pl-6 py-4 bg-white/60 rounded-r-2xl">
+        <p class="text-sm text-slate-600 italic">
+          Pre-seed KPI: show reliable sessions + trends users trust, then earn the right to claim tighter clinical accuracy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economics Section -->
+  <section id="economics" class="py-24 bg-white border-y border-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Unit economics that can scale</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         MonBe is built around a razor-blade model with a cost structure that supports attractive blended margins as volume grows.
       </p>
 
-      <div class="grid3">
-        <div class="card">
-          <h4>COGS targets</h4>
-          <ul>
-            <li>Core module: ~$54.30 (100k units)</li>
-            <li>Daily patch: ~$2.97 (1M patches/year)</li>
-            <li>Starter kit COGS: ~$57.27 (core + 1 patch)</li>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">COGS targets</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Core module: ~$54.30 (100k units)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Daily patch: ~$2.97 (1M patches/year)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Starter kit COGS: ~$57.27 (core + 1 patch)</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Recurring engine</h4>
-          <ul>
-            <li>Monthly patch COGS (30): ~$89.10</li>
-            <li>Target retail per patch: $5.00-6.00</li>
-            <li>Consumables gross margin goal: ~40-50%</li>
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">Recurring engine</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Monthly patch COGS (30): ~$89.10</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Target retail per patch: $5.00-6.00</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Consumables gross margin goal: ~40-50%</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Price positioning (investor logic)</h4>
-          <ul>
-            <li>Baby-tech analogs: $200-400 devices + subscriptions</li>
-            <li>MonBe can bundle: starter kit + refills + optional premium app</li>
-            <li>Long-term margin expansion comes from software + B2B workflows</li>
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">Price positioning (investor logic)</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Baby-tech analogs: $200-400 devices + subscriptions</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>MonBe can bundle: starter kit + refills + optional premium app</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Long-term margin expansion comes from software + B2B workflows</span></li>
           </ul>
         </div>
       </div>
 
-      <div class="fineprint">
+      <p class="text-xs text-slate-400 text-center">
         The economics above are cost targets and model inputs intended for scale manufacturing assumptions.
-      </div>
-    </section>
+      </p>
+    </div>
+  </section>
 
-    <section class="panel" id="plan">
-      <h3>Pre-seed execution plan</h3>
-      <p>
+  <!-- Execution Plan Section -->
+  <section id="plan" class="py-24 bg-rose-50/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Pre-seed execution plan</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         The goal is not to "boil the ocean". The goal is to ship a minimal SKU that parents use repeatedly,
         then de-risk clinical adoption with the smallest validation that creates trust.
       </p>
 
-      <div class="two">
-        <div class="card">
-          <h4>Milestones (next)</h4>
-          <ul>
-            <li>BMMPP: best minimal mother pay product (consumer)</li>
-            <li>Pilot: 50 mothers (home environment, repeated sessions)</li>
-            <li>Refine: model personalization, outputs, and retention loops</li>
-            <li>Launch: DTC for speed and iteration</li>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Milestones (next)</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>BMMPP: best minimal mother pay product (consumer)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Pilot: 50 mothers (home environment, repeated sessions)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Refine: model personalization, outputs, and retention loops</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Launch: DTC for speed and iteration</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>What "success" looks like</h4>
-          <ul>
-            <li>Repeat usage with low friction (daily patch model validated)</li>
-            <li>Session detection and trends are trusted</li>
-            <li>Clear cohort retention tied to reducing anxiety and improving routines</li>
-            <li>Design-partner pipeline ready for clinical SKU requirements</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="grid3">
-        <div class="card">
-          <h4>Phase 1: DTC (US)</h4>
-          <ul>
-            <li>Fast iteration, high learning rate</li>
-            <li>Validates pricing and consumables behavior</li>
-            <li>Builds dataset for personalization</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Phase 2: Lactation pros</h4>
-          <ul>
-            <li>Professional dashboard and reporting</li>
-            <li>Bundled "assessment packages" and referrals</li>
-            <li>Trust channel for parents</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Phase 3: Hospitals</h4>
-          <ul>
-            <li>Clinical workflow and QA requirements</li>
-            <li>Evidence tied to readmission risk and feeding support</li>
-            <li>Procurement-ready packaging, training, and monitoring</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">What "success" looks like</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Repeat usage with low friction (daily patch model validated)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Session detection and trends are trusted</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clear cohort retention tied to reducing anxiety and improving routines</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Design-partner pipeline ready for clinical SKU requirements</span></li>
           </ul>
         </div>
       </div>
-    </section>
 
-    <section class="panel" id="regulatory">
-      <h3>Regulatory strategy: staged and realistic</h3>
-      <p>
+      <div class="h-px bg-rose-200 mb-12"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 1: DTC (US)</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Fast iteration, high learning rate</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Validates pricing and consumables behavior</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Builds dataset for personalization</span></li>
+          </ul>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 2: Lactation pros</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Professional dashboard and reporting</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Bundled "assessment packages" and referrals</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Trust channel for parents</span></li>
+          </ul>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Phase 3: Hospitals</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinical workflow and QA requirements</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Evidence tied to readmission risk and feeding support</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Procurement-ready packaging, training, and monitoring</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regulatory Section -->
+  <section id="regulatory" class="py-24 bg-white border-y border-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Regulatory strategy: staged and realistic</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         MonBe starts as a non-diagnostic consumer product focused on insights and coaching.
         In parallel, we build the evidence and QMS needed to pursue FDA 510(k) for clinical use cases.
       </p>
 
-      <div class="two">
-        <div class="card">
-          <h4>Stage 1: Wellness and iteration</h4>
-          <ul>
-            <li>Focus on session patterns, latch indicators, and reassurance</li>
-            <li>Language designed to avoid diagnosis or treatment claims</li>
-            <li>Rapid learning cycles in home environments</li>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">Stage 1: Wellness and iteration</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Focus on session patterns, latch indicators, and reassurance</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Language designed to avoid diagnosis or treatment claims</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Rapid learning cycles in home environments</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Stage 2: Clinical SKU</h4>
-          <ul>
-            <li>510(k) substantial equivalence pathway (planned)</li>
-            <li>Validation study sized to the claim and endpoint</li>
-            <li>Move from "insights" to clinician-grade reporting and QA</li>
+        <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-8 rounded-3xl border-2 border-rose-200">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">Stage 2: Clinical SKU</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>510(k) substantial equivalence pathway (planned)</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Validation study sized to the claim and endpoint</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Move from "insights" to clinician-grade reporting and QA</span></li>
           </ul>
         </div>
       </div>
 
-      <div class="fineprint">
+      <p class="text-xs text-slate-400 text-center">
         Regulatory path is presented as the plan based on internal specs and standard medtech process.
-      </div>
-    </section>
+      </p>
+    </div>
+  </section>
 
-    <section class="panel" id="moat">
-      <h3>Moat</h3>
-      <p>
+  <!-- Moat Section -->
+  <section id="moat" class="py-24 bg-rose-50/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Moat</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         MonBe is hard to copy because it is a system: form factor + consumables + signal processing + dataset + workflow.
       </p>
 
-      <div class="grid3">
-        <div class="card">
-          <h4>Architecture moat</h4>
-          <ul>
-            <li>Modular core + daily patch drives recurring revenue and data continuity</li>
-            <li>Designed for repeat attach/detach cycles and daily wear</li>
-            <li>Privacy-first NFC sync reduces operational complexity</li>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Architecture moat</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Modular core + daily patch drives recurring revenue and data continuity</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Designed for repeat attach/detach cycles and daily wear</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Privacy-first NFC sync reduces operational complexity</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Data moat</h4>
-          <ul>
-            <li>Signal dataset grows with usage and improves personalization</li>
-            <li>Personalization is the path from consumer trust to clinical trust</li>
-            <li>Trend analytics become more defensible over time</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Data moat</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Signal dataset grows with usage and improves personalization</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Personalization is the path from consumer trust to clinical trust</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Trend analytics become more defensible over time</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Go-to-market moat</h4>
-          <ul>
-            <li>DTC speed, then professional trust channels</li>
-            <li>Design partners create workflow lock-in</li>
-            <li>Clinical evidence unlocks reimbursement narratives later</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pill">
-        <span>Razor-blade economics</span>
-        <span>Manufacturing readiness</span>
-        <span>Personalization flywheel</span>
-        <span>Clinical workflow expansion</span>
-      </div>
-    </section>
-
-    <section class="panel" id="ask">
-      <h3>The Ask</h3>
-      <p>
-        Raising a pre-seed to ship BMMPP, run a 50-mother pilot, and prepare the clinical SKU track.
-      </p>
-
-      <div class="two">
-        <div class="card">
-          <h4>Use of funds (what investors want to see)</h4>
-          <ul>
-            <li>Finalize BMMPP product and manufacturable patch experience</li>
-            <li>Pilot execution, data collection, and model personalization</li>
-            <li>QA, testing, and manufacturing handoff readiness</li>
-            <li>Regulatory groundwork for 510(k) track (QMS, endpoints, protocol)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>What you get as an investor</h4>
-          <ul>
-            <li>A category-defining form factor in breastfeeding monitoring</li>
-            <li>Recurring consumables engine with scalable cost targets</li>
-            <li>Dataset and personalization flywheel</li>
-            <li>Clear expansion path: DTC - pros - hospitals</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Go-to-market moat</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>DTC speed, then professional trust channels</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Design partners create workflow lock-in</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinical evidence unlocks reimbursement narratives later</span></li>
           </ul>
         </div>
       </div>
 
-      <div class="hero-actions" style="margin-top:14px;">
-        <a class="btn primary" href="mailto:eitanthti.e.h@gmail.com">Contact</a>
-        <a class="btn" href="#thesis">Back to top</a>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <span class="px-4 py-2 bg-rose-100 border border-rose-200 rounded-full text-sm text-slate-700 font-medium">Razor-blade economics</span>
+        <span class="px-4 py-2 bg-rose-100 border border-rose-200 rounded-full text-sm text-slate-700 font-medium">Manufacturing readiness</span>
+        <span class="px-4 py-2 bg-rose-100 border border-rose-200 rounded-full text-sm text-slate-700 font-medium">Personalization flywheel</span>
+        <span class="px-4 py-2 bg-rose-100 border border-rose-200 rounded-full text-sm text-slate-700 font-medium">Clinical workflow expansion</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="panel" id="team">
-      <h3>Founder</h3>
-      <p>
+  <!-- Ask Section -->
+  <section id="ask" class="py-24 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-black mb-6">The Ask</h2>
+        <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          Raising a pre-seed to ship BMMPP, run a 50-mother pilot, and prepare the clinical SKU track.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-white/5 p-10 rounded-3xl border border-white/10">
+          <h3 class="text-2xl font-bold mb-6">Use of funds (what investors want to see)</h3>
+          <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Finalize BMMPP product and manufacturable patch experience</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Pilot execution, data collection, and model personalization</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>QA, testing, and manufacturing handoff readiness</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Regulatory groundwork for 510(k) track (QMS, endpoints, protocol)</span></li>
+          </ul>
+        </div>
+        <div class="bg-white/5 p-10 rounded-3xl border border-white/10">
+          <h3 class="text-2xl font-bold mb-6">What you get as an investor</h3>
+          <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>A category-defining form factor in breastfeeding monitoring</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Recurring consumables engine with scalable cost targets</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Dataset and personalization flywheel</span></li>
+            <li class="flex gap-3"><span class="text-rose-400 text-lg">•</span> <span>Clear expansion path: DTC → pros → hospitals</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:eitanthti.e.h@gmail.com" class="px-8 py-4 text-lg font-bold text-white accent-gradient rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-1 text-center">
+          Contact Us
+        </a>
+        <button onclick="scrollToSection('thesis')" class="px-8 py-4 text-lg font-bold text-rose-400 bg-white/10 border-2 border-white/20 rounded-xl hover:bg-white/20 transition-all">
+          Back to Top
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-24 bg-white border-y border-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Founder</h2>
+      <p class="text-lg text-slate-500 max-w-3xl mx-auto mb-16 text-center leading-relaxed">
         Eitan Halfon - Electrical engineer with hands-on experience taking complex hardware products from concept to production,
         with embedded development and hardware leadership background.
       </p>
 
-      <div class="grid3" style="margin-top:12px;">
-        <div class="card">
-          <h4>Why I can build this</h4>
-          <ul>
-            <li>Hardware and embedded experience across RF, power, analog, digital</li>
-            <li>System integration, debugging, and production-oriented engineering</li>
-            <li>Automation tooling for testing and validation</li>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Why I can build this</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Hardware and embedded experience across RF, power, analog, digital</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>System integration, debugging, and production-oriented engineering</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Automation tooling for testing and validation</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>Why I care</h4>
-          <ul>
-            <li>Personal motivation as a parent, building from lived pain</li>
-            <li>Focus on reducing anxiety with trustworthy signals</li>
-            <li>Product-first approach with evidence-driven path</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">Why I care</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Personal motivation as a parent, building from lived pain</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Focus on reducing anxiety with trustworthy signals</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Product-first approach with evidence-driven path</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>What I am building toward</h4>
-          <ul>
-            <li>Consumer adoption and dataset flywheel</li>
-            <li>Clinical trust through staged validation</li>
-            <li>Platform expansion beyond breastfeeding over time</li>
+        <div class="glass-panel p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-rose-600 mb-4">What I am building toward</h3>
+          <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Consumer adoption and dataset flywheel</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Clinical trust through staged validation</span></li>
+            <li class="flex gap-2"><span class="text-rose-400">•</span> <span>Platform expansion beyond breastfeeding over time</span></li>
           </ul>
         </div>
       </div>
-    </section>
-
-    <div class="footer">
-      MonBe - confidential. This page is for discussion purposes only.
     </div>
-  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-baby-pink text-center">
+    <p class="text-sm text-slate-400">
+      MonBe - confidential. This page is for discussion purposes only.
+    </p>
+  </footer>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
